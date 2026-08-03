@@ -47,30 +47,50 @@ export function AudioPageShell({
     return <PageSkeleton />;
   }
 
+  const stickyHeaderClass = compactMobile
+    ? audioStyles.stickyHeader.replace(" py-4", " py-2.5 md:py-4")
+    : audioStyles.stickyHeader;
+
   return (
-    <div className={compactMobile ? "space-y-5 md:space-y-10" : audioStyles.page}>
+    <div className={compactMobile ? "space-y-4 md:space-y-10" : audioStyles.page}>
       <div
-        className={audioStyles.stickyHeader}
+        className={stickyHeaderClass}
         data-scrolled={headerScrolled || undefined}
       >
-        <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
+        <div
+          className={`flex flex-col sm:flex-row sm:items-center sm:justify-between ${
+            compactMobile ? "gap-2 md:gap-2.5" : "gap-2.5"
+          }`}
+        >
           <Breadcrumbs items={breadcrumbs} />
           <BackButton />
         </div>
 
-        <header className="mt-3.5 space-y-2.5">
+        <header
+          className={
+            compactMobile ? "mt-2 space-y-1.5 md:mt-3.5 md:space-y-2.5" : "mt-3.5 space-y-2.5"
+          }
+        >
           <div className="flex items-start gap-3.5 md:gap-4">
             <div className={uiPageIcon}>
               <Icon />
             </div>
             <div className="min-w-0 flex-1 pt-0.5">
               <h1 className={audioStyles.display}>{title}</h1>
-              <p className={`mt-1.5 max-w-3xl ${audioStyles.body}`}>{description}</p>
+              <p
+                className={`max-w-3xl ${audioStyles.body} ${
+                  compactMobile ? "mt-1 md:mt-1.5" : "mt-1.5"
+                }`}
+              >
+                {description}
+              </p>
             </div>
           </div>
         </header>
 
-        {toolbar && <div className="mt-3.5">{toolbar}</div>}
+        {toolbar && (
+          <div className={compactMobile ? "mt-2 md:mt-3.5" : "mt-3.5"}>{toolbar}</div>
+        )}
       </div>
 
       {stickyProgress}
@@ -86,7 +106,7 @@ export function AudioPageShell({
 
       <div
         className={`${
-          compactMobile ? "space-y-4 md:space-y-6" : audioStyles.section
+          compactMobile ? "space-y-3 md:space-y-6" : audioStyles.section
         } animate-fade-in`}
       >
         {children}

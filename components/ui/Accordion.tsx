@@ -14,6 +14,7 @@ interface AccordionProps {
   onToggle?: () => void;
   badge?: React.ReactNode;
   children: React.ReactNode;
+  compactMobile?: boolean;
 }
 
 export function Accordion({
@@ -24,6 +25,7 @@ export function Accordion({
   onToggle,
   badge,
   children,
+  compactMobile = false,
 }: AccordionProps) {
   const isControlled = controlledOpen !== undefined;
   const [internalOpen, setInternalOpen] = useState(defaultOpen);
@@ -44,7 +46,11 @@ export function Accordion({
       <button
         type="button"
         onClick={handleToggle}
-        className={`flex w-full items-center gap-3 px-5 py-3.5 text-left ${audioStyles.transition} hover:bg-white/[0.035] md:px-6 md:py-4`}
+        className={`flex w-full items-center gap-3 text-left ${audioStyles.transition} hover:bg-white/[0.035] ${
+          compactMobile
+            ? "px-4 py-2.5 md:px-6 md:py-4"
+            : "px-5 py-3.5 md:px-6 md:py-4"
+        }`}
         aria-expanded={isOpen}
       >
         {Icon && (
@@ -69,7 +75,11 @@ export function Accordion({
         }`}
       >
         <div className="overflow-hidden">
-          <div className="border-t border-white/[0.06] px-5 py-4 md:px-6 md:py-5">
+          <div
+            className={`border-t border-white/[0.06] ${
+              compactMobile ? "px-4 py-3 md:px-6 md:py-5" : "px-5 py-4 md:px-6 md:py-5"
+            }`}
+          >
             {children}
           </div>
         </div>

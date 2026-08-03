@@ -59,7 +59,7 @@ export function SetupContent() {
         { label: "Pre-Service Checklist" },
       ]}
       stickyProgress={
-        <div className="sticky top-[12.5rem] z-10 md:top-[14rem]">
+        <div className="md:sticky md:top-[14rem] md:z-10">
           <AudioProgressCard
             compactMobile
             title={`${voaLabels.preService} Progress`}
@@ -71,7 +71,7 @@ export function SetupContent() {
       }
     >
       {complete && (
-        <div className="flex items-center gap-4 rounded-2xl border border-green-500/20 bg-gradient-to-br from-green-500/10 to-emerald-500/5 p-6 animate-slide-up">
+        <div className="flex items-center gap-3 rounded-2xl border border-green-500/20 bg-gradient-to-br from-green-500/10 to-emerald-500/5 p-4 animate-slide-up md:gap-4 md:p-6">
           <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-green-500/15 ring-1 ring-green-500/25">
             <PartyPopper className="h-6 w-6 text-green-400" />
           </div>
@@ -84,12 +84,12 @@ export function SetupContent() {
         </div>
       )}
 
-      <div className="mb-3 flex flex-wrap gap-2 md:mb-6 md:gap-3">
+      <div className="hidden flex-wrap gap-3 md:mb-6 md:flex">
         <MetaChip icon={Clock} label="Est. time" value={`${SETUP_ESTIMATED_MINUTES} min`} />
         <MetaChip icon={User} label="Sections" value={`${sundaySetupSections.length} groups`} />
       </div>
 
-      <div className={audioStyles.stackSm}>
+      <div className="space-y-3">
         {sundaySetupSections.map((section, index) => (
           <Accordion
             key={section.id}
@@ -98,9 +98,10 @@ export function SetupContent() {
             icon={section.icon}
             badge={sectionBadges[index]}
             defaultOpen={index === 0}
+            compactMobile
           >
             {(section.volunteer || section.estimatedMinutes) && (
-              <div className="mb-4 flex flex-wrap gap-2 border-b border-white/[0.05] pb-4">
+              <div className="mb-3 flex flex-wrap gap-2 border-b border-white/[0.05] pb-3 md:mb-4 md:pb-4">
                 {section.volunteer && (
                   <span className="inline-flex items-center gap-1.5 rounded-lg bg-white/[0.04] px-3 py-1.5 text-xs text-slate-400 ring-1 ring-white/[0.06]">
                     <User className="h-3 w-3" />
