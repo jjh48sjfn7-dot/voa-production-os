@@ -26,6 +26,7 @@ interface AudioPageShellProps {
     title?: string;
     description?: string;
   };
+  compactMobile?: boolean;
 }
 
 export function AudioPageShell({
@@ -37,6 +38,7 @@ export function AudioPageShell({
   toolbar,
   stickyProgress,
   progress,
+  compactMobile = false,
 }: AudioPageShellProps) {
   const mounted = useMounted();
   const headerScrolled = useScrolled(12);
@@ -46,7 +48,7 @@ export function AudioPageShell({
   }
 
   return (
-    <div className={audioStyles.page}>
+    <div className={compactMobile ? "space-y-5 md:space-y-10" : audioStyles.page}>
       <div
         className={audioStyles.stickyHeader}
         data-scrolled={headerScrolled || undefined}
@@ -82,7 +84,13 @@ export function AudioPageShell({
         />
       )}
 
-      <div className={`${audioStyles.section} animate-fade-in`}>{children}</div>
+      <div
+        className={`${
+          compactMobile ? "space-y-4 md:space-y-6" : audioStyles.section
+        } animate-fade-in`}
+      >
+        {children}
+      </div>
     </div>
   );
 }
