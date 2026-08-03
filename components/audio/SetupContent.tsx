@@ -53,13 +53,15 @@ export function SetupContent() {
       title="Pre-Service Checklist"
       description={`${voaLabels.preService} checklist for ${voaVenue.church} — trailer unload through ${voaLabels.volunteerTeam} prayer before ${voaLabels.serviceLive}.`}
       icon={BookOpen}
+      compactMobile
       breadcrumbs={[
         { label: voaLabels.audioDepartment, href: "/audio" },
         { label: "Pre-Service Checklist" },
       ]}
       stickyProgress={
-        <div className="sticky top-[13.5rem] z-10 md:top-[14rem]">
+        <div className="sticky top-[12.5rem] z-10 md:top-[14rem]">
           <AudioProgressCard
+            compactMobile
             title={`${voaLabels.preService} Progress`}
             description={`~${SETUP_ESTIMATED_MINUTES} min estimated · progress saves locally`}
             stats={progress}
@@ -82,7 +84,7 @@ export function SetupContent() {
         </div>
       )}
 
-      <div className="mb-6 flex flex-wrap gap-3">
+      <div className="mb-3 flex flex-wrap gap-2 md:mb-6 md:gap-3">
         <MetaChip icon={Clock} label="Est. time" value={`${SETUP_ESTIMATED_MINUTES} min`} />
         <MetaChip icon={User} label="Sections" value={`${sundaySetupSections.length} groups`} />
       </div>
