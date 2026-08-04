@@ -5,9 +5,11 @@ import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { SetupChecklist } from "@/components/audio/v2/SetupChecklist";
 import { SundaySetupAccordion } from "@/components/audio/v2/SundaySetupAccordion";
+import { SundaySetupMilestoneRow } from "@/components/audio/v2/SundaySetupMilestoneRow";
 import { useChecklist } from "@/hooks/useChecklist";
 import {
   SUNDAY_SETUP_V2_STORAGE,
+  sundaySetupUnloadTrailer,
   sundaySetupV2Sections,
 } from "@/data/audio/v2/sunday-setup";
 import { audioStyles } from "@/lib/audio-styles";
@@ -44,6 +46,11 @@ export function SundaySetupContent() {
       </p>
 
       <div className="mt-4 space-y-2 sm:mt-5">
+        <SundaySetupMilestoneRow
+          title={sundaySetupUnloadTrailer.title}
+          icon={sundaySetupUnloadTrailer.icon}
+        />
+
         {sundaySetupV2Sections.map((section) => (
           <SundaySetupAccordion
             key={section.id}

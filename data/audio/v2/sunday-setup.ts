@@ -1,4 +1,5 @@
 import type { ChecklistItem } from "@/types";
+import { Truck } from "lucide-react";
 
 export const SUNDAY_SETUP_V2_STORAGE = "sunday-setup-v2";
 
@@ -8,17 +9,13 @@ export interface SundaySetupSection {
   items: ChecklistItem[];
 }
 
+export const sundaySetupUnloadTrailer = {
+  id: "unload-trailer",
+  title: "Unload Trailer",
+  icon: Truck,
+};
+
 export const sundaySetupV2Sections: SundaySetupSection[] = [
-  {
-    id: "trailer-storage",
-    title: "Trailer & Storage",
-    items: [
-      { id: "trailer-unlock", label: "Unlock trailer" },
-      { id: "trailer-lights", label: "Power trailer lights" },
-      { id: "trailer-cables", label: "Remove cable trunks" },
-      { id: "trailer-speakers", label: "Remove speaker carts" },
-    ],
-  },
   {
     id: "stage",
     title: "Stage",
