@@ -1,5 +1,5 @@
-import { AudioHubContent } from "@/components/audio/AudioHubContent";
+import { AudioHomeContent } from "@/components/audio/v2/AudioHomeContent";
 
 export default function AudioPage() {
-  return <AudioHubContent />;
+  return <AudioHomeContent />;
 }

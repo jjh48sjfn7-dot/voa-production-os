@@ -1,5 +1,5 @@
-import { SetupContent } from "@/components/audio/SetupContent";
+import { SundaySetupContent } from "@/components/audio/v2/SundaySetupContent";
 
 export default function SetupPage() {
-  return <SetupContent />;
+  return <SundaySetupContent />;
 }

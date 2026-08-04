@@ -1,5 +1,5 @@
-import { InventoryContent } from "@/components/audio/InventoryContent";
+import { InventoryLandingContent } from "@/components/audio/v2/InventoryLandingContent";
 
 export default function InventoryPage() {
-  return <InventoryContent />;
+  return <InventoryLandingContent />;
 }
