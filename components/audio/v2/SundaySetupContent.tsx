@@ -9,13 +9,20 @@ import { SundaySetupMilestoneRow } from "@/components/audio/v2/SundaySetupMilest
 import { useChecklist } from "@/hooks/useChecklist";
 import {
   SUNDAY_SETUP_V2_STORAGE,
+  getSectionTaskCount,
+  getSundaySetupV2ItemIds,
   sundaySetupUnloadTrailer,
   sundaySetupV2Sections,
 } from "@/data/audio/v2/sunday-setup";
 import { audioStyles } from "@/lib/audio-styles";
 
+const SUNDAY_SETUP_VALID_ITEM_IDS = getSundaySetupV2ItemIds();
+
 export function SundaySetupContent() {
-  const { checked, toggleItem } = useChecklist(SUNDAY_SETUP_V2_STORAGE);
+  const { checked, toggleItem } = useChecklist(
+    SUNDAY_SETUP_V2_STORAGE,
+    SUNDAY_SETUP_VALID_ITEM_IDS
+  );
   const [openSectionId, setOpenSectionId] = useState<string | null>(null);
 
   function handleSectionToggle(sectionId: string) {
@@ -56,12 +63,13 @@ export function SundaySetupContent() {
             key={section.id}
             title={section.title}
             emoji={section.emoji}
-            taskCount={section.items.length}
+            taskCount={getSectionTaskCount(section)}
             open={openSectionId === section.id}
             onToggle={() => handleSectionToggle(section.id)}
           >
             <SetupChecklist
               items={section.items}
+              groups={section.groups}
               checked={checked}
               onToggle={toggleItem}
             />

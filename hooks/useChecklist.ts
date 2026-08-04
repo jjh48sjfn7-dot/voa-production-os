@@ -3,12 +3,30 @@
 import { useCallback, useEffect, useState } from "react";
 import { loadCheckedItems, saveCheckedItems } from "@/lib/storage";
 
-export function useChecklist(storageId: string) {
+export function useChecklist(
+  storageId: string,
+  validItemIds?: readonly string[]
+) {
   const [checked, setChecked] = useState<Record<string, boolean>>({});
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setChecked(loadCheckedItems(storageId));
+    let loaded = loadCheckedItems(storageId);
+
+    if (validItemIds && validItemIds.length > 0) {
+      const valid = new Set(validItemIds);
+      const sanitized = Object.fromEntries(
+        Object.entries(loaded).filter(([id]) => valid.has(id))
+      );
+
+      if (Object.keys(sanitized).length !== Object.keys(loaded).length) {
+        saveCheckedItems(storageId, sanitized);
+      }
+
+      loaded = sanitized;
+    }
+
+    setChecked(loaded);
     setMounted(true);
   }, [storageId]);
 
