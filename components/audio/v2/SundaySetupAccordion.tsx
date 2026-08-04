@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
+import { SundaySetupSectionIcon } from "@/components/audio/v2/SundaySetupSectionIcon";
 import { audioStyles } from "@/lib/audio-styles";
 
 interface SundaySetupAccordionProps {
@@ -30,11 +31,13 @@ export function SundaySetupAccordion({
         className="flex min-h-[56px] w-full items-center gap-3 px-4 py-3.5 text-left sm:px-5"
         aria-expanded={open}
       >
+        {emoji ? (
+          <SundaySetupSectionIcon emoji={emoji} />
+        ) : (
+          <div className="h-12 w-12 shrink-0" aria-hidden />
+        )}
         <div className="min-w-0 flex-1">
-          <p className="text-base font-semibold text-slate-50">
-            {emoji ? `${emoji} ` : ""}
-            {title}
-          </p>
+          <p className="text-base font-semibold text-slate-50">{title}</p>
           <p className="mt-0.5 text-[13px] text-slate-500">{taskLabel}</p>
         </div>
         <ChevronDown
