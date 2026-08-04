@@ -1,11 +1,25 @@
 import { ImageIcon } from "lucide-react";
 import { audioStyles } from "@/lib/audio-styles";
 
-interface EquipmentImagePlaceholderProps {
+interface EquipmentImageProps {
   name: string;
+  src?: string;
 }
 
-export function EquipmentImagePlaceholder({ name }: EquipmentImagePlaceholderProps) {
+export function EquipmentImage({ name, src }: EquipmentImageProps) {
+  if (src) {
+    return (
+      <div className={`overflow-hidden rounded-2xl ${audioStyles.card}`}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={src}
+          alt={name}
+          className="aspect-[4/3] w-full object-cover"
+        />
+      </div>
+    );
+  }
+
   return (
     <div
       className={`flex aspect-[4/3] w-full items-center justify-center rounded-2xl border border-white/[0.08] bg-white/[0.02] ${audioStyles.card}`}

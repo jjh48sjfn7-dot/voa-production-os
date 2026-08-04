@@ -3,11 +3,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { audioStyles } from "@/lib/audio-styles";
-import type { EquipmentTroubleshootingItem } from "@/data/audio/v2/equipment-manuals/types";
-
-interface TroubleshootingAccordionProps {
-  items: EquipmentTroubleshootingItem[];
-}
+import type { EquipmentTroubleshootingItem } from "@/data/audio/v2/equipment/types";
 
 function TroubleshootingItemContent({
   item,
@@ -50,7 +46,13 @@ function TroubleshootingItemContent({
   );
 }
 
-export function TroubleshootingAccordion({ items }: TroubleshootingAccordionProps) {
+interface EquipmentTroubleshootingProps {
+  items: EquipmentTroubleshootingItem[];
+}
+
+export function EquipmentTroubleshooting({
+  items,
+}: EquipmentTroubleshootingProps) {
   const [openId, setOpenId] = useState<string | null>(null);
 
   function handleToggle(id: string) {

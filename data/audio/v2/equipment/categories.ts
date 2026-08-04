@@ -1,0 +1,86 @@
+import type { EquipmentCategory } from "@/data/audio/v2/equipment/types";
+
+export const equipmentCategories: EquipmentCategory[] = [
+  {
+    id: "console",
+    title: "Console",
+    emoji: "🎚️",
+    href: "/audio/equipment/console",
+    itemSlugs: ["yamaha-tf5"],
+  },
+  {
+    id: "wireless",
+    title: "Wireless",
+    emoji: "🎤",
+    href: "/audio/equipment/wireless",
+    itemSlugs: [
+      "shure-blx-dual-receiver-1",
+      "shure-blx-dual-receiver-2",
+      "wireless-microphones",
+    ],
+  },
+  {
+    id: "foh-speakers",
+    title: "FOH Speakers",
+    emoji: "🔊",
+    href: "/audio/equipment/foh-speakers",
+    itemSlugs: ["qsc-kw153-left", "qsc-kw153-right"],
+  },
+  {
+    id: "monitors",
+    title: "Monitors",
+    emoji: "📣",
+    href: "/audio/equipment/monitors",
+    itemSlugs: [
+      "stage-monitor-left",
+      "stage-monitor-right",
+      "drummer-in-ear-system",
+    ],
+  },
+  {
+    id: "stage-boxes",
+    title: "Stage Boxes",
+    emoji: "🔌",
+    href: "/audio/equipment/stage-boxes",
+    itemSlugs: ["stage-snake-a", "stage-snake-b"],
+  },
+  {
+    id: "microphones",
+    title: "Microphones",
+    emoji: "🎙️",
+    href: "/audio/equipment/microphones",
+    itemSlugs: [
+      "pastor-wireless-microphone",
+      "worship-leader-wireless-microphone",
+      "wireless-microphone-3",
+      "wireless-microphone-4",
+      "kick-microphone",
+      "snare-microphone",
+      "overhead-microphone-1",
+      "overhead-microphone-2",
+    ],
+  },
+  {
+    id: "playback",
+    title: "Playback",
+    emoji: "💻",
+    href: "/audio/equipment/playback",
+    itemSlugs: ["media-computer", "audio-playback-connection"],
+  },
+  {
+    id: "accessories",
+    title: "Accessories",
+    emoji: "🧰",
+    href: "/audio/equipment/accessories",
+    itemSlugs: [
+      "xlr-cables",
+      "power-cables",
+      "color-coded-wireless-xlr-cables",
+      "microphone-stands",
+      "speaker-stands",
+      "cable-covers",
+      "adapters",
+      "di-boxes",
+    ],
+  },
+];

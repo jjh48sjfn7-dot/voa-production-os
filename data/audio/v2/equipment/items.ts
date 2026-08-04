@@ -1,28 +1,27 @@
-import type { EquipmentManual } from "@/data/audio/v2/equipment-manuals/types";
+import type { EquipmentDefinition } from "@/data/audio/v2/equipment/types";
 
-export const yamahaTf5Manual: EquipmentManual = {
+export const yamahaTf5: EquipmentDefinition = {
+  id: "yamaha-tf5",
   slug: "yamaha-tf5",
   name: "Yamaha TF5",
-  categoryHref: "/audio/equipment/console",
-  categoryTitle: "Console",
+  categoryId: "console",
+  icon: "🎚️",
   purpose:
-    "The Yamaha TF5 is the primary audio console for Victory Outreach Antioch. It controls all microphones, playback audio, stage monitors and FOH speakers during Sunday service.",
+    "The Yamaha TF5 is the primary audio console for Victory Outreach Antioch. It controls all microphones, playback audio, stage monitors, and FOH speakers during Sunday service.",
   quickStart: [
     "Power on TF5",
     "Wait for full boot",
     "Load Sunday Scene",
     "Verify Main L/R is muted",
     "Verify Media Computer input",
-    "Verify Stage Snake inputs",
+    "Verify stage snake inputs",
     "Verify Stage outputs",
     "Ready for Soundcheck",
   ],
   connections: [
     { label: "Power", items: ["AC Power"] },
-    {
-      label: "Inputs",
-      items: ["Stage Snake A", "Stage Snake B", "Playback", "Media Computer"],
-    },
+    { label: "Inputs", items: ["Stage Snake A", "Stage Snake B"] },
+    { label: "Playback", items: ["Media Computer"] },
     {
       label: "Outputs",
       items: ["FOH Speakers", "Stage Monitors", "Drummer In-Ear"],
@@ -33,7 +32,7 @@ export const yamahaTf5Manual: EquipmentManual = {
     label: "Open Sunday Setup",
     description: "Setup TF5 section",
   },
-  troubleshooting: [
+  commonProblems: [
     {
       id: "no-audio",
       title: "No Audio",
@@ -124,26 +123,93 @@ export const yamahaTf5Manual: EquipmentManual = {
     { label: "Sunday Scene", href: "#" },
     { label: "Signal Flow", href: "#" },
   ],
-  related: [
-    {
-      title: "Stage Snake A",
-      href: "/audio/equipment/stage-boxes/stage-snake-a",
-    },
-    {
-      title: "Stage Snake B",
-      href: "/audio/equipment/stage-boxes/stage-snake-b",
-    },
-    {
-      title: "Media Computer",
-      href: "/audio/equipment/playback/media-computer",
-    },
-    {
-      title: "QSC KW153",
-      href: "/audio/equipment/foh-speakers",
-    },
-    {
-      title: "Shure BLX Receiver",
-      href: "/audio/equipment/wireless/shure-blx-dual-receiver-1",
-    },
+  relatedEquipment: [
+    { slug: "stage-snake-a", name: "Stage Snake A" },
+    { slug: "stage-snake-b", name: "Stage Snake B" },
+    { slug: "media-computer", name: "Media Computer" },
+    { slug: "qsc-kw153", name: "QSC KW153" },
+    { slug: "shure-blx-receiver", name: "Shure BLX Receiver" },
   ],
 };
+
+export const stageSnakeA: EquipmentDefinition = {
+  id: "stage-snake-a",
+  slug: "stage-snake-a",
+  name: "Stage Snake A",
+  categoryId: "stage-boxes",
+  icon: "🔌",
+  purpose:
+    "Stage Snake A carries drum and stage-left inputs from the platform to the Yamaha TF5.",
+  relatedEquipment: [
+    { slug: "yamaha-tf5", name: "Yamaha TF5" },
+    { slug: "stage-snake-b", name: "Stage Snake B" },
+  ],
+};
+
+export const stageSnakeB: EquipmentDefinition = {
+  id: "stage-snake-b",
+  slug: "stage-snake-b",
+  name: "Stage Snake B",
+  categoryId: "stage-boxes",
+  icon: "🔌",
+  purpose:
+    "Stage Snake B carries keyboard and stage-right inputs from the platform to the Yamaha TF5.",
+  relatedEquipment: [
+    { slug: "yamaha-tf5", name: "Yamaha TF5" },
+    { slug: "stage-snake-a", name: "Stage Snake A" },
+  ],
+};
+
+export const shureBlxReceiver: EquipmentDefinition = {
+  id: "shure-blx-receiver",
+  slug: "shure-blx-receiver",
+  name: "Shure BLX Receiver",
+  categoryId: "wireless",
+  icon: "🎤",
+  purpose:
+    "Shure BLX receivers provide wireless microphone audio to the Yamaha TF5 during Sunday service.",
+  relatedEquipment: [{ slug: "yamaha-tf5", name: "Yamaha TF5" }],
+};
+
+export const qscKw153: EquipmentDefinition = {
+  id: "qsc-kw153",
+  slug: "qsc-kw153",
+  name: "QSC KW153",
+  categoryId: "foh-speakers",
+  icon: "🔊",
+  purpose:
+    "QSC KW153 powered speakers deliver front-of-house audio for the sanctuary.",
+  relatedEquipment: [{ slug: "yamaha-tf5", name: "Yamaha TF5" }],
+};
+
+export const stageMonitor: EquipmentDefinition = {
+  id: "stage-monitor",
+  slug: "stage-monitor",
+  name: "Stage Monitor",
+  categoryId: "monitors",
+  icon: "📣",
+  purpose:
+    "Stage monitors provide on-stage audio for musicians and vocalists during service.",
+  relatedEquipment: [{ slug: "yamaha-tf5", name: "Yamaha TF5" }],
+};
+
+export const mediaComputer: EquipmentDefinition = {
+  id: "media-computer",
+  slug: "media-computer",
+  name: "Media Computer",
+  categoryId: "playback",
+  icon: "💻",
+  purpose:
+    "The media computer sends playback and presentation audio to the Yamaha TF5.",
+  relatedEquipment: [{ slug: "yamaha-tf5", name: "Yamaha TF5" }],
+};
+
+export const equipmentItems: EquipmentDefinition[] = [
+  yamahaTf5,
+  stageSnakeA,
+  stageSnakeB,
+  shureBlxReceiver,
+  qscKw153,
+  stageMonitor,
+  mediaComputer,
+];

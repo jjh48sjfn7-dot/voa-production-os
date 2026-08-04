@@ -9,9 +9,9 @@ interface EquipmentDetailPageProps {
   params: Promise<{ category: string; slug: string }>;
 }
 
-export default async function EquipmentDetailPage({
+export default async function EquipmentCategoryDetailPage({
   params,
 }: EquipmentDetailPageProps) {
-  const { category, slug } = await params;
-  return <EquipmentDetailContent categoryId={category} slug={slug} />;
+  const { slug } = await params;
+  return <EquipmentDetailContent slug={slug} />;
 }

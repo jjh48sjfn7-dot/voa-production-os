@@ -1,16 +1,18 @@
 import { AudioSubpageHeader } from "@/components/audio/v2/AudioSubpageHeader";
-import { EquipmentImagePlaceholder } from "@/components/audio/v2/equipment/EquipmentImagePlaceholder";
+import { EquipmentImage } from "@/components/audio/v2/equipment/EquipmentImage";
 
 interface EquipmentHeaderProps {
   name: string;
   backHref: string;
   backLabel: string;
+  image?: string;
 }
 
 export function EquipmentHeader({
   name,
   backHref,
   backLabel,
+  image,
 }: EquipmentHeaderProps) {
   return (
     <>
@@ -20,7 +22,7 @@ export function EquipmentHeader({
         title={name}
       />
       <div className="mt-4 sm:mt-5">
-        <EquipmentImagePlaceholder name={name} />
+        <EquipmentImage name={name} src={image} />
       </div>
     </>
   );

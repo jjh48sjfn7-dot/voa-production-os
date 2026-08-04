@@ -1,11 +1,7 @@
 import { audioStyles } from "@/lib/audio-styles";
-import type { EquipmentConnectionGroup } from "@/data/audio/v2/equipment-manuals/types";
+import type { EquipmentConnectionGroup } from "@/data/audio/v2/equipment/types";
 
-interface ConnectionCardProps {
-  group: EquipmentConnectionGroup;
-}
-
-export function ConnectionCard({ group }: ConnectionCardProps) {
+function ConnectionCard({ group }: { group: EquipmentConnectionGroup }) {
   return (
     <div className={`${audioStyles.card} ${audioStyles.cardPad}`}>
       <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
@@ -22,11 +18,11 @@ export function ConnectionCard({ group }: ConnectionCardProps) {
   );
 }
 
-interface ConnectionCardListProps {
+interface EquipmentConnectionsProps {
   groups: EquipmentConnectionGroup[];
 }
 
-export function ConnectionCardList({ groups }: ConnectionCardListProps) {
+export function EquipmentConnections({ groups }: EquipmentConnectionsProps) {
   return (
     <div className="space-y-2">
       {groups.map((group) => (

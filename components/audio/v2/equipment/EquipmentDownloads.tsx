@@ -1,13 +1,9 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { audioStyles } from "@/lib/audio-styles";
-import type { EquipmentDownload } from "@/data/audio/v2/equipment-manuals/types";
+import type { EquipmentDownload } from "@/data/audio/v2/equipment/types";
 
-interface DownloadRowProps {
-  download: EquipmentDownload;
-}
-
-export function DownloadRow({ download }: DownloadRowProps) {
+function DownloadRow({ download }: { download: EquipmentDownload }) {
   return (
     <Link
       href={download.href}
@@ -19,11 +15,11 @@ export function DownloadRow({ download }: DownloadRowProps) {
   );
 }
 
-interface DownloadRowListProps {
+interface EquipmentDownloadsProps {
   downloads: EquipmentDownload[];
 }
 
-export function DownloadRowList({ downloads }: DownloadRowListProps) {
+export function EquipmentDownloads({ downloads }: EquipmentDownloadsProps) {
   return (
     <div className={`divide-y divide-white/[0.06] ${audioStyles.card}`}>
       {downloads.map((download) => (

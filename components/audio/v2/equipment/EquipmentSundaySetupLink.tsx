@@ -5,7 +5,7 @@ import { audioStyles } from "@/lib/audio-styles";
 interface EquipmentSundaySetupLinkProps {
   href: string;
   label: string;
-  description: string;
+  description?: string;
 }
 
 export function EquipmentSundaySetupLink({
@@ -20,7 +20,9 @@ export function EquipmentSundaySetupLink({
     >
       <div className="min-w-0 flex-1">
         <p className="text-base font-semibold text-slate-50">{label}</p>
-        <p className="mt-0.5 text-[13px] text-slate-500">{description}</p>
+        {description && (
+          <p className="mt-0.5 text-[13px] text-slate-500">{description}</p>
+        )}
       </div>
       <ChevronRight className="h-5 w-5 shrink-0 text-slate-600" />
     </Link>
