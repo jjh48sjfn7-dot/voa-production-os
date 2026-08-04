@@ -1,7 +1,9 @@
 "use client";
 
 import { notFound } from "next/navigation";
+import { EquipmentManualContent } from "@/components/audio/v2/equipment/EquipmentManualContent";
 import { AudioSubpageHeader } from "@/components/audio/v2/AudioSubpageHeader";
+import { getEquipmentManual } from "@/data/audio/v2/equipment-manuals";
 import { getEquipmentItem } from "@/data/audio/v2/equipment";
 import { audioStyles } from "@/lib/audio-styles";
 
@@ -15,9 +17,14 @@ export function EquipmentDetailContent({
   slug,
 }: EquipmentDetailContentProps) {
   const result = getEquipmentItem(categoryId, slug);
+  const manual = getEquipmentManual(slug);
 
   if (!result) {
     notFound();
+  }
+
+  if (manual) {
+    return <EquipmentManualContent manual={manual} />;
   }
 
   const { category, item } = result;
