@@ -5,6 +5,7 @@ import { audioStyles } from "@/lib/audio-styles";
 
 interface SundaySetupAccordionProps {
   title: string;
+  emoji?: string;
   taskCount: number;
   open: boolean;
   onToggle: () => void;
@@ -13,6 +14,7 @@ interface SundaySetupAccordionProps {
 
 export function SundaySetupAccordion({
   title,
+  emoji,
   taskCount,
   open,
   onToggle,
@@ -29,7 +31,10 @@ export function SundaySetupAccordion({
         aria-expanded={open}
       >
         <div className="min-w-0 flex-1">
-          <p className="text-base font-semibold text-slate-50">{title}</p>
+          <p className="text-base font-semibold text-slate-50">
+            {emoji ? `${emoji} ` : ""}
+            {title}
+          </p>
           <p className="mt-0.5 text-[13px] text-slate-500">{taskLabel}</p>
         </div>
         <ChevronDown

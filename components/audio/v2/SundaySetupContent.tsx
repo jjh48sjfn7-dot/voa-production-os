@@ -48,13 +48,14 @@ export function SundaySetupContent() {
       <div className="mt-4 space-y-2 sm:mt-5">
         <SundaySetupMilestoneRow
           title={sundaySetupUnloadTrailer.title}
-          icon={sundaySetupUnloadTrailer.icon}
+          emoji={sundaySetupUnloadTrailer.emoji}
         />
 
         {sundaySetupV2Sections.map((section) => (
           <SundaySetupAccordion
             key={section.id}
             title={section.title}
+            emoji={section.emoji}
             taskCount={section.items.length}
             open={openSectionId === section.id}
             onToggle={() => handleSectionToggle(section.id)}

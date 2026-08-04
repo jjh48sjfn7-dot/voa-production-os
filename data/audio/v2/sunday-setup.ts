@@ -1,24 +1,25 @@
 import type { ChecklistItem } from "@/types";
-import { Truck } from "lucide-react";
 
 export const SUNDAY_SETUP_V2_STORAGE = "sunday-setup-v2";
 
 export interface SundaySetupSection {
   id: string;
   title: string;
+  emoji?: string;
   items: ChecklistItem[];
 }
 
 export const sundaySetupUnloadTrailer = {
   id: "unload-trailer",
   title: "Unload Trailer",
-  icon: Truck,
+  emoji: "📦",
 };
 
 export const sundaySetupV2Sections: SundaySetupSection[] = [
   {
     id: "stage",
-    title: "Stage",
+    title: "Positioning",
+    emoji: "🎯",
     items: [
       { id: "stage-drums", label: "Position drums" },
       { id: "stage-snake", label: "Run stage snake" },
@@ -28,7 +29,8 @@ export const sundaySetupV2Sections: SundaySetupSection[] = [
   },
   {
     id: "foh",
-    title: "FOH",
+    title: "Setup TF5",
+    emoji: "🎚️",
     items: [
       { id: "foh-console", label: "Roll out console" },
       { id: "foh-power", label: "Connect power" },
@@ -39,6 +41,7 @@ export const sundaySetupV2Sections: SundaySetupSection[] = [
   {
     id: "stage-left",
     title: "Stage Left",
+    emoji: "🔌",
     items: [
       { id: "sl-sb1", label: "Connect Rio SB1" },
       { id: "sl-drums", label: "Patch drum inputs" },
@@ -49,6 +52,7 @@ export const sundaySetupV2Sections: SundaySetupSection[] = [
   {
     id: "stage-right",
     title: "Stage Right",
+    emoji: "🔌",
     items: [
       { id: "sr-sb2", label: "Connect Rio SB2" },
       { id: "sr-keys", label: "Patch keyboard and guitar inputs" },
@@ -68,7 +72,8 @@ export const sundaySetupV2Sections: SundaySetupSection[] = [
   },
   {
     id: "wireless",
-    title: "Wireless",
+    title: "Wireless Setup",
+    emoji: "🎤",
     items: [
       { id: "wl-scan", label: "Scan RF environment" },
       { id: "wl-sync", label: "Sync wireless receivers" },
@@ -79,6 +84,7 @@ export const sundaySetupV2Sections: SundaySetupSection[] = [
   {
     id: "soundcheck",
     title: "Soundcheck",
+    emoji: "🔊",
     items: [
       { id: "sc-powered-speakers", label: "Power on all powered speakers" },
       { id: "sc-monitors-audio", label: "Verify all monitors are passing audio" },
@@ -103,6 +109,7 @@ export const sundaySetupV2Sections: SundaySetupSection[] = [
   {
     id: "service-ready",
     title: "Service Ready",
+    emoji: "✅",
     items: [
       { id: "ready-stage-clean", label: "Confirm stage is clean and clear" },
       { id: "ready-cables", label: "Secure all visible cables and cable crossings" },
