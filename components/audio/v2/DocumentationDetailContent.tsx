@@ -2,6 +2,7 @@
 
 import { notFound } from "next/navigation";
 import { AudioPlaceholderContent } from "@/components/audio/v2/AudioPlaceholderContent";
+import { SignalFlowContent } from "@/components/audio/v2/SignalFlowContent";
 import { getDocumentationPage } from "@/data/audio/v2/documentation";
 import { voaLabels } from "@/data/audio/venue";
 
@@ -10,6 +11,10 @@ interface DocumentationDetailContentProps {
 }
 
 export function DocumentationDetailContent({ slug }: DocumentationDetailContentProps) {
+  if (slug === "signal-flow") {
+    return <SignalFlowContent />;
+  }
+
   const page = getDocumentationPage(slug);
 
   if (!page) {
