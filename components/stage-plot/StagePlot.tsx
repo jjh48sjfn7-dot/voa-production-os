@@ -1,47 +1,48 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { EquipmentSection } from "@/components/audio/v2/equipment/EquipmentSection";
-import { StagePlotZoneView } from "@/components/stage-plot/StagePlotZoneView";
-import type { StagePlotDocument, StagePlotZone } from "@/data/stage-plot/types";
+import { StageArea } from "@/components/stage-plot/StageArea";
+import type { StagePlotArea, StagePlotDocument } from "@/data/stage-plot/types";
 import { audioStyles } from "@/lib/audio-styles";
 
 type StagePlotLayoutBlock =
-  | { type: "zone"; zone: StagePlotZone }
-  | { type: "columns"; zones: StagePlotZone[] };
+  | { type: "area"; area: StagePlotArea }
+  | { type: "columns"; areas: StagePlotArea[] };
 
-function buildLayoutBlocks(zones: StagePlotZone[]): StagePlotLayoutBlock[] {
+function buildLayoutBlocks(areas: StagePlotArea[]): StagePlotLayoutBlock[] {
+  const sorted = [...areas].sort((a, b) => a.order - b.order);
   const blocks: StagePlotLayoutBlock[] = [];
   let index = 0;
 
-  while (index < zones.length) {
-    const zone = zones[index];
+  while (index < sorted.length) {
+    const area = sorted[index];
 
-    if (zone.columnGroup) {
-      const group = zone.columnGroup;
-      const columnZones: StagePlotZone[] = [];
+    if (area.columnGroup) {
+      const group = area.columnGroup;
+      const columnAreas: StagePlotArea[] = [];
 
-      while (index < zones.length && zones[index].columnGroup === group) {
-        columnZones.push(zones[index]);
+      while (index < sorted.length && sorted[index].columnGroup === group) {
+        columnAreas.push(sorted[index]);
         index += 1;
       }
 
-      blocks.push({ type: "columns", zones: columnZones });
+      blocks.push({ type: "columns", areas: columnAreas });
       continue;
     }
 
-    blocks.push({ type: "zone", zone });
+    blocks.push({ type: "area", area });
     index += 1;
   }
 
   return blocks;
 }
 
-interface StagePlotViewProps {
+interface StagePlotProps {
   document: StagePlotDocument;
 }
 
-export function StagePlotView({ document }: StagePlotViewProps) {
-  const blocks = buildLayoutBlocks(document.zones);
+export function StagePlot({ document }: StagePlotProps) {
+  const blocks = buildLayoutBlocks(document.areas);
 
   return (
     <div className="space-y-8 sm:space-y-10">
@@ -49,17 +50,17 @@ export function StagePlotView({ document }: StagePlotViewProps) {
         if (block.type === "columns") {
           return (
             <div
-              key={block.zones.map((zone) => zone.id).join("-")}
+              key={block.areas.map((area) => area.id).join("-")}
               className="grid gap-6 md:grid-cols-3 md:gap-4"
             >
-              {block.zones.map((zone) => (
-                <StagePlotZoneView key={zone.id} zone={zone} />
+              {block.areas.map((area) => (
+                <StageArea key={area.id} area={area} />
               ))}
             </div>
           );
         }
 
-        return <StagePlotZoneView key={block.zone.id} zone={block.zone} />;
+        return <StageArea key={block.area.id} area={block.area} />;
       })}
 
       {document.relatedLinks.length > 0 && (

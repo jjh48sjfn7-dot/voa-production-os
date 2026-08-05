@@ -1,7 +1,7 @@
 "use client";
 
 import { AudioSubpageHeader } from "@/components/audio/v2/AudioSubpageHeader";
-import { StagePlotView } from "@/components/stage-plot/StagePlotView";
+import { StagePlot } from "@/components/stage-plot/StagePlot";
 import { audioStagePlot } from "@/data/audio/v2/stage-plot";
 import { audioStyles } from "@/lib/audio-styles";
 
@@ -19,7 +19,7 @@ export function StagePlotContent() {
       </p>
 
       <div className="mt-6 sm:mt-8">
-        <StagePlotView document={audioStagePlot} />
+        <StagePlot document={audioStagePlot} />
       </div>
     </div>
   );
