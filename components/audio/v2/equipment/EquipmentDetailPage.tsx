@@ -1,3 +1,5 @@
+import { EquipmentChannelList } from "@/components/audio/v2/equipment/EquipmentChannelList";
+import { EquipmentConnectionNotes } from "@/components/audio/v2/equipment/EquipmentConnectionNotes";
 import { EquipmentHeader } from "@/components/audio/v2/equipment/EquipmentHeader";
 import { EquipmentConnections } from "@/components/audio/v2/equipment/EquipmentConnections";
 import { EquipmentDownloads } from "@/components/audio/v2/equipment/EquipmentDownloads";
@@ -22,7 +24,10 @@ export function EquipmentDetailPage({ equipment }: EquipmentDetailPageProps) {
     : "Back to Equipment";
 
   const hasQuickStart = !!equipment.quickStart?.length;
+  const hasInputs = !!equipment.inputs?.length;
+  const hasOutputs = !!equipment.outputs?.length;
   const hasConnections = !!equipment.connections?.length;
+  const hasConnectionNotes = !!equipment.connectionNotes?.length;
   const hasCommonProblems = !!equipment.commonProblems?.length;
   const hasDownloads = !!equipment.downloads?.length;
   const hasRelated = !!equipment.relatedEquipment?.length;
@@ -51,6 +56,18 @@ export function EquipmentDetailPage({ equipment }: EquipmentDetailPageProps) {
           </EquipmentSection>
         )}
 
+        {hasInputs && (
+          <EquipmentSection title="Inputs">
+            <EquipmentChannelList channels={equipment.inputs!} />
+          </EquipmentSection>
+        )}
+
+        {hasOutputs && (
+          <EquipmentSection title="Outputs">
+            <EquipmentChannelList channels={equipment.outputs!} />
+          </EquipmentSection>
+        )}
+
         {hasConnections && (
           <EquipmentSection title="Connections">
             <EquipmentConnections groups={equipment.connections!} />
@@ -64,6 +81,12 @@ export function EquipmentDetailPage({ equipment }: EquipmentDetailPageProps) {
               label={equipment.sundaySetup.label}
               description={equipment.sundaySetup.description}
             />
+          </EquipmentSection>
+        )}
+
+        {hasConnectionNotes && (
+          <EquipmentSection title="Connection Notes">
+            <EquipmentConnectionNotes notes={equipment.connectionNotes!} />
           </EquipmentSection>
         )}
 

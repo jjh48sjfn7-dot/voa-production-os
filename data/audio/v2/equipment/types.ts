@@ -36,7 +36,10 @@ export interface EquipmentDefinition {
   image?: string;
   purpose?: string;
   quickStart?: string[];
+  inputs?: string[];
+  outputs?: string[];
   connections?: EquipmentConnectionGroup[];
+  connectionNotes?: string[];
   sundaySetup?: EquipmentSundaySetupLink;
   commonProblems?: EquipmentTroubleshootingItem[];
   downloads?: EquipmentDownload[];
