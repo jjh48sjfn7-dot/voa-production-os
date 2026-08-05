@@ -1,11 +1,15 @@
+import { EquipmentBestPractices } from "@/components/audio/v2/equipment/EquipmentBestPractices";
 import { EquipmentChannelList } from "@/components/audio/v2/equipment/EquipmentChannelList";
 import { EquipmentConnectionNotes } from "@/components/audio/v2/equipment/EquipmentConnectionNotes";
 import { EquipmentHeader } from "@/components/audio/v2/equipment/EquipmentHeader";
 import { EquipmentConnections } from "@/components/audio/v2/equipment/EquipmentConnections";
 import { EquipmentDownloads } from "@/components/audio/v2/equipment/EquipmentDownloads";
+import { EquipmentPrimaryConnections } from "@/components/audio/v2/equipment/EquipmentPrimaryConnections";
 import { EquipmentQuickChecklist } from "@/components/audio/v2/equipment/EquipmentQuickChecklist";
 import { EquipmentRelatedList } from "@/components/audio/v2/equipment/EquipmentRelatedList";
 import { EquipmentSection } from "@/components/audio/v2/equipment/EquipmentSection";
+import { EquipmentSetupLinks } from "@/components/audio/v2/equipment/EquipmentSetupLinks";
+import { EquipmentSpecifications } from "@/components/audio/v2/equipment/EquipmentSpecifications";
 import { EquipmentSundaySetupLink } from "@/components/audio/v2/equipment/EquipmentSundaySetupLink";
 import { EquipmentTroubleshooting } from "@/components/audio/v2/equipment/EquipmentTroubleshooting";
 import { getEquipmentCategory } from "@/data/audio/v2/equipment";
@@ -24,6 +28,10 @@ export function EquipmentDetailPage({ equipment }: EquipmentDetailPageProps) {
     : "Back to Equipment";
 
   const hasQuickStart = !!equipment.quickStart?.length;
+  const hasSpecifications = !!equipment.specifications?.length;
+  const hasPrimaryConnections = !!equipment.primaryConnections?.length;
+  const hasSetupLinks = !!equipment.setupLinks?.length;
+  const hasBestPractices = !!equipment.bestPractices?.length;
   const hasInputs = !!equipment.inputs?.length;
   const hasOutputs = !!equipment.outputs?.length;
   const hasConnections = !!equipment.connections?.length;
@@ -56,6 +64,40 @@ export function EquipmentDetailPage({ equipment }: EquipmentDetailPageProps) {
           </EquipmentSection>
         )}
 
+        {hasSpecifications && (
+          <EquipmentSection title="Specifications">
+            <EquipmentSpecifications items={equipment.specifications!} />
+          </EquipmentSection>
+        )}
+
+        {hasPrimaryConnections && (
+          <EquipmentSection title="Primary Connections">
+            <EquipmentPrimaryConnections connections={equipment.primaryConnections!} />
+          </EquipmentSection>
+        )}
+
+        {hasSetupLinks && (
+          <EquipmentSection title="Sunday Setup">
+            <EquipmentSetupLinks links={equipment.setupLinks!} />
+          </EquipmentSection>
+        )}
+
+        {equipment.sundaySetup && !hasSetupLinks && (
+          <EquipmentSection title="Sunday Setup">
+            <EquipmentSundaySetupLink
+              href={equipment.sundaySetup.href}
+              label={equipment.sundaySetup.label}
+              description={equipment.sundaySetup.description}
+            />
+          </EquipmentSection>
+        )}
+
+        {hasBestPractices && (
+          <EquipmentSection title="Best Practices">
+            <EquipmentBestPractices practices={equipment.bestPractices!} />
+          </EquipmentSection>
+        )}
+
         {hasInputs && (
           <EquipmentSection title="Inputs">
             <EquipmentChannelList channels={equipment.inputs!} />
@@ -71,16 +113,6 @@ export function EquipmentDetailPage({ equipment }: EquipmentDetailPageProps) {
         {hasConnections && (
           <EquipmentSection title="Connections">
             <EquipmentConnections groups={equipment.connections!} />
-          </EquipmentSection>
-        )}
-
-        {equipment.sundaySetup && (
-          <EquipmentSection title="Sunday Setup">
-            <EquipmentSundaySetupLink
-              href={equipment.sundaySetup.href}
-              label={equipment.sundaySetup.label}
-              description={equipment.sundaySetup.description}
-            />
           </EquipmentSection>
         )}
 

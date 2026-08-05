@@ -6,9 +6,14 @@ export interface EquipmentConnectionGroup {
 export interface EquipmentTroubleshootingItem {
   id: string;
   title: string;
-  problem: string;
-  possibleCauses: string[];
-  basicChecks: string[];
+  problem?: string;
+  possibleCauses?: string[];
+  basicChecks?: string[];
+}
+
+export interface EquipmentSpecification {
+  label: string;
+  value: string;
 }
 
 export interface EquipmentDownload {
@@ -17,8 +22,9 @@ export interface EquipmentDownload {
 }
 
 export interface EquipmentRelatedRef {
-  slug: string;
+  slug?: string;
   name: string;
+  href?: string;
 }
 
 export interface EquipmentSundaySetupLink {
@@ -36,11 +42,15 @@ export interface EquipmentDefinition {
   image?: string;
   purpose?: string;
   quickStart?: string[];
+  specifications?: EquipmentSpecification[];
+  primaryConnections?: string[];
   inputs?: string[];
   outputs?: string[];
   connections?: EquipmentConnectionGroup[];
   connectionNotes?: string[];
   sundaySetup?: EquipmentSundaySetupLink;
+  setupLinks?: EquipmentSundaySetupLink[];
+  bestPractices?: string[];
   commonProblems?: EquipmentTroubleshootingItem[];
   downloads?: EquipmentDownload[];
   relatedEquipment?: EquipmentRelatedRef[];

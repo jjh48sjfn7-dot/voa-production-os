@@ -12,9 +12,9 @@ export function EquipmentRelatedList({ items }: EquipmentRelatedListProps) {
     <div className={`divide-y divide-white/[0.06] ${audioStyles.card}`}>
       {items.map((item) => (
         <EquipmentItemRow
-          key={item.slug}
+          key={item.href ?? item.slug ?? item.name}
           title={item.name}
-          href={getEquipmentItemHref(item.slug)}
+          href={item.href ?? getEquipmentItemHref(item.slug!)}
         />
       ))}
     </div>

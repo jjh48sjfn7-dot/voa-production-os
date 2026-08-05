@@ -10,38 +10,61 @@ function TroubleshootingItemContent({
 }: {
   item: EquipmentTroubleshootingItem;
 }) {
+  const hasProblem = !!item.problem;
+  const hasCauses = !!item.possibleCauses?.length;
+  const hasChecks = !!item.basicChecks?.length;
+  const stepsOnly = hasChecks && !hasProblem && !hasCauses;
+
+  if (stepsOnly) {
+    return (
+      <ul className="space-y-1">
+        {item.basicChecks!.map((check) => (
+          <li key={check} className={`${audioStyles.body} text-slate-300`}>
+            {check}
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
   return (
     <div className="space-y-4">
-      <div>
-        <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
-          Problem
-        </p>
-        <p className={`mt-1.5 ${audioStyles.body} text-slate-200`}>{item.problem}</p>
-      </div>
-      <div>
-        <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
-          Possible Causes
-        </p>
-        <ul className="mt-1.5 space-y-1">
-          {item.possibleCauses.map((cause) => (
-            <li key={cause} className={`${audioStyles.body} text-slate-300`}>
-              {cause}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
-          Basic Checks
-        </p>
-        <ul className="mt-1.5 space-y-1">
-          {item.basicChecks.map((check) => (
-            <li key={check} className={`${audioStyles.body} text-slate-300`}>
-              {check}
-            </li>
-          ))}
-        </ul>
-      </div>
+      {hasProblem && (
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+            Problem
+          </p>
+          <p className={`mt-1.5 ${audioStyles.body} text-slate-200`}>{item.problem}</p>
+        </div>
+      )}
+      {hasCauses && (
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+            Possible Causes
+          </p>
+          <ul className="mt-1.5 space-y-1">
+            {item.possibleCauses!.map((cause) => (
+              <li key={cause} className={`${audioStyles.body} text-slate-300`}>
+                {cause}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {hasChecks && (
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+            Basic Checks
+          </p>
+          <ul className="mt-1.5 space-y-1">
+            {item.basicChecks!.map((check) => (
+              <li key={check} className={`${audioStyles.body} text-slate-300`}>
+                {check}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
