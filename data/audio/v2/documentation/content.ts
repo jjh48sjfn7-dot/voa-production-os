@@ -39,6 +39,7 @@ export {
 export type {
   DocumentationListSection,
   DocumentationPageContent,
+  DocumentationRelatedResource,
   DocumentationTableColumn,
   DocumentationTableRow,
   DocumentationTableSection,

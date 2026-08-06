@@ -3,6 +3,7 @@
 import type { LucideIcon } from "lucide-react";
 import { AudioPageShell } from "@/components/audio/AudioPageShell";
 import { DocumentationList } from "@/components/audio/v2/documentation/DocumentationList";
+import { DocumentationRelatedResources } from "@/components/audio/v2/documentation/DocumentationRelatedResources";
 import { DocumentationTable } from "@/components/audio/v2/documentation/DocumentationTable";
 import { EquipmentSection } from "@/components/audio/v2/equipment/EquipmentSection";
 import type { DocumentationPageContent } from "@/data/audio/v2/documentation/types";
@@ -22,12 +23,13 @@ export function DocumentationPageView({
 }: DocumentationPageContentProps) {
   const hasTables = !!content.tableSections?.length;
   const hasLists = !!content.listSections?.length;
+  const hasRelatedResources = !!content.relatedResources?.length;
   const isPlaceholder = !!content.placeholderMessage;
 
   return (
     <AudioPageShell
       title={title}
-      description={`${voaLabels.audioDepartment} reference`}
+      description={content.subtitle ?? `${voaLabels.audioDepartment} reference`}
       icon={icon}
       breadcrumbs={[
         { label: voaLabels.audioDepartment, href: "/audio" },
@@ -68,6 +70,12 @@ export function DocumentationPageView({
               <DocumentationList items={section.items} />
             </EquipmentSection>
           ))}
+
+        {hasRelatedResources && (
+          <EquipmentSection title="Related Resources">
+            <DocumentationRelatedResources resources={content.relatedResources!} />
+          </EquipmentSection>
+        )}
       </div>
     </AudioPageShell>
   );

@@ -27,10 +27,18 @@ export interface DocumentationListSection {
   items: string[];
 }
 
+export interface DocumentationRelatedResource {
+  icon: string;
+  title: string;
+  href: string;
+}
+
 export interface DocumentationPageContent {
   id: string;
   purpose: string;
+  subtitle?: string;
   tableSections?: DocumentationTableSection[];
   listSections?: DocumentationListSection[];
   placeholderMessage?: string;
+  relatedResources?: DocumentationRelatedResource[];
 }
