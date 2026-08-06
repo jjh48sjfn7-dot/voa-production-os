@@ -539,6 +539,18 @@ export const shureBlxReceiver: EquipmentDefinition = {
   ],
 };
 
+export const wirelessMicrophones: EquipmentDefinition = {
+  id: "wireless-microphones",
+  slug: "wireless-microphones",
+  name: "Wireless Microphones",
+  categoryId: "wireless",
+  icon: "🎤",
+  relatedEquipment: [
+    { slug: "shure-blx-receiver", name: "Shure BLX288 Dual Wireless Receiver" },
+    { slug: "yamaha-tf5", name: "Yamaha TF5" },
+  ],
+};
+
 export const qscKw153: EquipmentDefinition = {
   id: "qsc-kw153",
   slug: "qsc-kw153",
@@ -577,6 +589,7 @@ export const equipmentItems: EquipmentDefinition[] = [
   stageSnakeA,
   stageSnakeB,
   shureBlxReceiver,
+  wirelessMicrophones,
   qscKw153,
   stageMonitor,
   mediaComputer,
