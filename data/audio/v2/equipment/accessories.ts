@@ -105,60 +105,6 @@ export const diBoxes = createAccessoryItem(
   "DI boxes convert instrument-level signals to balanced mic-level for the TF5."
 );
 
-export const keyboard: EquipmentDefinition = {
-  id: "keyboard",
-  slug: "keyboard",
-  name: "Keyboard",
-  categoryId: "playback",
-  icon: "🎹",
-  purpose:
-    "The worship keyboard sends audio to the Yamaha TF5 through Stage Snake B for Sunday services.",
-  quickStart: [
-    "Confirm keyboard power and output level",
-    "Connect keyboard output to Stage Snake B Input 1",
-    "Verify TF5 Channel 16 receives signal",
-    "Check keyboard level during soundcheck",
-  ],
-  specifications: [
-    { label: "TF5 Channel", value: "16 — Keyboard" },
-    { label: "Physical Input", value: "Stage Snake B Input 1" },
-  ],
-  primaryConnections: ["Stage Snake B — Input 1"],
-  bestPractices: [
-    "Verify keyboard level before service.",
-    "Use the approved DI or direct connection.",
-    "Do not change TF5 channel routing without Audio Lead approval.",
-  ],
-  commonProblems: [
-    {
-      id: "keyboard-no-signal",
-      title: "No Keyboard Signal",
-      basicChecks: [
-        "Confirm keyboard is connected to Stage Snake B Input 1",
-        "Check keyboard power and volume",
-        "Verify TF5 Channel 16 is not muted",
-        "Reseat the signal cable",
-      ],
-    },
-  ],
-  relatedEquipment: [
-    { slug: "stage-snake-b", name: "Stage Snake B" },
-    { slug: "yamaha-tf5", name: "Yamaha TF5" },
-  ],
-  setupLinks: [
-    { href: "/audio/setup", label: "Sunday Setup" },
-    {
-      href: "/audio/documentation/tf5-channel-list",
-      label: "TF5 Channel List",
-    },
-    {
-      href: "/audio/troubleshooting/no-keyboard-audio",
-      label: "No Keyboard Audio Troubleshooting",
-    },
-  ],
-  downloads: [{ label: "Keyboard Patch Reference", href: "#" }],
-};
-
 export const accessoryItems: EquipmentDefinition[] = [
   xlrCables,
   powerCables,
@@ -168,5 +114,4 @@ export const accessoryItems: EquipmentDefinition[] = [
   cableCovers,
   adapters,
   diBoxes,
-  keyboard,
 ];

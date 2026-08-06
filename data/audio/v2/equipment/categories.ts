@@ -48,6 +48,13 @@ export const equipmentCategories: EquipmentCategory[] = [
     itemSlugs: ["stage-snake-a", "stage-snake-b"],
   },
   {
+    id: "keyboard",
+    title: "Keyboard",
+    emoji: "🎹",
+    href: "/audio/equipment/keyboard",
+    itemSlugs: ["keyboard"],
+  },
+  {
     id: "playback",
     title: "Playback",
     emoji: "💻",

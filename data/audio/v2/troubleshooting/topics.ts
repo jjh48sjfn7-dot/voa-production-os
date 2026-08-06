@@ -83,7 +83,7 @@ export const troubleshootingGuides: Record<string, TroubleshootingGuide> = {
     signalPath: {
       id: "keyboard-signal-path",
       nodes: [
-        { id: "keyboard", name: "Keyboard", emoji: "🎹" },
+        { id: "keyboard", name: "Keyboard", emoji: "🎹", equipmentSlug: "keyboard" },
         {
           id: "stage-snake-b",
           name: "Stage Snake B",
@@ -103,7 +103,11 @@ export const troubleshootingGuides: Record<string, TroubleshootingGuide> = {
       "Verify gain and fader level on Channel 16.",
       "Trace the cable from keyboard to the stage snake.",
     ],
-    relatedEquipment: standardRelatedEquipment,
+    relatedEquipment: [
+      { slug: "keyboard", name: "Keyboard" },
+      { slug: "stage-snake-b", name: "Stage Snake B" },
+      { slug: "yamaha-tf5", name: "Yamaha TF5" },
+    ],
     relatedDocumentation: standardRelatedDocumentation,
   },
   "no-wireless-microphone": {

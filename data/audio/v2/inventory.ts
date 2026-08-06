@@ -20,6 +20,10 @@ export const inventoryLandingSections = [
     title: "Stage Snakes",
   },
   {
+    id: "keyboard",
+    title: "Keyboard",
+  },
+  {
     id: "playback",
     title: "Playback",
   },

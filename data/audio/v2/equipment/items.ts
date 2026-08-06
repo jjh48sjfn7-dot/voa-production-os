@@ -1020,10 +1020,133 @@ export const mediaComputer: EquipmentDefinition = {
   ],
 };
 
+export const keyboard: EquipmentDefinition = {
+  id: "keyboard",
+  slug: "keyboard",
+  name: "Keyboard",
+  categoryId: "keyboard",
+  icon: "🎹",
+  purpose:
+    "The keyboard provides the main keys signal for worship and feeds the audio system through Stage Snake B.",
+  quickStart: [
+    "Position keyboard at Stage Right",
+    "Connect keyboard power",
+    "Connect the keyboard audio output",
+    "Connect to a DI box if required",
+    "Patch to Stage Snake B Input 1",
+    "Verify TF5 Channel 16 is labeled Keys",
+    "Confirm signal during Soundcheck",
+  ],
+  specifications: [
+    { label: "Category", value: "Instrument" },
+    { label: "Console Channel", value: "TF5 Channel 16 — Keys" },
+    { label: "Physical Input", value: "Stage Snake B Input 1" },
+  ],
+  primaryConnections: [
+    "Power — AC Power",
+    "Audio Input — Stage Snake B Input 1",
+    "Console Channel — TF5 Channel 16",
+    "Related Output — Main L/R to FOH Speakers",
+  ],
+  bestPractices: [
+    "Turn keyboard volume down before connecting.",
+    "Confirm the correct audio output is being used.",
+    "Keep power and audio cables secured.",
+    "Do not change TF5 Channel 16 routing without approval.",
+    "Verify signal before rehearsal begins.",
+  ],
+  commonProblems: [
+    {
+      id: "keyboard-no-audio",
+      title: "No Keyboard Audio",
+      basicChecks: [
+        "Verify keyboard power",
+        "Check keyboard output level",
+        "Confirm Stage Snake B Input 1",
+        "Check TF5 Channel 16",
+        "Confirm the channel is unmuted",
+        "Verify Main L/R output",
+      ],
+    },
+    {
+      id: "keyboard-weak-signal",
+      title: "Weak Keyboard Signal",
+      basicChecks: [
+        "Raise keyboard output carefully",
+        "Check the DI box if used",
+        "Verify cable connections",
+        "Check TF5 gain",
+      ],
+    },
+    {
+      id: "keyboard-hum",
+      title: "Hum or Noise",
+      basicChecks: [
+        "Reseat the audio cable",
+        "Separate audio and power cables",
+        "Check the DI box",
+        "Replace the cable if needed",
+      ],
+    },
+    {
+      id: "keyboard-one-side",
+      title: "Only One Side of Keyboard Audio",
+      basicChecks: [
+        "Verify whether the keyboard is connected mono or stereo",
+        "Check the selected keyboard output",
+        "Verify the DI and cable connection",
+        "Confirm TF5 routing",
+      ],
+    },
+    {
+      id: "keyboard-no-power",
+      title: "No Power",
+      basicChecks: [
+        "Verify the power cable",
+        "Check the outlet",
+        "Confirm the power switch",
+        "Notify the Audio Lead if power still fails",
+      ],
+    },
+  ],
+  downloads: [{ label: "Keyboard Patch Reference", href: "#" }],
+  relatedEquipment: [
+    { slug: "stage-snake-b", name: "Stage Snake B" },
+    { slug: "yamaha-tf5", name: "Yamaha TF5" },
+    { slug: "di-boxes", name: "DI Box" },
+    { name: "FOH Speakers", href: "/audio/equipment/foh-speakers" },
+    { name: "Stage Monitors", href: "/audio/equipment/monitors" },
+  ],
+  setupLinks: [
+    {
+      href: "/audio/documentation/input-patch-list",
+      label: "Input Patch List",
+    },
+    {
+      href: "/audio/documentation/tf5-channel-list",
+      label: "TF5 Channel List",
+    },
+    {
+      href: "/audio/documentation/output-routing",
+      label: "Output Routing",
+    },
+    {
+      href: "/audio/documentation/signal-flow",
+      label: "Signal Flow",
+    },
+    { href: "/audio/setup", label: "Sunday Setup" },
+    {
+      href: "/audio/troubleshooting/no-keyboard-audio",
+      label: "No Keyboard Audio",
+    },
+  ],
+};
+
 export const equipmentItems: EquipmentDefinition[] = [
   yamahaTf5,
   stageSnakeA,
   stageSnakeB,
+  keyboard,
   shureBlxReceiver,
   qscK122,
   subwoofer,
