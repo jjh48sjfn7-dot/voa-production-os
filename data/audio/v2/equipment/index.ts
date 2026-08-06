@@ -13,6 +13,11 @@ const equipmentBySlug = new Map(
 const equipmentSlugAliases: Record<string, string> = {
   "shure-blx-dual-receiver-1": "shure-blx-receiver",
   "shure-blx-dual-receiver-2": "shure-blx-receiver",
+  "wireless-microphones": "shure-blx-receiver",
+  "pastor-wireless-microphone": "shure-blx-receiver",
+  "worship-leader-wireless-microphone": "shure-blx-receiver",
+  "wireless-microphone-3": "shure-blx-receiver",
+  "wireless-microphone-4": "shure-blx-receiver",
   "qsc-kw153-left": "qsc-k12-2",
   "qsc-kw153-right": "qsc-k12-2",
   "qsc-kw153": "qsc-k12-2",

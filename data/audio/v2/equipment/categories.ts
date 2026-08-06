@@ -13,11 +13,7 @@ export const equipmentCategories: EquipmentCategory[] = [
     title: "Wireless",
     emoji: "🎤",
     href: "/audio/equipment/wireless",
-    itemSlugs: [
-      "shure-blx-dual-receiver-1",
-      "shure-blx-dual-receiver-2",
-      "wireless-microphones",
-    ],
+    itemSlugs: ["shure-blx-dual-receiver-1", "shure-blx-dual-receiver-2"],
   },
   {
     id: "foh-speakers",
@@ -43,22 +39,6 @@ export const equipmentCategories: EquipmentCategory[] = [
     emoji: "🔌",
     href: "/audio/equipment/stage-boxes",
     itemSlugs: ["stage-snake-a", "stage-snake-b"],
-  },
-  {
-    id: "microphones",
-    title: "Microphones",
-    emoji: "🎙️",
-    href: "/audio/equipment/microphones",
-    itemSlugs: [
-      "pastor-wireless-microphone",
-      "worship-leader-wireless-microphone",
-      "wireless-microphone-3",
-      "wireless-microphone-4",
-      "kick-microphone",
-      "snare-microphone",
-      "overhead-microphone-1",
-      "overhead-microphone-2",
-    ],
   },
   {
     id: "playback",

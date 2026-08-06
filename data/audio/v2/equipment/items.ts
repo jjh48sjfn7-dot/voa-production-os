@@ -142,7 +142,6 @@ export const yamahaTf5: EquipmentDefinition = {
     { name: "Wireless Receivers", href: "/audio/equipment/wireless" },
     { name: "FOH Speakers", href: "/audio/equipment/foh-speakers" },
     { name: "Stage Monitors", href: "/audio/equipment/monitors" },
-    { name: "Microphones", href: "/audio/equipment/microphones" },
   ],
 };
 
@@ -273,9 +272,14 @@ export const stageSnakeA: EquipmentDefinition = {
     { slug: "drummer-in-ear-system", name: "Drummer In-Ear System" },
     { slug: "qsc-kw153-right", name: "QSC K12.2" },
     { slug: "stage-monitor-right", name: "QSC K10.2" },
-    { slug: "kick-microphone", name: "Kick Microphone" },
-    { slug: "snare-microphone", name: "Snare Microphone" },
-    { slug: "overhead-microphone-1", name: "Overhead Microphones" },
+    {
+      name: "Drum Input Patch List",
+      href: "/audio/documentation/input-patch-list",
+    },
+    {
+      name: "TF5 Channel List",
+      href: "/audio/documentation/tf5-channel-list",
+    },
   ],
 };
 
@@ -416,28 +420,54 @@ export const shureBlxReceiver: EquipmentDefinition = {
   categoryId: "wireless",
   icon: "🎤",
   purpose:
-    "The Shure BLX288 provides wireless audio for handheld microphones used during Sunday services. The receivers feed directly into the Yamaha TF5.",
+    "The Shure BLX288 wireless system provides handheld microphone audio for Sunday services. Two dual receivers feed four color-coded handheld microphones directly into the Yamaha TF5.",
+  specifications: [
+    { label: "Receivers", value: "2× Shure BLX288 dual receivers (4 channels total)" },
+    { label: "Handheld Microphones", value: "4× Shure BLX handheld transmitters" },
+    { label: "Purple Handheld", value: "Pastor / primary speaker — TF5 Channel 17" },
+    { label: "Yellow Handheld", value: "Worship leader — TF5 Channel 18" },
+    { label: "Green Handheld", value: "Wireless 3 — TF5 Channel 19" },
+    { label: "Blue Handheld", value: "Wireless 4 — TF5 Channel 20" },
+    { label: "Batteries", value: "2× AA alkaline per handheld — replace before service" },
+  ],
   channelAssignments: [
-    { label: "Purple", value: "TF5 Channel 17" },
-    { label: "Yellow", value: "TF5 Channel 18" },
-    { label: "Green", value: "TF5 Channel 19" },
-    { label: "Blue", value: "TF5 Channel 20" },
+    { label: "Purple", value: "TF5 Channel 17 — Purple XLR" },
+    { label: "Yellow", value: "TF5 Channel 18 — Yellow XLR" },
+    { label: "Green", value: "TF5 Channel 19 — Green XLR" },
+    { label: "Blue", value: "TF5 Channel 20 — Blue XLR" },
   ],
   quickStart: [
-    "Power on receivers",
-    "Verify antennas",
-    "Confirm microphones pair correctly",
-    "Verify RF signal",
-    "Verify Audio signal",
-    "Check battery level",
-    "Confirm all four channels pass audio",
+    "Power on both BLX288 receivers",
+    "Verify antennas are connected and upright",
+    "Install fresh AA batteries in each handheld",
+    "Power on each handheld microphone",
+    "Pair each handheld to its matching receiver (see Connection Notes)",
+    "Connect color-coded XLR cables from receivers to TF5 Inputs 17–20",
+    "Verify RF signal on each receiver",
+    "Verify audio passes on all four TF5 channels",
   ],
-  primaryConnections: ["Power", "TF5 Inputs 17–20", "Wireless Microphones"],
+  primaryConnections: [
+    "Power",
+    "TF5 Inputs 17–20",
+    "Color-coded wireless XLR cables",
+    "Purple, Yellow, Green, and Blue handheld microphones",
+  ],
+  connectionNotes: [
+    "Each handheld must stay matched to its color-coded XLR and TF5 channel.",
+    "Purple → Channel 17, Yellow → Channel 18, Green → Channel 19, Blue → Channel 20.",
+    "To pair: press and hold the Sync button on the receiver until the LED flashes, then hold the handheld power button until linked.",
+    "Confirm the RF indicator is solid before soundcheck.",
+    "Use matching cable color at both the receiver output and TF5 input.",
+    "Replace AA batteries with fresh alkalines before every service.",
+    "Keep spare AA batteries at FOH.",
+  ],
   bestPractices: [
-    "Replace weak batteries before service.",
-    "Never mix microphone colors.",
-    "Keep antennas unobstructed.",
+    "Replace weak batteries before service — fresh AA alkalines in every handheld.",
+    "Never mix microphone colors or cable colors.",
+    "Keep receiver antennas unobstructed and upright.",
     "Mute microphones when not in use.",
+    "Hand the correct color microphone to each performer before service.",
+    "Verify all four channels during soundcheck every Sunday.",
   ],
   commonProblems: [
     {
@@ -532,22 +562,9 @@ export const shureBlxReceiver: EquipmentDefinition = {
   ],
   relatedEquipment: [
     { slug: "yamaha-tf5", name: "Yamaha TF5" },
-    { name: "Wireless Microphones", href: "/audio/equipment/microphones" },
     { name: "Sunday Setup", href: "/audio/setup" },
     { name: "Signal Flow", href: "/audio/documentation/signal-flow" },
     { name: "TF5 Channel List", href: "/audio/documentation/tf5-channel-list" },
-  ],
-};
-
-export const wirelessMicrophones: EquipmentDefinition = {
-  id: "wireless-microphones",
-  slug: "wireless-microphones",
-  name: "Wireless Microphones",
-  categoryId: "wireless",
-  icon: "🎤",
-  relatedEquipment: [
-    { slug: "shure-blx-receiver", name: "Shure BLX288 Dual Wireless Receiver" },
-    { slug: "yamaha-tf5", name: "Yamaha TF5" },
   ],
 };
 
@@ -595,7 +612,6 @@ export const equipmentItems: EquipmentDefinition[] = [
   stageSnakeA,
   stageSnakeB,
   shureBlxReceiver,
-  wirelessMicrophones,
   qscK122,
   qscK102,
   mediaComputer,
