@@ -37,6 +37,7 @@ export {
 };
 
 export type {
+  DocumentationInfoSection,
   DocumentationListSection,
   DocumentationPageContent,
   DocumentationRelatedResource,

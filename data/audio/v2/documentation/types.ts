@@ -34,12 +34,18 @@ export interface DocumentationRelatedResource {
   disabled?: boolean;
 }
 
+export interface DocumentationInfoSection {
+  title: string;
+  body: string[];
+}
+
 export interface DocumentationPageContent {
   id: string;
   purpose: string;
   subtitle?: string;
   tableSections?: DocumentationTableSection[];
   listSections?: DocumentationListSection[];
+  infoSections?: DocumentationInfoSection[];
   placeholderMessage?: string;
   relatedResources?: DocumentationRelatedResource[];
 }

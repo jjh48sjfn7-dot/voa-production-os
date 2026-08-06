@@ -2,6 +2,7 @@
 
 import type { LucideIcon } from "lucide-react";
 import { AudioPageShell } from "@/components/audio/AudioPageShell";
+import { DocumentationInfoCard } from "@/components/audio/v2/documentation/DocumentationInfoCard";
 import { DocumentationList } from "@/components/audio/v2/documentation/DocumentationList";
 import { DocumentationRelatedResources } from "@/components/audio/v2/documentation/DocumentationRelatedResources";
 import { DocumentationTable } from "@/components/audio/v2/documentation/DocumentationTable";
@@ -23,6 +24,7 @@ export function DocumentationPageView({
 }: DocumentationPageContentProps) {
   const hasTables = !!content.tableSections?.length;
   const hasLists = !!content.listSections?.length;
+  const hasInfoSections = !!content.infoSections?.length;
   const hasRelatedResources = !!content.relatedResources?.length;
   const isPlaceholder = !!content.placeholderMessage;
 
@@ -58,6 +60,13 @@ export function DocumentationPageView({
                 columns={section.columns}
                 rows={section.rows}
               />
+            </EquipmentSection>
+          ))}
+
+        {hasInfoSections &&
+          content.infoSections!.map((section) => (
+            <EquipmentSection key={section.title} title={section.title}>
+              <DocumentationInfoCard body={section.body} />
             </EquipmentSection>
           ))}
 
