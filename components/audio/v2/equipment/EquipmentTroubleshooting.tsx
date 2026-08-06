@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { TroubleshootingCard } from "@/components/shared/TroubleshootingCard";
 import { audioStyles } from "@/lib/audio-styles";
 import type { EquipmentTroubleshootingItem } from "@/data/audio/v2/equipment/types";
 
@@ -84,41 +84,16 @@ export function EquipmentTroubleshooting({
 
   return (
     <div className="space-y-2">
-      {items.map((item) => {
-        const open = openId === item.id;
-
-        return (
-          <div key={item.id} className={`overflow-hidden ${audioStyles.card}`}>
-            <button
-              type="button"
-              onClick={() => handleToggle(item.id)}
-              className="flex min-h-[52px] w-full items-center gap-3 px-4 py-3.5 text-left sm:px-5"
-              aria-expanded={open}
-            >
-              <p className="flex-1 text-base font-semibold text-slate-50">
-                {item.title}
-              </p>
-              <ChevronDown
-                className={`h-5 w-5 shrink-0 text-slate-500 transition-transform duration-200 ease-out ${
-                  open ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-
-            <div
-              className={`grid transition-[grid-template-rows] duration-200 ease-out ${
-                open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-              }`}
-            >
-              <div className="overflow-hidden">
-                <div className="border-t border-white/[0.06] px-4 pb-4 pt-3 sm:px-5">
-                  <TroubleshootingItemContent item={item} />
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      })}
+      {items.map((item) => (
+        <TroubleshootingCard
+          key={item.id}
+          title={item.title}
+          open={openId === item.id}
+          onToggle={() => handleToggle(item.id)}
+        >
+          <TroubleshootingItemContent item={item} />
+        </TroubleshootingCard>
+      ))}
     </div>
   );
 }
