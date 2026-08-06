@@ -42,6 +42,7 @@ export interface EquipmentDefinition {
   image?: string;
   purpose?: string;
   quickStart?: string[];
+  channelAssignments?: EquipmentSpecification[];
   specifications?: EquipmentSpecification[];
   primaryConnections?: string[];
   inputs?: string[];

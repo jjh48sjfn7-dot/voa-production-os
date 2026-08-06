@@ -28,6 +28,7 @@ export function EquipmentDetailPage({ equipment }: EquipmentDetailPageProps) {
     : "Back to Equipment";
 
   const hasQuickStart = !!equipment.quickStart?.length;
+  const hasChannelAssignments = !!equipment.channelAssignments?.length;
   const hasSpecifications = !!equipment.specifications?.length;
   const hasPrimaryConnections = !!equipment.primaryConnections?.length;
   const hasSetupLinks = !!equipment.setupLinks?.length;
@@ -55,6 +56,12 @@ export function EquipmentDetailPage({ equipment }: EquipmentDetailPageProps) {
             <p className={`${audioStyles.body} leading-relaxed text-slate-300`}>
               {equipment.purpose}
             </p>
+          </EquipmentSection>
+        )}
+
+        {hasChannelAssignments && (
+          <EquipmentSection title="Channel Assignments">
+            <EquipmentSpecifications items={equipment.channelAssignments!} />
           </EquipmentSection>
         )}
 

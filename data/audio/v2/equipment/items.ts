@@ -412,12 +412,131 @@ export const stageSnakeB: EquipmentDefinition = {
 export const shureBlxReceiver: EquipmentDefinition = {
   id: "shure-blx-receiver",
   slug: "shure-blx-receiver",
-  name: "Shure BLX Receiver",
+  name: "Shure BLX288 Dual Wireless Receiver",
   categoryId: "wireless",
   icon: "🎤",
   purpose:
-    "Shure BLX receivers provide wireless microphone audio to the Yamaha TF5 during Sunday service.",
-  relatedEquipment: [{ slug: "yamaha-tf5", name: "Yamaha TF5" }],
+    "The Shure BLX288 provides wireless audio for handheld microphones used during Sunday services. The receivers feed directly into the Yamaha TF5.",
+  channelAssignments: [
+    { label: "Purple", value: "TF5 Channel 17" },
+    { label: "Yellow", value: "TF5 Channel 18" },
+    { label: "Green", value: "TF5 Channel 19" },
+    { label: "Blue", value: "TF5 Channel 20" },
+  ],
+  quickStart: [
+    "Power on receivers",
+    "Verify antennas",
+    "Confirm microphones pair correctly",
+    "Verify RF signal",
+    "Verify Audio signal",
+    "Check battery level",
+    "Confirm all four channels pass audio",
+  ],
+  primaryConnections: ["Power", "TF5 Inputs 17–20", "Wireless Microphones"],
+  bestPractices: [
+    "Replace weak batteries before service.",
+    "Never mix microphone colors.",
+    "Keep antennas unobstructed.",
+    "Mute microphones when not in use.",
+  ],
+  commonProblems: [
+    {
+      id: "blx-no-rf",
+      title: "No RF Signal",
+      problem: "The receiver shows no RF signal for a wireless microphone.",
+      basicChecks: [
+        "Confirm the receiver is powered on.",
+        "Verify antennas are connected and upright.",
+        "Confirm the microphone is powered on.",
+        "Check that the microphone is within range.",
+        "Reseat the matching color XLR at the receiver.",
+      ],
+      possibleCauses: [
+        "Microphone is powered off or out of range",
+        "Antenna is loose or obstructed",
+        "Microphone is not paired to the receiver",
+      ],
+    },
+    {
+      id: "blx-no-audio",
+      title: "No Audio",
+      problem: "RF signal is present but no audio passes to the TF5.",
+      basicChecks: [
+        "Verify the matching color XLR is patched to the correct TF5 input.",
+        "Confirm the receiver output volume is up.",
+        "Check the TF5 channel is not muted.",
+        "Confirm gain is set on the assigned TF5 channel.",
+        "Swap the XLR cable if needed.",
+      ],
+      possibleCauses: [
+        "Wrong color cable patched to TF5",
+        "Receiver output level too low",
+        "TF5 channel muted or not routed",
+      ],
+    },
+    {
+      id: "blx-battery-dead",
+      title: "Battery Dead",
+      problem: "The wireless microphone has no power or drops out immediately.",
+      basicChecks: [
+        "Replace the microphone batteries.",
+        "Confirm battery orientation is correct.",
+        "Check for corrosion in the battery compartment.",
+        "Verify the power LED on the microphone.",
+        "Keep spare batteries at FOH.",
+      ],
+      possibleCauses: [
+        "Weak or dead batteries",
+        "Incorrect battery installation",
+        "Battery contacts need cleaning",
+      ],
+    },
+    {
+      id: "blx-wrong-mic",
+      title: "Wrong Microphone",
+      problem: "The wrong microphone color or channel is active on the console.",
+      basicChecks: [
+        "Confirm the microphone color matches the assigned TF5 channel.",
+        "Verify Purple → 17, Yellow → 18, Green → 19, Blue → 20.",
+        "Check that the correct performer has the matching microphone.",
+        "Confirm the Sunday Scene channel labels.",
+      ],
+      possibleCauses: [
+        "Microphone color mixed with wrong cable",
+        "Wrong microphone handed to performer",
+        "TF5 channel patch does not match color code",
+      ],
+    },
+    {
+      id: "blx-dropout",
+      title: "Intermittent Dropout",
+      problem: "Wireless audio cuts in and out during service.",
+      basicChecks: [
+        "Replace weak batteries.",
+        "Reposition antennas for clear line of sight.",
+        "Move the microphone away from metal surfaces and obstructions.",
+        "Check for interference from other wireless devices.",
+        "Confirm the performer is within approved range.",
+      ],
+      possibleCauses: [
+        "Low battery voltage",
+        "RF interference or blocked signal path",
+        "Microphone moving out of receiver range",
+      ],
+    },
+  ],
+  downloads: [
+    { label: "Wireless Guide", href: "#" },
+    { label: "Frequency Sheet", href: "#" },
+    { label: "Battery Checklist", href: "#" },
+  ],
+  relatedEquipment: [
+    { slug: "yamaha-tf5", name: "Yamaha TF5" },
+    { name: "Wireless Microphones", href: "/audio/equipment/microphones" },
+    { name: "Sunday Setup", href: "/audio/setup" },
+    { name: "Signal Flow", href: "/audio/documentation/signal-flow" },
+    { name: "TF5 Channel List", href: "/audio/documentation/tf5-channel-list" },
+  ],
 };
 
 export const qscKw153: EquipmentDefinition = {
