@@ -20,15 +20,15 @@ export const outputRouting: DocumentationPageContent = {
       columns: outputColumns,
       rows: [
         {
-          output: "Main Left",
+          output: "Output 15",
           destination: "Left FOH Speaker",
-          physicalConnection: "QSC K12.2",
+          physicalConnection: "Stage Snake A Output 1 — QSC K12.2",
           notes: "Primary Left House Mix",
         },
         {
-          output: "Main Right",
+          output: "Output 16",
           destination: "Right FOH Speaker",
-          physicalConnection: "QSC K12.2",
+          physicalConnection: "Stage Snake B Output 1 — QSC K12.2",
           notes: "Primary Right House Mix",
         },
       ],
@@ -38,29 +38,34 @@ export const outputRouting: DocumentationPageContent = {
       columns: outputColumns,
       rows: [
         {
-          output: "Right Monitor Mix",
+          output: "Output 4",
+          destination: "Left Stage Monitor",
+          physicalConnection: "Stage Snake A Output 2 — QSC K10.2",
+          notes: "Stage Left Monitor Mix",
+        },
+        {
+          output: "Output 5",
           destination: "Right Stage Monitor",
-          physicalConnection: "QSC K10.2",
+          physicalConnection: "Stage Snake B Output 2 — QSC K10.2",
           notes: "Stage Right Monitor Mix",
         },
         {
-          output: "Drummer Mix",
+          output: "Output 3",
           destination: "Drummer In-Ear System",
-          physicalConnection: "Behringer PM1 — Stage Snake A Output 3",
+          physicalConnection: "Stage Snake A Output 3 — Behringer PM1",
           notes: "Dedicated Drum Mix",
         },
       ],
     },
     {
-      title: "Reserved Outputs",
+      title: "Subwoofer Output",
       columns: outputColumns,
       rows: [
         {
-          output: "Reserved Output",
+          output: "Output 6",
           destination: "Subwoofer",
-          physicalConnection: "Stage Snake B Output 3",
-          notes:
-            "Reserved for future expansion. Currently not active unless approved.",
+          physicalConnection: "Placeholder until finalized",
+          notes: "Subwoofer routing pending final configuration",
         },
       ],
     },

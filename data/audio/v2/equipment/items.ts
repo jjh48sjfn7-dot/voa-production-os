@@ -173,9 +173,9 @@ export const stageSnakeA: EquipmentDefinition = {
     "Input 6 — Overhead Microphone 2",
   ],
   outputs: [
-    "Output 1 — Right FOH Speaker",
-    "Output 2 — Right Monitor",
-    "Output 3 — Drummer In-Ear System",
+    "Output 1 — Left FOH Speaker (TF5 Output 15)",
+    "Output 2 — Left Stage Monitor (TF5 Output 4)",
+    "Output 3 — Drummer In-Ear System (TF5 Output 3)",
     "Output 4 — Open",
   ],
   sundaySetup: {
@@ -217,24 +217,24 @@ export const stageSnakeA: EquipmentDefinition = {
     },
     {
       id: "snake-a-no-foh",
-      title: "No FOH Speaker Output",
-      problem: "FOH speaker output from Stage Snake A is not working.",
+      title: "No Left FOH Speaker Output",
+      problem: "Left FOH speaker output from Stage Snake A is not working.",
       basicChecks: [
         "Confirm Output 1 connection",
         "Verify speaker power",
-        "Verify TF5 Main L/R routing",
+        "Verify TF5 Output 15 routing",
         "Check output cable",
       ],
       possibleCauses: ["Output 1 patch or speaker power issue"],
     },
     {
       id: "snake-a-no-monitor",
-      title: "No Monitor Output",
-      problem: "Stage monitor output from Stage Snake A is not working.",
+      title: "No Left Monitor Output",
+      problem: "Left stage monitor output from Stage Snake A is not working.",
       basicChecks: [
         "Confirm Output 2 connection",
         "Verify monitor power",
-        "Check the assigned TF5 mix",
+        "Verify TF5 Output 4 routing",
         "Confirm mix output is not muted",
       ],
       possibleCauses: ["Output 2 patch or monitor mix issue"],
@@ -246,7 +246,7 @@ export const stageSnakeA: EquipmentDefinition = {
       basicChecks: [
         "Confirm Output 3 connection",
         "Verify the drummer in-ear system is powered",
-        "Check the assigned TF5 mix",
+        "Verify TF5 Output 3 routing",
         "Confirm output level is safe",
       ],
       possibleCauses: ["Output 3 patch or in-ear system power issue"],
@@ -273,8 +273,8 @@ export const stageSnakeA: EquipmentDefinition = {
     { slug: "yamaha-tf5", name: "Yamaha TF5" },
     { slug: "stage-snake-b", name: "Stage Snake B" },
     { slug: "drummer-in-ear-system", name: "Behringer PM1 — Drummer In-Ear" },
-    { slug: "qsc-kw153-right", name: "QSC K12.2" },
-    { slug: "stage-monitor-right", name: "QSC K10.2" },
+    { slug: "qsc-kw153-left", name: "QSC K12.2 — Left FOH" },
+    { slug: "stage-monitor-left", name: "QSC K10.2 — Left Monitor" },
     {
       name: "Drum Input Patch List",
       href: "/audio/documentation/input-patch-list",
@@ -293,7 +293,7 @@ export const stageSnakeB: EquipmentDefinition = {
   categoryId: "stage-boxes",
   icon: "🔌",
   purpose:
-    "Stage Snake B carries the keyboard input and Stage Right outputs between the stage and the Yamaha TF5. It is used every Sunday for the keyboard, Right FOH speaker, Right stage monitor, and the reserved subwoofer output.",
+    "Stage Snake B carries the keyboard input and Stage Right outputs between the stage and the Yamaha TF5. It is used every Sunday for the keyboard, Right FOH speaker, and Right stage monitor.",
   quickStart: [
     "Position Stage Snake B at Stage Right",
     "Run the snake cable along the approved route",
@@ -304,9 +304,9 @@ export const stageSnakeB: EquipmentDefinition = {
   ],
   inputs: ["Input 1 — Keyboard"],
   outputs: [
-    "Output 1 — Right FOH Speaker",
-    "Output 2 — Right Stage Monitor",
-    "Output 3 — Subwoofer Output Reserved",
+    "Output 1 — Right FOH Speaker (TF5 Output 16)",
+    "Output 2 — Right Stage Monitor (TF5 Output 5)",
+    "Output 3 — Open",
     "Output 4 — Open",
   ],
   sundaySetup: {
@@ -319,8 +319,7 @@ export const stageSnakeB: EquipmentDefinition = {
     "Keep the snake cable tight to the approved wall route.",
     "Keep connectors clear of walkways.",
     "Do not power connected speakers until signal connections are complete.",
-    "Output 3 is reserved for a subwoofer.",
-    "Output 4 must remain open unless Daniel approves a change.",
+    "Output 3 and Output 4 must remain open unless Daniel approves a change.",
   ],
   commonProblems: [
     {
@@ -343,7 +342,7 @@ export const stageSnakeB: EquipmentDefinition = {
       basicChecks: [
         "Confirm Output 1 connection",
         "Verify speaker power",
-        "Verify TF5 Main L/R routing",
+        "Verify TF5 Output 16 routing",
         "Check the output cable",
       ],
       possibleCauses: ["Output 1 patch or speaker power issue"],
@@ -355,23 +354,10 @@ export const stageSnakeB: EquipmentDefinition = {
       basicChecks: [
         "Confirm Output 2 connection",
         "Verify monitor power",
-        "Check the assigned TF5 mix",
+        "Verify TF5 Output 5 routing",
         "Confirm the mix output is not muted",
       ],
       possibleCauses: ["Output 2 patch or monitor mix issue"],
-    },
-    {
-      id: "snake-b-no-sub",
-      title: "No Subwoofer Output",
-      problem: "Subwoofer output from Stage Snake B is not working.",
-      basicChecks: [
-        "Confirm whether a subwoofer is currently installed",
-        "Confirm Output 3 connection",
-        "Verify the assigned TF5 output routing",
-        "Check the output cable",
-        "Do not repurpose Output 3 without approval",
-      ],
-      possibleCauses: ["Output 3 reserved routing or subwoofer not installed"],
     },
     {
       id: "snake-b-hum",
@@ -409,8 +395,8 @@ export const stageSnakeB: EquipmentDefinition = {
     { slug: "yamaha-tf5", name: "Yamaha TF5" },
     { slug: "stage-snake-a", name: "Stage Snake A" },
     { slug: "keyboard", name: "Keyboard" },
-    { slug: "qsc-kw153-right", name: "QSC K12.2" },
-    { slug: "stage-monitor-right", name: "QSC K10.2" },
+    { slug: "qsc-kw153-right", name: "QSC K12.2 — Right FOH" },
+    { slug: "stage-monitor-right", name: "QSC K10.2 — Right Monitor" },
     { slug: "subwoofer", name: "Subwoofer" },
     { slug: "di-boxes", name: "DI Box" },
   ],
@@ -598,8 +584,8 @@ export const subwoofer: EquipmentDefinition = {
     "The subwoofer extends the front-of-house low-frequency response, reinforcing bass content from worship music and playback for the sanctuary.",
   quickStart: [
     "Position the subwoofer at the approved FOH location",
-    "Connect Stage Snake B Output 3 to the subwoofer input",
-    "Verify the TF5 subwoofer output routing",
+    "Connect the subwoofer to TF5 Output 6",
+    "Verify TF5 Output 6 subwoofer routing",
     "Power on the subwoofer after signal connections are complete",
     "Confirm subwoofer level during soundcheck",
     "Walk the room to verify balanced low-end coverage",
@@ -611,8 +597,8 @@ export const subwoofer: EquipmentDefinition = {
     { label: "Placement", value: "FOH — center of stage area" },
   ],
   primaryConnections: [
-    "Stage Snake B — Output 3",
-    "TF5 subwoofer output mix",
+    "TF5 Output 6",
+    "Subwoofer input",
     "Power",
   ],
   bestPractices: [
@@ -629,15 +615,15 @@ export const subwoofer: EquipmentDefinition = {
       title: "No Subwoofer Output",
       problem: "The subwoofer is not receiving audio from the TF5.",
       basicChecks: [
-        "Confirm Stage Snake B Output 3 is connected.",
+        "Confirm the subwoofer is connected to TF5 Output 6.",
         "Verify the subwoofer is powered on.",
-        "Check TF5 subwoofer output routing.",
+        "Check TF5 Output 6 routing.",
         "Confirm the subwoofer mix is not muted.",
         "Verify the output cable at both ends.",
         "Recall the approved Sunday Scene if routing looks wrong.",
       ],
       possibleCauses: [
-        "Output 3 patch disconnected",
+        "TF5 Output 6 patch disconnected",
         "Subwoofer output routing not assigned",
         "Subwoofer powered off or cable fault",
       ],
@@ -736,7 +722,7 @@ export const drummerInEarSystem: EquipmentDefinition = {
       value: "Behringer PM1 Personal In-Ear Monitor Beltpack",
     },
   ],
-  primaryConnections: ["Stage Snake A — Output 3"],
+  primaryConnections: ["Stage Snake A — Output 3 (TF5 Output 3)"],
   quickStart: [
     "Connect XLR cable",
     "Connect headphones",

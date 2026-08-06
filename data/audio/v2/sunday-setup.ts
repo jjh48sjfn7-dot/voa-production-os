@@ -79,7 +79,7 @@ export const sundaySetupV2Sections: SundaySetupSection[] = [
             id: "sr-out-monitor",
             label: "Patch Right Monitor to Output 2",
           },
-          { id: "sr-out-sub", label: "Patch Subwoofer to Output 3" },
+          { id: "sr-out-open-3", label: "Leave Output 3 Open" },
           { id: "sr-out-open", label: "Leave Output 4 Open" },
           {
             id: "sr-out-run",
@@ -117,11 +117,11 @@ export const sundaySetupV2Sections: SundaySetupSection[] = [
         items: [
           {
             id: "sl-out-foh",
-            label: "Patch Right FOH Speaker to Output 1",
+            label: "Patch Left FOH Speaker to Output 1",
           },
           {
             id: "sl-out-monitor",
-            label: "Patch Right Monitor to Output 2",
+            label: "Patch Left Monitor to Output 2",
           },
           {
             id: "sl-out-ie",
