@@ -173,7 +173,7 @@ export const troubleshootingGuides: Record<string, TroubleshootingGuide> = {
         { id: "sources", name: "Sources", emoji: "🎤" },
         tf5Node,
         outputsNode,
-        { id: "foh-speaker", name: "FOH Speaker", emoji: "🔊" },
+        { id: "foh-speaker", name: "QSC K12.2", emoji: "🔊" },
       ],
     },
     checks: [
@@ -196,7 +196,7 @@ export const troubleshootingGuides: Record<string, TroubleshootingGuide> = {
         { id: "sources", name: "Sources", emoji: "🎤" },
         tf5Node,
         outputsNode,
-        { id: "stage-monitor", name: "Stage Monitor", emoji: "📣" },
+        { id: "stage-monitor", name: "QSC K10.2", emoji: "📣" },
       ],
     },
     checks: [

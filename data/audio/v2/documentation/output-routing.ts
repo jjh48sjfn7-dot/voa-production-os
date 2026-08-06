@@ -22,13 +22,13 @@ export const outputRouting: DocumentationPageContent = {
         {
           output: "Main Left",
           destination: "Left FOH Speaker",
-          physicalConnection: "FOH Speaker System",
+          physicalConnection: "QSC K12.2",
           notes: "Primary Left House Mix",
         },
         {
           output: "Main Right",
           destination: "Right FOH Speaker",
-          physicalConnection: "FOH Speaker System",
+          physicalConnection: "QSC K12.2",
           notes: "Primary Right House Mix",
         },
       ],
@@ -40,7 +40,7 @@ export const outputRouting: DocumentationPageContent = {
         {
           output: "Right Monitor Mix",
           destination: "Right Stage Monitor",
-          physicalConnection: "Stage Snake Output 2",
+          physicalConnection: "QSC K10.2",
           notes: "Stage Right Monitor Mix",
         },
         {

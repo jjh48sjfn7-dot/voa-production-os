@@ -22,8 +22,8 @@ export const inventoryItems: InventoryEntry[] = [
   { id: "inv-tape", assetNumber: "VOA-ANT-AUD-050", name: "Spike Tape (Neon)", category: "Accessories", quantity: 4, location: "FOH Drawer", status: "available", condition: "good" },
   { id: "inv-batteries", assetNumber: "VOA-ANT-AUD-051", name: "AA Batteries (Duracell 24pk)", category: "Accessories", quantity: 3, location: "FOH Drawer", status: "available", condition: "good", lastService: "Aug 2026", nextService: "Feb 2027" },
   { id: "inv-tf5", assetNumber: "VOA-ANT-AUD-060", name: "Yamaha TF5 Console", category: "Console", quantity: 1, location: "FOH Rack", status: "in-use", condition: "excellent", lastService: "Aug 2026", nextService: "Feb 2027" },
-  { id: "inv-amp-l", assetNumber: "VOA-ANT-AUD-070", name: "QSC GX5 Amp (Main L)", category: "Amplifiers", quantity: 1, location: "FOH Rack", status: "in-use", condition: "excellent", lastService: "Jun 2026", nextService: "Dec 2026" },
-  { id: "inv-amp-r", assetNumber: "VOA-ANT-AUD-071", name: "QSC GX5 Amp (Main R)", category: "Amplifiers", quantity: 1, location: "FOH Rack", status: "in-use", condition: "excellent", lastService: "Jun 2026", nextService: "Dec 2026" },
+  { id: "inv-foh", assetNumber: "VOA-ANT-AUD-070", name: "QSC K12.2 (FOH L/R)", category: "Speakers", quantity: 2, location: "FOH — Center Screen", status: "in-use", condition: "excellent", lastService: "Jun 2026", nextService: "Dec 2026" },
+  { id: "inv-monitor", assetNumber: "VOA-ANT-AUD-071", name: "QSC K10.2 (Stage Monitor L/R)", category: "Speakers", quantity: 2, location: "Stage", status: "in-use", condition: "excellent", lastService: "Jun 2026", nextService: "Dec 2026" },
 ];
 
 export const inventoryBlocks: ContentBlock[] = [
@@ -64,7 +64,7 @@ export const inventoryCategories = [
   "Rio3224-D2",
   "Stands",
   "Console",
-  "Amplifiers",
+  "Speakers",
   "Accessories",
 ];
 

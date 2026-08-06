@@ -35,9 +35,9 @@ export const yamahaTf5: EquipmentDefinition = {
     "Stage Snake A",
     "Stage Snake B",
     "Media Computer",
-    "FOH Left Speaker",
-    "FOH Right Speaker",
-    "Stage Monitors",
+    "QSC K12.2 — FOH Left",
+    "QSC K12.2 — FOH Right",
+    "QSC K10.2 — Stage Monitors",
     "Wireless Receivers",
   ],
   setupLinks: [
@@ -271,8 +271,8 @@ export const stageSnakeA: EquipmentDefinition = {
     { slug: "yamaha-tf5", name: "Yamaha TF5" },
     { slug: "stage-snake-b", name: "Stage Snake B" },
     { slug: "drummer-in-ear-system", name: "Drummer In-Ear System" },
-    { slug: "qsc-kw153-right", name: "Right FOH Speaker" },
-    { slug: "stage-monitor-right", name: "Right Monitor" },
+    { slug: "qsc-kw153-right", name: "QSC K12.2" },
+    { slug: "stage-monitor-right", name: "QSC K10.2" },
     { slug: "kick-microphone", name: "Kick Microphone" },
     { slug: "snare-microphone", name: "Snare Microphone" },
     { slug: "overhead-microphone-1", name: "Overhead Microphones" },
@@ -402,8 +402,8 @@ export const stageSnakeB: EquipmentDefinition = {
     { slug: "yamaha-tf5", name: "Yamaha TF5" },
     { slug: "stage-snake-a", name: "Stage Snake A" },
     { slug: "keyboard", name: "Keyboard" },
-    { slug: "qsc-kw153-right", name: "Right FOH Speaker" },
-    { slug: "stage-monitor-right", name: "Right Stage Monitor" },
+    { slug: "qsc-kw153-right", name: "QSC K12.2" },
+    { slug: "stage-monitor-right", name: "QSC K10.2" },
     { slug: "subwoofer-output", name: "Subwoofer Output" },
     { slug: "di-boxes", name: "DI Box" },
   ],
@@ -551,25 +551,31 @@ export const wirelessMicrophones: EquipmentDefinition = {
   ],
 };
 
-export const qscKw153: EquipmentDefinition = {
-  id: "qsc-kw153",
-  slug: "qsc-kw153",
-  name: "QSC KW153",
+export const qscK122: EquipmentDefinition = {
+  id: "qsc-k12-2",
+  slug: "qsc-k12-2",
+  name: "QSC K12.2",
   categoryId: "foh-speakers",
   icon: "🔊",
-  purpose:
-    "QSC KW153 powered speakers deliver front-of-house audio for the sanctuary.",
+  purpose: "Main Front of House speakers.",
+  specifications: [
+    { label: "Model", value: "QSC K12.2" },
+    { label: "Quantity", value: "2" },
+  ],
   relatedEquipment: [{ slug: "yamaha-tf5", name: "Yamaha TF5" }],
 };
 
-export const stageMonitor: EquipmentDefinition = {
-  id: "stage-monitor",
-  slug: "stage-monitor",
-  name: "Stage Monitor",
+export const qscK102: EquipmentDefinition = {
+  id: "qsc-k10-2",
+  slug: "qsc-k10-2",
+  name: "QSC K10.2",
   categoryId: "monitors",
   icon: "📣",
-  purpose:
-    "Stage monitors provide on-stage audio for musicians and vocalists during service.",
+  purpose: "Stage monitor speakers.",
+  specifications: [
+    { label: "Model", value: "QSC K10.2" },
+    { label: "Quantity", value: "2" },
+  ],
   relatedEquipment: [{ slug: "yamaha-tf5", name: "Yamaha TF5" }],
 };
 
@@ -590,7 +596,7 @@ export const equipmentItems: EquipmentDefinition[] = [
   stageSnakeB,
   shureBlxReceiver,
   wirelessMicrophones,
-  qscKw153,
-  stageMonitor,
+  qscK122,
+  qscK102,
   mediaComputer,
 ];
