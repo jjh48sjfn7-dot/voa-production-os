@@ -46,7 +46,7 @@ export const outputRouting: DocumentationPageContent = {
         {
           output: "Drummer Mix",
           destination: "Drummer In-Ear System",
-          physicalConnection: "Stage Snake Output 3",
+          physicalConnection: "Behringer PM1 — Stage Snake A Output 3",
           notes: "Dedicated Drum Mix",
         },
       ],

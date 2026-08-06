@@ -38,6 +38,7 @@ export const yamahaTf5: EquipmentDefinition = {
     "QSC K12.2 — FOH Left",
     "QSC K12.2 — FOH Right",
     "QSC K10.2 — Stage Monitors",
+    "Behringer PM1 — Drummer In-Ear",
     "Wireless Receivers",
   ],
   setupLinks: [
@@ -269,7 +270,7 @@ export const stageSnakeA: EquipmentDefinition = {
   relatedEquipment: [
     { slug: "yamaha-tf5", name: "Yamaha TF5" },
     { slug: "stage-snake-b", name: "Stage Snake B" },
-    { slug: "drummer-in-ear-system", name: "Drummer In-Ear System" },
+    { slug: "drummer-in-ear-system", name: "Behringer PM1 — Drummer In-Ear" },
     { slug: "qsc-kw153-right", name: "QSC K12.2" },
     { slug: "stage-monitor-right", name: "QSC K10.2" },
     {
@@ -593,7 +594,44 @@ export const qscK102: EquipmentDefinition = {
     { label: "Model", value: "QSC K10.2" },
     { label: "Quantity", value: "2" },
   ],
-  relatedEquipment: [{ slug: "yamaha-tf5", name: "Yamaha TF5" }],
+  relatedEquipment: [
+    { slug: "yamaha-tf5", name: "Yamaha TF5" },
+    { slug: "drummer-in-ear-system", name: "Behringer PM1 — Drummer In-Ear" },
+  ],
+};
+
+export const drummerInEarSystem: EquipmentDefinition = {
+  id: "drummer-in-ear-system",
+  slug: "drummer-in-ear-system",
+  name: "Drummer In-Ear System",
+  categoryId: "monitors",
+  icon: "🎧",
+  purpose: "Provides a wired personal monitor mix for the drummer.",
+  specifications: [
+    {
+      label: "Equipment",
+      value: "Behringer PM1 Personal In-Ear Monitor Beltpack",
+    },
+  ],
+  primaryConnections: ["Stage Snake A — Output 3"],
+  quickStart: [
+    "Connect XLR cable",
+    "Connect headphones",
+    "Turn volume fully down before use",
+    "Verify monitor mix",
+    "Raise volume slowly",
+  ],
+  bestPractices: [
+    "Start with volume down.",
+    "Increase slowly.",
+    "Never unplug while wearing in-ear headphones.",
+    "Secure the beltpack before service.",
+  ],
+  relatedEquipment: [
+    { slug: "stage-snake-a", name: "Stage Snake A" },
+    { slug: "yamaha-tf5", name: "Yamaha TF5" },
+    { slug: "qsc-k10-2", name: "QSC K10.2" },
+  ],
 };
 
 export const mediaComputer: EquipmentDefinition = {
@@ -707,5 +745,6 @@ export const equipmentItems: EquipmentDefinition[] = [
   shureBlxReceiver,
   qscK122,
   qscK102,
+  drummerInEarSystem,
   mediaComputer,
 ];
