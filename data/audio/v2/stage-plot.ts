@@ -82,6 +82,7 @@ export const audioStagePlot: StagePlotDocument = {
           id: "keyboard",
           name: "Keyboard",
           icon: "🎹",
+          equipmentSlug: "keyboard",
           itemType: "equipment",
           position: "stage-right",
         },
@@ -159,7 +160,7 @@ export const audioStagePlot: StagePlotDocument = {
   ],
   relatedLinks: [
     { title: "Signal Flow", href: "/audio/documentation/signal-flow" },
-    { title: "Channel List", href: "/audio/documentation/channel-list" },
+    { title: "TF5 Channel List", href: "/audio/documentation/tf5-channel-list" },
     { title: "Sunday Setup", href: "/audio/setup" },
   ],
 };

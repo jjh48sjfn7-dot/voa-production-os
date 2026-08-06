@@ -70,10 +70,26 @@ export function getCategoryItems(categoryId: string): EquipmentCategoryItem[] {
 
     return {
       id: equipment?.id ?? slug,
-      title: equipment?.name ?? formatSlugTitle(slug),
+      title: getCategoryItemTitle(slug, equipment?.name),
       slug,
     };
   });
+}
+
+const categoryItemTitles: Record<string, string> = {
+  "qsc-kw153-left": "QSC K12.2 — Left FOH",
+  "qsc-kw153-right": "QSC K12.2 — Right FOH",
+  "stage-monitor-left": "QSC K10.2 — Left Monitor",
+  "stage-monitor-right": "QSC K10.2 — Right Monitor",
+  "shure-blx-dual-receiver-1": "Shure BLX288 — Receiver 1",
+  "shure-blx-dual-receiver-2": "Shure BLX288 — Receiver 2",
+};
+
+function getCategoryItemTitle(
+  slug: string,
+  equipmentName?: string
+): string {
+  return categoryItemTitles[slug] ?? equipmentName ?? formatSlugTitle(slug);
 }
 
 export function getEquipmentDetailParams(): {

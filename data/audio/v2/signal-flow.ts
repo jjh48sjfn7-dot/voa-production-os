@@ -8,7 +8,12 @@ export const audioSignalFlow: SignalFlowDocument = {
     {
       id: "keyboard-path",
       nodes: [
-        { id: "keyboard", name: "Keyboard", emoji: "🎹", equipmentSlug: "keyboard" },
+        {
+          id: "keyboard",
+          name: "Keyboard",
+          emoji: "🎹",
+          equipmentSlug: "keyboard",
+        },
         {
           id: "stage-snake-b",
           name: "Stage Snake B",
@@ -60,7 +65,7 @@ export const audioSignalFlow: SignalFlowDocument = {
       nodes: [
         {
           id: "wireless-mics",
-          name: "Wireless Microphones",
+          name: "Wireless",
           emoji: "🎤",
         },
         {
@@ -87,7 +92,7 @@ export const audioSignalFlow: SignalFlowDocument = {
   ],
   relatedLinks: [
     { title: "Stage Plot", href: "/audio/documentation/stage-plot" },
-    { title: "Channel List", href: "/audio/documentation/channel-list" },
+    { title: "TF5 Channel List", href: "/audio/documentation/tf5-channel-list" },
     { title: "Sunday Setup", href: "/audio/setup" },
   ],
 };

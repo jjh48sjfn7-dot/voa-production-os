@@ -2,6 +2,8 @@
 
 import { notFound } from "next/navigation";
 import { DocumentationPageView } from "@/components/audio/v2/documentation/DocumentationPageView";
+import { SignalFlowContent } from "@/components/audio/v2/SignalFlowContent";
+import { StagePlotContent } from "@/components/audio/v2/StagePlotContent";
 import {
   getDocumentationContent,
 } from "@/data/audio/v2/documentation/content";
@@ -14,6 +16,14 @@ interface DocumentationDetailContentProps {
 }
 
 export function DocumentationDetailContent({ slug }: DocumentationDetailContentProps) {
+  if (slug === "signal-flow") {
+    return <SignalFlowContent />;
+  }
+
+  if (slug === "stage-plot") {
+    return <StagePlotContent />;
+  }
+
   const page = getDocumentationPage(slug);
   const content = getDocumentationContent(slug);
 

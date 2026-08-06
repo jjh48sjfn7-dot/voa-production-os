@@ -1,18 +1,30 @@
 export const inventoryLandingSections = [
   {
-    id: "microphones",
-    title: "Microphones",
+    id: "console",
+    title: "Yamaha TF5",
   },
   {
-    id: "consoles",
-    title: "Consoles",
+    id: "wireless",
+    title: "Wireless",
   },
   {
     id: "speakers",
-    title: "Speakers",
+    title: "FOH Speakers & Monitors",
   },
   {
-    id: "cables-accessories",
-    title: "Cables & Accessories",
+    id: "subwoofer",
+    title: "Subwoofer",
+  },
+  {
+    id: "stage-boxes",
+    title: "Stage Snakes",
+  },
+  {
+    id: "playback",
+    title: "Playback",
+  },
+  {
+    id: "accessories",
+    title: "Accessories",
   },
 ] as const;

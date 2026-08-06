@@ -105,6 +105,16 @@ export const inputPatchList: DocumentationPageContent = {
       href: "/audio/equipment/item/stage-snake-b",
     },
     {
+      icon: "🎛️",
+      title: "TF5 Channel List",
+      href: "/audio/documentation/tf5-channel-list",
+    },
+    {
+      icon: "🔊",
+      title: "Output Routing",
+      href: "/audio/documentation/output-routing",
+    },
+    {
       icon: "🎯",
       title: "Sunday Setup",
       href: "/audio/setup",

@@ -84,7 +84,7 @@ export function EquipmentDetailPage({ equipment }: EquipmentDetailPageProps) {
         )}
 
         {hasSetupLinks && (
-          <EquipmentSection title="Sunday Setup">
+          <EquipmentSection title="Related Documentation">
             <EquipmentSetupLinks links={equipment.setupLinks!} />
           </EquipmentSection>
         )}

@@ -1,4 +1,5 @@
 import type { EquipmentDefinition } from "@/data/audio/v2/equipment/types";
+import { accessoryItems } from "@/data/audio/v2/equipment/accessories";
 
 export const yamahaTf5: EquipmentDefinition = {
   id: "yamaha-tf5",
@@ -40,7 +41,7 @@ export const yamahaTf5: EquipmentDefinition = {
     "Subwoofer",
     "QSC K10.2 — Stage Monitors",
     "Behringer PM1 — Drummer In-Ear",
-    "Wireless Receivers",
+    "Wireless",
   ],
   setupLinks: [
     {
@@ -48,8 +49,8 @@ export const yamahaTf5: EquipmentDefinition = {
       label: "Open Sunday Setup",
     },
     {
-      href: "/audio/documentation/channel-list",
-      label: "Open Channel List",
+      href: "/audio/documentation/tf5-channel-list",
+      label: "TF5 Channel List",
     },
     {
       href: "/audio/documentation/signal-flow",
@@ -141,7 +142,7 @@ export const yamahaTf5: EquipmentDefinition = {
     { slug: "stage-snake-a", name: "Stage Snake A" },
     { slug: "stage-snake-b", name: "Stage Snake B" },
     { slug: "media-computer", name: "Media Computer" },
-    { name: "Wireless Receivers", href: "/audio/equipment/wireless" },
+    { name: "Wireless", href: "/audio/equipment/wireless" },
     { name: "FOH Speakers", href: "/audio/equipment/foh-speakers" },
     { name: "Stage Monitors", href: "/audio/equipment/monitors" },
     { name: "Subwoofer", href: "/audio/equipment/subwoofer" },
@@ -189,6 +190,33 @@ export const stageSnakeA: EquipmentDefinition = {
     "Keep connectors clear of walkways.",
     "Do not power equipment until all signal connections are complete.",
     "Output 4 must remain open unless Daniel approves a change.",
+  ],
+  bestPractices: [
+    "Patch drum inputs before soundcheck begins.",
+    "Verify TF5 Outputs 3, 4, and 15 after patching.",
+    "Keep Output 4 open unless approved.",
+    "Label every cable before powering speakers.",
+  ],
+  primaryConnections: [
+    "Drum inputs — Inputs 1–6",
+    "Left FOH — Output 1 (TF5 Output 15)",
+    "Left monitor — Output 2 (TF5 Output 4)",
+    "Drummer in-ear — Output 3 (TF5 Output 3)",
+  ],
+  setupLinks: [
+    { href: "/audio/setup", label: "Sunday Setup" },
+    {
+      href: "/audio/documentation/input-patch-list",
+      label: "Input Patch List",
+    },
+    {
+      href: "/audio/documentation/output-routing",
+      label: "Output Routing",
+    },
+    {
+      href: "/audio/documentation/tf5-channel-list",
+      label: "TF5 Channel List",
+    },
   ],
   commonProblems: [
     {
@@ -321,6 +349,32 @@ export const stageSnakeB: EquipmentDefinition = {
     "Do not power connected speakers until signal connections are complete.",
     "Output 3 and Output 4 must remain open unless Daniel approves a change.",
   ],
+  bestPractices: [
+    "Patch keyboard input before soundcheck begins.",
+    "Verify TF5 Outputs 5 and 16 after patching.",
+    "Keep Outputs 3 and 4 open unless approved.",
+    "Label every cable before powering speakers.",
+  ],
+  primaryConnections: [
+    "Keyboard — Input 1",
+    "Right FOH — Output 1 (TF5 Output 16)",
+    "Right monitor — Output 2 (TF5 Output 5)",
+  ],
+  setupLinks: [
+    { href: "/audio/setup", label: "Sunday Setup" },
+    {
+      href: "/audio/documentation/input-patch-list",
+      label: "Input Patch List",
+    },
+    {
+      href: "/audio/documentation/output-routing",
+      label: "Output Routing",
+    },
+    {
+      href: "/audio/documentation/tf5-channel-list",
+      label: "TF5 Channel List",
+    },
+  ],
   commonProblems: [
     {
       id: "snake-b-no-keyboard",
@@ -397,8 +451,7 @@ export const stageSnakeB: EquipmentDefinition = {
     { slug: "keyboard", name: "Keyboard" },
     { slug: "qsc-kw153-right", name: "QSC K12.2 — Right FOH" },
     { slug: "stage-monitor-right", name: "QSC K10.2 — Right Monitor" },
-    { slug: "subwoofer", name: "Subwoofer" },
-    { slug: "di-boxes", name: "DI Box" },
+    { slug: "di-boxes", name: "DI Boxes" },
   ],
 };
 
@@ -549,11 +602,23 @@ export const shureBlxReceiver: EquipmentDefinition = {
     { label: "Frequency Sheet", href: "#" },
     { label: "Battery Checklist", href: "#" },
   ],
+  setupLinks: [
+    { href: "/audio/setup", label: "Sunday Setup" },
+    {
+      href: "/audio/documentation/tf5-channel-list",
+      label: "TF5 Channel List",
+    },
+    {
+      href: "/audio/documentation/signal-flow",
+      label: "Signal Flow",
+    },
+    {
+      href: "/audio/troubleshooting/no-wireless-microphone",
+      label: "No Wireless Troubleshooting",
+    },
+  ],
   relatedEquipment: [
     { slug: "yamaha-tf5", name: "Yamaha TF5" },
-    { name: "Sunday Setup", href: "/audio/setup" },
-    { name: "Signal Flow", href: "/audio/documentation/signal-flow" },
-    { name: "TF5 Channel List", href: "/audio/documentation/tf5-channel-list" },
   ],
 };
 
@@ -564,9 +629,49 @@ export const qscK122: EquipmentDefinition = {
   categoryId: "foh-speakers",
   icon: "🔊",
   purpose: "Main Front of House speakers.",
+  quickStart: [
+    "Position Left and Right FOH speakers at the approved FOH location",
+    "Connect Stage Snake A Output 1 to Left FOH (TF5 Output 15)",
+    "Connect Stage Snake B Output 1 to Right FOH (TF5 Output 16)",
+    "Power on speakers after signal connections are complete",
+    "Verify FOH level during soundcheck",
+  ],
   specifications: [
     { label: "Model", value: "QSC K12.2" },
     { label: "Quantity", value: "2" },
+  ],
+  primaryConnections: [
+    "Stage Snake A Output 1 — Left FOH (TF5 Output 15)",
+    "Stage Snake B Output 1 — Right FOH (TF5 Output 16)",
+  ],
+  bestPractices: [
+    "Power FOH speakers on after all signal connections are made.",
+    "Power FOH speakers off before disconnecting cables at teardown.",
+    "Verify TF5 Outputs 15 and 16 during soundcheck every Sunday.",
+  ],
+  commonProblems: [
+    {
+      id: "foh-no-audio",
+      title: "No FOH Output",
+      basicChecks: [
+        "Verify speaker power",
+        "Check Stage Snake output connections",
+        "Verify TF5 Outputs 15 and 16 routing",
+        "Confirm Main L/R is unmuted after soundcheck",
+      ],
+    },
+  ],
+  downloads: [{ label: "FOH Speaker Quick Reference", href: "#" }],
+  setupLinks: [
+    { href: "/audio/setup", label: "Sunday Setup" },
+    {
+      href: "/audio/documentation/output-routing",
+      label: "Output Routing",
+    },
+    {
+      href: "/audio/troubleshooting/no-foh-audio",
+      label: "No FOH Audio Troubleshooting",
+    },
   ],
   relatedEquipment: [
     { slug: "yamaha-tf5", name: "Yamaha TF5" },
@@ -699,9 +804,49 @@ export const qscK102: EquipmentDefinition = {
   categoryId: "monitors",
   icon: "📣",
   purpose: "Stage monitor speakers.",
+  quickStart: [
+    "Position Left and Right monitors at approved stage locations",
+    "Connect Stage Snake A Output 2 to Left monitor (TF5 Output 4)",
+    "Connect Stage Snake B Output 2 to Right monitor (TF5 Output 5)",
+    "Power on monitors after signal connections are complete",
+    "Verify monitor mixes during soundcheck",
+  ],
   specifications: [
     { label: "Model", value: "QSC K10.2" },
     { label: "Quantity", value: "2" },
+  ],
+  primaryConnections: [
+    "Stage Snake A Output 2 — Left Monitor (TF5 Output 4)",
+    "Stage Snake B Output 2 — Right Monitor (TF5 Output 5)",
+  ],
+  bestPractices: [
+    "Verify TF5 Outputs 4 and 5 during soundcheck.",
+    "Confirm monitor mixes before service.",
+    "Keep monitor levels safe for on-stage performers.",
+  ],
+  commonProblems: [
+    {
+      id: "monitor-no-audio",
+      title: "No Monitor Output",
+      basicChecks: [
+        "Verify monitor power",
+        "Check Stage Snake output connections",
+        "Verify TF5 Outputs 4 and 5 routing",
+        "Confirm monitor mix is not muted",
+      ],
+    },
+  ],
+  downloads: [{ label: "Stage Monitor Quick Reference", href: "#" }],
+  setupLinks: [
+    { href: "/audio/setup", label: "Sunday Setup" },
+    {
+      href: "/audio/documentation/output-routing",
+      label: "Output Routing",
+    },
+    {
+      href: "/audio/troubleshooting/no-stage-monitor",
+      label: "No Stage Monitor Troubleshooting",
+    },
   ],
   relatedEquipment: [
     { slug: "yamaha-tf5", name: "Yamaha TF5" },
@@ -736,6 +881,30 @@ export const drummerInEarSystem: EquipmentDefinition = {
     "Never unplug while wearing in-ear headphones.",
     "Secure the beltpack before service.",
   ],
+  commonProblems: [
+    {
+      id: "drummer-ie-no-audio",
+      title: "No Drummer In-Ear Audio",
+      basicChecks: [
+        "Confirm Stage Snake A Output 3 connection",
+        "Verify TF5 Output 3 routing",
+        "Check beltpack power and volume",
+        "Confirm drummer mix is not muted",
+      ],
+    },
+  ],
+  downloads: [{ label: "Drummer In-Ear Quick Reference", href: "#" }],
+  setupLinks: [
+    { href: "/audio/setup", label: "Sunday Setup" },
+    {
+      href: "/audio/documentation/output-routing",
+      label: "Output Routing",
+    },
+    {
+      href: "/audio/troubleshooting/no-stage-monitor",
+      label: "No Stage Monitor Troubleshooting",
+    },
+  ],
   relatedEquipment: [
     { slug: "stage-snake-a", name: "Stage Snake A" },
     { slug: "yamaha-tf5", name: "Yamaha TF5" },
@@ -751,6 +920,10 @@ export const mediaComputer: EquipmentDefinition = {
   icon: "💻",
   purpose:
     "The media computer runs ProPresenter and sends playback audio to the Yamaha TF5 for worship slides, videos, and pre-service music.",
+  specifications: [
+    { label: "Software", value: "ProPresenter" },
+    { label: "TF5 Channels", value: "31–32 — Computer L/R" },
+  ],
   quickStart: [
     "Confirm the media computer is powered on",
     "Verify the audio cable to the TF5 is connected",
@@ -857,4 +1030,5 @@ export const equipmentItems: EquipmentDefinition[] = [
   qscK102,
   drummerInEarSystem,
   mediaComputer,
+  ...accessoryItems,
 ];

@@ -1,10 +1,10 @@
 import type { EquipmentRelatedRef } from "@/data/audio/v2/equipment/types";
 
 export const standardRelatedEquipment: EquipmentRelatedRef[] = [
-  { slug: "yamaha-tf5", name: "TF5" },
+  { slug: "yamaha-tf5", name: "Yamaha TF5" },
   { slug: "stage-snake-a", name: "Stage Snake A" },
   { slug: "stage-snake-b", name: "Stage Snake B" },
-  { slug: "shure-blx-receiver", name: "BLX288" },
+  { slug: "shure-blx-receiver", name: "Shure BLX288" },
 ];
 
 export const standardRelatedDocumentation: EquipmentRelatedRef[] = [

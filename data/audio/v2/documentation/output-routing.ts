@@ -64,7 +64,7 @@ export const outputRouting: DocumentationPageContent = {
         {
           output: "Output 6",
           destination: "Subwoofer",
-          physicalConnection: "Placeholder until finalized",
+          physicalConnection: "TF5 Output 6 — placeholder until finalized",
           notes: "Subwoofer routing pending final configuration",
         },
       ],

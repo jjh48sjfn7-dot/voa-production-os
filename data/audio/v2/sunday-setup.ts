@@ -84,7 +84,7 @@ export const sundaySetupV2Sections: SundaySetupSection[] = [
           {
             id: "sr-out-run",
             label:
-              "Run patched outputs to all FOH speakers, monitors, and subwoofer",
+              "Run patched outputs to FOH speakers and monitors",
           },
         ],
       },
@@ -131,7 +131,7 @@ export const sundaySetupV2Sections: SundaySetupSection[] = [
           {
             id: "sl-out-run",
             label:
-              "Run patched outputs to all FOH speakers, monitors, and subwoofer",
+              "Run patched outputs to FOH speakers and monitors",
           },
         ],
       },

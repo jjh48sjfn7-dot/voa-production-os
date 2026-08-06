@@ -35,7 +35,7 @@ export const tf5ChannelList: DocumentationPageContent = {
     },
     {
       type: "assignments",
-      title: "Wireless Microphones",
+      title: "Wireless",
       items: [
         {
           channel: 17,

@@ -38,4 +38,26 @@ export const wiringStandards: DocumentationPageContent = {
       ],
     },
   ],
+  relatedResources: [
+    {
+      icon: "🎚️",
+      title: "Yamaha TF5",
+      href: "/audio/equipment/item/yamaha-tf5",
+    },
+    {
+      icon: "📥",
+      title: "Input Patch List",
+      href: "/audio/documentation/input-patch-list",
+    },
+    {
+      icon: "🔊",
+      title: "Output Routing",
+      href: "/audio/documentation/output-routing",
+    },
+    {
+      icon: "🎯",
+      title: "Sunday Setup",
+      href: "/audio/setup",
+    },
+  ],
 };
