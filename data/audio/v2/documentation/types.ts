@@ -30,7 +30,8 @@ export interface DocumentationListSection {
 export interface DocumentationRelatedResource {
   icon: string;
   title: string;
-  href: string;
+  href?: string;
+  disabled?: boolean;
 }
 
 export interface DocumentationPageContent {
