@@ -1,8 +1,8 @@
 import { DocumentationDetailContent } from "@/components/audio/v2/DocumentationDetailContent";
-import { documentationPages } from "@/data/audio/v2/documentation";
+import { getDocumentationPageSlugs } from "@/data/audio/v2/documentation";
 
 export function generateStaticParams() {
-  return documentationPages.map((page) => ({ slug: page.id }));
+  return getDocumentationPageSlugs().map((slug) => ({ slug }));
 }
 
 interface DocumentationDetailPageProps {
