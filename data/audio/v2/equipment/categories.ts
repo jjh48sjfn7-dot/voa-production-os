@@ -23,6 +23,13 @@ export const equipmentCategories: EquipmentCategory[] = [
     itemSlugs: ["qsc-kw153-left", "qsc-kw153-right"],
   },
   {
+    id: "subwoofer",
+    title: "Subwoofer",
+    emoji: "🔈",
+    href: "/audio/equipment/subwoofer",
+    itemSlugs: ["subwoofer"],
+  },
+  {
     id: "monitors",
     title: "Monitors",
     emoji: "📣",

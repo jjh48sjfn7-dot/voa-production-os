@@ -37,6 +37,7 @@ export const yamahaTf5: EquipmentDefinition = {
     "Media Computer",
     "QSC K12.2 — FOH Left",
     "QSC K12.2 — FOH Right",
+    "Subwoofer",
     "QSC K10.2 — Stage Monitors",
     "Behringer PM1 — Drummer In-Ear",
     "Wireless Receivers",
@@ -143,6 +144,7 @@ export const yamahaTf5: EquipmentDefinition = {
     { name: "Wireless Receivers", href: "/audio/equipment/wireless" },
     { name: "FOH Speakers", href: "/audio/equipment/foh-speakers" },
     { name: "Stage Monitors", href: "/audio/equipment/monitors" },
+    { name: "Subwoofer", href: "/audio/equipment/subwoofer" },
   ],
 };
 
@@ -409,7 +411,7 @@ export const stageSnakeB: EquipmentDefinition = {
     { slug: "keyboard", name: "Keyboard" },
     { slug: "qsc-kw153-right", name: "QSC K12.2" },
     { slug: "stage-monitor-right", name: "QSC K10.2" },
-    { slug: "subwoofer-output", name: "Subwoofer Output" },
+    { slug: "subwoofer", name: "Subwoofer" },
     { slug: "di-boxes", name: "DI Box" },
   ],
 };
@@ -580,7 +582,128 @@ export const qscK122: EquipmentDefinition = {
     { label: "Model", value: "QSC K12.2" },
     { label: "Quantity", value: "2" },
   ],
-  relatedEquipment: [{ slug: "yamaha-tf5", name: "Yamaha TF5" }],
+  relatedEquipment: [
+    { slug: "yamaha-tf5", name: "Yamaha TF5" },
+    { slug: "subwoofer", name: "Subwoofer" },
+  ],
+};
+
+export const subwoofer: EquipmentDefinition = {
+  id: "subwoofer",
+  slug: "subwoofer",
+  name: "Subwoofer",
+  categoryId: "subwoofer",
+  icon: "🔈",
+  purpose:
+    "The subwoofer extends the front-of-house low-frequency response, reinforcing bass content from worship music and playback for the sanctuary.",
+  quickStart: [
+    "Position the subwoofer at the approved FOH location",
+    "Connect Stage Snake B Output 3 to the subwoofer input",
+    "Verify the TF5 subwoofer output routing",
+    "Power on the subwoofer after signal connections are complete",
+    "Confirm subwoofer level during soundcheck",
+    "Walk the room to verify balanced low-end coverage",
+  ],
+  specifications: [
+    { label: "Model", value: "TBD — confirm with Audio Lead" },
+    { label: "Quantity", value: "1" },
+    { label: "Type", value: "Powered subwoofer" },
+    { label: "Placement", value: "FOH — center of stage area" },
+  ],
+  primaryConnections: [
+    "Stage Snake B — Output 3",
+    "TF5 subwoofer output mix",
+    "Power",
+  ],
+  bestPractices: [
+    "Power the subwoofer on after all signal connections are made.",
+    "Power the subwoofer off before disconnecting cables at teardown.",
+    "Verify subwoofer routing in the approved Sunday Scene before service.",
+    "Do not change crossover or routing settings without Audio Lead approval.",
+    "Keep the subwoofer clear of walkways and secure before service.",
+    "Confirm subwoofer level during soundcheck every Sunday.",
+  ],
+  commonProblems: [
+    {
+      id: "sub-no-audio",
+      title: "No Subwoofer Output",
+      problem: "The subwoofer is not receiving audio from the TF5.",
+      basicChecks: [
+        "Confirm Stage Snake B Output 3 is connected.",
+        "Verify the subwoofer is powered on.",
+        "Check TF5 subwoofer output routing.",
+        "Confirm the subwoofer mix is not muted.",
+        "Verify the output cable at both ends.",
+        "Recall the approved Sunday Scene if routing looks wrong.",
+      ],
+      possibleCauses: [
+        "Output 3 patch disconnected",
+        "Subwoofer output routing not assigned",
+        "Subwoofer powered off or cable fault",
+      ],
+    },
+    {
+      id: "sub-too-loud",
+      title: "Subwoofer Too Loud or Too Quiet",
+      problem: "Low-frequency level is noticeably off compared to normal service.",
+      basicChecks: [
+        "Check TF5 subwoofer mix fader level.",
+        "Verify no scene recall changed the subwoofer gain.",
+        "Compare against the previous week's settings.",
+        "Ask the Audio Lead before making routing changes.",
+      ],
+      possibleCauses: [
+        "Subwoofer mix level changed",
+        "Scene recall altered subwoofer routing",
+      ],
+    },
+    {
+      id: "sub-rumble",
+      title: "Rumble or Distortion",
+      problem: "The subwoofer produces unwanted rumble or distortion.",
+      basicChecks: [
+        "Check for loose XLR connections.",
+        "Verify input level is not clipping on the TF5.",
+        "Inspect the subwoofer cable for damage.",
+        "Confirm the subwoofer is on a stable surface.",
+        "Notify the Audio Lead if distortion persists.",
+      ],
+      possibleCauses: [
+        "Loose cable or damaged connector",
+        "Input level too hot",
+        "Physical vibration or placement issue",
+      ],
+    },
+  ],
+  downloads: [
+    { label: "Subwoofer Quick Reference", href: "#" },
+    { label: "Output Routing Guide", href: "#" },
+  ],
+  relatedEquipment: [
+    { slug: "yamaha-tf5", name: "Yamaha TF5" },
+    { name: "FOH Speakers", href: "/audio/equipment/foh-speakers" },
+    { slug: "stage-snake-a", name: "Stage Snake A" },
+    { slug: "stage-snake-b", name: "Stage Snake B" },
+    {
+      name: "Output Routing",
+      href: "/audio/documentation/output-routing",
+    },
+  ],
+  setupLinks: [
+    { href: "/audio/setup", label: "Sunday Setup" },
+    {
+      href: "/audio/documentation/output-routing",
+      label: "Output Routing",
+    },
+    {
+      href: "/audio/documentation/signal-flow",
+      label: "Signal Flow",
+    },
+    {
+      href: "/audio/documentation/stage-plot",
+      label: "Stage Plot",
+    },
+  ],
 };
 
 export const qscK102: EquipmentDefinition = {
@@ -744,6 +867,7 @@ export const equipmentItems: EquipmentDefinition[] = [
   stageSnakeB,
   shureBlxReceiver,
   qscK122,
+  subwoofer,
   qscK102,
   drummerInEarSystem,
   mediaComputer,

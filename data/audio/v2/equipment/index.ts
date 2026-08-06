@@ -25,6 +25,7 @@ const equipmentSlugAliases: Record<string, string> = {
   "stage-monitor-left": "qsc-k10-2",
   "stage-monitor-right": "qsc-k10-2",
   "stage-monitor": "qsc-k10-2",
+  "subwoofer-output": "subwoofer",
 };
 
 export function getEquipmentBySlug(
