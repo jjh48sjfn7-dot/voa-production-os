@@ -9,7 +9,7 @@ export function TroubleshootingHubContent() {
   return (
     <AudioNavHubContent
       title="Troubleshooting"
-      description="Find guidance for common audio problems."
+      description="Help volunteers diagnose problems by following the audio signal path."
       icon={AlertTriangle}
       breadcrumbs={[
         { label: voaLabels.audioDepartment, href: "/audio" },
