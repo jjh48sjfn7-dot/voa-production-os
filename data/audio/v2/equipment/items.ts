@@ -603,8 +603,101 @@ export const mediaComputer: EquipmentDefinition = {
   categoryId: "playback",
   icon: "💻",
   purpose:
-    "The media computer sends playback and presentation audio to the Yamaha TF5.",
+    "The media computer runs ProPresenter and sends playback audio to the Yamaha TF5 for worship slides, videos, and pre-service music.",
+  quickStart: [
+    "Confirm the media computer is powered on",
+    "Verify the audio cable to the TF5 is connected",
+    "Open ProPresenter and load the approved playlist",
+    "Set computer output volume to the standard level",
+    "Play a test track and confirm audio on TF5 Channels 31–32",
+    "Confirm Main L/R passes playback during soundcheck",
+    "Set pre-service playback before volunteers arrive",
+  ],
+  primaryConnections: [
+    "TF5 Input 31 — Computer Left",
+    "TF5 Input 32 — Computer Right",
+    "Audio output cable to TF5 local inputs",
+  ],
+  bestPractices: [
+    "Load the approved pre-service playlist before 10:15 AM.",
+    "Keep computer output volume consistent week to week.",
+    "Test playback during soundcheck every Sunday.",
+    "Do not change TF5 playback routing without Audio Lead approval.",
+    "Lock the screen during service to prevent accidental changes.",
+    "Notify the Audio Lead immediately if playback fails.",
+  ],
+  commonProblems: [
+    {
+      id: "playback-no-audio",
+      title: "No Playback Audio",
+      problem: "Media computer playback is not heard through the audio system.",
+      basicChecks: [
+        "Confirm ProPresenter or playback app is playing.",
+        "Verify the audio cable to the TF5 is connected.",
+        "Check TF5 Channels 31–32 are not muted.",
+        "Confirm computer output volume is up.",
+        "Verify Main L/R is unmuted after soundcheck.",
+        "Recall the approved Sunday Scene if routing looks wrong.",
+      ],
+      possibleCauses: [
+        "Playback cable disconnected",
+        "TF5 channel muted or wrong routing",
+        "Computer output volume too low",
+      ],
+    },
+    {
+      id: "playback-too-quiet",
+      title: "Playback Too Quiet or Too Loud",
+      problem: "Playback level is noticeably off compared to normal service.",
+      basicChecks: [
+        "Check computer output volume.",
+        "Verify TF5 fader level on Channels 31–32.",
+        "Confirm no channel processing was changed.",
+        "Compare against the previous week's settings.",
+        "Ask the Audio Lead before making routing changes.",
+      ],
+      possibleCauses: [
+        "Computer or TF5 fader level changed",
+        "Scene recall changed channel gain",
+      ],
+    },
+    {
+      id: "playback-computer-asleep",
+      title: "Computer Asleep or Locked",
+      problem: "The media computer is on but playback cannot start.",
+      basicChecks: [
+        "Wake the computer and unlock the screen.",
+        "Confirm ProPresenter is open.",
+        "Verify the correct playlist is loaded.",
+        "Restart playback if the app is frozen.",
+        "Notify the Media or Audio Lead if the issue persists.",
+      ],
+      possibleCauses: [
+        "Computer sleep mode enabled",
+        "ProPresenter not running or frozen",
+      ],
+    },
+  ],
+  downloads: [
+    { label: "Playback Quick Reference", href: "#" },
+    { label: "ProPresenter Checklist", href: "#" },
+  ],
   relatedEquipment: [{ slug: "yamaha-tf5", name: "Yamaha TF5" }],
+  setupLinks: [
+    { href: "/audio/setup", label: "Sunday Setup" },
+    {
+      href: "/audio/documentation/tf5-channel-list",
+      label: "TF5 Channel List",
+    },
+    {
+      href: "/audio/documentation/signal-flow",
+      label: "Signal Flow",
+    },
+    {
+      href: "/audio/troubleshooting/no-computer-playback",
+      label: "No Computer Playback Troubleshooting",
+    },
+  ],
 };
 
 export const equipmentItems: EquipmentDefinition[] = [

@@ -18,6 +18,7 @@ const equipmentSlugAliases: Record<string, string> = {
   "worship-leader-wireless-microphone": "shure-blx-receiver",
   "wireless-microphone-3": "shure-blx-receiver",
   "wireless-microphone-4": "shure-blx-receiver",
+  "audio-playback-connection": "media-computer",
   "qsc-kw153-left": "qsc-k12-2",
   "qsc-kw153-right": "qsc-k12-2",
   "qsc-kw153": "qsc-k12-2",

@@ -45,7 +45,7 @@ export const equipmentCategories: EquipmentCategory[] = [
     title: "Playback",
     emoji: "💻",
     href: "/audio/equipment/playback",
-    itemSlugs: ["media-computer", "audio-playback-connection"],
+    itemSlugs: ["media-computer"],
   },
   {
     id: "accessories",
