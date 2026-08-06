@@ -1,93 +1,143 @@
 import type { DocumentationPageContent } from "@/data/audio/v2/documentation/types";
 
-// Future updates will populate channels as the production system expands.
-// Never invent channel assignments.
-
 export const tf5ChannelList: DocumentationPageContent = {
   id: "tf5-channel-list",
-  purpose: "Which source is assigned to each Yamaha TF5 channel?",
-  subtitle: "Official Yamaha TF5 input channel assignments.",
-  tableSections: [
+  purpose: "What source is assigned to each Yamaha TF5 channel?",
+  subtitle: "Official Yamaha TF5 console channel assignments.",
+  headerInfo: {
+    title: "Understanding TF5 Channels",
+    body: [
+      "The Yamaha TF5 channel numbers do not necessarily match the physical stage inputs.",
+      "Physical connections are documented in the Input Patch List.",
+      "This page documents how the Sunday Scene is organized for mixing.",
+    ],
+  },
+  channelGroups: [
     {
-      title: "TF5 Channel List",
-      columns: [
-        { key: "channel", label: "Channel" },
-        { key: "source", label: "Source" },
-        { key: "category", label: "Category" },
-        { key: "notes", label: "Notes" },
+      type: "available",
+      title: "Available",
+      channels: "1–15",
+      status: "Available",
+    },
+    {
+      type: "assignments",
+      title: "Keyboard",
+      items: [
+        {
+          channel: 16,
+          fields: [
+            { label: "Source", value: "Keyboard" },
+            { label: "Physical Source", value: "Stage Snake B Input 1" },
+            { label: "Category", value: "Band" },
+          ],
+        },
       ],
-      rows: [
+    },
+    {
+      type: "assignments",
+      title: "Wireless Microphones",
+      items: [
         {
-          channel: "Channel 1",
-          source: "Kick",
-          category: "Drums",
-          notes: "Stage Snake A Input 1",
+          channel: 17,
+          fields: [
+            { label: "Source", value: "Purple Wireless" },
+            { label: "Physical Source", value: "TF5 Local Input 17" },
+          ],
         },
         {
-          channel: "Channel 2",
-          source: "Snare",
-          category: "Drums",
-          notes: "Stage Snake A Input 2",
+          channel: 18,
+          fields: [
+            { label: "Source", value: "Yellow Wireless" },
+            { label: "Physical Source", value: "TF5 Local Input 18" },
+          ],
         },
         {
-          channel: "Channel 3",
-          source: "Toms",
-          category: "Drums",
-          notes: "Stage Snake A Input 3",
+          channel: 19,
+          fields: [
+            { label: "Source", value: "Green Wireless" },
+            { label: "Physical Source", value: "TF5 Local Input 19" },
+          ],
         },
         {
-          channel: "Channel 4",
-          source: "Floor Tom",
-          category: "Drums",
-          notes: "Stage Snake A Input 4",
+          channel: 20,
+          fields: [
+            { label: "Source", value: "Blue Wireless" },
+            { label: "Physical Source", value: "TF5 Local Input 20" },
+          ],
+        },
+      ],
+    },
+    {
+      type: "available",
+      title: "Available",
+      channels: "21–24",
+      status: "Available",
+    },
+    {
+      type: "assignments",
+      title: "Drums",
+      items: [
+        {
+          channel: 25,
+          fields: [
+            { label: "Source", value: "Snare" },
+            { label: "Physical Source", value: "Stage Snake A Input 2" },
+          ],
         },
         {
-          channel: "Channel 5",
-          source: "Overhead Left",
-          category: "Drums",
-          notes: "Stage Snake A Input 5",
+          channel: 26,
+          fields: [
+            { label: "Source", value: "Toms" },
+            { label: "Physical Source", value: "Stage Snake A Input 3" },
+          ],
         },
         {
-          channel: "Channel 6",
-          source: "Overhead Right",
-          category: "Drums",
-          notes: "Stage Snake A Input 6",
+          channel: 27,
+          fields: [
+            { label: "Source", value: "Floor Tom" },
+            { label: "Physical Source", value: "Stage Snake A Input 4" },
+          ],
         },
         {
-          channel: "Channels 7–16",
-          source: "Available",
-          category: "—",
-          notes: "Unassigned",
+          channel: 28,
+          fields: [
+            { label: "Source", value: "Kick" },
+            { label: "Physical Source", value: "Stage Snake A Input 1" },
+          ],
         },
         {
-          channel: "Channel 17",
-          source: "Wireless Purple",
-          category: "Wireless",
-          notes: "Shure BLX Receiver",
+          channel: 29,
+          fields: [
+            { label: "Source", value: "Overhead Left" },
+            { label: "Physical Source", value: "Stage Snake A Input 5" },
+          ],
         },
         {
-          channel: "Channel 18",
-          source: "Wireless Yellow",
-          category: "Wireless",
-          notes: "Shure BLX Receiver",
+          channel: 30,
+          fields: [
+            { label: "Source", value: "Overhead Right" },
+            { label: "Physical Source", value: "Stage Snake A Input 6" },
+          ],
+        },
+      ],
+    },
+    {
+      type: "assignments",
+      title: "Playback",
+      items: [
+        {
+          channel: 31,
+          fields: [
+            { label: "Source", value: "Computer Left" },
+            { label: "Physical Source", value: "TF5 Local Input 31" },
+          ],
         },
         {
-          channel: "Channel 19",
-          source: "Wireless Green",
-          category: "Wireless",
-          notes: "Shure BLX Receiver",
-        },
-        {
-          channel: "Channel 20",
-          source: "Wireless Blue",
-          category: "Wireless",
-          notes: "Shure BLX Receiver",
-        },
-        {
-          channel: "Channels 21–40",
-          source: "Available",
-          category: "—",
-          notes: "Unassigned",
+          channel: 32,
+          fields: [
+            { label: "Source", value: "Computer Right" },
+            { label: "Physical Source", value: "TF5 Local Input 32" },
+          ],
         },
       ],
     },
@@ -102,16 +152,6 @@ export const tf5ChannelList: DocumentationPageContent = {
       icon: "📥",
       title: "Input Patch List",
       href: "/audio/documentation/input-patch-list",
-    },
-    {
-      icon: "🔌",
-      title: "Stage Snake A",
-      href: "/audio/equipment/item/stage-snake-a",
-    },
-    {
-      icon: "🔌",
-      title: "Stage Snake B",
-      href: "/audio/equipment/item/stage-snake-b",
     },
     {
       icon: "🔊",

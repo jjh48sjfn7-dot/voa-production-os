@@ -37,6 +37,10 @@ export {
 };
 
 export type {
+  DocumentationChannelAssignment,
+  DocumentationChannelAssignmentGroup,
+  DocumentationChannelAvailableGroup,
+  DocumentationChannelGroup,
   DocumentationInfoSection,
   DocumentationListSection,
   DocumentationPageContent,

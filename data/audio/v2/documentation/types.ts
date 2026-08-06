@@ -39,11 +39,35 @@ export interface DocumentationInfoSection {
   body: string[];
 }
 
+export interface DocumentationChannelAvailableGroup {
+  type: "available";
+  title: string;
+  channels: string;
+  status: string;
+}
+
+export interface DocumentationChannelAssignment {
+  channel: number;
+  fields: { label: string; value: string }[];
+}
+
+export interface DocumentationChannelAssignmentGroup {
+  type: "assignments";
+  title: string;
+  items: DocumentationChannelAssignment[];
+}
+
+export type DocumentationChannelGroup =
+  | DocumentationChannelAvailableGroup
+  | DocumentationChannelAssignmentGroup;
+
 export interface DocumentationPageContent {
   id: string;
   purpose: string;
   subtitle?: string;
+  headerInfo?: DocumentationInfoSection;
   tableSections?: DocumentationTableSection[];
+  channelGroups?: DocumentationChannelGroup[];
   listSections?: DocumentationListSection[];
   infoSections?: DocumentationInfoSection[];
   placeholderMessage?: string;

@@ -2,6 +2,7 @@
 
 import type { LucideIcon } from "lucide-react";
 import { AudioPageShell } from "@/components/audio/AudioPageShell";
+import { DocumentationChannelGroups } from "@/components/audio/v2/documentation/DocumentationChannelGroups";
 import { DocumentationInfoCard } from "@/components/audio/v2/documentation/DocumentationInfoCard";
 import { DocumentationList } from "@/components/audio/v2/documentation/DocumentationList";
 import { DocumentationRelatedResources } from "@/components/audio/v2/documentation/DocumentationRelatedResources";
@@ -23,6 +24,7 @@ export function DocumentationPageView({
   content,
 }: DocumentationPageContentProps) {
   const hasTables = !!content.tableSections?.length;
+  const hasChannelGroups = !!content.channelGroups?.length;
   const hasLists = !!content.listSections?.length;
   const hasInfoSections = !!content.infoSections?.length;
   const hasRelatedResources = !!content.relatedResources?.length;
@@ -41,6 +43,12 @@ export function DocumentationPageView({
       compactMobile
     >
       <div className="space-y-8 sm:space-y-10">
+        {content.headerInfo && (
+          <EquipmentSection title={content.headerInfo.title}>
+            <DocumentationInfoCard body={content.headerInfo.body} />
+          </EquipmentSection>
+        )}
+
         <EquipmentSection title="Purpose">
           <p className={`${audioStyles.body} leading-relaxed text-slate-300`}>
             {content.purpose}
@@ -62,6 +70,10 @@ export function DocumentationPageView({
               />
             </EquipmentSection>
           ))}
+
+        {hasChannelGroups && (
+          <DocumentationChannelGroups groups={content.channelGroups!} />
+        )}
 
         {hasInfoSections &&
           content.infoSections!.map((section) => (
