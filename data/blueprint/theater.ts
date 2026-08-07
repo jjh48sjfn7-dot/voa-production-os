@@ -174,7 +174,7 @@ export const theaterBlueprint: TheaterBlueprint = {
     {
       id: "drum-kit",
       name: "Drum Kit",
-      mapLabel: "Drum Kit",
+      mapLabel: "Drums",
       icon: "🥁",
       zoneId: "center-stage",
       departments: ["audio"],
@@ -202,7 +202,7 @@ export const theaterBlueprint: TheaterBlueprint = {
     {
       id: "worship-leader-position",
       name: "Worship Leader Position",
-      mapLabel: "Worship Ldr",
+      mapLabel: "Worship Lead",
       icon: "🎤",
       zoneId: "center-stage",
       departments: ["audio"],

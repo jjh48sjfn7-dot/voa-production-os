@@ -3,14 +3,14 @@
 import {
   getItemOverlayOpacity,
   itemMatchesOverlay,
+  getPrimaryDepartment,
 } from "@/data/blueprint";
 import type { BlueprintItem, BlueprintOverlayId } from "@/data/blueprint/types";
-import { blueprintDepartmentColors } from "@/data/blueprint/types";
+import { blueprintDepartmentLabels } from "@/data/blueprint/types";
 import {
   BlueprintEquipmentGraphic,
   getGraphicAccessibleName,
 } from "@/components/blueprint/graphics/BlueprintEquipmentGraphic";
-import { getPrimaryDepartment } from "@/data/blueprint";
 
 interface BlueprintMapItemProps {
   item: BlueprintItem;
@@ -28,44 +28,61 @@ export function BlueprintMapItem({
   const opacity = getItemOverlayOpacity(item, overlay);
   const emphasized = itemMatchesOverlay(item, overlay);
   const department = getPrimaryDepartment(item);
-  const colors = blueprintDepartmentColors[department];
+  const departmentLabel = blueprintDepartmentLabels[department];
   const label = item.mapLabel ?? item.name;
   const { x, y, rotate = 0 } = item.mapPosition;
 
   return (
     <button
       type="button"
-      aria-label={`${label}, ${getGraphicAccessibleName(item.graphic)}`}
+      aria-label={`${label}, ${departmentLabel}, ${getGraphicAccessibleName(item.graphic)}`}
       aria-pressed={selected}
       onClick={() => onSelect(item.id)}
-      className={`absolute z-10 flex min-h-[44px] min-w-[44px] flex-col items-center justify-center rounded-lg border bg-[#0a1220]/90 px-1 py-1 transition-[opacity,box-shadow,border-color] duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 sm:min-h-[52px] sm:min-w-[52px] sm:px-1.5 ${
-        selected
-          ? `border-white/30 ring-2 ${colors.ring} shadow-lg`
-          : emphasized
-            ? `${colors.border} shadow-md`
-            : "border-white/[0.06]"
-      }`}
+      className="group absolute z-10 flex min-h-[56px] min-w-[56px] flex-col items-center justify-start border-0 bg-transparent p-1 transition-opacity duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a12] sm:min-h-[64px] sm:min-w-[64px]"
       style={{
         left: `${x}%`,
         top: `${y}%`,
         opacity,
-        transform: `translate(-50%, -50%) rotate(${rotate}deg) scale(${selected ? 1.05 : 1})`,
+        transform: `translate(-50%, -50%) rotate(${rotate}deg)`,
       }}
     >
-      <div style={{ transform: `rotate(${-rotate}deg)` }} className="flex flex-col items-center">
+      <div
+        style={{ transform: `rotate(${-rotate}deg)` }}
+        className={`relative flex flex-col items-center ${
+          selected
+            ? "rounded-lg ring-2 ring-white/50 ring-offset-2 ring-offset-[#070d18]"
+            : emphasized
+              ? "rounded-lg ring-1 ring-white/15"
+              : ""
+        }`}
+      >
         <BlueprintEquipmentGraphic
           graphic={item.graphic}
-          className="h-8 w-8 text-slate-300 sm:h-10 sm:w-10"
+          placeholder={item.status === "placeholder"}
+          className="h-12 w-12 text-slate-200 transition-transform duration-200 group-hover:scale-105 sm:h-16 sm:w-16"
         />
-        <span className="mt-0.5 max-w-[4.5rem] truncate text-center text-[9px] font-semibold leading-tight text-slate-200 sm:max-w-none sm:text-[10px]">
-          {label}
-        </span>
         {item.status === "placeholder" && emphasized && (
-          <span className="text-[8px] uppercase tracking-wide text-amber-500/90">
+          <span className="absolute -right-1 -top-1 rounded bg-amber-500/20 px-1 text-[7px] font-bold uppercase tracking-wide text-amber-400 ring-1 ring-amber-500/40">
             TBD
           </span>
         )}
       </div>
+
+      <span
+        style={{ transform: `rotate(${-rotate}deg)` }}
+        className={`mt-1 max-w-[5rem] text-center text-[9px] font-medium leading-tight sm:max-w-[6rem] sm:text-[10px] ${
+          emphasized ? "text-slate-300" : "text-slate-500"
+        }`}
+      >
+        {label}
+      </span>
+      <span
+        style={{ transform: `rotate(${-rotate}deg)` }}
+        className="mt-0.5 text-[8px] uppercase tracking-wide text-slate-600"
+        aria-hidden
+      >
+        {departmentLabel}
+      </span>
     </button>
   );
 }

@@ -25,22 +25,26 @@ function BlueprintMapBackground({ blueprint }: { blueprint: TheaterBlueprint }) 
             y={region.bounds.y}
             width={region.bounds.w}
             height={region.bounds.h}
-            rx={1.2}
-            fill={
-              region.id === "foh"
-                ? "rgba(244,63,94,0.04)"
-                : region.id === "main-stage"
-                  ? "rgba(255,255,255,0.03)"
-                  : "rgba(255,255,255,0.015)"
-            }
-            stroke="rgba(255,255,255,0.08)"
-            strokeWidth={0.25}
-            strokeDasharray={region.id === "foh" ? "1 0.8" : undefined}
+            rx={0.8}
+            fill="transparent"
+            stroke="rgba(255,255,255,0.07)"
+            strokeWidth={0.2}
+            strokeDasharray={region.id === "foh" ? "1.2 0.8" : "0.6 0.6"}
           />
         </g>
       ))}
 
-      {/* Main stage column guides */}
+      {/* Stage platform outline */}
+      <rect
+        x="4"
+        y="14"
+        width="92"
+        height="36"
+        rx="1"
+        fill="rgba(255,255,255,0.015)"
+        stroke="rgba(255,255,255,0.1)"
+        strokeWidth={0.25}
+      />
       <line
         x1="33"
         y1="14"
@@ -161,7 +165,7 @@ export function BlueprintMap({
 }: BlueprintMapProps) {
   return (
     <div
-      className="relative mx-auto w-full max-w-4xl overflow-hidden rounded-2xl border border-white/[0.1] bg-[#070d18]"
+      className="relative mx-auto w-full max-w-5xl overflow-hidden rounded-xl border border-white/[0.08] bg-[#050a12]"
       style={{ aspectRatio: "4 / 5" }}
     >
       <p className="sr-only">

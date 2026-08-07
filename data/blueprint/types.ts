@@ -36,7 +36,8 @@ export type BlueprintGraphicId =
   | "computer"
   | "wireless-rack"
   | "display-monitor"
-  | "lighting-control";
+  | "lighting-control"
+  | "beltpack";
 
 /** Normalized position on the theater map (percentage, top-left anchor) */
 export interface BlueprintMapPosition {
