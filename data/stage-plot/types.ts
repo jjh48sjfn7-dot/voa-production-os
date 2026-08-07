@@ -8,14 +8,24 @@ export interface StagePlotItemData {
   href?: string;
   itemType: StagePlotItemType;
   position: string;
+  locationNotes?: string[];
 }
 
-export interface StagePlotArea {
+export interface StagePlotMapZone {
   id: string;
   title: string;
-  order: number;
-  columnGroup?: string;
-  items: StagePlotItemData[];
+  plainTitle?: string;
+  itemIds: string[];
+}
+
+export interface StagePlotMapRow {
+  id: string;
+  zones: StagePlotMapZone[];
+}
+
+export interface StagePlotIntro {
+  title: string;
+  body: string[];
 }
 
 export interface StagePlotLink {
@@ -27,6 +37,16 @@ export interface StagePlotDocument {
   id: string;
   title: string;
   subtitle: string;
-  areas: StagePlotArea[];
+  intro: StagePlotIntro;
+  items: StagePlotItemData[];
+  mapRows: StagePlotMapRow[];
   relatedLinks: StagePlotLink[];
+}
+
+export interface StagePlotArea {
+  id: string;
+  title: string;
+  order: number;
+  columnGroup?: string;
+  items: StagePlotItemData[];
 }

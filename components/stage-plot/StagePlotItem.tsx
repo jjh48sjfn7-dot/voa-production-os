@@ -10,6 +10,7 @@ import { audioStyles } from "@/lib/audio-styles";
 
 interface StagePlotItemProps {
   item: StagePlotItemData;
+  compact?: boolean;
 }
 
 function getItemHref(item: StagePlotItemData): string | undefined {
@@ -28,28 +29,47 @@ function getItemHref(item: StagePlotItemData): string | undefined {
   return getEquipmentItemHref(item.equipmentSlug);
 }
 
-export function StagePlotItem({ item }: StagePlotItemProps) {
+function StagePlotItemContent({
+  item,
+  compact,
+}: {
+  item: StagePlotItemData;
+  compact?: boolean;
+}) {
   const href = getItemHref(item);
+  const showNotes = !compact && item.locationNotes && item.locationNotes.length > 0;
+
+  const inner = (
+    <>
+      <SundaySetupSectionIcon emoji={item.icon} />
+      <div className="min-w-0 flex-1 space-y-1.5">
+        <p className="text-base font-semibold text-slate-50">{item.name}</p>
+        {showNotes &&
+          item.locationNotes!.map((note) => (
+            <p key={note} className="text-sm leading-relaxed text-slate-400">
+              {note}
+            </p>
+          ))}
+      </div>
+      {href && <ChevronRight className="h-5 w-5 shrink-0 text-slate-600" />}
+    </>
+  );
+
+  const className = `flex min-h-[56px] items-start gap-3 px-4 py-3.5 sm:px-5 ${
+    compact ? "py-3" : ""
+  } ${audioStyles.card} ${href ? `${audioStyles.transition} hover:border-white/[0.12] hover:bg-white/[0.03]` : ""}`;
 
   if (href) {
     return (
-      <Link
-        href={href}
-        className={`flex min-h-[56px] items-center gap-3 px-4 py-3.5 sm:px-5 ${audioStyles.card} ${audioStyles.transition} hover:border-white/[0.12] hover:bg-white/[0.03]`}
-      >
-        <SundaySetupSectionIcon emoji={item.icon} />
-        <p className="flex-1 text-base font-semibold text-slate-50">{item.name}</p>
-        <ChevronRight className="h-5 w-5 shrink-0 text-slate-600" />
+      <Link href={href} className={className}>
+        {inner}
       </Link>
     );
   }
 
-  return (
-    <div
-      className={`flex min-h-[56px] items-center gap-3 px-4 py-3.5 sm:px-5 ${audioStyles.card}`}
-    >
-      <SundaySetupSectionIcon emoji={item.icon} />
-      <p className="flex-1 text-base font-semibold text-slate-50">{item.name}</p>
-    </div>
-  );
+  return <div className={className}>{inner}</div>;
+}
+
+export function StagePlotItem({ item, compact }: StagePlotItemProps) {
+  return <StagePlotItemContent item={item} compact={compact} />;
 }

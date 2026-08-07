@@ -1,67 +1,42 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import { DocumentationInfoCard } from "@/components/audio/v2/documentation/DocumentationInfoCard";
 import { EquipmentSection } from "@/components/audio/v2/equipment/EquipmentSection";
-import { StageArea } from "@/components/stage-plot/StageArea";
-import type { StagePlotArea, StagePlotDocument } from "@/data/stage-plot/types";
+import { StagePlotMap } from "@/components/stage-plot/StagePlotMap";
+import { StagePlotItem } from "@/components/stage-plot/StagePlotItem";
+import type { StagePlotDocument } from "@/data/stage-plot/types";
 import { audioStyles } from "@/lib/audio-styles";
-
-type StagePlotLayoutBlock =
-  | { type: "area"; area: StagePlotArea }
-  | { type: "columns"; areas: StagePlotArea[] };
-
-function buildLayoutBlocks(areas: StagePlotArea[]): StagePlotLayoutBlock[] {
-  const sorted = [...areas].sort((a, b) => a.order - b.order);
-  const blocks: StagePlotLayoutBlock[] = [];
-  let index = 0;
-
-  while (index < sorted.length) {
-    const area = sorted[index];
-
-    if (area.columnGroup) {
-      const group = area.columnGroup;
-      const columnAreas: StagePlotArea[] = [];
-
-      while (index < sorted.length && sorted[index].columnGroup === group) {
-        columnAreas.push(sorted[index]);
-        index += 1;
-      }
-
-      blocks.push({ type: "columns", areas: columnAreas });
-      continue;
-    }
-
-    blocks.push({ type: "area", area });
-    index += 1;
-  }
-
-  return blocks;
-}
 
 interface StagePlotProps {
   document: StagePlotDocument;
 }
 
 export function StagePlot({ document }: StagePlotProps) {
-  const blocks = buildLayoutBlocks(document.areas);
-
   return (
-    <div className="space-y-8 sm:space-y-10">
-      {blocks.map((block) => {
-        if (block.type === "columns") {
-          return (
-            <div
-              key={block.areas.map((area) => area.id).join("-")}
-              className="grid gap-6 md:grid-cols-3 md:gap-4"
-            >
-              {block.areas.map((area) => (
-                <StageArea key={area.id} area={area} />
-              ))}
-            </div>
-          );
-        }
+    <div className="space-y-10 sm:space-y-12">
+      <EquipmentSection title={document.intro.title}>
+        <DocumentationInfoCard body={document.intro.body} />
+      </EquipmentSection>
 
-        return <StageArea key={block.area.id} area={block.area} />;
-      })}
+      <EquipmentSection title="Stage Layout">
+        <StagePlotMap document={document} />
+      </EquipmentSection>
+
+      <EquipmentSection title="Location Notes">
+        <div className="space-y-3">
+          {document.items.map((item, index) => (
+            <div key={item.id}>
+              <StagePlotItem item={item} />
+              {index < document.items.length - 1 && (
+                <div
+                  className="my-4 border-t border-dashed border-white/[0.08]"
+                  aria-hidden
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      </EquipmentSection>
 
       {document.relatedLinks.length > 0 && (
         <EquipmentSection title="Related Documentation">
