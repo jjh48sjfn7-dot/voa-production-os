@@ -10,6 +10,7 @@ import type {
   BlueprintZone,
   TheaterBlueprint,
 } from "@/data/blueprint/types";
+import { blueprintStageZoneIds } from "@/data/blueprint/types";
 
 export { theaterBlueprint };
 
@@ -48,7 +49,24 @@ export function itemMatchesOverlay(
   if (overlay === "all") {
     return true;
   }
+
+  if (overlay === "stage") {
+    return blueprintStageZoneIds.includes(
+      item.zoneId as (typeof blueprintStageZoneIds)[number]
+    );
+  }
+
   return item.departments.includes(overlay);
+}
+
+export function getItemOverlayOpacity(
+  item: BlueprintItem,
+  overlay: BlueprintOverlayId
+): number {
+  if (overlay === "all") {
+    return 1;
+  }
+  return itemMatchesOverlay(item, overlay) ? 1 : 0.22;
 }
 
 export function getBlueprintItemsForOverlay(
@@ -86,3 +104,18 @@ export function getPrimaryDepartment(
 export function getSortedZones(blueprint: TheaterBlueprint): BlueprintZone[] {
   return [...blueprint.zones].sort((a, b) => a.order - b.order);
 }
+
+export function getDepartmentLabels(item: BlueprintItem): string {
+  return item.departments
+    .map((department) => department.charAt(0).toUpperCase() + department.slice(1))
+    .join(", ");
+}
+
+export const blueprintPreviewOverlays: BlueprintOverlayId[] = [
+  "all",
+  "stage",
+  "audio",
+  "lighting",
+  "media",
+  "video",
+];

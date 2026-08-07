@@ -2,22 +2,35 @@
 
 import { useState } from "react";
 import { BlueprintLegend } from "@/components/blueprint/BlueprintLegend";
+import { BlueprintItemPanel } from "@/components/blueprint/BlueprintItemPanel";
 import { BlueprintOverlay } from "@/components/blueprint/BlueprintOverlay";
 import { ChurchBlueprint } from "@/components/blueprint/ChurchBlueprint";
-import { theaterBlueprint } from "@/data/blueprint";
-import type { BlueprintOverlayId } from "@/data/blueprint/types";
+import { getBlueprintItem, theaterBlueprint } from "@/data/blueprint";
+import type { BlueprintDepartment, BlueprintOverlayId } from "@/data/blueprint/types";
 import { audioStyles } from "@/lib/audio-styles";
+
+function getLegendDepartments(
+  overlay: BlueprintOverlayId
+): BlueprintDepartment[] {
+  if (overlay === "all" || overlay === "stage") {
+    return ["audio", "media", "lighting", "video"];
+  }
+  if (overlay === "audio" || overlay === "lighting" || overlay === "media" || overlay === "video") {
+    return [overlay];
+  }
+  return ["audio"];
+}
 
 export function BlueprintPreviewContent() {
   const [overlay, setOverlay] = useState<BlueprintOverlayId>("all");
+  const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
 
-  const activeDepartments =
-    overlay === "all"
-      ? (["audio", "media", "lighting"] as const)
-      : [overlay];
+  const selectedItem = selectedItemId
+    ? getBlueprintItem(theaterBlueprint, selectedItemId)
+    : undefined;
 
   return (
-    <div className="space-y-8 sm:space-y-10">
+    <div className="space-y-6 sm:space-y-8">
       <div className="space-y-2">
         <p className="text-xs font-medium uppercase tracking-wide text-amber-500/90">
           Internal development preview
@@ -26,34 +39,33 @@ export function BlueprintPreviewContent() {
           Master Church Blueprint
         </h1>
         <p className={`${audioStyles.body} text-slate-400`}>
-          {theaterBlueprint.venue.name} — shared physical map for all
-          production departments.
+          {theaterBlueprint.venue.name} — top-down theater and stage plot.
         </p>
       </div>
 
-      <div className={`${audioStyles.card} ${audioStyles.cardPad} space-y-3`}>
-        <p className="text-sm font-medium text-slate-300">Venue notes</p>
-        <ul className="space-y-2">
-          {theaterBlueprint.venue.notes.map((note) => (
-            <li key={note} className={`${audioStyles.body} text-slate-400`}>
-              {note}
-            </li>
-          ))}
-        </ul>
+      <BlueprintOverlay overlay={overlay} onOverlayChange={setOverlay} />
+
+      <div className="space-y-2">
+        <p className="text-sm font-medium text-slate-400">Department legend</p>
+        <BlueprintLegend departments={getLegendDepartments(overlay)} />
       </div>
 
-      <BlueprintOverlay
+      <ChurchBlueprint
+        blueprint={theaterBlueprint}
         overlay={overlay}
-        availableOverlays={theaterBlueprint.overlays}
-        onOverlayChange={setOverlay}
+        selectedItemId={selectedItemId}
+        onSelectItem={(id) =>
+          setSelectedItemId((current) => (current === id ? null : id))
+        }
       />
 
-      <div className="space-y-3">
-        <p className="text-sm font-medium text-slate-400">Department legend</p>
-        <BlueprintLegend departments={[...activeDepartments]} />
-      </div>
-
-      <ChurchBlueprint blueprint={theaterBlueprint} overlay={overlay} />
+      {selectedItem && (
+        <BlueprintItemPanel
+          blueprint={theaterBlueprint}
+          item={selectedItem}
+          onClose={() => setSelectedItemId(null)}
+        />
+      )}
     </div>
   );
 }
