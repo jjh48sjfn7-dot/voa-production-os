@@ -1,14 +1,15 @@
-import { GraphicSvg, s, sw, swb } from "@/components/blueprint/graphics/equipment/shared";
+import { GraphicSvg, EquipmentShadow, s, sw, swb } from "@/components/blueprint/graphics/equipment/shared";
 
 /** Microphone stand — top-down tripod */
 export function MicStandGraphic({ className }: { className?: string }) {
   return (
-    <GraphicSvg viewBox="0 0 48 56" className={className}>
-      <circle cx="24" cy="10" r="5" stroke={s} strokeWidth={swb} />
-      <line x1="24" y1="15" x2="24" y2="38" stroke={s} strokeWidth={swb} />
-      <line x1="24" y1="38" x2="10" y2="50" stroke={s} strokeWidth={sw} />
-      <line x1="24" y1="38" x2="38" y2="50" stroke={s} strokeWidth={sw} />
-      <line x1="24" y1="38" x2="24" y2="52" stroke={s} strokeWidth={sw} />
+    <GraphicSvg viewBox="0 0 44 52" className={className}>
+      <EquipmentShadow cx={22} cy={48} rx={14} ry={3} />
+      <circle cx="22" cy="8" r="5" stroke={s} strokeWidth={swb} />
+      <line x1="22" y1="13" x2="22" y2="36" stroke={s} strokeWidth={swb} />
+      <line x1="22" y1="36" x2="8" y2="46" stroke={s} strokeWidth={sw} />
+      <line x1="22" y1="36" x2="36" y2="46" stroke={s} strokeWidth={sw} />
+      <line x1="22" y1="36" x2="22" y2="48" stroke={s} strokeWidth={sw} />
     </GraphicSvg>
   );
 }
@@ -16,13 +17,14 @@ export function MicStandGraphic({ className }: { className?: string }) {
 /** Lighting control desk reference */
 export function LightingControlGraphic({ className }: { className?: string }) {
   return (
-    <GraphicSvg viewBox="0 0 72 48" className={className}>
-      <rect x="6" y="12" width="60" height="28" rx="2" stroke={s} strokeWidth={swb} />
-      <rect x="12" y="16" width="20" height="8" rx="1" stroke={s} strokeWidth={sw} opacity={0.5} />
-      {[22, 30, 38, 46, 54].map((x) => (
-        <circle key={x} cx={x} cy="30" r="3" stroke={s} strokeWidth={1} />
+    <GraphicSvg viewBox="0 0 80 44" className={className}>
+      <EquipmentShadow cx={40} cy={40} rx={30} ry={4} />
+      <rect x="6" y="10" width="68" height="26" rx="2" stroke={s} strokeWidth={swb} />
+      <rect x="12" y="14" width="22" height="8" rx="1" stroke={s} strokeWidth={sw} opacity={0.45} />
+      {[24, 32, 40, 48, 56, 64].map((x) => (
+        <circle key={x} cx={x} cy="26" r="2.8" stroke={s} strokeWidth={0.9} />
       ))}
-      <line x1="12" y1="36" x2="60" y2="36" stroke={s} strokeWidth={0.8} opacity={0.4} />
+      <line x1="12" y1="32" x2="68" y2="32" stroke={s} strokeWidth={0.7} opacity={0.35} />
     </GraphicSvg>
   );
 }

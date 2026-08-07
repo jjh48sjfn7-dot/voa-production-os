@@ -5,7 +5,11 @@ import {
   itemMatchesOverlay,
   getPrimaryDepartment,
 } from "@/data/blueprint";
-import type { BlueprintItem, BlueprintOverlayId } from "@/data/blueprint/types";
+import type {
+  BlueprintGraphicId,
+  BlueprintItem,
+  BlueprintOverlayId,
+} from "@/data/blueprint/types";
 import { blueprintDepartmentLabels } from "@/data/blueprint/types";
 import {
   BlueprintEquipmentGraphic,
@@ -19,6 +23,24 @@ interface BlueprintMapItemProps {
   onSelect: (itemId: string) => void;
 }
 
+const graphicSizeClasses: Partial<Record<BlueprintGraphicId, string>> = {
+  keyboard: "h-7 w-[4.5rem] sm:h-9 sm:w-28",
+  screen: "h-5 w-24 sm:h-6 sm:w-32",
+  curtain: "h-4 w-24 sm:h-5 sm:w-32",
+  console: "h-9 w-24 sm:h-11 sm:w-32",
+  projector: "h-7 w-20 sm:h-9 sm:w-24",
+  speaker: "h-12 w-8 sm:h-14 sm:w-10",
+  "drum-kit": "h-14 w-16 sm:h-16 sm:w-20",
+  subwoofer: "h-10 w-14 sm:h-12 sm:w-16",
+};
+
+function getGraphicClass(graphic: BlueprintGraphicId): string {
+  return (
+    graphicSizeClasses[graphic] ??
+    "h-11 w-11 sm:h-14 sm:w-14"
+  );
+}
+
 export function BlueprintMapItem({
   item,
   overlay,
@@ -27,10 +49,10 @@ export function BlueprintMapItem({
 }: BlueprintMapItemProps) {
   const opacity = getItemOverlayOpacity(item, overlay);
   const emphasized = itemMatchesOverlay(item, overlay);
-  const department = getPrimaryDepartment(item);
-  const departmentLabel = blueprintDepartmentLabels[department];
+  const departmentLabel = blueprintDepartmentLabels[getPrimaryDepartment(item)];
   const label = item.mapLabel ?? item.name;
   const { x, y, rotate = 0 } = item.mapPosition;
+  const graphicClass = getGraphicClass(item.graphic);
 
   return (
     <button
@@ -38,7 +60,7 @@ export function BlueprintMapItem({
       aria-label={`${label}, ${departmentLabel}, ${getGraphicAccessibleName(item.graphic)}`}
       aria-pressed={selected}
       onClick={() => onSelect(item.id)}
-      className="group absolute z-10 flex min-h-[56px] min-w-[56px] flex-col items-center justify-start border-0 bg-transparent p-1 transition-opacity duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a12] sm:min-h-[64px] sm:min-w-[64px]"
+      className="group absolute z-10 flex min-h-[52px] min-w-[52px] flex-col items-center justify-start border-0 bg-transparent p-0 transition-opacity duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-4 focus-visible:ring-offset-transparent sm:min-h-[60px] sm:min-w-[60px]"
       style={{
         left: `${x}%`,
         top: `${y}%`,
@@ -48,37 +70,40 @@ export function BlueprintMapItem({
     >
       <div
         style={{ transform: `rotate(${-rotate}deg)` }}
-        className={`relative flex flex-col items-center ${
+        className={`relative transition-[filter,transform] duration-200 ${
           selected
-            ? "rounded-lg ring-2 ring-white/50 ring-offset-2 ring-offset-[#070d18]"
-            : emphasized
-              ? "rounded-lg ring-1 ring-white/15"
-              : ""
+            ? "scale-105 drop-shadow-[0_0_10px_rgba(255,255,255,0.35)]"
+            : "drop-shadow-[0_3px_6px_rgba(0,0,0,0.55)] group-hover:scale-[1.03]"
         }`}
       >
         <BlueprintEquipmentGraphic
           graphic={item.graphic}
           placeholder={item.status === "placeholder"}
-          className="h-12 w-12 text-slate-200 transition-transform duration-200 group-hover:scale-105 sm:h-16 sm:w-16"
+          className={`${graphicClass} text-slate-100`}
         />
-        {item.status === "placeholder" && emphasized && (
-          <span className="absolute -right-1 -top-1 rounded bg-amber-500/20 px-1 text-[7px] font-bold uppercase tracking-wide text-amber-400 ring-1 ring-amber-500/40">
-            TBD
-          </span>
-        )}
       </div>
 
       <span
         style={{ transform: `rotate(${-rotate}deg)` }}
-        className={`mt-1 max-w-[5rem] text-center text-[9px] font-medium leading-tight sm:max-w-[6rem] sm:text-[10px] ${
+        className={`mt-1 max-w-[4.75rem] text-center text-[9px] font-medium leading-tight tracking-wide sm:max-w-[5.5rem] sm:text-[10px] ${
           emphasized ? "text-slate-300" : "text-slate-500"
         }`}
       >
         {label}
       </span>
+
+      {item.status === "placeholder" && emphasized && (
+        <span
+          style={{ transform: `rotate(${-rotate}deg)` }}
+          className="text-[8px] font-medium uppercase tracking-wider text-amber-500/80"
+        >
+          TBD
+        </span>
+      )}
+
       <span
         style={{ transform: `rotate(${-rotate}deg)` }}
-        className="mt-0.5 text-[8px] uppercase tracking-wide text-slate-600"
+        className="hidden text-[8px] uppercase tracking-wide text-slate-600 sm:block"
         aria-hidden
       >
         {departmentLabel}

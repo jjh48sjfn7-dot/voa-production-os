@@ -52,7 +52,7 @@ const graphicComponents: Record<
 
 export function BlueprintEquipmentGraphic({
   graphic,
-  className = "h-14 w-14 sm:h-[4.5rem] sm:w-[4.5rem]",
+  className = "h-11 w-11 sm:h-14 sm:w-14",
   placeholder = false,
 }: {
   graphic: BlueprintGraphicId;

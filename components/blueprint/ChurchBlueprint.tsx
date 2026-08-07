@@ -18,10 +18,10 @@ export function ChurchBlueprint({
   onSelectItem = () => {},
 }: ChurchBlueprintProps) {
   return (
-    <div className="space-y-3">
-      <p className={`text-center ${audioStyles.caption} text-slate-500`}>
-        {blueprint.mapLayout.orientationLabel}
-      </p>
+      <div className="space-y-2 sm:space-y-3">
+        <p className={`text-center ${audioStyles.caption} text-slate-500`}>
+          {blueprint.mapLayout.orientationLabel}
+        </p>
 
       <BlueprintMap
         blueprint={blueprint}
