@@ -86,6 +86,53 @@ Production OS divides the physical environment into zones. Each zone maps to doc
 
 ---
 
+## Structured Theater Blueprint (Master Map)
+
+Production OS maintains a **single structured theater blueprint** in the application data layer. This is the canonical source for all physical equipment placement across departments.
+
+| Field | Location |
+|-------|----------|
+| Blueprint data | `data/blueprint/theater.ts` |
+| Types | `data/blueprint/types.ts` |
+| Helpers | `data/blueprint/index.ts` |
+| Map components | `components/blueprint/` |
+| Development preview | `/blueprint` *(internal — not in main navigation)* |
+
+### Master map zones (approved)
+
+| Zone ID | Name | Beginner label |
+|---------|------|----------------|
+| `back-of-stage` | Back of Stage | Upstage — farthest from the congregation |
+| `stage-left` | Stage Left | Left side of the stage when facing the audience |
+| `center-stage` | Center Stage | Center of the stage |
+| `stage-right` | Stage Right | Right side of the stage when facing the audience |
+| `front-of-stage` | Front of Stage | Downstage — closest to the congregation |
+| `audience` | Audience | Where the congregation sits |
+| `foh` | FOH | Production control position in the audience area |
+
+### Rules for all department maps
+
+1. **Stage Plot, Lighting Plot, Media Plot, Video Plot, Power Map, and Cable Routing Map** must render from the shared master blueprint — not independent hardcoded layouts.
+2. **Equipment placement changes** must be updated in `data/blueprint/theater.ts` first, then synced to department-specific views (e.g., audio stage plot data).
+3. **Do not create contradictory department maps.** If audio and media disagree on Mac Desktop placement, the master blueprint wins.
+4. **Use department overlays** to filter items by department (`audio`, `lighting`, `media`, etc.) — do not duplicate item definitions per department.
+5. **Placeholders** for unfinalized equipment (projector, confidence monitor, subwoofer placement, lighting control) remain marked `status: "placeholder"` until approved.
+6. **Do not add** unconfirmed measurements, fixture positions, or cable routes to the master blueprint.
+
+### Future department overlays (planned)
+
+| Overlay | Status |
+|---------|--------|
+| Audio | Approved items in master blueprint |
+| Media | Approved items in master blueprint |
+| Lighting | Control reference only — no fixture positions yet |
+| Video | Projection items placeholder only |
+| Power | Not yet populated |
+| Network | Not yet populated |
+| Cable Routing | Not yet populated |
+
+---
+
 ## Physical Stage Layout
 
 Top-down reference (audience at bottom):

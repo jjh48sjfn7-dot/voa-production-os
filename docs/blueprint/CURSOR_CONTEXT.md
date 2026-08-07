@@ -33,6 +33,7 @@ Production OS is a **mobile-first reference and checklist app** — not a consol
 | Documentation | ✅ Live — signal flow, stage plot, patch lists, routing |
 | Troubleshooting | ✅ Live — 8 topics |
 | Inventory | 🟡 Landing only — asset detail migration pending |
+| Master Church Blueprint | ✅ Data + dev preview at `/blueprint` |
 | Dashboard | ✅ Live — locked design |
 | Lighting / Video / Media | ⬜ Not started — blueprint placeholders only |
 | Legacy v1 routes | ⚠️ Exist (`/audio/tf5`, `/audio/channels`, etc.) — do not extend |
@@ -63,6 +64,7 @@ These decisions are **approved and locked**. Do not change without explicit user
 | Subwoofer output | TF5 Output 6 — **placeholder routing** |
 | Console scene | Sunday Scene |
 | Sunday Setup storage key | `sunday-setup-v2` |
+| Master Church Blueprint | `data/blueprint/theater.ts` — source of truth for physical maps |
 | Dark theme | Required — no light mode |
 | Mobile-first | Required — no horizontal scroll |
 
@@ -287,6 +289,7 @@ Special pages bypass generic templates because layout exceeds tables.
 - [ ] Invent routing, channels, or equipment specs — use placeholders
 - [ ] Add horizontal scrolling on mobile
 - [ ] Hardcode routing values in components (belongs in `data/`)
+- [ ] Create isolated list-based Stage Plots or department maps that contradict the Master Church Blueprint (`data/blueprint/theater.ts`)
 - [ ] Extend legacy v1 data (`data/audio/` without v2) with new features
 - [ ] Push to remote without explicit user request
 - [ ] Update git config
@@ -303,6 +306,13 @@ Special pages bypass generic templates because layout exceeds tables.
 - [ ] Call `move_agent_to_root` before project-scoped work when starting from home directory
 - [ ] Commit only when user explicitly requests — use message user provides
 - [ ] Use placeholders for unfinalized information
+- [ ] Reference `data/blueprint/theater.ts` when building or updating any physical map view
+
+### Physical map rule (locked)
+
+**Future physical maps must reference the shared Master Church Blueprint. Do not create isolated list-based Stage Plots or department maps that contradict `data/blueprint/theater.ts`.**
+
+Department views (Audio Stage Plot, Lighting Plot, etc.) filter and present master blueprint data — they do not define independent equipment placement.
 
 ---
 
@@ -332,6 +342,8 @@ Treat unspecified pages as **locked** unless the sprint explicitly includes them
 | Add documentation page | `documentation.ts` + `content.ts` |
 | Modify signal flow | `data/audio/v2/documentation/signal-flow.ts` |
 | Modify stage plot | `data/audio/v2/stage-plot.ts` |
+| Master Church Blueprint | `data/blueprint/theater.ts` |
+| Blueprint preview | `/blueprint` (internal — not in sidebar nav) |
 | Modify Sunday Setup | `data/audio/v2/sunday-setup.ts` ⚠️ approval required |
 | Add troubleshooting topic | `data/audio/v2/troubleshooting/topics.ts` |
 | Venue labels | `data/audio/venue.ts` |
