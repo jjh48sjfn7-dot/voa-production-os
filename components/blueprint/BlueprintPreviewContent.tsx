@@ -46,8 +46,8 @@ export function BlueprintPreviewContent() {
 
       <BlueprintOverlay overlay={overlay} onOverlayChange={setOverlay} />
 
-      <div className="space-y-2">
-        <p className="text-sm font-medium text-slate-400">Department legend</p>
+      <div className="space-y-1 sm:space-y-2">
+        <p className="text-xs font-medium text-slate-400 sm:text-sm">Department legend</p>
         <BlueprintLegend departments={getLegendDepartments(overlay)} />
       </div>
 

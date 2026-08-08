@@ -24,14 +24,18 @@ function SeatRow({
   left,
   right,
   seats,
+  subtle = false,
 }: {
   y: number;
   left: number;
   right: number;
   seats: number;
+  subtle?: boolean;
 }) {
   const width = right - left;
   const gap = width / seats;
+  const fill = subtle ? "rgba(72,150,145,0.08)" : "rgba(72,150,145,0.14)";
+  const stroke = subtle ? "rgba(72,150,145,0.14)" : "rgba(72,150,145,0.22)";
   return (
     <>
       {Array.from({ length: seats }, (_, i) => {
@@ -44,8 +48,8 @@ function SeatRow({
             width={2.2}
             height={1.1}
             rx={0.25}
-            fill="rgba(72,150,145,0.14)"
-            stroke="rgba(72,150,145,0.22)"
+            fill={fill}
+            stroke={stroke}
             strokeWidth={0.08}
           />
         );
@@ -53,6 +57,9 @@ function SeatRow({
     </>
   );
 }
+
+/** Simplified mobile seating — fewer rows, lighter fill */
+const MOBILE_SEAT_ROW_YS = [53, 61, 69, 77, 85];
 
 export function BlueprintMapEnvironment() {
   return (
@@ -162,7 +169,7 @@ export function BlueprintMapEnvironment() {
             y={TRUSS_LABEL_Y}
             textAnchor="middle"
             fill="rgba(148,163,184,0.38)"
-            fontSize="2"
+            className="[font-size:1.35px] sm:[font-size:2px]"
             fontWeight="600"
             fontFamily="system-ui, sans-serif"
           >
@@ -221,17 +228,52 @@ export function BlueprintMapEnvironment() {
         fill="url(#bp-audience-floor)"
       />
 
-      {/* Seating — first row behind subwoofer */}
-      {SEAT_ROW_YS.map((y, i) => (
-        <SeatRow key={`l-${y}`} y={y} left={8 + i * 0.4} right={38 - i * 0.2} seats={8 + i} />
-      ))}
-      {SEAT_ROW_YS.map((y, i) => (
-        <SeatRow key={`c-${y}`} y={y} left={40 - i * 0.2} right={60 + i * 0.2} seats={6 + Math.floor(i / 2)} />
-      ))}
-      {SEAT_ROW_YS.slice(0, 7).map((y, i) => (
-        <SeatRow key={`r-${y}`} y={y} left={62 + i * 0.2} right={88 - i * 0.3} seats={7 + i} />
-      ))}
+      {/* Seating — simplified on mobile, full detail from sm */}
+      <g className="sm:hidden">
+        {MOBILE_SEAT_ROW_YS.map((y, i) => (
+          <SeatRow
+            key={`ml-${y}`}
+            y={y}
+            left={10 + i * 0.5}
+            right={36 - i * 0.2}
+            seats={6 + i}
+            subtle
+          />
+        ))}
+        {MOBILE_SEAT_ROW_YS.map((y, i) => (
+          <SeatRow
+            key={`mc-${y}`}
+            y={y}
+            left={42 - i * 0.2}
+            right={58 + i * 0.2}
+            seats={4 + Math.floor(i / 2)}
+            subtle
+          />
+        ))}
+        {MOBILE_SEAT_ROW_YS.slice(0, 4).map((y, i) => (
+          <SeatRow
+            key={`mr-${y}`}
+            y={y}
+            left={64 + i * 0.2}
+            right={86 - i * 0.3}
+            seats={5 + i}
+            subtle
+          />
+        ))}
+      </g>
+      <g className="hidden sm:block">
+        {SEAT_ROW_YS.map((y, i) => (
+          <SeatRow key={`l-${y}`} y={y} left={8 + i * 0.4} right={38 - i * 0.2} seats={8 + i} />
+        ))}
+        {SEAT_ROW_YS.map((y, i) => (
+          <SeatRow key={`c-${y}`} y={y} left={40 - i * 0.2} right={60 + i * 0.2} seats={6 + Math.floor(i / 2)} />
+        ))}
+        {SEAT_ROW_YS.slice(0, 7).map((y, i) => (
+          <SeatRow key={`r-${y}`} y={y} left={62 + i * 0.2} right={88 - i * 0.3} seats={7 + i} />
+        ))}
+      </g>
 
+      <g className="hidden sm:block">
       {[55, 63, 71, 79, 87].map((y, i) => {
         const spread = 10 + i * 3.5;
         return (
@@ -244,6 +286,7 @@ export function BlueprintMapEnvironment() {
           />
         );
       })}
+      </g>
 
       {/* Aisles */}
       <path d={`M${ROOM_CENTERLINE} ${FIRST_SEAT_ROW_Y - 2} L${ROOM_CENTERLINE} 91`} fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth={0.4} />
@@ -270,7 +313,7 @@ export function BlueprintMapEnvironment() {
         y="73.2"
         textAnchor="middle"
         fill="rgba(148,163,184,0.38)"
-        fontSize="2"
+        className="[font-size:1.35px] sm:[font-size:2px]"
         fontWeight="600"
         fontFamily="system-ui, sans-serif"
       >

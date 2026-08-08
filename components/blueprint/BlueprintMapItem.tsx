@@ -23,22 +23,23 @@ interface BlueprintMapItemProps {
   onSelect: (itemId: string) => void;
 }
 
+/** Mobile defaults ~65% scale; sm: preserves locked desktop presentation */
 const graphicSizeClasses: Partial<Record<BlueprintGraphicId, string>> = {
-  keyboard: "h-9 w-[4.75rem] sm:h-11 sm:w-[6rem]",
-  screen: "h-4 w-20 sm:h-5 sm:w-28",
-  curtain: "h-3 w-20 sm:h-4 sm:w-28",
-  console: "h-11 w-[6rem] sm:h-[3.25rem] sm:w-[7.25rem]",
-  projector: "h-6 w-14 sm:h-7 sm:w-[4.5rem]",
-  speaker: "h-12 w-8 sm:h-16 sm:w-10",
-  "drum-kit": "h-14 w-16 sm:h-[4.5rem] sm:w-20",
-  subwoofer: "h-6 w-9 sm:h-7 sm:w-11",
-  beltpack: "h-6 w-5 sm:h-7 sm:w-6",
-  "display-monitor": "h-12 w-11 sm:h-14 sm:w-12",
-  "monitor-wedge": "h-10 w-14 sm:h-12 sm:w-16",
-  "snake-box": "h-10 w-10 sm:h-12 sm:w-12",
-  "wireless-rack": "h-9 w-14 sm:h-10 sm:w-16",
-  computer: "h-11 w-12 sm:h-12 sm:w-14",
-  "mic-stand": "h-10 w-8 sm:h-11 sm:w-9",
+  keyboard: "h-6 w-12 sm:h-11 sm:w-[6rem]",
+  screen: "h-3 w-14 sm:h-5 sm:w-28",
+  curtain: "h-2 w-14 sm:h-4 sm:w-28",
+  console: "h-7 w-[4rem] sm:h-[3.25rem] sm:w-[7.25rem]",
+  projector: "h-4 w-10 sm:h-7 sm:w-[4.5rem]",
+  speaker: "h-8 w-5 sm:h-16 sm:w-10",
+  "drum-kit": "h-9 w-10 sm:h-[4.5rem] sm:w-20",
+  subwoofer: "h-4 w-6 sm:h-7 sm:w-11",
+  beltpack: "h-4 w-4 sm:h-7 sm:w-6",
+  "display-monitor": "h-7 w-7 sm:h-14 sm:w-12",
+  "monitor-wedge": "h-7 w-10 sm:h-12 sm:w-16",
+  "snake-box": "h-7 w-7 sm:h-12 sm:w-12",
+  "wireless-rack": "h-5 w-9 sm:h-10 sm:w-16",
+  computer: "h-6 w-8 sm:h-12 sm:w-14",
+  "mic-stand": "h-7 w-6 sm:h-11 sm:w-9",
 };
 
 const departmentTagColors: Record<string, string> = {
@@ -63,20 +64,24 @@ const fohItemIds = new Set([
 ]);
 
 const fohGraphicSizeClasses: Partial<Record<BlueprintGraphicId, string>> = {
-  console: "h-9 w-[5rem] sm:h-10 sm:w-[5.75rem]",
-  "wireless-rack": "h-8 w-12 sm:h-9 sm:w-14",
-  computer: "h-9 w-10 sm:h-10 sm:w-12",
-  "display-monitor": "h-10 w-10 sm:h-11 sm:w-11",
+  console: "h-5 w-[2.75rem] sm:h-10 sm:w-[5.75rem]",
+  "wireless-rack": "h-4 w-8 sm:h-9 sm:w-14",
+  computer: "h-5 w-7 sm:h-10 sm:w-12",
+  "display-monitor": "h-6 w-6 sm:h-11 sm:w-11",
 };
 
 function getGraphicClass(graphic: BlueprintGraphicId, itemId: string): string {
   if (itemId === "projector") {
-    return graphicSizeClasses.projector ?? "h-6 w-14";
+    return graphicSizeClasses.projector ?? "h-4 w-10 sm:h-7 sm:w-[4.5rem]";
   }
   if (fohItemIds.has(itemId)) {
-    return fohGraphicSizeClasses[graphic] ?? graphicSizeClasses[graphic] ?? "h-11 w-11 sm:h-12 sm:w-12";
+    return (
+      fohGraphicSizeClasses[graphic] ??
+      graphicSizeClasses[graphic] ??
+      "h-7 w-7 sm:h-12 sm:w-12"
+    );
   }
-  return graphicSizeClasses[graphic] ?? "h-11 w-11 sm:h-12 sm:w-12";
+  return graphicSizeClasses[graphic] ?? "h-7 w-7 sm:h-12 sm:w-12";
 }
 
 export function BlueprintMapItem({
@@ -135,10 +140,10 @@ export function BlueprintMapItem({
     >
       <div
         style={{ transform: `rotate(${-rotate}deg)` }}
-        className={`relative transition-[filter,transform] duration-200 ${
+        className={`relative origin-center transition-[filter,transform] duration-200 ${
           selected
-            ? "scale-[1.07] drop-shadow-[0_0_14px_rgba(255,255,255,0.28)]"
-            : "drop-shadow-[0_3px_10px_rgba(0,0,0,0.7)] group-hover:scale-[1.04]"
+            ? "scale-[1.04] drop-shadow-[0_0_10px_rgba(255,255,255,0.22)] sm:scale-[1.07] sm:drop-shadow-[0_0_14px_rgba(255,255,255,0.28)]"
+            : "drop-shadow-[0_2px_6px_rgba(0,0,0,0.65)] sm:drop-shadow-[0_3px_10px_rgba(0,0,0,0.7)] sm:group-hover:scale-[1.04]"
         }`}
       >
         <BlueprintEquipmentGraphic
@@ -151,12 +156,14 @@ export function BlueprintMapItem({
       {!isReference && (
         <div
           style={{ transform: `rotate(${-rotate}deg)` }}
-          className="mt-0.5 flex flex-col items-center gap-0"
+          className="mt-px flex flex-col items-center gap-0 sm:mt-0.5"
         >
           <span
-            className={`text-center text-[7px] font-semibold leading-tight text-slate-200 sm:text-[8px] ${
-              compactFohLabel ? "max-w-[3.25rem] sm:max-w-[3.75rem]" : "max-w-[4.75rem] sm:max-w-[5.25rem]"
-            } ${emphasized ? "opacity-100" : "opacity-75"} ${
+            className={`text-center text-[6px] font-semibold leading-tight text-slate-200 sm:text-[8px] ${
+              compactFohLabel
+                ? "max-w-[2.75rem] sm:max-w-[3.75rem]"
+                : "max-w-[3.5rem] sm:max-w-[5.25rem]"
+            } ${emphasized ? "opacity-100" : "opacity-80 sm:opacity-75"} ${
               item.id === "subwoofer" ? "text-slate-400/80" : ""
             }`}
           >
@@ -164,15 +171,15 @@ export function BlueprintMapItem({
           </span>
           {!hideDeptTag && (
             <span
-              className={`text-center text-[5px] font-medium uppercase tracking-wider sm:text-[6px] ${deptTag} ${
-                compactFohLabel ? "max-w-[3.25rem] sm:max-w-[3.75rem]" : ""
+              className={`hidden text-center text-[6px] font-medium uppercase tracking-wider sm:block ${deptTag} ${
+                compactFohLabel ? "max-w-[3.75rem]" : ""
               }`}
             >
               {departmentLabel}
             </span>
           )}
           {item.id === "projector" && (
-            <span className="text-[4px] font-medium leading-tight text-sky-400/50 sm:text-[5px]">
+            <span className="hidden text-[5px] font-medium leading-tight text-sky-400/50 sm:block">
               TR-5 / TR-6
             </span>
           )}
@@ -182,7 +189,7 @@ export function BlueprintMapItem({
       {item.status === "placeholder" && emphasized && !hidePlaceholderTag && (
         <span
           style={{ transform: `rotate(${-rotate}deg)` }}
-          className={`text-[5px] font-medium uppercase tracking-wider sm:text-[6px] ${
+          className={`text-[4px] font-medium uppercase tracking-wider sm:text-[6px] ${
             isSubtlePlaceholder ? "text-slate-500/50" : "text-amber-500/60"
           }`}
         >
