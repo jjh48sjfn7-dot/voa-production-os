@@ -15,6 +15,28 @@ export function MicStandGraphic({ className }: { className?: string }) {
   );
 }
 
+/** SlimPAR / PAR fixture — top-down */
+export function ParFixtureGraphic({ className }: { className?: string }) {
+  return (
+    <GraphicSvg viewBox="0 0 40 40" className={className}>
+      <EquipmentShadow cx={20} cy={34} rx={12} ry={3} />
+      <rect
+        x="8"
+        y="10"
+        width="24"
+        height="18"
+        rx="3"
+        fill={fill}
+        stroke={s}
+        strokeWidth={swb}
+      />
+      <rect x="12" y="14" width="16" height="8" rx="1.5" fill="rgba(250,204,21,0.18)" stroke={s} strokeWidth={sw} />
+      <line x1="20" y1="28" x2="20" y2="33" stroke={s} strokeWidth={sw} />
+      <line x1="14" y1="33" x2="26" y2="33" stroke={s} strokeWidth={sw} />
+    </GraphicSvg>
+  );
+}
+
 /** Lighting control desk reference */
 export function LightingControlGraphic({ className }: { className?: string }) {
   return (

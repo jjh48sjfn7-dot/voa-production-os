@@ -4,6 +4,7 @@ import {
   FileText,
   Headphones,
   Home,
+  Lightbulb,
   Package,
   Wrench,
 } from "lucide-react";
@@ -33,6 +34,29 @@ export const navItems: NavItem[] = [
         accent: "audio",
       },
       { label: "Inventory", href: "/audio/inventory", icon: Package, accent: "audio" },
+    ],
+  },
+  {
+    label: "Lighting Department",
+    href: "/lighting",
+    icon: Lightbulb,
+    accent: "lighting",
+    children: [
+      { label: "Sunday Setup", href: "/lighting/setup", icon: BookOpen, accent: "lighting" },
+      { label: "Equipment", href: "/lighting/equipment", icon: Wrench, accent: "lighting" },
+      {
+        label: "Documentation",
+        href: "/lighting/documentation",
+        icon: FileText,
+        accent: "lighting",
+      },
+      {
+        label: "Troubleshooting",
+        href: "/lighting/troubleshooting",
+        icon: AlertTriangle,
+        accent: "lighting",
+      },
+      { label: "Inventory", href: "/lighting/inventory", icon: Package, accent: "lighting" },
     ],
   },
 ];

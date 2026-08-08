@@ -15,6 +15,8 @@ interface AppPageHeaderProps {
   breadcrumbs: BreadcrumbItem[];
   toolbar?: React.ReactNode;
   compactMobile?: boolean;
+  backHref?: string;
+  backLabel?: string;
 }
 
 export function AppPageHeader({
@@ -24,6 +26,8 @@ export function AppPageHeader({
   breadcrumbs,
   toolbar,
   compactMobile = false,
+  backHref,
+  backLabel,
 }: AppPageHeaderProps) {
   const headerScrolled = useScrolled(12);
   const stickyHeaderClass = compactMobile
@@ -41,7 +45,7 @@ export function AppPageHeader({
         }`}
       >
         <Breadcrumbs items={breadcrumbs} />
-        <BackButton />
+        <BackButton href={backHref} label={backLabel} />
       </div>
 
       <header

@@ -11,6 +11,16 @@ import {
   sundaySetupV2Sections,
 } from "@/data/audio/v2/sunday-setup";
 import { voaLabels } from "@/data/audio/venue";
+import { lightingDocumentationPages } from "@/data/lighting/v2/documentation";
+import { lightingEquipmentCategories } from "@/data/lighting/v2/equipment/categories";
+import {
+  getLightingEquipmentItemHref,
+  lightingEquipmentItems,
+} from "@/data/lighting/v2/equipment";
+import {
+  lightingSetupSections,
+} from "@/data/lighting/v2/sunday-setup";
+import { lightingTroubleshootingTopics } from "@/data/lighting/v2/troubleshooting/topics";
 
 export type SearchCategory =
   | "page"
@@ -123,6 +133,52 @@ const troubleshootingSearchMeta: Record<string, string> = {
   "no-computer-playback": "playback media computer mac no sound propresenter",
   "console-will-not-power-on": "console tf5 power will not turn on",
   feedback: "feedback squeal ringing mic monitor",
+};
+
+const lightingDocumentationSearchMeta: Record<
+  string,
+  { subtitle: string; keywords: string }
+> = {
+  "lighting-plot": {
+    subtitle: "Documentation · lighting fixture map",
+    keywords: "lighting plot layout map blueprint fixture truss floor",
+  },
+  "dmx-signal-flow": {
+    subtitle: "Documentation · DMX control path",
+    keywords: "dmx signal flow lightkey dmxking universe routing",
+  },
+  "fixture-layout": {
+    subtitle: "Documentation · truss and floor fixtures",
+    keywords: "fixture layout truss floor slimpar tr-1 tr-6",
+  },
+  "dmx-addressing": {
+    subtitle: "Documentation · fixture DMX addresses",
+    keywords: "dmx addressing universe address slimpar fixture",
+  },
+};
+
+const lightingEquipmentSearchMeta: Record<string, { keywords: string }> = {
+  "chauvet-slimpar-pro-h-usb": {
+    keywords: "slimpar chauvet fixture par light lights uplight truss floor",
+  },
+  "dmxking-micro": {
+    keywords: "dmxking micro dmx interface universe",
+  },
+  "lightkey-foh-control": {
+    keywords: "lightkey mac lighting control software foh",
+  },
+};
+
+const lightingCategorySearchMeta: Record<string, string> = {
+  fixtures: "fixture slimpar chauvet par lights",
+  control: "control lightkey dmxking mac",
+};
+
+const lightingTroubleshootingSearchMeta: Record<string, string> = {
+  "fixture-not-turning-on": "fixture light not turning on power slimpar",
+  "no-dmx-control": "no dmx control universe lightkey dmxking",
+  "one-fixture-not-responding": "one fixture not responding slimpar dmx",
+  "lightkey-not-connected": "lightkey not connected mac dmxking",
 };
 
 function buildSearchIndex(): SearchResult[] {
@@ -254,6 +310,128 @@ function buildSearchIndex(): SearchResult[] {
         subtitle: section.title,
         href: "/audio/setup",
         category: "setup",
+      });
+    }
+  }
+
+  results.push({
+    id: "page-lighting-home",
+    title: "Lighting Department",
+    subtitle: "Lighting Department home",
+    href: "/lighting",
+    category: "page",
+    keywords: "lighting department lights dmx",
+  });
+
+  results.push({
+    id: "page-lighting-setup",
+    title: "Lighting Sunday Setup",
+    subtitle: "Pre-service lighting checklist",
+    href: "/lighting/setup",
+    category: "page",
+    keywords: "lighting sunday setup checklist slimpar dmx",
+  });
+
+  results.push({
+    id: "page-lighting-equipment",
+    title: "Lighting Equipment",
+    subtitle: "Lighting equipment manuals",
+    href: "/lighting/equipment",
+    category: "page",
+    keywords: "lighting equipment slimpar lightkey dmxking fixture",
+  });
+
+  results.push({
+    id: "page-lighting-documentation",
+    title: "Lighting Documentation",
+    subtitle: "Lighting plots and DMX reference",
+    href: "/lighting/documentation",
+    category: "page",
+    keywords: "lighting documentation plot dmx fixture",
+  });
+
+  results.push({
+    id: "page-lighting-troubleshooting",
+    title: "Lighting Troubleshooting",
+    subtitle: "Fix common lighting problems",
+    href: "/lighting/troubleshooting",
+    category: "page",
+    keywords: "lighting troubleshooting no dmx light not working fixture",
+  });
+
+  results.push({
+    id: "page-lighting-inventory",
+    title: "Lighting Inventory",
+    subtitle: "Lighting Department equipment list",
+    href: "/lighting/inventory",
+    category: "page",
+    keywords: "lighting inventory gear slimpar dmxking",
+  });
+
+  for (const page of lightingDocumentationPages) {
+    const meta = lightingDocumentationSearchMeta[page.id];
+    results.push({
+      id: `lighting-doc-${page.id}`,
+      title: page.title,
+      subtitle: meta?.subtitle ?? "Lighting documentation",
+      href: page.href,
+      category: "page",
+      keywords: meta?.keywords,
+    });
+  }
+
+  for (const category of lightingEquipmentCategories) {
+    results.push({
+      id: `lighting-eq-cat-${category.id}`,
+      title: category.title,
+      subtitle: "Lighting equipment category",
+      href: category.href,
+      category: "equipment",
+      keywords: lightingCategorySearchMeta[category.id],
+    });
+  }
+
+  for (const item of lightingEquipmentItems) {
+    const meta = lightingEquipmentSearchMeta[item.slug];
+    results.push({
+      id: `lighting-eq-${item.slug}`,
+      title: item.name,
+      subtitle: "Lighting equipment manual",
+      href: getLightingEquipmentItemHref(item.slug),
+      category: "equipment",
+      keywords: meta?.keywords,
+    });
+  }
+
+  for (const topic of lightingTroubleshootingTopics) {
+    results.push({
+      id: `lighting-ts-${topic.id}`,
+      title: topic.title,
+      subtitle: "Lighting troubleshooting guide",
+      href: topic.href,
+      category: "troubleshooting",
+      keywords: lightingTroubleshootingSearchMeta[topic.id],
+    });
+  }
+
+  for (const section of lightingSetupSections) {
+    results.push({
+      id: `lighting-setup-section-${section.id}`,
+      title: section.title,
+      subtitle: "Lighting Sunday Setup section",
+      href: "/lighting/setup",
+      category: "setup",
+      keywords: `${section.title} lighting sunday setup checklist dmx slimpar`,
+    });
+
+    for (const task of section.items) {
+      results.push({
+        id: `lighting-setup-task-${task.id}`,
+        title: task.label,
+        subtitle: section.title,
+        href: "/lighting/setup",
+        category: "setup",
+        keywords: "lighting setup dmx slimpar floor truss",
       });
     }
   }

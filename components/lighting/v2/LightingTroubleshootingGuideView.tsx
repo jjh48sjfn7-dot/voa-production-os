@@ -6,32 +6,33 @@ import { DocumentationList } from "@/components/audio/v2/documentation/Documenta
 import { EquipmentRelatedList } from "@/components/audio/v2/equipment/EquipmentRelatedList";
 import { EquipmentSection } from "@/components/audio/v2/equipment/EquipmentSection";
 import type { TroubleshootingGuide } from "@/data/audio/v2/troubleshooting/types";
-import { audioStyles } from "@/lib/audio-styles";
-import { voaLabels } from "@/data/audio/venue";
 import { SignalFlowPathView } from "@/components/signal-flow/SignalFlowPathView";
+import { audioStyles } from "@/lib/audio-styles";
 
-interface TroubleshootingGuideViewProps {
+interface LightingTroubleshootingGuideViewProps {
   title: string;
   icon: LucideIcon;
   guide: TroubleshootingGuide;
 }
 
-export function TroubleshootingGuideView({
+export function LightingTroubleshootingGuideView({
   title,
   icon,
   guide,
-}: TroubleshootingGuideViewProps) {
+}: LightingTroubleshootingGuideViewProps) {
   return (
     <AudioPageShell
       title={title}
       description="Follow the signal path to diagnose the problem."
       icon={icon}
       breadcrumbs={[
-        { label: voaLabels.audioDepartment, href: "/audio" },
-        { label: "Troubleshooting", href: "/audio/troubleshooting" },
+        { label: "Lighting Department", href: "/lighting" },
+        { label: "Troubleshooting", href: "/lighting/troubleshooting" },
         { label: title },
       ]}
       compactMobile
+      backHref="/lighting"
+      backLabel="Back to Lighting Department"
     >
       <div className="space-y-8 sm:space-y-10">
         <EquipmentSection title="Problem">

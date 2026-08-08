@@ -21,6 +21,7 @@ import {
 import {
   LightingControlGraphic,
   MicStandGraphic,
+  ParFixtureGraphic,
 } from "@/components/blueprint/graphics/equipment/stage";
 
 export interface BlueprintGraphicProps {
@@ -48,6 +49,7 @@ const graphicComponents: Record<
   curtain: CurtainGraphic,
   "mic-stand": MicStandGraphic,
   "lighting-control": LightingControlGraphic,
+  "par-fixture": ParFixtureGraphic,
 };
 
 export function BlueprintEquipmentGraphic({
@@ -81,6 +83,7 @@ export function getGraphicAccessibleName(graphic: BlueprintGraphicId): string {
     curtain: "Back curtain",
     "mic-stand": "Microphone stand",
     "lighting-control": "Lighting control desk",
+    "par-fixture": "SlimPAR lighting fixture",
   };
   return names[graphic];
 }

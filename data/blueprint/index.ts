@@ -2,6 +2,10 @@ import {
   getEquipmentBySlug,
   getEquipmentItemHref,
 } from "@/data/audio/v2/equipment";
+import {
+  getLightingEquipmentBySlug,
+  getLightingEquipmentItemHref,
+} from "@/data/lighting/v2/equipment";
 import { theaterBlueprint } from "@/data/blueprint/theater";
 import type {
   BlueprintDepartment,
@@ -88,6 +92,10 @@ export function getBlueprintItemHref(item: BlueprintItem): string | undefined {
     return undefined;
   }
 
+  if (getLightingEquipmentBySlug(item.equipmentSlug)) {
+    return getLightingEquipmentItemHref(item.equipmentSlug);
+  }
+
   if (!getEquipmentBySlug(item.equipmentSlug)) {
     return undefined;
   }
@@ -98,6 +106,16 @@ export function getBlueprintItemHref(item: BlueprintItem): string | undefined {
 export function getEquipmentTroubleshootingHref(
   equipmentSlug: string
 ): string | undefined {
+  const lightingEquipment = getLightingEquipmentBySlug(equipmentSlug);
+  if (lightingEquipment) {
+    const topicMap: Record<string, string> = {
+      "chauvet-slimpar-pro-h-usb": "/lighting/troubleshooting/fixture-not-turning-on",
+      "dmxking-micro": "/lighting/troubleshooting/no-dmx-control",
+      "lightkey-foh-control": "/lighting/troubleshooting/lightkey-not-connected",
+    };
+    return topicMap[equipmentSlug];
+  }
+
   const equipment = getEquipmentBySlug(equipmentSlug);
   return equipment?.setupLinks?.find((link) =>
     link.href.startsWith("/audio/troubleshooting/")

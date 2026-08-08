@@ -145,10 +145,12 @@ Every troubleshooting topic includes:
 | Field | Purpose |
 |-------|---------|
 | Problem statement | What the volunteer hears or sees |
-| Signal path | Where in the chain to look (optional nodes) |
 | Checks | Ordered checklist — most likely fix first |
+| Signal path | Where in the chain to look (optional nodes) |
 | Related equipment | Links to manuals |
 | Related documentation | Links to patch lists, routing, signal flow |
+
+**Presentation order (all departments):** Troubleshooting topics are action-first — **Things to Check** appears before **Signal Path** on the page. Volunteers see immediate actions before supporting signal-path context. Same order on mobile and desktop.
 
 ### Rules
 
@@ -179,7 +181,8 @@ Sunday Setup is the **only** setup checklist. Volunteers should not hunt through
 | Storage key: `sunday-setup-v2` | Versioned key allows future migration |
 | Group related items (INPUTS / OUTPUTS under stage sections) | Mirrors physical patching workflow |
 | Milestone items (Unload Trailer) are display-only | Not part of checkbox progress |
-| ~60 checklist items across 7 sections | Large enough to be complete; small enough to finish by soundcheck |
+| **Every department Sunday Setup begins with Unload Trailer** | Shared team responsibility before department-specific work — display milestone, same pattern as Audio |
+| ~60 checklist items across 7 sections | Large enough to be complete; small enough to finish by soundcheck *(Audio v1)* |
 
 ### Section order is fixed
 
@@ -191,7 +194,11 @@ Sunday Setup is the **only** setup checklist. Volunteers should not hunt through
 6. Soundcheck  
 7. Service Ready  
 
-Changing section order requires Audio Lead approval and a migration note.
+Changing section order requires department lead approval and a migration note.
+
+### Cross-department rule
+
+**Every department Sunday Setup begins with Unload Trailer** — a display-only milestone row (not a checkbox item) representing the shared trailer unload before department-specific accordion sections. Applies to Audio, Lighting, and future departments (Media, Video, etc.).
 
 ---
 
@@ -317,6 +324,15 @@ If a new component is justified, place it under the relevant v2 folder and docum
 Production OS serves a live church service. Breaking changes on Sunday morning are unacceptable.
 
 **Audio Department v1.0 is locked** (August 2026). Treat approved Audio pages, checklist content, Equipment copy, Blueprint geometry, and Stage Plot integration as frozen unless a sprint explicitly approves a bug fix, verified routing/equipment update, or future-version feature. Do not change approved content for polish alone.
+
+**Lighting Department v1.0 is locked** (August 2026). Treat approved Lighting pages, Sunday Setup, Equipment, Documentation, Troubleshooting, Inventory, Lighting Plot overlay, and related Master Blueprint fixture entries as frozen unless a sprint explicitly approves a bug fix, verified equipment/DMX update, or future-version feature. Do not change approved content for polish alone. **TBD values remain TBD** until owner-verified (DMX addresses, mode/personality, Lightkey scenes, electrical circuits).
+
+### Locked Production OS standards (all departments)
+
+1. **Sunday Setup begins with Unload Trailer** — display-only milestone before department accordion sections.
+2. **Troubleshooting is action-first** — Things to Check → Signal Path → Related Help.
+3. **Department physical maps use the shared Master Church Blueprint** (`data/blueprint/theater.ts`) — no duplicate geometry.
+4. **Audio v1.0 remains locked** — see change policy above.
 
 | Layer | Versioning approach |
 |-------|---------------------|

@@ -24,7 +24,7 @@ export const departments: Department[] = [
     href: "/lighting",
     icon: Lightbulb,
     accent: "lighting",
-    available: false,
+    available: true,
   },
   {
     id: "media",

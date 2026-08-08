@@ -24,6 +24,8 @@ interface AudioPageShellProps {
     description?: string;
   };
   compactMobile?: boolean;
+  backHref?: string;
+  backLabel?: string;
 }
 
 export function AudioPageShell({
@@ -36,6 +38,8 @@ export function AudioPageShell({
   stickyProgress,
   progress,
   compactMobile = false,
+  backHref,
+  backLabel,
 }: AudioPageShellProps) {
   const mounted = useMounted();
 
@@ -52,6 +56,8 @@ export function AudioPageShell({
         breadcrumbs={breadcrumbs}
         toolbar={toolbar}
         compactMobile={compactMobile}
+        backHref={backHref}
+        backLabel={backLabel}
       />
 
       {stickyProgress}

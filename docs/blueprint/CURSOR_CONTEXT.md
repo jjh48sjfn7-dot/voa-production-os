@@ -14,8 +14,8 @@
 | Product name | Production OS v1.0 (VOA) |
 | Church | Victory Outreach Antioch — East Antioch Campus |
 | Stack | Next.js 16 App Router, React 19, TypeScript, Tailwind CSS 4 |
-| Primary user | Sunday production volunteers (audio department live; other depts future) |
-| Content pattern | Data in `data/audio/v2/` → components in `components/audio/v2/` |
+| Primary user | Sunday production volunteers (Audio + Lighting departments live; Video / Media future) |
+| Content pattern | Data in `data/{department}/v2/` → components in `components/{department}/v2/` |
 
 Production OS is a **mobile-first reference and checklist app** — not a console remote, not a streaming platform.
 
@@ -23,7 +23,7 @@ Production OS is a **mobile-first reference and checklist app** — not a consol
 
 ## Current Development Phase
 
-**Phase:** Audio Department v1.0 — **LOCKED** (owner-approved, August 2026).
+**Phase:** Audio Department v1.0 — **LOCKED** · Lighting Department v1.0 — **LOCKED** (owner-approved, August 2026).
 
 | Area | Status |
 |------|--------|
@@ -39,11 +39,17 @@ Production OS is a **mobile-first reference and checklist app** — not a consol
 | Audio Stage Plot | ✅ Locked — shared Blueprint overlay |
 | Dashboard | ✅ Locked design |
 | `/audio/production` | ↪ Redirects to `/audio/setup` — not discoverable |
-| Lighting / Video / Media | ⬜ Not started — blueprint placeholders only |
+| **Lighting Department v1.0** | ✅ **Locked** — home, setup, equipment, documentation, troubleshooting, inventory |
+| Lighting Sunday Setup | ✅ Locked — `sunday-setup-lighting-v1`, Unload Trailer first |
+| Lighting Equipment | ✅ Locked — 3 items (SlimPAR ×9, DMXking, Lightkey) |
+| Lighting Documentation | ✅ Locked — plot, DMX flow, fixture layout, addressing (TBD values) |
+| Lighting Troubleshooting | ✅ Locked — 4 topics, action-first order |
+| Lighting Plot | ✅ Locked — shared Master Blueprint `overlay="lighting"` |
+| Video / Media | ⬜ Not started — blueprint placeholders only |
 | Legacy v1 routes | ⚠️ Exist (`/audio/tf5`, `/audio/channels`, etc.) — do not extend |
 
-**Canonical data path:** `data/audio/v2/`  
-**Canonical UI path:** `components/audio/v2/`
+**Canonical data path:** `data/audio/v2/` · `data/lighting/v2/`  
+**Canonical UI path:** `components/audio/v2/` · `components/lighting/v2/`
 
 ### Audio v1.0 change policy
 
@@ -56,6 +62,22 @@ Future Audio work should be limited to:
 Do **not** alter approved Audio content, layout, or geometry for cosmetic reasons.
 
 **Final QA Must Fixes (complete):** Emergency routes · Global Search index · Subwoofer placement copy · Inventory navigation · Production Mode redirect.
+
+### Lighting v1.0 change policy
+
+**LIGHTING DEPARTMENT v1.0 — LOCKED** (August 2026).
+
+Future Lighting work should be limited to:
+
+- **Bug fixes** (broken links, regressions, incorrect copy)
+- **Verified equipment or DMX/address updates** (owner-approved — fill TBD values only when verified)
+- **Explicitly approved future-version features** (new sprint scope — not polish or redesign)
+
+Do **not** alter approved Lighting content, layout, or Master Blueprint geometry for cosmetic reasons.
+
+**Intentionally deferred (TBD — do not invent):** exact DMX starting addresses · DMX mode/personality/channel count · Lightkey scene/preset names · electrical circuit details.
+
+**Final QA (complete):** All routes · Sunday Setup order · Equipment · Documentation · Troubleshooting action-first · Inventory links · Back buttons · Blueprint overlay · Search · Build pass.
 
 ---
 
@@ -113,6 +135,43 @@ These decisions are **approved and locked**. Do not change without explicit user
 ### Equipment categories (9)
 
 `console`, `wireless`, `foh-speakers`, `subwoofer`, `monitors`, `stage-boxes`, `keyboard`, `playback`, `accessories`
+
+---
+
+## Lighting Department Status
+
+**LIGHTING DEPARTMENT v1.0 — LOCKED.** See change policy under Current Development Phase.
+
+### Live pages
+
+| Page | Route | Component / data |
+|------|-------|------------------|
+| Lighting home | `/lighting` | `LightingHomeContent`, `data/lighting/v2/home.ts` |
+| Sunday Setup | `/lighting/setup` | `data/lighting/v2/sunday-setup.ts` (`sunday-setup-lighting-v1`) |
+| Equipment hub | `/lighting/equipment` | `data/lighting/v2/equipment/categories.ts` |
+| Equipment detail | `/lighting/equipment/item/[slug]` | `items.ts` — 3 canonical items |
+| Documentation hub | `/lighting/documentation` | `documentation.ts` |
+| Lighting Plot | `/lighting/documentation/lighting-plot` | `LightingPlotContent` + shared `ChurchBlueprint` (`theater.ts`, `overlay="lighting"`) |
+| DMX Signal Flow | `/lighting/documentation/dmx-signal-flow` | `documentation/dmx-signal-flow.ts` |
+| Fixture Layout | `/lighting/documentation/fixture-layout` | `documentation/content.ts` |
+| DMX Addressing | `/lighting/documentation/dmx-addressing` | `documentation/content.ts` (addresses TBD) |
+| Troubleshooting hub | `/lighting/troubleshooting` | `troubleshooting/topics.ts` — 4 topics |
+| Inventory | `/lighting/inventory` | `v2/inventory.ts` — rows link to Equipment |
+
+### Equipment items (3)
+
+| Slug | Name |
+|------|------|
+| `chauvet-slimpar-pro-h-usb` | Chauvet DJ SlimPAR Pro H USB (×9) |
+| `dmxking-micro` | DMXking Micro |
+| `lightkey-foh-control` | FOH Mac / Lightkey Control |
+
+### Approved physical truth (locked)
+
+- 9 SlimPAR fixtures — 6 truss (TR-1–TR-6 permanent) + 3 floor (weekly)
+- DMX Universe 1 · weekly path FOH → Floor 3 → Floor 2 → Floor 1 → TR-1
+- Permanent truss chain TR-1 → TR-6 stays connected
+- Master Blueprint source: `data/blueprint/theater.ts` — no duplicate geometry
 
 ---
 
@@ -215,7 +274,8 @@ Channels 1–15 and 21–24 are **available** — do not assign without approval
 
 ## Sunday Setup Rules
 
-- **7 accordion sections** in fixed order — see PRODUCTION_OS_STANDARDS.md
+- **Every department Sunday Setup begins with Unload Trailer** — display milestone before accordion sections (cross-department Production OS standard)
+- **7 accordion sections** in fixed order — see PRODUCTION_OS_STANDARDS.md *(Audio v1)*
 - Progress stored in `localStorage` key `sunday-setup-v2`
 - **Do not redesign** layout, section titles, or accordion behavior without explicit sprint approval
 - Unload Trailer is a **display milestone** — not a checkbox item
@@ -252,6 +312,7 @@ Special pages bypass generic templates because layout exceeds tables.
 
 - Topics: `data/audio/v2/troubleshooting/topics.ts`
 - Renders via `TroubleshootingGuideView`
+- **Action-first presentation:** Things to Check before Signal Path (all departments)
 - 8 approved topic slugs — see PRODUCTION_OS_STANDARDS.md
 - Each topic links to equipment and documentation — never duplicates manual content
 
@@ -364,7 +425,11 @@ Treat unspecified pages as **locked** unless the sprint explicitly includes them
 | Master Church Blueprint | `data/blueprint/theater.ts` |
 | Blueprint preview | `/blueprint` (internal — not in sidebar nav) |
 | Modify Sunday Setup | `data/audio/v2/sunday-setup.ts` ⚠️ approval required |
+| Modify Lighting Sunday Setup | `data/lighting/v2/sunday-setup.ts` ⚠️ approval required |
 | Add troubleshooting topic | `data/audio/v2/troubleshooting/topics.ts` |
+| Add Lighting equipment | `data/lighting/v2/equipment/items.ts` ⚠️ approval required |
+| Add Lighting documentation | `data/lighting/v2/documentation/` ⚠️ approval required |
+| Modify Lighting plot / DMX docs | `data/lighting/v2/` + `data/blueprint/theater.ts` ⚠️ approval required |
 | Venue labels | `data/audio/venue.ts` |
 | Navigation | `data/navigation.ts` |
 | UI tokens | `lib/audio-styles.ts` |
@@ -388,5 +453,6 @@ Treat unspecified pages as **locked** unless the sprint explicitly includes them
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-08-06 | Initial Cursor context — Sprint 18 foundation |
+| 1.1 | 2026-08-08 | **Lighting Department v1.0 — LOCKED** |
 
 **Update this file** when locked decisions change, new departments launch, or major architecture shifts occur.

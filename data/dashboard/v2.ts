@@ -62,7 +62,7 @@ export const dashboardDepartments: DashboardDepartmentItem[] = [
     id: "lighting",
     name: "Lighting",
     description: "Stage lighting and DMX control",
-    href: "#",
+    href: "/lighting",
     icon: Lightbulb,
     accent: "lighting",
   },
