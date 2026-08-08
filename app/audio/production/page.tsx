@@ -1,5 +1,5 @@
-import { ProductionModeContent } from "@/components/audio/ProductionModeContent";
+import { redirect } from "next/navigation";
 
 export default function ProductionPage() {
-  return <ProductionModeContent />;
+  redirect("/audio/setup");
 }

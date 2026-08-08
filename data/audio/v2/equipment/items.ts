@@ -686,11 +686,11 @@ export const subwoofer: EquipmentDefinition = {
   categoryId: "subwoofer",
   icon: "🔈",
   purpose:
-    "The subwoofer extends the front-of-house low-frequency response, reinforcing bass content from worship music and playback for the sanctuary.",
+    "The subwoofer extends low-frequency response for worship music and playback. Approved placement is on the audience floor, centered directly in front of the stage before the first seating row. Model and final routing are TBD.",
   quickStart: [
-    "Position the subwoofer at the approved FOH location",
-    "Connect the subwoofer to TF5 Output 6",
-    "Verify TF5 Output 6 subwoofer routing",
+    "Position the subwoofer on the audience floor, centered directly in front of the stage, before the first row of seating",
+    "Align on the room centerline between TR-3 and TR-4 (see Stage Plot)",
+    "Confirm model and TF5 routing with Audio Lead before connecting — routing TBD",
     "Power on the subwoofer after signal connections are complete",
     "Confirm subwoofer level during soundcheck",
     "Walk the room to verify balanced low-end coverage",
@@ -698,18 +698,27 @@ export const subwoofer: EquipmentDefinition = {
   specifications: [
     { label: "Model", value: "TBD — confirm with Audio Lead" },
     { label: "Quantity", value: "1" },
-    { label: "Type", value: "Powered subwoofer" },
-    { label: "Placement", value: "FOH — center of stage area" },
+    { label: "Type", value: "Powered subwoofer (model TBD)" },
+    {
+      label: "Placement",
+      value:
+        "Audience floor — centered directly in front of the stage, before the first row of seating",
+    },
+    {
+      label: "Alignment",
+      value: "Room centerline between TR-3 and TR-4",
+    },
+    { label: "TF5 routing", value: "TBD — confirm with Audio Lead" },
   ],
   primaryConnections: [
-    "TF5 Output 6",
-    "Subwoofer input",
+    "TF5 mix output — routing TBD",
+    "Subwoofer input — when model confirmed",
     "Power",
   ],
   bestPractices: [
     "Power the subwoofer on after all signal connections are made.",
     "Power the subwoofer off before disconnecting cables at teardown.",
-    "Verify subwoofer routing in the approved Sunday Scene before service.",
+    "Verify subwoofer routing with the Audio Lead before service — routing TBD.",
     "Do not change crossover or routing settings without Audio Lead approval.",
     "Keep the subwoofer clear of walkways and secure before service.",
     "Confirm subwoofer level during soundcheck every Sunday.",
@@ -720,9 +729,9 @@ export const subwoofer: EquipmentDefinition = {
       title: "No Subwoofer Output",
       problem: "The subwoofer is not receiving audio from the TF5.",
       basicChecks: [
-        "Confirm the subwoofer is connected to TF5 Output 6.",
+        "Confirm the subwoofer is connected per confirmed routing (TBD).",
         "Verify the subwoofer is powered on.",
-        "Check TF5 Output 6 routing.",
+        "Check TF5 subwoofer output routing with the Audio Lead.",
         "Confirm the subwoofer mix is not muted.",
         "Verify the output cable at both ends.",
         "Recall the approved Sunday Scene if routing looks wrong.",

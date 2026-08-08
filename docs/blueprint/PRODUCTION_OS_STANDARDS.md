@@ -54,6 +54,8 @@ Predictable navigation reduces cognitive load. Volunteers open the same paths ev
 | Troubleshooting | `/audio/troubleshooting` |
 | Inventory | `/audio/inventory` |
 
+`/audio/production` redirects to `/audio/setup` and must not be re-exposed in v2 navigation or search.
+
 ### Route naming
 
 - Use **kebab-case** slugs: `/audio/troubleshooting/no-keyboard-audio`
@@ -313,6 +315,8 @@ If a new component is justified, place it under the relevant v2 folder and docum
 ### Why
 
 Production OS serves a live church service. Breaking changes on Sunday morning are unacceptable.
+
+**Audio Department v1.0 is locked** (August 2026). Treat approved Audio pages, checklist content, Equipment copy, Blueprint geometry, and Stage Plot integration as frozen unless a sprint explicitly approves a bug fix, verified routing/equipment update, or future-version feature. Do not change approved content for polish alone.
 
 | Layer | Versioning approach |
 |-------|---------------------|

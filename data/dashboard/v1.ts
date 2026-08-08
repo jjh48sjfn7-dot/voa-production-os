@@ -80,9 +80,9 @@ export interface EmergencyCategory {
 }
 
 export const emergencyCategories: EmergencyCategory[] = [
-  { id: "no-signal", label: "No Signal", href: "/audio/troubleshooting#issue-no-signal" },
-  { id: "feedback", label: "Feedback", href: "/audio/troubleshooting#issue-feedback" },
-  { id: "wireless", label: "Wireless", href: "/audio/troubleshooting#issue-wireless-drop" },
+  { id: "no-signal", label: "No Signal", href: "/audio/troubleshooting/no-foh-audio" },
+  { id: "feedback", label: "Feedback", href: "/audio/troubleshooting/feedback" },
+  { id: "wireless", label: "Wireless", href: "/audio/troubleshooting/no-wireless-microphone" },
   { id: "console", label: voaLabels.tf5, href: "/audio/tf5#emergency-no-audio" },
   { id: "power", label: "Power", href: "/audio/tf5#emergency-power" },
   { id: "stagebox", label: voaLabels.rio, href: "/audio/diagram" },

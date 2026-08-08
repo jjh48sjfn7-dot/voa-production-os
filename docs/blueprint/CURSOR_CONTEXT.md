@@ -23,23 +23,39 @@ Production OS is a **mobile-first reference and checklist app** — not a consol
 
 ## Current Development Phase
 
-**Phase:** Sprint 18+ — Foundation documentation and audio department QA complete.
+**Phase:** Audio Department v1.0 — **LOCKED** (owner-approved, August 2026).
 
 | Area | Status |
 |------|--------|
-| Audio home | ✅ Live |
-| Sunday Setup | ✅ Live — locked layout |
-| Equipment manuals | ✅ Live — v2 canonical slugs |
-| Documentation | ✅ Live — signal flow, stage plot, patch lists, routing |
-| Troubleshooting | ✅ Live — 8 topics |
-| Inventory | 🟡 Landing only — asset detail migration pending |
-| Master Church Blueprint | ✅ Data + dev preview at `/blueprint` |
-| Dashboard | ✅ Live — locked design |
+| Audio home | ✅ Locked |
+| Sunday Setup | ✅ Locked — single official workflow (`/audio/setup`, `sunday-setup-v2`) |
+| Equipment manuals | ✅ Locked — v2 canonical slugs |
+| Documentation | ✅ Locked — signal flow, stage plot, patch lists, routing |
+| Troubleshooting | ✅ Locked — 8 topics |
+| Inventory | ✅ Locked — tappable rows link to Equipment |
+| Emergency shortcuts | ✅ Locked — v2 troubleshooting routes |
+| Global Search | ✅ Locked — v2 index only |
+| Master Church Blueprint | ✅ Locked — `data/blueprint/theater.ts` |
+| Audio Stage Plot | ✅ Locked — shared Blueprint overlay |
+| Dashboard | ✅ Locked design |
+| `/audio/production` | ↪ Redirects to `/audio/setup` — not discoverable |
 | Lighting / Video / Media | ⬜ Not started — blueprint placeholders only |
 | Legacy v1 routes | ⚠️ Exist (`/audio/tf5`, `/audio/channels`, etc.) — do not extend |
 
 **Canonical data path:** `data/audio/v2/`  
 **Canonical UI path:** `components/audio/v2/`
+
+### Audio v1.0 change policy
+
+Future Audio work should be limited to:
+
+- **Bug fixes** (broken links, regressions, incorrect copy)
+- **Verified equipment or routing updates** (owner-approved, cross-checked against Master Blueprint)
+- **Explicitly approved future-version features** (new sprint scope — not polish or redesign)
+
+Do **not** alter approved Audio content, layout, or geometry for cosmetic reasons.
+
+**Final QA Must Fixes (complete):** Emergency routes · Global Search index · Subwoofer placement copy · Inventory navigation · Production Mode redirect.
 
 ---
 
@@ -72,6 +88,8 @@ These decisions are **approved and locked**. Do not change without explicit user
 
 ## Audio Department Status
 
+**AUDIO DEPARTMENT v1.0 — LOCKED.** See change policy under Current Development Phase.
+
 ### Live pages
 
 | Page | Route | Component / data |
@@ -85,11 +103,12 @@ These decisions are **approved and locked**. Do not change without explicit user
 | TF5 Channel List | `/audio/documentation/tf5-channel-list` | `documentation/content.ts` |
 | Output Routing | `/audio/documentation/output-routing` | `documentation/content.ts` |
 | Signal Flow | `/audio/documentation/signal-flow` | `SignalFlowContent` + `documentation/signal-flow.ts` |
-| Stage Plot | `/audio/documentation/stage-plot` | `StagePlotContent` + `v2/stage-plot.ts` |
+| Stage Plot | `/audio/documentation/stage-plot` | `StagePlotContent` + shared `ChurchBlueprint` (`theater.ts`) |
 | Wiring Standards | `/audio/documentation/wiring-standards` | `documentation/content.ts` |
 | Volunteer Guide | `/audio/documentation/volunteer-guide` | `documentation/content.ts` |
 | Troubleshooting hub | `/audio/troubleshooting` | `troubleshooting/topics.ts` |
-| Inventory | `/audio/inventory` | `v2/inventory.ts` (landing) |
+| Inventory | `/audio/inventory` | `v2/inventory.ts` — rows link to Equipment |
+| Production Mode (legacy) | `/audio/production` | Redirects to `/audio/setup` |
 
 ### Equipment categories (9)
 
@@ -240,10 +259,10 @@ Special pages bypass generic templates because layout exceeds tables.
 
 ## Inventory Architecture
 
-- v2 landing: `data/audio/v2/inventory.ts` (category sections)
-- Legacy assets: `data/audio/inventory.ts` (`VOA-ANT-AUD-###`)
-- **Do not invent asset numbers** — use placeholders until verified
-- Full v2 inventory detail pages: not yet built
+- v2 landing: `data/audio/v2/inventory.ts` — major equipment rows with links to Equipment categories/items
+- Legacy assets: `data/audio/inventory.ts` (`VOA-ANT-AUD-###`) — used by legacy Production Mode only
+- **Do not invent asset numbers or quantities** — use placeholders until verified
+- Serial tracking, checkout, and asset detail pages: future version
 
 ---
 

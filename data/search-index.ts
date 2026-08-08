@@ -1,13 +1,20 @@
-import { audioPages } from "@/data/audio/pages";
-import { channelAssignments } from "@/data/audio/channels";
-import { inventoryItems } from "@/data/audio/inventory";
-import { troubleshootingIssues } from "@/data/audio/troubleshooting";
-import { sundaySetupSections } from "@/data/sunday-setup";
+import { documentationPages } from "@/data/audio/v2/documentation";
+import { equipmentCategories } from "@/data/audio/v2/equipment/categories";
+import {
+  equipmentItems,
+  getEquipmentItemHref,
+} from "@/data/audio/v2/equipment";
+import { troubleshootingTopics } from "@/data/audio/v2/troubleshooting/topics";
+import {
+  getSectionItems,
+  sundaySetupUnloadTrailer,
+  sundaySetupV2Sections,
+} from "@/data/audio/v2/sunday-setup";
+import { voaLabels } from "@/data/audio/venue";
 
 export type SearchCategory =
   | "page"
   | "equipment"
-  | "channel"
   | "troubleshooting"
   | "setup";
 
@@ -17,82 +24,237 @@ export interface SearchResult {
   subtitle?: string;
   href: string;
   category: SearchCategory;
+  /** Lowercase aliases for volunteer-friendly search — not shown in UI */
+  keywords?: string;
 }
 
 export const searchCategoryLabels: Record<SearchCategory, string> = {
   page: "Pages",
   equipment: "Equipment",
-  channel: "Channels",
   troubleshooting: "Troubleshooting",
-  setup: "Pre-Service Tasks",
+  setup: "Sunday Setup",
+};
+
+const documentationSearchMeta: Record<
+  string,
+  { subtitle: string; keywords: string }
+> = {
+  "input-patch-list": {
+    subtitle: "Documentation · stage input patching",
+    keywords: "input patch list patch snake channel",
+  },
+  "tf5-channel-list": {
+    subtitle: "Documentation · TF5 channel assignments",
+    keywords: "tf5 channel list channels mixer console",
+  },
+  "output-routing": {
+    subtitle: "Documentation · TF5 outputs and snakes",
+    keywords: "output routing foh monitor snake",
+  },
+  "signal-flow": {
+    subtitle: "Documentation · how audio moves through the system",
+    keywords: "signal flow diagram routing path",
+  },
+  "stage-plot": {
+    subtitle: "Documentation · where audio equipment is located",
+    keywords: "stage plot layout map blueprint equipment location",
+  },
+  "wiring-standards": {
+    subtitle: "Documentation · patching and cable standards",
+    keywords: "wiring standards cables xlr patch",
+  },
+  "volunteer-guide": {
+    subtitle: "Documentation · audio volunteer reference",
+    keywords: "volunteer guide help beginner",
+  },
+};
+
+const equipmentSearchMeta: Record<string, { keywords: string }> = {
+  "yamaha-tf5": {
+    keywords: "tf5 console mixer sound board audio console yamaha",
+  },
+  keyboard: {
+    keywords: "keyboard keys piano modx8 yamaha",
+  },
+  "shure-blx-receiver": {
+    keywords: "wireless microphone mic receiver shure blx288 handheld",
+  },
+  "stage-snake-a": {
+    keywords: "snake stage box xlr stage left snake a rio",
+  },
+  "stage-snake-b": {
+    keywords: "snake stage box xlr stage right snake b rio",
+  },
+  "qsc-k12-2": {
+    keywords: "speaker main mains foh house k12.2 qsc left right",
+  },
+  "qsc-k10-2": {
+    keywords: "monitor wedge stage monitor k10.2 qsc left right",
+  },
+  "drummer-in-ear-system": {
+    keywords: "pm1 behringer in-ear drummer iem monitor",
+  },
+  subwoofer: {
+    keywords: "sub subwoofer bass low placeholder",
+  },
+  "media-computer": {
+    keywords: "playback mac computer propresenter media audio",
+  },
+};
+
+const categorySearchMeta: Record<string, string> = {
+  console: "console mixer tf5",
+  wireless: "wireless microphone mic receiver",
+  "foh-speakers": "foh speaker main mains house k12.2",
+  subwoofer: "sub subwoofer bass",
+  monitors: "monitor wedge stage monitor k10.2 pm1 in-ear",
+  "stage-boxes": "snake stage box xlr stage snake",
+  keyboard: "keyboard keys piano",
+  playback: "playback media computer mac",
+  accessories: "cables stands adapters accessories",
+};
+
+const troubleshootingSearchMeta: Record<string, string> = {
+  "no-keyboard-audio": "keyboard keys no sound audio",
+  "no-wireless-microphone": "wireless microphone mic handheld no sound drop",
+  "no-drum-audio": "drums kick snare no sound audio",
+  "no-foh-audio": "no sound no audio foh house mains speakers",
+  "no-stage-monitor": "monitor wedge stage no sound audio",
+  "no-computer-playback": "playback media computer mac no sound propresenter",
+  "console-will-not-power-on": "console tf5 power will not turn on",
+  feedback: "feedback squeal ringing mic monitor",
 };
 
 function buildSearchIndex(): SearchResult[] {
   const results: SearchResult[] = [];
 
-  for (const page of audioPages) {
+  results.push({
+    id: "page-audio-home",
+    title: voaLabels.audioDepartment,
+    subtitle: "Audio Department home",
+    href: "/audio",
+    category: "page",
+    keywords: "audio department sound",
+  });
+
+  results.push({
+    id: "page-sunday-setup",
+    title: "Sunday Setup",
+    subtitle: "Pre-service checklist",
+    href: "/audio/setup",
+    category: "page",
+    keywords: "sunday setup checklist pre-service service morning",
+  });
+
+  results.push({
+    id: "page-equipment",
+    title: "Equipment",
+    subtitle: "Audio equipment manuals",
+    href: "/audio/equipment",
+    category: "page",
+    keywords: "equipment gear manuals",
+  });
+
+  results.push({
+    id: "page-documentation",
+    title: "Documentation",
+    subtitle: "Patch lists, routing, and guides",
+    href: "/audio/documentation",
+    category: "page",
+    keywords: "documentation docs reference",
+  });
+
+  results.push({
+    id: "page-troubleshooting",
+    title: "Troubleshooting",
+    subtitle: "Fix common audio problems",
+    href: "/audio/troubleshooting",
+    category: "page",
+    keywords: "troubleshooting help problem fix emergency",
+  });
+
+  results.push({
+    id: "page-inventory",
+    title: "Inventory",
+    subtitle: "Audio Department equipment list",
+    href: "/audio/inventory",
+    category: "page",
+    keywords: "inventory gear list assets",
+  });
+
+  for (const page of documentationPages) {
+    const meta = documentationSearchMeta[page.id];
     results.push({
-      id: `page-${page.id}`,
+      id: `doc-${page.id}`,
       title: page.title,
-      subtitle: page.description,
+      subtitle: meta?.subtitle ?? "Documentation",
       href: page.href,
       category: "page",
+      keywords: meta?.keywords,
     });
   }
 
-  for (const item of inventoryItems) {
+  for (const category of equipmentCategories) {
     results.push({
-      id: `eq-${item.id}`,
-      title: item.name,
-      subtitle: `${item.assetNumber} · ${item.location}`,
-      href: "/audio/inventory",
+      id: `eq-cat-${category.id}`,
+      title: category.title,
+      subtitle: "Equipment category",
+      href: category.href,
       category: "equipment",
+      keywords: categorySearchMeta[category.id],
     });
   }
 
-  for (const ch of channelAssignments) {
+  for (const item of equipmentItems) {
+    const meta = equipmentSearchMeta[item.slug];
     results.push({
-      id: `ch-${ch.id}`,
-      title: `Ch ${ch.channel} — ${ch.name}`,
-      subtitle: `${ch.microphone} · ${ch.cableType}`,
-      href: "/audio/channels",
-      category: "channel",
+      id: `eq-${item.slug}`,
+      title: item.name,
+      subtitle: "Equipment manual",
+      href: getEquipmentItemHref(item.slug),
+      category: "equipment",
+      keywords: meta?.keywords,
     });
   }
 
-  for (const issue of troubleshootingIssues) {
+  for (const topic of troubleshootingTopics) {
     results.push({
-      id: `ts-${issue.id}`,
-      title: issue.title,
-      subtitle: issue.symptoms[0],
-      href: `/audio/troubleshooting#issue-${issue.id}`,
+      id: `ts-${topic.id}`,
+      title: topic.title,
+      subtitle: "Troubleshooting guide",
+      href: topic.href,
       category: "troubleshooting",
+      keywords: troubleshootingSearchMeta[topic.id],
     });
   }
 
-  for (const section of sundaySetupSections) {
-    for (const item of section.items) {
-      if (item.type === "checklist") {
-        for (const task of item.items) {
-          results.push({
-            id: `setup-${task.id}`,
-            title: task.label,
-            subtitle: section.title,
-            href: "/audio/setup",
-            category: "setup",
-          });
-        }
-      } else {
-        for (const text of item.items) {
-          results.push({
-            id: `setup-${section.id}-${text.slice(0, 20)}`,
-            title: text,
-            subtitle: section.title,
-            href: "/audio/setup",
-            category: "setup",
-          });
-        }
-      }
+  results.push({
+    id: "setup-unload-trailer",
+    title: sundaySetupUnloadTrailer.title,
+    subtitle: "Sunday Setup",
+    href: "/audio/setup",
+    category: "setup",
+    keywords: "unload trailer load in gear",
+  });
+
+  for (const section of sundaySetupV2Sections) {
+    results.push({
+      id: `setup-section-${section.id}`,
+      title: section.title,
+      subtitle: "Sunday Setup section",
+      href: "/audio/setup",
+      category: "setup",
+      keywords: `${section.title} sunday setup checklist`,
+    });
+
+    for (const task of getSectionItems(section)) {
+      results.push({
+        id: `setup-task-${task.id}`,
+        title: task.label,
+        subtitle: section.title,
+        href: "/audio/setup",
+        category: "setup",
+      });
     }
   }
 
@@ -101,17 +263,19 @@ function buildSearchIndex(): SearchResult[] {
 
 export const globalSearchIndex = buildSearchIndex();
 
+function matchesQuery(result: SearchResult, query: string): boolean {
+  return (
+    result.title.toLowerCase().includes(query) ||
+    result.subtitle?.toLowerCase().includes(query) === true ||
+    result.keywords?.includes(query) === true
+  );
+}
+
 export function searchGlobalIndex(query: string, limit = 12): SearchResult[] {
   const q = query.trim().toLowerCase();
   if (!q) return [];
 
-  return globalSearchIndex
-    .filter(
-      (r) =>
-        r.title.toLowerCase().includes(q) ||
-        r.subtitle?.toLowerCase().includes(q)
-    )
-    .slice(0, limit);
+  return globalSearchIndex.filter((r) => matchesQuery(r, q)).slice(0, limit);
 }
 
 export function groupSearchResults(
