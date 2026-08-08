@@ -145,9 +145,10 @@ Top-down reference (audience at bottom):
     │ K12.2 L         Screen         K12.2 R     │
     │  K10.2 CL                    K10.2 CR    │
     ├─────────────────────────────────────────┤
-    │     FRONT TRUSS TR-1 … TR-6  [Projector]│
+    │     FRONT TRUSS  TR-1 TR-2 TR-3 | TR-4 TR-5 TR-6  [Projector]│
     └────────── curved downstage apron ───────┘
-                    ↓ AUDIENCE (tiered) ↓
+              ↓ AUDIENCE FLOOR — Sub (centerline) ↓
+                    ↓ SEATING (tiered) ↓
               ┌──────────────────┐
               │  FOH PLATFORM    │  ← house right side walkway
               │  TF5 · Mac · RX  │
@@ -164,7 +165,7 @@ Top-down reference (audience at bottom):
 - **Stage Snake B:** Stage Right — **physically to the RIGHT of the keyboard.**
 - **FOH speakers (QSC K12.2):** **On the stage platform** at left/right sides — Sunday portable mains only. Do not depict permanent/flown venue speakers.
 - **Stage monitors (QSC K10.2):** **Two only** — **Center-Left** and **Center-Right** wedges (not a third center monitor).
-- **Subwoofer:** Front of stage — **exact placement placeholder** until finalized.
+- **Subwoofer:** **Audience floor** on room centerline (between TR-3 and TR-4) — directly in front of stage/truss, **before first seating row** — exact model/placement placeholder until finalized.
 - **Behringer PM1 (drummer in-ear):** Drum-kit accessory at Stage Left; fed from Stage Snake A Output 3. Not an independent floor landmark.
 - **Projector:** Overhead on **front/downstage truss between TR-5 and TR-6** — not floor upstage.
 - **FOH production:** House-right side platform — TF5 and Mac on table; BLX288 beside TF5 and behind Mac; confidence monitor on rolling stand **right of Mac**.

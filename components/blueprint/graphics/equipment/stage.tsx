@@ -1,12 +1,13 @@
-import { GraphicSvg, EquipmentShadow, s, sw, swb } from "@/components/blueprint/graphics/equipment/shared";
+import { GraphicSvg, EquipmentShadow, s, sw, swb, fill, fillStrong } from "@/components/blueprint/graphics/equipment/shared";
 
 /** Microphone stand — top-down tripod */
 export function MicStandGraphic({ className }: { className?: string }) {
   return (
     <GraphicSvg viewBox="0 0 44 52" className={className}>
       <EquipmentShadow cx={22} cy={48} rx={14} ry={3} />
-      <circle cx="22" cy="8" r="5" stroke={s} strokeWidth={swb} />
-      <line x1="22" y1="13" x2="22" y2="36" stroke={s} strokeWidth={swb} />
+      <circle cx="22" cy="8" r="5.5" fill={fillStrong} stroke={s} strokeWidth={swb} />
+      <circle cx="22" cy="8" r="2" fill="rgba(20,24,32,0.45)" />
+      <line x1="22" y1="13.5" x2="22" y2="36" stroke={s} strokeWidth={swb} />
       <line x1="22" y1="36" x2="8" y2="46" stroke={s} strokeWidth={sw} />
       <line x1="22" y1="36" x2="36" y2="46" stroke={s} strokeWidth={sw} />
       <line x1="22" y1="36" x2="22" y2="48" stroke={s} strokeWidth={sw} />
