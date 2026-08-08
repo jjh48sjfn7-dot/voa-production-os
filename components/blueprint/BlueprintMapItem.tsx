@@ -70,6 +70,14 @@ const fohGraphicSizeClasses: Partial<Record<BlueprintGraphicId, string>> = {
   "display-monitor": "h-6 w-6 sm:h-11 sm:w-11",
 };
 
+/** Mobile-only label nudges — equipment coordinates unchanged */
+const mobileLabelOffsetClasses: Partial<Record<string, string>> = {
+  "stage-snake-a": "translate-x-1.5 translate-y-1 sm:translate-x-0 sm:translate-y-0",
+  "foh-speaker-left": "-translate-x-2 translate-y-2 sm:translate-x-0 sm:translate-y-0",
+  "stage-snake-b": "-translate-x-1.5 translate-y-1 sm:translate-x-0 sm:translate-y-0",
+  "foh-speaker-right": "translate-x-2 translate-y-2 sm:translate-x-0 sm:translate-y-0",
+};
+
 function getGraphicClass(graphic: BlueprintGraphicId, itemId: string): string {
   if (itemId === "projector") {
     return graphicSizeClasses.projector ?? "h-4 w-10 sm:h-7 sm:w-[4.5rem]";
@@ -122,6 +130,8 @@ export function BlueprintMapItem({
           : 12;
 
   const deptTag = departmentTagColors[department] ?? "text-slate-500/60";
+  const mobileLabelOffset =
+    mobileLabelOffsetClasses[item.id] ?? "sm:translate-x-0 sm:translate-y-0";
 
   return (
     <button
@@ -156,7 +166,7 @@ export function BlueprintMapItem({
       {!isReference && (
         <div
           style={{ transform: `rotate(${-rotate}deg)` }}
-          className="mt-px flex flex-col items-center gap-0 sm:mt-0.5"
+          className={`mt-px flex flex-col items-center gap-0 sm:mt-0.5 ${mobileLabelOffset}`}
         >
           <span
             className={`text-center text-[6px] font-semibold leading-tight text-slate-200 sm:text-[8px] ${

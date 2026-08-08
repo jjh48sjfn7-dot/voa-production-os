@@ -30,7 +30,7 @@ export function BlueprintPreviewContent() {
     : undefined;
 
   return (
-    <div className="space-y-6 sm:space-y-8">
+    <div className="space-y-4 sm:space-y-8">
       <div className="space-y-2">
         <p className="text-xs font-medium uppercase tracking-wide text-amber-500/90">
           Internal development preview
@@ -46,8 +46,8 @@ export function BlueprintPreviewContent() {
 
       <BlueprintOverlay overlay={overlay} onOverlayChange={setOverlay} />
 
-      <div className="space-y-1 sm:space-y-2">
-        <p className="text-xs font-medium text-slate-400 sm:text-sm">Department legend</p>
+      <div className="hidden space-y-1 sm:block sm:space-y-2">
+        <p className="text-sm font-medium text-slate-400">Department legend</p>
         <BlueprintLegend departments={getLegendDepartments(overlay)} />
       </div>
 

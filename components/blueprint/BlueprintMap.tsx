@@ -31,7 +31,7 @@ export function BlueprintMap({
 
   return (
     <div
-      className="relative mx-auto w-full max-w-[72rem] overflow-hidden rounded-lg border border-white/[0.05] bg-[#020408] aspect-[16/13] max-h-[min(94vh,920px)] sm:aspect-[16/11] sm:max-h-[min(88vh,820px)] sm:rounded-xl"
+      className="relative mx-auto w-full max-w-[72rem] overflow-hidden rounded-lg border border-white/[0.05] bg-[#020408] aspect-[16/14] max-h-[min(96vh,980px)] sm:aspect-[16/11] sm:max-h-[min(88vh,820px)] sm:rounded-xl"
     >
       <p className="sr-only">
         Hybrid architectural theater map for {blueprint.venue.name}. Curved stage
