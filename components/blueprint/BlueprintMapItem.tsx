@@ -28,10 +28,12 @@ const graphicSizeClasses: Partial<Record<BlueprintGraphicId, string>> = {
   screen: "h-5 w-24 sm:h-6 sm:w-32",
   curtain: "h-4 w-24 sm:h-5 sm:w-32",
   console: "h-9 w-24 sm:h-11 sm:w-32",
-  projector: "h-7 w-20 sm:h-9 sm:w-24",
+  projector: "h-8 w-20 sm:h-10 sm:w-24",
   speaker: "h-12 w-8 sm:h-14 sm:w-10",
   "drum-kit": "h-14 w-16 sm:h-16 sm:w-20",
-  subwoofer: "h-10 w-14 sm:h-12 sm:w-16",
+  subwoofer: "h-7 w-10 sm:h-8 sm:w-12",
+  beltpack: "h-7 w-6 sm:h-8 sm:w-7",
+  "display-monitor": "h-12 w-11 sm:h-14 sm:w-12",
 };
 
 function getGraphicClass(graphic: BlueprintGraphicId): string {
@@ -53,6 +55,8 @@ export function BlueprintMapItem({
   const label = item.mapLabel ?? item.name;
   const { x, y, rotate = 0 } = item.mapPosition;
   const graphicClass = getGraphicClass(item.graphic);
+  const isSubtlePlaceholder =
+    item.status === "placeholder" && item.id === "subwoofer";
 
   return (
     <button
@@ -64,8 +68,9 @@ export function BlueprintMapItem({
       style={{
         left: `${x}%`,
         top: `${y}%`,
-        opacity,
+        opacity: isSubtlePlaceholder ? opacity * 0.55 : opacity,
         transform: `translate(-50%, -50%) rotate(${rotate}deg)`,
+        zIndex: isSubtlePlaceholder ? 5 : 10,
       }}
     >
       <div

@@ -39,7 +39,8 @@ export function BlueprintPreviewContent() {
           Master Church Blueprint
         </h1>
         <p className={`${audioStyles.body} text-slate-400`}>
-          {theaterBlueprint.venue.name} — top-down theater and stage plot.
+          {theaterBlueprint.venue.name} — hybrid architectural digital twin of
+          the Sunday production layout.
         </p>
       </div>
 

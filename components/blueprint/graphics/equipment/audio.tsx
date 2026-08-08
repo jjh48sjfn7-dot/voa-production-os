@@ -74,22 +74,24 @@ export function DrumKitGraphic({ className }: { className?: string }) {
   );
 }
 
-/** Stage snake — box, sockets, cable fan-out */
+/** Stage snake — MC-12 box with 3×4 XLR grid and fan-out */
 export function SnakeBoxGraphic({ className }: { className?: string }) {
   return (
     <GraphicSvg viewBox="0 0 72 64" className={className}>
       <EquipmentShadow cx={36} cy={58} rx={22} ry={4} />
-      <rect x="14" y="20" width="36" height="34" rx="2" stroke={s} strokeWidth={swb} />
-      {[28, 36, 44, 52].map((y) => (
-        <g key={y}>
-          <circle cx="22" cy={y} r="2.8" stroke={s} strokeWidth={1} />
-          <circle cx="22" cy={y} r="1" fill={s} opacity={0.4} />
-        </g>
-      ))}
-      <path d="M50 28 Q58 24, 66 18" stroke={s} strokeWidth={1.1} />
-      <path d="M50 36 Q62 36, 68 34" stroke={s} strokeWidth={1.1} />
-      <path d="M50 44 Q58 48, 66 52" stroke={s} strokeWidth={1.1} />
-      <path d="M50 52 Q60 56, 68 58" stroke={s} strokeWidth={1} opacity={0.6} />
+      <rect x="14" y="18" width="36" height="34" rx="2" stroke={s} strokeWidth={swb} />
+      {[22, 30, 38, 46].map((y, row) =>
+        [22, 30, 38, 46].map((x, col) => (
+          <g key={`${row}-${col}`}>
+            <circle cx={x} cy={y} r="2.4" stroke={s} strokeWidth={0.9} />
+            <circle cx={x} cy={y} r="0.8" fill={s} opacity={0.35} />
+          </g>
+        ))
+      )}
+      <path d="M50 26 Q58 22, 66 16" stroke={s} strokeWidth={1.1} />
+      <path d="M50 34 Q62 34, 68 32" stroke={s} strokeWidth={1.1} />
+      <path d="M50 42 Q58 46, 66 50" stroke={s} strokeWidth={1.1} />
+      <path d="M50 50 Q60 54, 68 56" stroke={s} strokeWidth={1} opacity={0.6} />
     </GraphicSvg>
   );
 }

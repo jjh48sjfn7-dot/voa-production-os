@@ -14,15 +14,23 @@ export function ComputerGraphic({ className }: { className?: string }) {
   );
 }
 
-/** Projector body and lens cone */
+/** Projector — overhead mount on front truss */
 export function ProjectorGraphic({ className }: { className?: string }) {
   return (
-    <GraphicSvg viewBox="0 0 80 36" className={className}>
-      <EquipmentShadow cx={32} cy={30} rx={22} ry={3} />
-      <rect x="6" y="10" width="44" height="18" rx="2" stroke={s} strokeWidth={swb} />
-      <circle cx="20" cy="19" r="5" stroke={s} strokeWidth={sw} />
-      <path d="M50 19 L74 12 L74 26 Z" stroke={s} strokeWidth={swb} />
-      <path d="M58 19 L74 19" stroke={s} strokeWidth={0.7} opacity={0.35} strokeDasharray="2 2" />
+    <GraphicSvg viewBox="0 0 80 40" className={className}>
+      <line x1="40" y1="2" x2="40" y2="8" stroke={s} strokeWidth={0.9} opacity={0.45} />
+      <line x1="34" y1="2" x2="46" y2="2" stroke={s} strokeWidth={0.9} opacity={0.45} />
+      <EquipmentShadow cx={32} cy={34} rx={22} ry={3} />
+      <rect x="6" y="12" width="44" height="18" rx="2" stroke={s} strokeWidth={swb} />
+      <circle cx="20" cy="21" r="5" stroke={s} strokeWidth={sw} />
+      <path d="M50 21 L74 14 L74 28 Z" stroke={s} strokeWidth={swb} />
+      <path
+        d="M58 21 L74 21"
+        stroke={s}
+        strokeWidth={0.7}
+        opacity={0.35}
+        strokeDasharray="2 2"
+      />
     </GraphicSvg>
   );
 }
@@ -39,14 +47,18 @@ export function ScreenGraphic({ className }: { className?: string }) {
   );
 }
 
-/** Confidence monitor on stand */
+/** Confidence monitor on rolling floor stand */
 export function DisplayMonitorGraphic({ className }: { className?: string }) {
   return (
-    <GraphicSvg viewBox="0 0 52 52" className={className}>
-      <EquipmentShadow cx={26} cy={48} rx={16} ry={3} />
-      <rect x="8" y="8" width="36" height="22" rx="2" stroke={s} strokeWidth={swb} />
-      <line x1="26" y1="30" x2="26" y2="40" stroke={s} strokeWidth={swb} />
-      <line x1="16" y1="40" x2="36" y2="40" stroke={s} strokeWidth={swb} />
+    <GraphicSvg viewBox="0 0 56 60" className={className}>
+      <EquipmentShadow cx={28} cy={56} rx={18} ry={3} />
+      <rect x="10" y="6" width="36" height="24" rx="2" stroke={s} strokeWidth={swb} />
+      <rect x="14" y="10" width="28" height="16" rx="1" stroke={s} strokeWidth={sw} opacity={0.4} />
+      <line x1="28" y1="30" x2="28" y2="42" stroke={s} strokeWidth={swb} />
+      <line x1="18" y1="42" x2="38" y2="42" stroke={s} strokeWidth={swb} />
+      <circle cx="20" cy="48" r="2.2" stroke={s} strokeWidth={0.9} />
+      <circle cx="36" cy="48" r="2.2" stroke={s} strokeWidth={0.9} />
+      <line x1="20" y1="48" x2="36" y2="48" stroke={s} strokeWidth={0.7} />
     </GraphicSvg>
   );
 }

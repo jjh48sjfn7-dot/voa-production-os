@@ -29,7 +29,7 @@ Long-term vision:
 | Campus | East Antioch Campus |
 | Address | 1800 Hillcrest Ave, Antioch, CA 94509 |
 | Primary service | Sunday, 10:30 AM (`America/Los_Angeles`) |
-| FOH location label | FOH — Center Screen |
+| FOH location label | FOH — House Right Side Platform *(legacy app label: FOH — Center Screen — pending sync)* |
 | Trailer / unload | South parking lot — Bay 2 *(confirm bay numbering with facilities)* |
 
 ### Production roles *(reference — not HR authority)*
@@ -45,7 +45,7 @@ Long-term vision:
 
 ## Theater Overview
 
-The sanctuary/theater is a **single-room worship environment** with a raised stage, congregation seating facing the stage, and a **FOH position in the audience** (not a separate booth).
+The sanctuary/theater is a **single-room worship environment** with a raised stage (curved downstage apron), tiered curved seating facing the stage, and a **FOH position on the house-right raised side platform/walkway** beside fixed seating — not a separate rear booth and not center-audience tables.
 
 ### Room characteristics *(placeholder — finalize with facilities)*
 
@@ -62,8 +62,8 @@ The sanctuary/theater is a **single-room worship environment** with a raised sta
 ### Primary sight lines
 
 - Congregation faces **Center Stage**.
-- **Projector / center screen** is upstage or above stage *(video department to confirm)*.
-- **FOH** operates from the audience area with line-of-sight to stage and congregation.
+- **Projector / portable projection screen** — screen upstage/center during service; projector overhead on **front/downstage truss between TR-5 and TR-6**.
+- **FOH** operates from the **house-right side platform** with line-of-sight to stage and congregation.
 
 ---
 
@@ -73,11 +73,11 @@ Production OS divides the physical environment into zones. Each zone maps to doc
 
 | Zone ID | Name | Description |
 |---------|------|-------------|
-| `stage-left` | Stage Left | Left side of stage when facing the audience. Drum position. Stage Snake A. Left monitor. |
-| `center-stage` | Center Stage | Drum kit primary position. |
-| `stage-right` | Stage Right | Right side of stage when facing the audience. Keyboard position. Stage Snake B. Right monitor. |
-| `front-of-stage` | Front of Stage | Downstage edge. FOH L/R speakers. Subwoofer *(placement placeholder)*. |
-| `foh` | FOH Position | In the audience. Console, playback computer, wireless receivers. |
+| `stage-left` | Stage Left | Left side of stage when facing the audience. **Drum kit.** Stage Snake A (left of drums). PM1 accessory. Left K12.2 on stage platform. |
+| `center-stage` | Center Stage | Shared **Center Mic** ministry position. Portable projection screen during service. |
+| `stage-right` | Stage Right | Right side of stage when facing the audience. Keyboard (MODX8). Stage Snake B (right of keyboard). Right K12.2 on stage platform. |
+| `front-of-stage` | Front of Stage | Curved downstage apron. **Front overhead truss TR-1–TR-6.** Overhead projector mount. Subwoofer *(placement placeholder)*. |
+| `foh` | FOH Position | **House-right raised side platform/walkway** — TF5, Mac, wireless receivers, confidence monitor on rolling stand. |
 | `audio-closet` | Audio Closet | Off-stage storage for cases, DI drawer, cable bins. |
 | `trailer` | Unload / Trailer | South parking lot — equipment arrives from transport cases. |
 | `video` | Video Zone | `[PLACEHOLDER — switcher, cameras, projection]` |
@@ -138,31 +138,36 @@ Production OS maintains a **single structured theater blueprint** in the applica
 Top-down reference (audience at bottom):
 
 ```
-                    BACK OF STAGE
+                    BACK OF STAGE (curtain)
     ┌─────────────────────────────────────────┐
-    │  STAGE LEFT      CENTER        STAGE RIGHT │
-    │  Snake A         Drums         Keyboard    │
-    │  L Monitor                     Snake B     │
-    │                                R Monitor   │
+    │ STAGE LEFT      CENTER STAGE   STAGE RIGHT│
+    │ Snake A←Drums   Center Mic     Keyboard→Snake B
+    │ K12.2 L         Screen         K12.2 R     │
+    │  K10.2 CL                    K10.2 CR    │
     ├─────────────────────────────────────────┤
-    │  FOH L        Subwoofer         FOH R     │  ← Front of Stage
-    └─────────────────────────────────────────┘
-                    ↓ AUDIENCE ↓
-    ┌─────────────────────────────────────────┐
-    │  FOH POSITION: Mac · TF5 · Wireless     │
-    └─────────────────────────────────────────┘
+    │     FRONT TRUSS TR-1 … TR-6  [Projector]│
+    └────────── curved downstage apron ───────┘
+                    ↓ AUDIENCE (tiered) ↓
+              ┌──────────────────┐
+              │  FOH PLATFORM    │  ← house right side walkway
+              │  TF5 · Mac · RX  │
+              │     Confidence → │
+              └──────────────────┘
 ```
 
 ### Positioning rules
 
-- **Drum kit:** Center Stage. All drum mics patch through **Stage Snake A** inputs 1–6.
+- **Drum kit:** **Stage Left.** All drum mics patch through **Stage Snake A** inputs 1–6.
+- **Center Mic:** **One shared center-stage position** — not separate Pastor and Worship Leader permanent pins.
 - **Keyboard:** Stage Right. Patches to **Stage Snake B Input 1**.
-- **Stage Snake A:** Stage Left. Must remain at drum position during Sunday setup.
-- **Stage Snake B:** Stage Right. Must remain at keyboard position during Sunday setup.
-- **FOH speakers (QSC K12.2):** Front-left and front-right of stage, aimed at congregation.
-- **Stage monitors (QSC K10.2):** On stage left and stage right wedges.
+- **Stage Snake A:** Stage Left — **physically to the LEFT of the drum kit.**
+- **Stage Snake B:** Stage Right — **physically to the RIGHT of the keyboard.**
+- **FOH speakers (QSC K12.2):** **On the stage platform** at left/right sides — Sunday portable mains only. Do not depict permanent/flown venue speakers.
+- **Stage monitors (QSC K10.2):** **Two only** — **Center-Left** and **Center-Right** wedges (not a third center monitor).
 - **Subwoofer:** Front of stage — **exact placement placeholder** until finalized.
-- **Behringer PM1 (drummer in-ear):** At drum kit; fed from Stage Snake A Output 3.
+- **Behringer PM1 (drummer in-ear):** Drum-kit accessory at Stage Left; fed from Stage Snake A Output 3. Not an independent floor landmark.
+- **Projector:** Overhead on **front/downstage truss between TR-5 and TR-6** — not floor upstage.
+- **FOH production:** House-right side platform — TF5 and Mac on table; BLX288 beside TF5 and behind Mac; confidence monitor on rolling stand **right of Mac**.
 
 Volunteer-facing stage plot: `/audio/documentation/stage-plot`
 
@@ -302,10 +307,10 @@ Asset prefix: `VOA-ANT-AUD-###`
 | VOA-ANT-AUD-060 | Yamaha TF5 Console | 1 | FOH Rack |
 | VOA-ANT-AUD-030 | Stage Snake A | 1 | Stage Left |
 | VOA-ANT-AUD-031 | Stage Snake B | 1 | Stage Right |
-| VOA-ANT-AUD-070 | QSC K12.2 (FOH L/R) | 2 | FOH — Center Screen area |
-| VOA-ANT-AUD-071 | QSC K10.2 (Monitors L/R) | 2 | Stage |
-| VOA-ANT-AUD-072 | Subwoofer | 1 | FOH — Center *(placement TBD)* |
-| VOA-ANT-AUD-073 | Behringer PM1 | 1 | Stage Left — Drum kit |
+| VOA-ANT-AUD-070 | QSC K12.2 (FOH L/R) | 2 | Stage platform — left/right *(Sunday portable)* |
+| VOA-ANT-AUD-071 | QSC K10.2 (Monitors L/R) | 2 | Stage — Center-Left / Center-Right |
+| VOA-ANT-AUD-072 | Subwoofer | 1 | Front of stage *(placement TBD)* |
+| VOA-ANT-AUD-073 | Behringer PM1 | 1 | Stage Left — drum kit accessory |
 | VOA-ANT-AUD-004 | Shure BLX288 Dual Receiver | 2 | FOH Rack — Wireless |
 | VOA-ANT-AUD-001–003 | Wired mics (SM58, SM57, Beta 52A) | various | Closet / stage |
 | VOA-ANT-AUD-010–011 | DI boxes | various | Audio Closet |
@@ -342,7 +347,7 @@ When lighting is onboarded, add a `data/lighting/v2/` module mirroring the audio
 | Switcher | `[PLACEHOLDER]` |
 | Camera positions | `[PLACEHOLDER]` |
 | Streaming encoder | `[PLACEHOLDER]` |
-| Confidence monitor at FOH | `[PLACEHOLDER — note overlap with media]` |
+| Confidence monitor | Rolling stand at FOH immediately **right of Mac Desktop** — `[PLACEHOLDER — signal path]` |
 | Cable paths video ↔ FOH | `[PLACEHOLDER]` |
 
 ---
@@ -356,7 +361,7 @@ When lighting is onboarded, add a `data/lighting/v2/` module mirroring the audio
 | Playback computer | Mac Desktop at FOH |
 | Software | ProPresenter + audio playback |
 | Console inputs | TF5 Local Inputs 31–32 (Computer L/R) |
-| Confidence monitor | `[PLACEHOLDER — location and signal path]` |
+| Confidence monitor | FOH — rolling stand right of Mac Desktop — `[PLACEHOLDER — signal path]` |
 | Streaming record | USB record on Yamaha TF5 *(confirm workflow)* |
 | Lyrics vs announcement routing | `[PLACEHOLDER — media team to document]` |
 
