@@ -95,6 +95,15 @@ export function getBlueprintItemHref(item: BlueprintItem): string | undefined {
   return getEquipmentItemHref(item.equipmentSlug);
 }
 
+export function getEquipmentTroubleshootingHref(
+  equipmentSlug: string
+): string | undefined {
+  const equipment = getEquipmentBySlug(equipmentSlug);
+  return equipment?.setupLinks?.find((link) =>
+    link.href.startsWith("/audio/troubleshooting/")
+  )?.href;
+}
+
 export function getPrimaryDepartment(
   item: BlueprintItem
 ): BlueprintDepartment {
