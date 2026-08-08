@@ -5,6 +5,7 @@ import {
   Headphones,
   LayoutGrid,
   Lightbulb,
+  Map,
   Monitor,
   Package,
   Search,
@@ -34,6 +35,12 @@ export interface DashboardQuickAccessItem {
   icon: LucideIcon;
   href?: string;
   action?: "focus-search";
+}
+
+export interface DashboardBlueprintItem {
+  href: string;
+  title: string;
+  description: string;
 }
 
 export const dashboardContinue: DashboardContinueItem = {
@@ -98,3 +105,11 @@ export const dashboardQuickAccess: DashboardQuickAccessItem[] = [
 ];
 
 export const dashboardContinueIcon = BookOpen;
+
+export const dashboardBlueprint: DashboardBlueprintItem = {
+  href: "/blueprint",
+  title: "Master Church Blueprint",
+  description: "Interactive overview of the Sunday production environment",
+};
+
+export const dashboardBlueprintIcon = Map;

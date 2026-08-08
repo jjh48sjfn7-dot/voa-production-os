@@ -1,6 +1,8 @@
 "use client";
 
 import {
+  dashboardBlueprint,
+  dashboardBlueprintIcon,
   dashboardContinue,
   dashboardContinueIcon,
   dashboardDepartments,
@@ -26,6 +28,16 @@ export function DashboardContent() {
           accent="audio"
           description={dashboardContinue.eyebrow}
           title={dashboardContinue.title}
+        />
+      </DashboardSection>
+
+      <DashboardSection title="Master Church Blueprint">
+        <DashboardRow
+          href={dashboardBlueprint.href}
+          icon={dashboardBlueprintIcon}
+          accent="operations"
+          description={dashboardBlueprint.description}
+          title={dashboardBlueprint.title}
         />
       </DashboardSection>
 
