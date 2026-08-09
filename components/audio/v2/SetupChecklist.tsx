@@ -46,12 +46,23 @@ function ChecklistRow({
           />
           {isChecked && <Check className="h-3.5 w-3.5" strokeWidth={3} />}
         </span>
-        <span
-          className={`flex-1 text-[15px] leading-snug ${
-            isChecked ? "line-through decoration-slate-600" : ""
-          }`}
-        >
-          {item.label}
+        <span className="flex-1">
+          <span
+            className={`block text-[15px] leading-snug ${
+              isChecked ? "line-through decoration-slate-600" : ""
+            }`}
+          >
+            {item.label}
+          </span>
+          {item.detail && (
+            <span
+              className={`mt-1 block text-[13px] leading-snug text-slate-500 ${
+                isChecked ? "line-through decoration-slate-700" : ""
+              }`}
+            >
+              {item.detail}
+            </span>
+          )}
         </span>
       </label>
     </li>

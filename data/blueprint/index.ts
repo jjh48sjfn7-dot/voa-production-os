@@ -6,6 +6,10 @@ import {
   getLightingEquipmentBySlug,
   getLightingEquipmentItemHref,
 } from "@/data/lighting/v2/equipment";
+import {
+  getMediaEquipmentBySlug,
+  getMediaEquipmentItemHref,
+} from "@/data/media/v2/equipment";
 import { theaterBlueprint } from "@/data/blueprint/theater";
 import type {
   BlueprintDepartment,
@@ -96,6 +100,10 @@ export function getBlueprintItemHref(item: BlueprintItem): string | undefined {
     return getLightingEquipmentItemHref(item.equipmentSlug);
   }
 
+  if (getMediaEquipmentBySlug(item.equipmentSlug)) {
+    return getMediaEquipmentItemHref(item.equipmentSlug);
+  }
+
   if (!getEquipmentBySlug(item.equipmentSlug)) {
     return undefined;
   }
@@ -112,6 +120,16 @@ export function getEquipmentTroubleshootingHref(
       "chauvet-slimpar-pro-h-usb": "/lighting/troubleshooting/fixture-not-turning-on",
       "dmxking-micro": "/lighting/troubleshooting/no-dmx-control",
       "lightkey-foh-control": "/lighting/troubleshooting/lightkey-not-connected",
+    };
+    return topicMap[equipmentSlug];
+  }
+
+  const mediaEquipment = getMediaEquipmentBySlug(equipmentSlug);
+  if (mediaEquipment) {
+    const topicMap: Record<string, string> = {
+      "epson-home-cinema-2250": "/media/troubleshooting/projector-has-no-image",
+      "roku-confidence-monitor": "/media/troubleshooting/confidence-monitor-is-blank",
+      "gofanco-hdmi-extender": "/media/troubleshooting/cat6-extender-no-signal",
     };
     return topicMap[equipmentSlug];
   }

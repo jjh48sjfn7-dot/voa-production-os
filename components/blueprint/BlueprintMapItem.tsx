@@ -60,6 +60,7 @@ const fohItemIds = new Set([
   "yamaha-tf5",
   "wireless-receivers",
   "mac-desktop",
+  "gofanco-transmitter",
   "confidence-monitor",
 ]);
 

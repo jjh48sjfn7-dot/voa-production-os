@@ -21,6 +21,14 @@ import {
   lightingSetupSections,
 } from "@/data/lighting/v2/sunday-setup";
 import { lightingTroubleshootingTopics } from "@/data/lighting/v2/troubleshooting/topics";
+import { mediaDocumentationPages } from "@/data/media/v2/documentation";
+import { mediaEquipmentCategories } from "@/data/media/v2/equipment/categories";
+import {
+  getMediaEquipmentItemHref,
+  mediaEquipmentItems,
+} from "@/data/media/v2/equipment";
+import { mediaSetupSections } from "@/data/media/v2/sunday-setup";
+import { mediaTroubleshootingTopics } from "@/data/media/v2/troubleshooting/topics";
 
 export type SearchCategory =
   | "page"
@@ -179,6 +187,69 @@ const lightingTroubleshootingSearchMeta: Record<string, string> = {
   "no-dmx-control": "no dmx control universe lightkey dmxking",
   "one-fixture-not-responding": "one fixture not responding slimpar dmx",
   "lightkey-not-connected": "lightkey not connected mac dmxking",
+};
+
+const mediaDocumentationSearchMeta: Record<
+  string,
+  { subtitle: string; keywords: string }
+> = {
+  "media-plot": {
+    subtitle: "Documentation · presentation display map",
+    keywords: "media plot projector screen confidence monitor mac blueprint",
+  },
+  "projector-signal-flow": {
+    subtitle: "Documentation · projector signal path",
+    keywords: "projector signal flow epson gofanco cat6 hdmi extender",
+  },
+  "confidence-monitor-signal-flow": {
+    subtitle: "Documentation · confidence monitor path",
+    keywords: "confidence monitor roku tv hdmi mac display",
+  },
+  "projection-screen-setup": {
+    subtitle: "Documentation · portable screen setup",
+    keywords: "projection screen skerell 150 inch assemble trailer",
+  },
+};
+
+const mediaEquipmentSearchMeta: Record<string, { keywords: string }> = {
+  "foh-mac": {
+    keywords: "foh mac desktop shared display usb-c hdmi",
+  },
+  "epson-home-cinema-2250": {
+    keywords: "epson projector home cinema 2250 truss overhead",
+  },
+  "gofanco-hdmi-extender": {
+    keywords: "gofanco hdmi extender cat6 transmitter receiver splitter",
+  },
+  "roku-confidence-monitor": {
+    keywords: "confidence monitor roku tv 55 inch display foh",
+  },
+  "confidence-monitor-stand": {
+    keywords: "confidence monitor rolling stand cart foh",
+  },
+  "skerell-projection-screen": {
+    keywords: "skerell projection screen 150 inch portable foldable",
+  },
+  "usb-c-hdmi-adapters": {
+    keywords: "usb-c hdmi adapter cable mac display",
+  },
+  "cat6-projector-cable": {
+    keywords: "cat6 projector signal cable extender wall curtain truss",
+  },
+};
+
+const mediaCategorySearchMeta: Record<string, string> = {
+  displays: "display screen confidence monitor projection",
+  projection: "projector epson gofanco cat6 hdmi extender",
+  control: "foh mac shared computer display",
+};
+
+const mediaTroubleshootingSearchMeta: Record<string, string> = {
+  "projector-has-no-image": "projector no image blank screen epson",
+  "confidence-monitor-is-blank": "confidence monitor blank no display roku tv",
+  "propresenter-output-not-showing": "propresenter output not showing display",
+  "cat6-extender-no-signal": "cat6 extender no signal gofanco hdmi",
+  "wrong-display-output-selected": "wrong display output selected monitor projector",
 };
 
 function buildSearchIndex(): SearchResult[] {
@@ -432,6 +503,128 @@ function buildSearchIndex(): SearchResult[] {
         href: "/lighting/setup",
         category: "setup",
         keywords: "lighting setup dmx slimpar floor truss",
+      });
+    }
+  }
+
+  results.push({
+    id: "page-media-home",
+    title: "Media Department",
+    subtitle: "Media Department home",
+    href: "/media",
+    category: "page",
+    keywords: "media department projector screen display presentation",
+  });
+
+  results.push({
+    id: "page-media-setup",
+    title: "Media Sunday Setup",
+    subtitle: "Pre-service media display checklist",
+    href: "/media/setup",
+    category: "page",
+    keywords: "media sunday setup screen projector confidence monitor",
+  });
+
+  results.push({
+    id: "page-media-equipment",
+    title: "Media Equipment",
+    subtitle: "Media equipment manuals",
+    href: "/media/equipment",
+    category: "page",
+    keywords: "media equipment epson projector skerell screen gofanco roku",
+  });
+
+  results.push({
+    id: "page-media-documentation",
+    title: "Media Documentation",
+    subtitle: "Media plots and signal flow reference",
+    href: "/media/documentation",
+    category: "page",
+    keywords: "media documentation plot projector signal flow screen",
+  });
+
+  results.push({
+    id: "page-media-troubleshooting",
+    title: "Media Troubleshooting",
+    subtitle: "Fix common media display problems",
+    href: "/media/troubleshooting",
+    category: "page",
+    keywords: "media troubleshooting projector no image confidence monitor blank",
+  });
+
+  results.push({
+    id: "page-media-inventory",
+    title: "Media Inventory",
+    subtitle: "Media Department equipment list",
+    href: "/media/inventory",
+    category: "page",
+    keywords: "media inventory projector screen extender cat6",
+  });
+
+  for (const page of mediaDocumentationPages) {
+    const meta = mediaDocumentationSearchMeta[page.id];
+    results.push({
+      id: `media-doc-${page.id}`,
+      title: page.title,
+      subtitle: meta?.subtitle ?? "Media documentation",
+      href: page.href,
+      category: "page",
+      keywords: meta?.keywords,
+    });
+  }
+
+  for (const category of mediaEquipmentCategories) {
+    results.push({
+      id: `media-eq-cat-${category.id}`,
+      title: category.title,
+      subtitle: "Media equipment category",
+      href: category.href,
+      category: "equipment",
+      keywords: mediaCategorySearchMeta[category.id],
+    });
+  }
+
+  for (const item of mediaEquipmentItems) {
+    const meta = mediaEquipmentSearchMeta[item.slug];
+    results.push({
+      id: `media-eq-${item.slug}`,
+      title: item.name,
+      subtitle: "Media equipment manual",
+      href: getMediaEquipmentItemHref(item.slug),
+      category: "equipment",
+      keywords: meta?.keywords,
+    });
+  }
+
+  for (const topic of mediaTroubleshootingTopics) {
+    results.push({
+      id: `media-ts-${topic.id}`,
+      title: topic.title,
+      subtitle: "Media troubleshooting guide",
+      href: topic.href,
+      category: "troubleshooting",
+      keywords: mediaTroubleshootingSearchMeta[topic.id],
+    });
+  }
+
+  for (const section of mediaSetupSections) {
+    results.push({
+      id: `media-setup-section-${section.id}`,
+      title: section.title,
+      subtitle: "Media Sunday Setup section",
+      href: "/media/setup",
+      category: "setup",
+      keywords: `${section.title} media sunday setup projector screen display`,
+    });
+
+    for (const task of section.items) {
+      results.push({
+        id: `media-setup-task-${task.id}`,
+        title: task.label,
+        subtitle: section.title,
+        href: "/media/setup",
+        category: "setup",
+        keywords: "media setup projector screen confidence monitor cat6 hdmi",
       });
     }
   }

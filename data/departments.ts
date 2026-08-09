@@ -29,11 +29,11 @@ export const departments: Department[] = [
   {
     id: "media",
     name: "Media",
-    description: "ProPresenter, projection, and video",
+    description: "Presentation displays, projector, and screen setup",
     href: "/media",
     icon: Monitor,
     accent: "media",
-    available: false,
+    available: true,
   },
   {
     id: "operations",

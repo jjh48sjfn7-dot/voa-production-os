@@ -41,6 +41,7 @@ export interface AudioSection {
 export interface ChecklistItem {
   id: string;
   label: string;
+  detail?: string;
 }
 
 export interface SetupSection {

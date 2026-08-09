@@ -70,7 +70,7 @@ export const dashboardDepartments: DashboardDepartmentItem[] = [
     id: "media",
     name: "Media",
     description: "Presentation and playback",
-    href: "#",
+    href: "/media",
     icon: Monitor,
     accent: "media",
   },
