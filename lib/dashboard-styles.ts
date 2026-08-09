@@ -39,5 +39,5 @@ export const dashboardStyles = {
 } as const;
 
 export function dashboardPrimaryGradient(className = "") {
-  return `bg-gradient-to-br from-red-500/[0.1] via-[#121f33]/96 to-[#0c1524]/96 ${className}`;
+  return `bg-gradient-to-br from-[#FF5A00]/[0.08] via-[#1A1A1A]/96 to-[#141414]/96 ${className}`;
 }

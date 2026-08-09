@@ -16,6 +16,7 @@ export function LightingDmxSignalFlowContent() {
         backHref="/lighting/documentation"
         backLabel="Back to Documentation"
         title={doc.title}
+        accent="lighting"
       />
 
       <p className={`mt-2 ${audioStyles.body} text-slate-500`}>{doc.subtitle}</p>
@@ -38,7 +39,7 @@ export function LightingDmxSignalFlowContent() {
         </EquipmentSection>
 
         <EquipmentSection title="Signal path">
-          <SignalFlowPathView path={doc.signalPath} />
+          <SignalFlowPathView path={doc.signalPath} accent="lighting" />
         </EquipmentSection>
 
         <EquipmentSection title="Teardown">

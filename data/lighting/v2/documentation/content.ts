@@ -102,12 +102,12 @@ export const fixtureLayout: DocumentationPageContent = {
   ],
   relatedResources: [
     {
-      icon: "💡",
+      icon: "fixture",
       title: "Chauvet DJ SlimPAR Pro H USB",
       href: "/lighting/equipment/item/chauvet-slimpar-pro-h-usb",
     },
     {
-      icon: "🗺️",
+      icon: "map",
       title: "Lighting Plot",
       href: "/lighting/documentation/lighting-plot",
     },
@@ -144,12 +144,12 @@ export const dmxAddressing: DocumentationPageContent = {
   ],
   relatedResources: [
     {
-      icon: "🔌",
+      icon: "cable",
       title: "DMX Signal Flow",
       href: "/lighting/documentation/dmx-signal-flow",
     },
     {
-      icon: "💻",
+      icon: "computer",
       title: "FOH Mac / Lightkey Control",
       href: "/lighting/equipment/item/lightkey-foh-control",
     },

@@ -43,6 +43,7 @@ export function LightingNavHubContent({
       compactMobile
       backHref={backHref}
       backLabel={backLabel}
+      accent="lighting"
     >
       <DashboardSection title={sectionTitle}>
         <div className="divide-y divide-white/[0.06]">

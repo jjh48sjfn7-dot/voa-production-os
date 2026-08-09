@@ -33,6 +33,7 @@ export function MediaTroubleshootingGuideView({
       compactMobile
       backHref="/media"
       backLabel="Back to Media Department"
+      accent="media"
     >
       <div className="space-y-8 sm:space-y-10">
         <EquipmentSection title="Problem">
@@ -46,7 +47,7 @@ export function MediaTroubleshootingGuideView({
         </EquipmentSection>
 
         <EquipmentSection title="Signal Path">
-          <SignalFlowPathView path={guide.signalPath} />
+          <SignalFlowPathView path={guide.signalPath} accent="media" />
         </EquipmentSection>
 
         <EquipmentSection title="Related Equipment">

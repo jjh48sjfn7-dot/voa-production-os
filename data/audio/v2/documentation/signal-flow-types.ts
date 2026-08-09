@@ -1,3 +1,5 @@
+import type { ProductionIconId } from "@/lib/production-icons";
+
 export interface SignalFlowLink {
   title: string;
   href: string;
@@ -7,7 +9,7 @@ export interface SignalFlowStep {
   id: string;
   helper?: string;
   lines: string[];
-  emoji?: string;
+  icon?: ProductionIconId;
   equipmentSlug?: string;
   href?: string;
 }

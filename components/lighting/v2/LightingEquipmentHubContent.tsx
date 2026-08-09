@@ -13,6 +13,7 @@ export function LightingEquipmentHubContent() {
         backHref="/lighting"
         backLabel="Back to Lighting Department"
         title="Equipment"
+        accent="lighting"
       />
 
       <p className={`mt-2 ${audioStyles.body} text-slate-500`}>
@@ -24,7 +25,8 @@ export function LightingEquipmentHubContent() {
           <AudioEmojiNavRow
             key={category.id}
             title={category.title}
-            emoji={category.emoji}
+            icon={category.icon}
+            accent="lighting"
             href={category.href}
           />
         ))}

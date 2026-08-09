@@ -3,10 +3,13 @@
 import { ChevronDown } from "lucide-react";
 import { SundaySetupSectionIcon } from "@/components/audio/v2/SundaySetupSectionIcon";
 import { audioStyles } from "@/lib/audio-styles";
+import type { ProductionIconId } from "@/lib/production-icons";
+import type { DepartmentAccent } from "@/lib/theme";
 
 interface SundaySetupAccordionProps {
   title: string;
-  emoji?: string;
+  icon?: ProductionIconId;
+  accent?: DepartmentAccent;
   taskCount: number;
   open: boolean;
   onToggle: () => void;
@@ -15,7 +18,8 @@ interface SundaySetupAccordionProps {
 
 export function SundaySetupAccordion({
   title,
-  emoji,
+  icon,
+  accent = "audio",
   taskCount,
   open,
   onToggle,
@@ -31,7 +35,7 @@ export function SundaySetupAccordion({
         className="flex min-h-[56px] w-full items-center gap-3 px-4 py-3.5 text-left sm:px-5"
         aria-expanded={open}
       >
-        {emoji && <SundaySetupSectionIcon emoji={emoji} />}
+        {icon && <SundaySetupSectionIcon icon={icon} accent={accent} />}
         <div className="min-w-0 flex-1">
           <p className="text-base font-semibold text-slate-50">{title}</p>
           <p className="mt-0.5 text-[13px] text-slate-500">{taskLabel}</p>

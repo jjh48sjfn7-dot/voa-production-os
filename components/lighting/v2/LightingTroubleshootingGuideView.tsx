@@ -33,6 +33,7 @@ export function LightingTroubleshootingGuideView({
       compactMobile
       backHref="/lighting"
       backLabel="Back to Lighting Department"
+      accent="lighting"
     >
       <div className="space-y-8 sm:space-y-10">
         <EquipmentSection title="Problem">
@@ -46,7 +47,7 @@ export function LightingTroubleshootingGuideView({
         </EquipmentSection>
 
         <EquipmentSection title="Signal Path">
-          <SignalFlowPathView path={guide.signalPath} />
+          <SignalFlowPathView path={guide.signalPath} accent="lighting" />
         </EquipmentSection>
 
         <EquipmentSection title="Related Equipment">

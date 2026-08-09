@@ -8,7 +8,7 @@ export function AppFooter() {
     >
       <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-sm font-semibold tracking-tight text-slate-300">
+          <p className="text-sm font-semibold tracking-tight text-white/80">
             VOA Production OS v1.0
           </p>
           <p className={`mt-1 ${uiType.caption}`}>

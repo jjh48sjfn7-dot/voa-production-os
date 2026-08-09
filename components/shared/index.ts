@@ -4,6 +4,7 @@ export { ChecklistSection } from "@/components/shared/ChecklistSection";
 export { DividedCard } from "@/components/shared/DividedCard";
 export { EquipmentCard } from "@/components/shared/EquipmentCard";
 export { IconTile } from "@/components/shared/IconTile";
+export { ProductionIconTile } from "@/components/shared/ProductionIconTile";
 export { InfoCard } from "@/components/shared/InfoCard";
 export {
   DocumentationRow,

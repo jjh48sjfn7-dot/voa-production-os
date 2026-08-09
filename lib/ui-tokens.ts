@@ -16,27 +16,27 @@ export const uiSpacing = {
 /** Canonical typography — single source for headers and body copy */
 export const uiType = {
   eyebrow:
-    "text-[11px] font-semibold uppercase tracking-[0.12em] text-red-400/90",
+    "text-[11px] font-semibold uppercase tracking-[0.12em] text-[#FF5A00]",
   display:
-    "text-[1.375rem] font-semibold leading-[1.15] tracking-[-0.035em] text-slate-50 sm:text-[1.625rem] md:text-[1.75rem]",
+    "text-[1.375rem] font-semibold leading-[1.15] tracking-[-0.035em] text-white sm:text-[1.625rem] md:text-[1.75rem]",
   displayLg:
-    "text-xl font-semibold leading-tight tracking-[-0.03em] text-slate-50 sm:text-2xl",
+    "text-xl font-semibold leading-tight tracking-[-0.03em] text-white sm:text-2xl",
   heading:
-    "text-[15px] font-semibold leading-snug tracking-[-0.02em] text-slate-50 sm:text-base",
-  body: "text-[14px] leading-[1.6] text-slate-400 sm:text-[15px]",
-  caption: "text-[13px] leading-snug text-slate-500",
+    "text-[15px] font-semibold leading-snug tracking-[-0.02em] text-white sm:text-base",
+  body: "text-[14px] leading-[1.6] text-white/65 sm:text-[15px]",
+  caption: "text-[13px] leading-snug text-white/45",
   label:
-    "text-[11px] font-semibold uppercase tracking-[0.11em] text-slate-500",
+    "text-[11px] font-semibold uppercase tracking-[0.11em] text-white/45",
   mission:
-    "text-[15px] leading-relaxed text-slate-400 sm:text-base sm:leading-relaxed",
+    "text-[15px] leading-relaxed text-white/65 sm:text-base sm:leading-relaxed",
 } as const;
 
-/** Button variants — consistent CTAs app-wide */
+/** Button variants — department/page CTAs (dept visual pass will align later) */
 export const uiButtons = {
   primary: `inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-gradient-to-r ${departmentAccents.audio.gradient} px-5 py-2.5 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(239,68,68,0.3),inset_0_1px_0_rgba(255,255,255,0.12)] ${transition} hover:shadow-[0_6px_20px_rgba(239,68,68,0.38)] active:scale-[0.98]`,
   primarySm: `inline-flex min-h-[40px] items-center justify-center gap-2 rounded-xl bg-gradient-to-r ${departmentAccents.audio.gradient} px-4 py-2 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(239,68,68,0.28),inset_0_1px_0_rgba(255,255,255,0.1)] ${transition} hover:shadow-[0_6px_20px_rgba(239,68,68,0.36)] active:scale-[0.98]`,
-  secondary: `inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-white/[0.1] bg-white/[0.04] px-5 py-2.5 text-sm font-semibold text-slate-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] ${transition} hover:border-white/[0.14] hover:bg-white/[0.06] active:scale-[0.98]`,
-  ghost: `inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-slate-400 ${transition} hover:bg-white/[0.05] hover:text-white active:scale-[0.98]`,
+  secondary: `inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-white/[0.1] bg-white/[0.04] px-5 py-2.5 text-sm font-semibold text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] ${transition} hover:border-white/[0.14] hover:bg-white/[0.06] active:scale-[0.98]`,
+  ghost: `inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-white/65 ${transition} hover:bg-white/[0.05] hover:text-white active:scale-[0.98]`,
 } as const;
 
 /** Page icon badge — matches AudioPageShell */

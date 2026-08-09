@@ -30,11 +30,11 @@ function getStepHref(step: SignalFlowStep): string | undefined {
 
 export function SignalFlowNode({ step }: SignalFlowNodeProps) {
   const href = getStepHref(step);
-  const emoji = step.emoji ?? "•";
+  const icon = step.icon ?? "cable";
 
   const content = (
     <>
-      <SundaySetupSectionIcon emoji={emoji} />
+      <SundaySetupSectionIcon icon={icon} accent="audio" />
       <div className="min-w-0 flex-1 space-y-1">
         {step.helper && (
           <p className="text-sm text-slate-500">{step.helper}</p>

@@ -25,6 +25,7 @@ export function StagePlotContent() {
         backHref="/audio/documentation"
         backLabel="Back to Documentation"
         title={audioStagePlot.title}
+        accent="audio"
       />
 
       <p className={`mt-2 ${audioStyles.body} text-slate-500`}>

@@ -1,7 +1,9 @@
+import type { ProductionIconId } from "@/lib/production-icons";
+
 export interface SignalFlowNode {
   id: string;
   name: string;
-  emoji: string;
+  icon: ProductionIconId;
   equipmentSlug?: string;
 }
 

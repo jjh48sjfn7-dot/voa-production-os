@@ -1,11 +1,13 @@
 import type { EquipmentDefinition } from "@/data/media/v2/equipment/types";
-
+import { brandPhotos } from "@/lib/brand-photos";
 export const fohMac: EquipmentDefinition = {
   id: "foh-mac",
   slug: "foh-mac",
   name: "FOH Mac",
   categoryId: "control",
-  icon: "💻",
+  icon: "computer",
+  image: brandPhotos.equipment.mediaComputer,
+  imageAlt: "FOH iMac production computer",
   purpose:
     "The shared FOH Mac at the house-right side platform sends display outputs for Sunday worship. Media Department connects USB-C to HDMI paths for the projector signal chain and the confidence monitor. The same computer is also used by Audio (playback), Lighting (Lightkey), and eventually the ProPresenter operator — each department owns its own workflow.",
   quickStart: [
@@ -64,7 +66,9 @@ export const epsonHomeCinema2250: EquipmentDefinition = {
   slug: "epson-home-cinema-2250",
   name: "Epson Home Cinema 2250 Projector",
   categoryId: "projection",
-  icon: "📽️",
+  icon: "projector",
+  image: brandPhotos.equipment.projector,
+  imageAlt: "Epson Home Cinema 2250 projector",
   purpose:
     "The Epson Home Cinema 2250 is permanently mounted overhead on the front/downstage truss between TR-5 and TR-6. It projects Sunday worship content onto the portable projection screen.",
   quickStart: [
@@ -123,7 +127,7 @@ export const gofancoHdmiExtender: EquipmentDefinition = {
   slug: "gofanco-hdmi-extender",
   name: "gofanco 1080p 1x4 HDMI Extender Splitter",
   categoryId: "projection",
-  icon: "🔌",
+  icon: "cable",
   purpose:
     "The gofanco extender sends HDMI from the FOH Mac over CAT6 to the permanent receiver at the truss/projector side. The FOH transmitter is connected and powered each Sunday.",
   quickStart: [
@@ -187,7 +191,7 @@ export const rokuConfidenceMonitor: EquipmentDefinition = {
   slug: "roku-confidence-monitor",
   name: "55-inch Roku TV — Confidence Monitor",
   categoryId: "displays",
-  icon: "📺",
+  icon: "display",
   purpose:
     "The 55-inch Roku TV serves as the FOH confidence monitor on a rolling stand immediately right of the FOH Mac. Media sets up the physical display each Sunday. ProPresenter content configuration belongs to the future ProPresenter department.",
   quickStart: [
@@ -240,7 +244,7 @@ export const confidenceMonitorStand: EquipmentDefinition = {
   slug: "confidence-monitor-stand",
   name: "Confidence Monitor Rolling Stand",
   categoryId: "displays",
-  icon: "🛒",
+  icon: "package",
   purpose:
     "The rolling stand holds the 55-inch Roku TV confidence monitor at FOH, immediately right of the FOH Mac. The TV and stand are separate pieces — volunteers hook the TV onto the stand each Sunday.",
   quickStart: [
@@ -273,7 +277,7 @@ export const skerellProjectionScreen: EquipmentDefinition = {
   slug: "skerell-projection-screen",
   name: "SKERELL 150-inch Portable Projection Screen",
   categoryId: "displays",
-  icon: "🖥️",
+  icon: "screen",
   purpose:
     "The SKERELL 150-inch portable projection screen is assembled center-stage/upstage in front of the back curtain each Sunday. Setup takes approximately 15 minutes.",
   quickStart: [
@@ -321,7 +325,7 @@ export const usbCHdmiAdapters: EquipmentDefinition = {
   slug: "usb-c-hdmi-adapters",
   name: "USB-C to HDMI Adapters/Cables",
   categoryId: "projection",
-  icon: "🔗",
+  icon: "link",
   purpose:
     "USB-C to HDMI adapters and cables connect the FOH Mac to HDMI paths for the projector signal chain and the confidence monitor.",
   quickStart: [
@@ -359,7 +363,7 @@ export const cat6ProjectorCable: EquipmentDefinition = {
   slug: "cat6-projector-cable",
   name: "CAT6 Projector Signal Cable",
   categoryId: "projection",
-  icon: "🔌",
+  icon: "cable",
   purpose:
     "CAT6 carries the HDMI extender signal from the FOH gofanco transmitter along the right-side wall, behind the curtain, to the permanent truss-side receiver.",
   quickStart: [

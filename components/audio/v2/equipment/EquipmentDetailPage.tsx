@@ -48,6 +48,8 @@ export function EquipmentDetailPage({ equipment }: EquipmentDetailPageProps) {
         backHref={backHref}
         backLabel={backLabel}
         image={equipment.image}
+        imageAlt={equipment.imageAlt}
+        accent="audio"
       />
 
       <div className="mt-8 space-y-8 sm:space-y-10">

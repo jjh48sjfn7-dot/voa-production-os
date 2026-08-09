@@ -19,6 +19,7 @@ export function LightingInventoryLandingContent() {
       compactMobile
       backHref="/lighting"
       backLabel="Back to Lighting Department"
+      accent="lighting"
     >
       <DashboardSection title="Equipment">
         <div className="divide-y divide-white/[0.06]">

@@ -43,6 +43,7 @@ export function MediaNavHubContent({
       compactMobile
       backHref={backHref}
       backLabel={backLabel}
+      accent="media"
     >
       <DashboardSection title={sectionTitle}>
         <div className="divide-y divide-white/[0.06]">

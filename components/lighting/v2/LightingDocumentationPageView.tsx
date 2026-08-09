@@ -42,6 +42,7 @@ export function LightingDocumentationPageView({
       compactMobile
       backHref="/lighting"
       backLabel="Back to Lighting Department"
+      accent="lighting"
     >
       <div className="space-y-8 sm:space-y-10">
         {content.headerInfo && (
@@ -97,7 +98,10 @@ export function LightingDocumentationPageView({
 
         {hasRelatedResources && (
           <EquipmentSection title="Related Resources">
-            <DocumentationRelatedResources resources={content.relatedResources!} />
+            <DocumentationRelatedResources
+              resources={content.relatedResources!}
+              accent="lighting"
+            />
           </EquipmentSection>
         )}
       </div>

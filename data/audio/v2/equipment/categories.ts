@@ -1,38 +1,39 @@
+import type { ProductionIconId } from "@/lib/production-icons";
 import type { EquipmentCategory } from "@/data/audio/v2/equipment/types";
 
 export const equipmentCategories: EquipmentCategory[] = [
   {
     id: "console",
     title: "Console",
-    emoji: "🎚️",
+    icon: "console",
     href: "/audio/equipment/console",
     itemSlugs: ["yamaha-tf5"],
   },
   {
     id: "wireless",
     title: "Wireless",
-    emoji: "🎤",
+    icon: "microphone",
     href: "/audio/equipment/wireless",
     itemSlugs: ["shure-blx-dual-receiver-1", "shure-blx-dual-receiver-2"],
   },
   {
     id: "foh-speakers",
     title: "FOH Speakers",
-    emoji: "🔊",
+    icon: "speaker",
     href: "/audio/equipment/foh-speakers",
     itemSlugs: ["qsc-kw153-left", "qsc-kw153-right"],
   },
   {
     id: "subwoofer",
     title: "Subwoofer",
-    emoji: "🔈",
+    icon: "subwoofer",
     href: "/audio/equipment/subwoofer",
     itemSlugs: ["subwoofer"],
   },
   {
     id: "monitors",
     title: "Monitors",
-    emoji: "📣",
+    icon: "monitor",
     href: "/audio/equipment/monitors",
     itemSlugs: [
       "stage-monitor-left",
@@ -43,28 +44,28 @@ export const equipmentCategories: EquipmentCategory[] = [
   {
     id: "stage-boxes",
     title: "Stage Boxes",
-    emoji: "🔌",
+    icon: "cable",
     href: "/audio/equipment/stage-boxes",
     itemSlugs: ["stage-snake-a", "stage-snake-b"],
   },
   {
     id: "keyboard",
     title: "Keyboard",
-    emoji: "🎹",
+    icon: "keyboard",
     href: "/audio/equipment/keyboard",
     itemSlugs: ["keyboard"],
   },
   {
     id: "playback",
     title: "Playback",
-    emoji: "💻",
+    icon: "computer",
     href: "/audio/equipment/playback",
     itemSlugs: ["media-computer"],
   },
   {
     id: "accessories",
     title: "Accessories",
-    emoji: "🧰",
+    icon: "tools",
     href: "/audio/equipment/accessories",
     itemSlugs: [
       "xlr-cables",

@@ -93,7 +93,7 @@ export function GlobalSearchBar() {
     <div ref={containerRef} className="relative w-full">
       <Search
         className={`pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 transition-colors duration-150 ${
-          focused ? "text-red-400/80" : "text-slate-500"
+          focused ? "text-[#FF5A00]/85" : "text-white/45"
         }`}
         aria-hidden
       />
@@ -109,7 +109,7 @@ export function GlobalSearchBar() {
         onBlur={() => setFocused(false)}
         onKeyDown={handleKeyDown}
         placeholder="Search pages, equipment, channels…"
-        className={`${appUi.searchInput} pr-16 ${focused ? "border-red-500/30" : ""}`}
+        className={`${appUi.searchInput} pr-16 ${focused ? "border-[#FF5A00]/30" : ""}`}
         aria-label="Search portal"
         aria-expanded={open}
         aria-controls="global-search-results"

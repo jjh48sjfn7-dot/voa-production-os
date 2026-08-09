@@ -46,8 +46,8 @@ export const lightingTroubleshootingGuides: Record<string, TroubleshootingGuide>
     signalPath: {
       id: "fixture-power-path",
       nodes: [
-        { id: "power", name: "Stage AC Power", emoji: "⚡" },
-        { id: "fixture", name: "SlimPAR Fixture", emoji: "💡" },
+        { id: "power", name: "Stage AC Power", icon: "power" },
+        { id: "fixture", name: "SlimPAR Fixture", icon: "fixture" },
       ],
     },
     checks: [
@@ -72,11 +72,11 @@ export const lightingTroubleshootingGuides: Record<string, TroubleshootingGuide>
     signalPath: {
       id: "no-dmx-path",
       nodes: [
-        { id: "mac", name: "FOH Mac", emoji: "💻" },
-        { id: "lightkey", name: "Lightkey", emoji: "🎛️" },
-        { id: "dmxking", name: "DMXking Micro", emoji: "🔌" },
-        { id: "universe", name: "Universe 1", emoji: "📡" },
-        { id: "fixtures", name: "All Fixtures", emoji: "💡" },
+        { id: "mac", name: "FOH Mac", icon: "computer" },
+        { id: "lightkey", name: "Lightkey", icon: "dmx-control" },
+        { id: "dmxking", name: "DMXking Micro", icon: "cable" },
+        { id: "universe", name: "Universe 1", icon: "signal" },
+        { id: "fixtures", name: "All Fixtures", icon: "fixture" },
       ],
     },
     checks: [
@@ -106,9 +106,9 @@ export const lightingTroubleshootingGuides: Record<string, TroubleshootingGuide>
     signalPath: {
       id: "single-fixture-path",
       nodes: [
-        { id: "lightkey", name: "Lightkey", emoji: "🎛️" },
-        { id: "chain", name: "DMX Chain", emoji: "🔌" },
-        { id: "fixture", name: "One SlimPAR", emoji: "💡" },
+        { id: "lightkey", name: "Lightkey", icon: "dmx-control" },
+        { id: "chain", name: "DMX Chain", icon: "cable" },
+        { id: "fixture", name: "One SlimPAR", icon: "fixture" },
       ],
     },
     checks: [
@@ -139,9 +139,9 @@ export const lightingTroubleshootingGuides: Record<string, TroubleshootingGuide>
     signalPath: {
       id: "lightkey-connection-path",
       nodes: [
-        { id: "mac", name: "FOH Mac", emoji: "💻" },
-        { id: "lightkey", name: "Lightkey", emoji: "🎛️" },
-        { id: "dmxking", name: "DMXking Micro", emoji: "🔌" },
+        { id: "mac", name: "FOH Mac", icon: "computer" },
+        { id: "lightkey", name: "Lightkey", icon: "dmx-control" },
+        { id: "dmxking", name: "DMXking Micro", icon: "cable" },
       ],
     },
     checks: [

@@ -25,6 +25,7 @@ export function MediaPlotContent() {
         backHref="/media/documentation"
         backLabel="Back to Documentation"
         title={mediaPlotDocument.title}
+        accent="media"
       />
 
       <p className={`mt-2 ${audioStyles.body} text-slate-500`}>

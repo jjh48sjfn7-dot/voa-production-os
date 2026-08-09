@@ -12,6 +12,7 @@ export function MediaEquipmentHubContent() {
         backHref="/media"
         backLabel="Back to Media Department"
         title="Equipment"
+        accent="media"
       />
 
       <p className={`mt-2 ${audioStyles.body} text-slate-500`}>
@@ -23,7 +24,8 @@ export function MediaEquipmentHubContent() {
           <AudioEmojiNavRow
             key={category.id}
             title={category.title}
-            emoji={category.emoji}
+            icon={category.icon}
+            accent="media"
             href={category.href}
           />
         ))}

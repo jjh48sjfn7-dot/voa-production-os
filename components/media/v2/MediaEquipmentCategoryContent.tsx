@@ -29,6 +29,7 @@ export function MediaEquipmentCategoryContent({
         backHref="/media/equipment"
         backLabel="Back to Equipment"
         title={category.title}
+        accent="media"
       />
 
       <div className={`mt-4 divide-y divide-white/[0.06] sm:mt-5 ${audioStyles.card}`}>

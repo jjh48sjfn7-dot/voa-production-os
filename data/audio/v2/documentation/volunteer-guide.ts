@@ -49,27 +49,27 @@ export const volunteerGuide: DocumentationPageContent = {
   ],
   relatedResources: [
     {
-      icon: "🎚️",
+      icon: "console",
       title: "Yamaha TF5",
       href: "/audio/equipment/item/yamaha-tf5",
     },
     {
-      icon: "🎯",
+      icon: "target",
       title: "Sunday Setup",
       href: "/audio/setup",
     },
     {
-      icon: "🔧",
+      icon: "tools",
       title: "Troubleshooting",
       href: "/audio/troubleshooting",
     },
     {
-      icon: "📋",
+      icon: "verify",
       title: "Wiring Standards",
       href: "/audio/documentation/wiring-standards",
     },
     {
-      icon: "🔊",
+      icon: "speaker",
       title: "Output Routing",
       href: "/audio/documentation/output-routing",
     },

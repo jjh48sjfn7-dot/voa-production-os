@@ -25,6 +25,7 @@ export function LightingPlotContent() {
         backHref="/lighting/documentation"
         backLabel="Back to Documentation"
         title={lightingPlotDocument.title}
+        accent="lighting"
       />
 
       <p className={`mt-2 ${audioStyles.body} text-slate-500`}>

@@ -1,3 +1,5 @@
+import type { ProductionIconId } from "@/lib/production-icons";
+
 export interface EquipmentConnectionGroup {
   label: string;
   items: string[];
@@ -38,8 +40,9 @@ export interface EquipmentDefinition {
   slug: string;
   name: string;
   categoryId: string;
-  icon?: string;
+  icon?: ProductionIconId;
   image?: string;
+  imageAlt?: string;
   purpose?: string;
   quickStart?: string[];
   channelAssignments?: EquipmentSpecification[];
@@ -60,7 +63,7 @@ export interface EquipmentDefinition {
 export interface EquipmentCategory {
   id: string;
   title: string;
-  emoji: string;
+  icon: ProductionIconId;
   href: string;
   itemSlugs: string[];
 }

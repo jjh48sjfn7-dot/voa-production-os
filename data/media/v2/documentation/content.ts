@@ -31,17 +31,17 @@ export const projectionScreenSetup: DocumentationPageContent = {
   ],
   relatedResources: [
     {
-      icon: "🖥️",
+      icon: "screen",
       title: "SKERELL 150-inch Portable Projection Screen",
       href: "/media/equipment/item/skerell-projection-screen",
     },
     {
-      icon: "🗺️",
+      icon: "map",
       title: "Media Plot",
       href: "/media/documentation/media-plot",
     },
     {
-      icon: "📽️",
+      icon: "projector",
       title: "Projector Signal Flow",
       href: "/media/documentation/projector-signal-flow",
     },

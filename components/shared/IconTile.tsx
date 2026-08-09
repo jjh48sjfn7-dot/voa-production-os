@@ -1,17 +1,12 @@
-import { departmentAccents } from "@/lib/theme";
+import { ProductionIconTile } from "@/components/shared/ProductionIconTile";
+import type { ProductionIconId } from "@/lib/production-icons";
+import type { DepartmentAccent } from "@/lib/theme";
 
 interface IconTileProps {
-  emoji: string;
+  icon: ProductionIconId;
+  accent?: DepartmentAccent;
 }
 
-export function IconTile({ emoji }: IconTileProps) {
-  const colors = departmentAccents.audio;
-
-  return (
-    <div
-      className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ring-1 ring-white/[0.06] ${colors.iconBg}`}
-    >
-      <span className="text-[2.5rem] leading-none">{emoji}</span>
-    </div>
-  );
+export function IconTile({ icon, accent = "audio" }: IconTileProps) {
+  return <ProductionIconTile icon={icon} accent={accent} />;
 }

@@ -42,6 +42,8 @@ export function LightingEquipmentDetailContent({
         backHref={backHref}
         backLabel={backLabel}
         image={equipment.image}
+        imageAlt={equipment.imageAlt}
+        accent="lighting"
       />
 
       <div className="mt-8 space-y-8 sm:space-y-10">

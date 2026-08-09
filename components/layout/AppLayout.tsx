@@ -32,7 +32,7 @@ export function AppLayout({ children, title }: AppLayoutProps) {
             </div>
           </main>
         </div>
-        <FloatingEmergencyButton />
+        <FloatingEmergencyButton className="lg:hidden" />
       </div>
     </SearchProvider>
   );

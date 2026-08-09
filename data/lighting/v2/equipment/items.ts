@@ -1,11 +1,12 @@
 import type { EquipmentDefinition } from "@/data/lighting/v2/equipment/types";
+import { brandPhotos } from "@/lib/brand-photos";
 
 export const chauvetSlimparProHUsb: EquipmentDefinition = {
   id: "chauvet-slimpar-pro-h-usb",
   slug: "chauvet-slimpar-pro-h-usb",
   name: "Chauvet DJ SlimPAR Pro H USB",
   categoryId: "fixtures",
-  icon: "💡",
+  icon: "fixture",
   purpose:
     "The church uses nine Chauvet DJ SlimPAR Pro H USB fixtures for Sunday worship lighting. Six are permanently mounted on the front/downstage truss at TR-1 through TR-6. Three floor fixtures are placed along the front edge of the stage each Sunday at Stage Left, Center, and Stage Right.",
   quickStart: [
@@ -86,7 +87,7 @@ export const dmxkingMicro: EquipmentDefinition = {
   slug: "dmxking-micro",
   name: "DMXking Micro",
   categoryId: "control",
-  icon: "🔌",
+  icon: "cable",
   purpose:
     "The DMXking Micro is the DMX interface at FOH. Lightkey on the FOH Mac sends lighting control to Universe 1 through this device.",
   quickStart: [
@@ -127,7 +128,9 @@ export const lightkeyFohControl: EquipmentDefinition = {
   slug: "lightkey-foh-control",
   name: "FOH Mac / Lightkey Control",
   categoryId: "control",
-  icon: "💻",
+  icon: "computer",
+  image: brandPhotos.equipment.mediaComputer,
+  imageAlt: "FOH iMac production computer",
   purpose:
     "Official lighting control runs on the FOH Mac Desktop using Lightkey. The same computer may run other production software, but Lightkey is the lighting control application for all nine SlimPAR fixtures on Universe 1.",
   quickStart: [

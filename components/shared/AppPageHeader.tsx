@@ -5,6 +5,7 @@ import type { BreadcrumbItem } from "@/types/audio";
 import { BackButton } from "@/components/audio/BackButton";
 import { Breadcrumbs } from "@/components/audio/Breadcrumbs";
 import { audioStyles } from "@/lib/audio-styles";
+import { shellTokens, type DepartmentAccent } from "@/lib/theme";
 import { uiPageIcon } from "@/lib/ui-tokens";
 import { useScrolled } from "@/hooks/useScrolled";
 
@@ -17,6 +18,7 @@ interface AppPageHeaderProps {
   compactMobile?: boolean;
   backHref?: string;
   backLabel?: string;
+  accent?: DepartmentAccent;
 }
 
 export function AppPageHeader({
@@ -28,6 +30,7 @@ export function AppPageHeader({
   compactMobile = false,
   backHref,
   backLabel,
+  accent = "audio",
 }: AppPageHeaderProps) {
   const headerScrolled = useScrolled(12);
   const stickyHeaderClass = compactMobile
@@ -36,7 +39,9 @@ export function AppPageHeader({
 
   return (
     <div
-      className={stickyHeaderClass}
+      className={`${stickyHeaderClass} ${shellTokens.pageHeader.accentBorder[accent]} ${
+        headerScrolled ? "data-[scrolled=true]:border-white/[0.09]" : ""
+      }`}
       data-scrolled={headerScrolled || undefined}
     >
       <div

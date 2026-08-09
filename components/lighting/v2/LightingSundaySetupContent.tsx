@@ -1,11 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
-import { ArrowLeft } from "lucide-react";
 import { SetupChecklist } from "@/components/audio/v2/SetupChecklist";
 import { SundaySetupAccordion } from "@/components/audio/v2/SundaySetupAccordion";
 import { SundaySetupMilestoneRow } from "@/components/audio/v2/SundaySetupMilestoneRow";
+import { AudioSubpageHeader } from "@/components/audio/v2/AudioSubpageHeader";
 import {
   SUNDAY_SETUP_LIGHTING_V1_STORAGE,
   getLightingSectionTaskCount,
@@ -31,22 +30,12 @@ export function LightingSundaySetupContent() {
 
   return (
     <div>
-      <div
-        className={`sticky top-16 z-20 -mx-4 border-b border-white/[0.07] bg-[#080f1a]/95 px-4 py-2.5 backdrop-blur-xl md:-mx-0 md:px-0`}
-      >
-        <div className="flex items-center gap-3">
-          <Link
-            href="/lighting"
-            className={`flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center rounded-xl border border-white/[0.08] bg-white/[0.03] text-slate-400 ${audioStyles.transition} hover:border-white/[0.12] hover:bg-white/[0.06] hover:text-slate-200`}
-            aria-label="Back to Lighting Department"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </Link>
-          <h1 className="text-base font-semibold text-slate-50 sm:text-lg">
-            Sunday Setup
-          </h1>
-        </div>
-      </div>
+      <AudioSubpageHeader
+        backHref="/lighting"
+        backLabel="Back to Lighting Department"
+        title="Sunday Setup"
+        accent="lighting"
+      />
 
       <p className={`mt-2 ${audioStyles.body} text-slate-500`}>
         Prepare all nine SlimPAR fixtures before service.
@@ -55,14 +44,16 @@ export function LightingSundaySetupContent() {
       <div className="mt-4 space-y-2 sm:mt-5">
         <SundaySetupMilestoneRow
           title={lightingSetupUnloadTrailer.title}
-          emoji={lightingSetupUnloadTrailer.emoji}
+          icon={lightingSetupUnloadTrailer.icon}
+          accent="lighting"
         />
 
         {lightingSetupSections.map((section) => (
           <SundaySetupAccordion
             key={section.id}
             title={section.title}
-            emoji={section.emoji}
+            icon={section.icon}
+            accent="lighting"
             taskCount={getLightingSectionTaskCount(section)}
             open={openSectionId === section.id}
             onToggle={() => handleSectionToggle(section.id)}

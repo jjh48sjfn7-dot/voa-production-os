@@ -52,10 +52,10 @@ export const audioStyles = {
 
   /* Sticky chrome */
   stickyHeader:
-    "sticky top-16 z-20 -mx-4 border-b border-white/[0.07] bg-[#080f1a]/92 px-4 py-4 shadow-[0_2px_16px_rgba(0,0,0,0.28)] backdrop-blur-2xl backdrop-saturate-150 duration-200 data-[scrolled=true]:border-white/[0.09] data-[scrolled=true]:shadow-[0_6px_28px_rgba(0,0,0,0.42)] md:-mx-0 md:rounded-2xl md:border md:px-6",
+    "sticky top-16 z-20 -mx-4 border-b bg-[#141414]/92 px-4 py-4 shadow-[0_2px_16px_rgba(0,0,0,0.28)] backdrop-blur-2xl backdrop-saturate-150 duration-200 data-[scrolled=true]:shadow-[0_6px_28px_rgba(0,0,0,0.42)] md:-mx-0 md:rounded-2xl md:border md:px-6",
 
   stickyToolbar:
-    "sticky top-[4.75rem] z-10 -mx-4 border-b border-white/[0.06] bg-[#080f1a]/88 px-4 py-3 backdrop-blur-xl duration-200 data-[scrolled=true]:shadow-[0_4px_20px_rgba(0,0,0,0.32)] md:top-[5.5rem] md:-mx-0 md:rounded-xl md:border md:px-4",
+    "sticky top-[4.75rem] z-10 -mx-4 border-b border-white/[0.06] bg-[#141414]/88 px-4 py-3 backdrop-blur-xl duration-200 data-[scrolled=true]:shadow-[0_4px_20px_rgba(0,0,0,0.32)] md:top-[5.5rem] md:-mx-0 md:rounded-xl md:border md:px-4",
 
   /* Patch sheet / metrics */
   metric: `rounded-xl border border-white/[0.07] bg-white/[0.025] p-4 ${shadowPanel} backdrop-blur-xl ${transitionBase} hover:border-white/[0.11] hover:bg-white/[0.04]`,

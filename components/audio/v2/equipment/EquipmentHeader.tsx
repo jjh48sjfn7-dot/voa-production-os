@@ -1,11 +1,14 @@
 import { AudioSubpageHeader } from "@/components/audio/v2/AudioSubpageHeader";
 import { EquipmentImage } from "@/components/audio/v2/equipment/EquipmentImage";
+import type { DepartmentAccent } from "@/lib/theme";
 
 interface EquipmentHeaderProps {
   name: string;
   backHref: string;
   backLabel: string;
   image?: string;
+  imageAlt?: string;
+  accent?: DepartmentAccent;
 }
 
 export function EquipmentHeader({
@@ -13,6 +16,8 @@ export function EquipmentHeader({
   backHref,
   backLabel,
   image,
+  imageAlt,
+  accent = "audio",
 }: EquipmentHeaderProps) {
   return (
     <>
@@ -20,9 +25,10 @@ export function EquipmentHeader({
         backHref={backHref}
         backLabel={backLabel}
         title={name}
+        accent={accent}
       />
       <div className="mt-4 sm:mt-5">
-        <EquipmentImage name={name} src={image} />
+        <EquipmentImage name={name} src={image} alt={imageAlt} />
       </div>
     </>
   );

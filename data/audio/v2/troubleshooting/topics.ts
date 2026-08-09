@@ -17,13 +17,13 @@ import {
 const tf5Node = {
   id: "tf5",
   name: "TF5",
-  emoji: "🎚️",
+  icon: "console",
   equipmentSlug: "yamaha-tf5",
 } as const;
 
-const outputsNode = { id: "outputs", name: "Outputs", emoji: "🎛️" } as const;
+const outputsNode = { id: "outputs", name: "Outputs", icon: "dmx-control" } as const;
 
-const speakerNode = { id: "speaker", name: "Speaker", emoji: "🔊" } as const;
+const speakerNode = { id: "speaker", name: "Speaker", icon: "speaker" } as const;
 
 export const troubleshootingTopics: TroubleshootingTopicMeta[] = [
   {
@@ -83,11 +83,11 @@ export const troubleshootingGuides: Record<string, TroubleshootingGuide> = {
     signalPath: {
       id: "keyboard-signal-path",
       nodes: [
-        { id: "keyboard", name: "Keyboard", emoji: "🎹", equipmentSlug: "keyboard" },
+        { id: "keyboard", name: "Keyboard", icon: "keyboard", equipmentSlug: "keyboard" },
         {
           id: "stage-snake-b",
           name: "Stage Snake B",
-          emoji: "🔌",
+          icon: "cable",
           equipmentSlug: "stage-snake-b",
         },
         tf5Node,
@@ -116,11 +116,11 @@ export const troubleshootingGuides: Record<string, TroubleshootingGuide> = {
     signalPath: {
       id: "wireless-signal-path",
       nodes: [
-        { id: "wireless-mic", name: "Wireless Microphone", emoji: "🎤" },
+        { id: "wireless-mic", name: "Wireless Microphone", icon: "microphone" },
         {
           id: "blx288",
           name: "BLX288",
-          emoji: "🎤",
+          icon: "microphone",
           equipmentSlug: "shure-blx-receiver",
         },
         tf5Node,
@@ -145,11 +145,11 @@ export const troubleshootingGuides: Record<string, TroubleshootingGuide> = {
     signalPath: {
       id: "drum-signal-path",
       nodes: [
-        { id: "drum-mics", name: "Drum Microphones", emoji: "🥁" },
+        { id: "drum-mics", name: "Drum Microphones", icon: "drums" },
         {
           id: "stage-snake-a",
           name: "Stage Snake A",
-          emoji: "🔌",
+          icon: "cable",
           equipmentSlug: "stage-snake-a",
         },
         tf5Node,
@@ -174,10 +174,10 @@ export const troubleshootingGuides: Record<string, TroubleshootingGuide> = {
     signalPath: {
       id: "foh-signal-path",
       nodes: [
-        { id: "sources", name: "Sources", emoji: "🎤" },
+        { id: "sources", name: "Sources", icon: "microphone" },
         tf5Node,
         outputsNode,
-        { id: "foh-speaker", name: "QSC K12.2", emoji: "🔊" },
+        { id: "foh-speaker", name: "QSC K12.2", icon: "speaker" },
       ],
     },
     checks: [
@@ -197,10 +197,10 @@ export const troubleshootingGuides: Record<string, TroubleshootingGuide> = {
     signalPath: {
       id: "monitor-signal-path",
       nodes: [
-        { id: "sources", name: "Sources", emoji: "🎤" },
+        { id: "sources", name: "Sources", icon: "microphone" },
         tf5Node,
         outputsNode,
-        { id: "stage-monitor", name: "QSC K10.2", emoji: "📣" },
+        { id: "stage-monitor", name: "QSC K10.2", icon: "monitor" },
       ],
     },
     checks: [
@@ -220,7 +220,7 @@ export const troubleshootingGuides: Record<string, TroubleshootingGuide> = {
     signalPath: {
       id: "playback-signal-path",
       nodes: [
-        { id: "media-computer", name: "Media Computer", emoji: "💻" },
+        { id: "media-computer", name: "Media Computer", icon: "computer" },
         tf5Node,
         outputsNode,
         speakerNode,
@@ -243,7 +243,7 @@ export const troubleshootingGuides: Record<string, TroubleshootingGuide> = {
     signalPath: {
       id: "console-power-path",
       nodes: [
-        { id: "power", name: "Power", emoji: "⚡" },
+        { id: "power", name: "Power", icon: "power" },
         tf5Node,
       ],
     },
@@ -263,7 +263,7 @@ export const troubleshootingGuides: Record<string, TroubleshootingGuide> = {
     signalPath: {
       id: "feedback-signal-path",
       nodes: [
-        { id: "microphone", name: "Microphone", emoji: "🎤" },
+        { id: "microphone", name: "Microphone", icon: "microphone" },
         tf5Node,
         outputsNode,
         speakerNode,

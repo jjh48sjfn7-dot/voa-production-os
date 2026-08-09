@@ -1,4 +1,5 @@
 import type { LucideIcon } from "lucide-react";
+import type { ProductionIconId } from "@/lib/production-icons";
 
 export interface DocumentationPage {
   id: string;
@@ -28,7 +29,7 @@ export interface DocumentationListSection {
 }
 
 export interface DocumentationRelatedResource {
-  icon: string;
+  icon: ProductionIconId;
   title: string;
   href?: string;
   disabled?: boolean;

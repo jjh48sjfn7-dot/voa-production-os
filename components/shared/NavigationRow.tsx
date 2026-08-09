@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import { ProductionIconTile } from "@/components/shared/ProductionIconTile";
+import type { ProductionIconId } from "@/lib/production-icons";
+import type { DepartmentAccent } from "@/lib/theme";
 
 interface DocumentationRowProps {
   title: string;
@@ -21,7 +24,8 @@ export function DocumentationRow({ title, href }: DocumentationRowProps) {
 interface NavigationRowProps {
   title: string;
   href?: string;
-  icon?: string;
+  icon?: ProductionIconId;
+  accent?: DepartmentAccent;
   disabled?: boolean;
 }
 
@@ -29,6 +33,7 @@ export function NavigationRow({
   title,
   href,
   icon,
+  accent = "audio",
   disabled = false,
 }: NavigationRowProps) {
   const isDisabled = disabled || !href;
@@ -37,11 +42,7 @@ export function NavigationRow({
 
   const content = (
     <>
-      {icon && (
-        <span className="text-xl leading-none" aria-hidden>
-          {icon}
-        </span>
-      )}
+      {icon && <ProductionIconTile icon={icon} accent={accent} size="sm" />}
       <p
         className={`flex-1 text-base font-medium ${
           isDisabled ? "text-slate-500" : "text-slate-50"

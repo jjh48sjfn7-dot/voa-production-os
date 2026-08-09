@@ -1,3 +1,4 @@
+import type { ProductionIconId } from "@/lib/production-icons";
 import type { ChecklistItem } from "@/types";
 
 export const SUNDAY_SETUP_MEDIA_V1_STORAGE = "sunday-setup-media-v1";
@@ -5,13 +6,13 @@ export const SUNDAY_SETUP_MEDIA_V1_STORAGE = "sunday-setup-media-v1";
 export const mediaSetupUnloadTrailer = {
   id: "unload-trailer",
   title: "Unload Trailer",
-  emoji: "📦",
+  icon: "package" as const,
 };
 
 export interface MediaSetupSection {
   id: string;
   title: string;
-  emoji?: string;
+  icon?: ProductionIconId;
   note?: string;
   items: ChecklistItem[];
 }
@@ -20,7 +21,7 @@ export const mediaSetupSections: MediaSetupSection[] = [
   {
     id: "assemble-projection-screen",
     title: "Assemble Projection Screen",
-    emoji: "🖥️",
+    icon: "screen",
     items: [
       {
         id: "screen-assemble",
@@ -41,7 +42,7 @@ export const mediaSetupSections: MediaSetupSection[] = [
   {
     id: "setup-confidence-monitor",
     title: "Set Up Confidence Monitor",
-    emoji: "📺",
+    icon: "display",
     items: [
       { id: "cm-stand", label: "Position rolling stand at FOH — immediately right of FOH Mac" },
       { id: "cm-hook", label: "Hook 55-inch Roku TV onto stand using existing mounting brackets" },
@@ -53,7 +54,7 @@ export const mediaSetupSections: MediaSetupSection[] = [
   {
     id: "connect-projector-path",
     title: "Connect FOH Projector Signal Path",
-    emoji: "🔌",
+    icon: "cable",
     note: "The projector-side CAT6 receiver, HDMI connection, and projector power remain permanently connected.",
     items: [
       {
@@ -70,7 +71,7 @@ export const mediaSetupSections: MediaSetupSection[] = [
   {
     id: "power-displays",
     title: "Power Projector / Displays",
-    emoji: "⚡",
+    icon: "power",
     items: [
       { id: "power-tx", label: "Confirm FOH gofanco transmitter is powered" },
       {
@@ -84,7 +85,7 @@ export const mediaSetupSections: MediaSetupSection[] = [
   {
     id: "verify-projector",
     title: "Verify Projector Image",
-    emoji: "✅",
+    icon: "verify",
     items: [
       {
         id: "verify-proj-image",
@@ -107,7 +108,7 @@ export const mediaSetupSections: MediaSetupSection[] = [
   {
     id: "verify-confidence-monitor",
     title: "Verify Confidence Monitor",
-    emoji: "✅",
+    icon: "verify",
     items: [
       {
         id: "verify-cm-output",
@@ -126,7 +127,7 @@ export const mediaSetupSections: MediaSetupSection[] = [
   {
     id: "ready",
     title: "Ready for ProPresenter Operator",
-    emoji: "🙌",
+    icon: "ready",
     items: [
       {
         id: "ready-both-displays",
@@ -137,7 +138,7 @@ export const mediaSetupSections: MediaSetupSection[] = [
   {
     id: "teardown",
     title: "Teardown",
-    emoji: "📦",
+    icon: "package",
     items: [
       { id: "td-power", label: "Power down displays" },
       {

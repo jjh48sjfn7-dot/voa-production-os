@@ -1,3 +1,4 @@
+import type { ProductionIconId } from "@/lib/production-icons";
 import type { ChecklistItem } from "@/types";
 
 export const SUNDAY_SETUP_LIGHTING_V1_STORAGE = "sunday-setup-lighting-v1";
@@ -5,13 +6,13 @@ export const SUNDAY_SETUP_LIGHTING_V1_STORAGE = "sunday-setup-lighting-v1";
 export const lightingSetupUnloadTrailer = {
   id: "unload-trailer",
   title: "Unload Trailer",
-  emoji: "📦",
+  icon: "package" as const,
 };
 
 export interface LightingSetupSection {
   id: string;
   title: string;
-  emoji?: string;
+  icon?: ProductionIconId;
   items: ChecklistItem[];
 }
 
@@ -19,7 +20,7 @@ export const lightingSetupSections: LightingSetupSection[] = [
   {
     id: "place-floor-lights",
     title: "Place Floor Lights",
-    emoji: "📍",
+    icon: "location",
     items: [
       { id: "floor-1", label: "Place Floor 1 — Stage Left" },
       { id: "floor-2", label: "Place Floor 2 — Center" },
@@ -29,7 +30,7 @@ export const lightingSetupSections: LightingSetupSection[] = [
   {
     id: "run-dmx",
     title: "Run DMX",
-    emoji: "🔌",
+    icon: "cable",
     items: [
       {
         id: "dmx-wall",
@@ -49,7 +50,7 @@ export const lightingSetupSections: LightingSetupSection[] = [
   {
     id: "lighting-control",
     title: "Lighting Control",
-    emoji: "💻",
+    icon: "computer",
     items: [
       { id: "ctrl-mac", label: "Confirm FOH Mac is ready" },
       { id: "ctrl-lightkey", label: "Open Lightkey" },
@@ -59,7 +60,7 @@ export const lightingSetupSections: LightingSetupSection[] = [
   {
     id: "power",
     title: "Power",
-    emoji: "⚡",
+    icon: "power",
     items: [
       {
         id: "power-wait",
@@ -70,7 +71,7 @@ export const lightingSetupSections: LightingSetupSection[] = [
   {
     id: "aiming",
     title: "Aiming",
-    emoji: "🎯",
+    icon: "target",
     items: [
       {
         id: "aim-truss",
@@ -86,7 +87,7 @@ export const lightingSetupSections: LightingSetupSection[] = [
   {
     id: "function-check",
     title: "Function Check",
-    emoji: "✅",
+    icon: "verify",
     items: [
       { id: "func-all", label: "Confirm all 9 fixtures respond" },
       {
@@ -99,7 +100,7 @@ export const lightingSetupSections: LightingSetupSection[] = [
   {
     id: "ready",
     title: "Ready",
-    emoji: "🙌",
+    icon: "ready",
     items: [{ id: "ready-lighting", label: "Lighting ready for service" }],
   },
 ];

@@ -1,18 +1,22 @@
 import { DividedCard } from "@/components/shared/DividedCard";
 import { DocumentationRow, NavigationRow } from "@/components/shared/NavigationRow";
+import type { ProductionIconId } from "@/lib/production-icons";
+import type { DepartmentAccent } from "@/lib/theme";
 
 export interface RelatedResourceItem {
   title: string;
   href?: string;
-  icon?: string;
+  icon?: ProductionIconId;
+  accent?: DepartmentAccent;
   disabled?: boolean;
 }
 
 interface RelatedResourcesProps {
   items: RelatedResourceItem[];
+  accent?: DepartmentAccent;
 }
 
-export function RelatedResources({ items }: RelatedResourcesProps) {
+export function RelatedResources({ items, accent = "audio" }: RelatedResourcesProps) {
   return (
     <DividedCard>
       {items.map((item) => {
@@ -25,6 +29,7 @@ export function RelatedResources({ items }: RelatedResourcesProps) {
               title={item.title}
               href={item.href}
               icon={item.icon}
+              accent={item.accent ?? accent}
               disabled={item.disabled}
             />
           );

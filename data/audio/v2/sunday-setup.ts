@@ -1,3 +1,4 @@
+import type { ProductionIconId } from "@/lib/production-icons";
 import type { ChecklistItem } from "@/types";
 
 export const SUNDAY_SETUP_V2_STORAGE = "sunday-setup-v2";
@@ -10,7 +11,7 @@ export interface SundaySetupChecklistGroup {
 export interface SundaySetupSection {
   id: string;
   title: string;
-  emoji?: string;
+  icon?: ProductionIconId;
   items?: ChecklistItem[];
   groups?: SundaySetupChecklistGroup[];
 }
@@ -18,14 +19,14 @@ export interface SundaySetupSection {
 export const sundaySetupUnloadTrailer = {
   id: "unload-trailer",
   title: "Unload Trailer",
-  emoji: "📦",
+  icon: "package" as const,
 };
 
 export const sundaySetupV2Sections: SundaySetupSection[] = [
   {
     id: "positioning",
     title: "Positioning",
-    emoji: "🎯",
+    icon: "target",
     items: [
       { id: "pos-drums", label: "Position Drums" },
       { id: "pos-snake", label: "Run Stage Snake A & B" },
@@ -36,7 +37,7 @@ export const sundaySetupV2Sections: SundaySetupSection[] = [
   {
     id: "setup-tf5",
     title: "Setup TF5",
-    emoji: "🎚️",
+    icon: "console",
     items: [
       { id: "tf5-power", label: "Power on TF5" },
       { id: "tf5-scene", label: "Load Sunday Scene" },
@@ -60,7 +61,7 @@ export const sundaySetupV2Sections: SundaySetupSection[] = [
   {
     id: "stage-right",
     title: "Stage Right",
-    emoji: "🔌",
+    icon: "cable",
     groups: [
       {
         label: "STAGE RIGHT — INPUTS",
@@ -93,7 +94,7 @@ export const sundaySetupV2Sections: SundaySetupSection[] = [
   {
     id: "stage-left",
     title: "Stage Left",
-    emoji: "🔌",
+    icon: "cable",
     groups: [
       {
         label: "STAGE LEFT — INPUTS",
@@ -140,7 +141,7 @@ export const sundaySetupV2Sections: SundaySetupSection[] = [
   {
     id: "wireless",
     title: "Wireless Setup",
-    emoji: "🎤",
+    icon: "microphone",
     items: [
       {
         id: "wl-power",
@@ -159,7 +160,7 @@ export const sundaySetupV2Sections: SundaySetupSection[] = [
   {
     id: "soundcheck",
     title: "Soundcheck",
-    emoji: "🔊",
+    icon: "speaker",
     items: [
       { id: "sc-powered-speakers", label: "Power on all powered speakers" },
       {
@@ -205,7 +206,7 @@ export const sundaySetupV2Sections: SundaySetupSection[] = [
   {
     id: "service-ready",
     title: "Service Ready",
-    emoji: "✅",
+    icon: "verify",
     items: [
       {
         id: "ready-stage-clean",

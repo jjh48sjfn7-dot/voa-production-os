@@ -42,6 +42,7 @@ export function MediaDocumentationPageView({
       compactMobile
       backHref="/media"
       backLabel="Back to Media Department"
+      accent="media"
     >
       <div className="space-y-8 sm:space-y-10">
         {content.headerInfo && (
@@ -97,7 +98,10 @@ export function MediaDocumentationPageView({
 
         {hasRelatedResources && (
           <EquipmentSection title="Related Resources">
-            <DocumentationRelatedResources resources={content.relatedResources!} />
+            <DocumentationRelatedResources
+              resources={content.relatedResources!}
+              accent="media"
+            />
           </EquipmentSection>
         )}
       </div>

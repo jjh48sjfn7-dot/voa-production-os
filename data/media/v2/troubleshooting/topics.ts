@@ -51,22 +51,22 @@ const standardMediaDocs = [
 const projectorSignalPath: TroubleshootingGuide["signalPath"] = {
   id: "projector-troubleshooting-path",
   nodes: [
-    { id: "mac", name: "FOH Mac", emoji: "💻" },
-    { id: "usb-hdmi", name: "USB-C → HDMI", emoji: "🔗" },
-    { id: "gofanco", name: "gofanco Transmitter", emoji: "📡" },
-    { id: "cat6", name: "CAT6 Run", emoji: "🔌" },
-    { id: "receiver", name: "Permanent Truss Receiver", emoji: "📡" },
-    { id: "projector", name: "Epson Projector", emoji: "📽️" },
-    { id: "screen", name: "Projection Screen", emoji: "🖥️" },
+    { id: "mac", name: "FOH Mac", icon: "computer" },
+    { id: "usb-hdmi", name: "USB-C → HDMI", icon: "link" },
+    { id: "gofanco", name: "gofanco Transmitter", icon: "signal" },
+    { id: "cat6", name: "CAT6 Run", icon: "cable" },
+    { id: "receiver", name: "Permanent Truss Receiver", icon: "signal" },
+    { id: "projector", name: "Epson Projector", icon: "projector" },
+    { id: "screen", name: "Projection Screen", icon: "screen" },
   ],
 };
 
 const confidenceSignalPath: TroubleshootingGuide["signalPath"] = {
   id: "confidence-troubleshooting-path",
   nodes: [
-    { id: "mac", name: "FOH Mac", emoji: "💻" },
-    { id: "usb-hdmi", name: "USB-C → HDMI", emoji: "🔗" },
-    { id: "tv", name: "55-inch Roku TV", emoji: "📺" },
+    { id: "mac", name: "FOH Mac", icon: "computer" },
+    { id: "usb-hdmi", name: "USB-C → HDMI", icon: "link" },
+    { id: "tv", name: "55-inch Roku TV", icon: "display" },
   ],
 };
 

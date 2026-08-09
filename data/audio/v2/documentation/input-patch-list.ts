@@ -90,37 +90,37 @@ export const inputPatchList: DocumentationPageContent = {
   ],
   relatedResources: [
     {
-      icon: "🎚️",
+      icon: "console",
       title: "Yamaha TF5",
       href: "/audio/equipment/item/yamaha-tf5",
     },
     {
-      icon: "🔌",
+      icon: "cable",
       title: "Stage Snake A",
       href: "/audio/equipment/item/stage-snake-a",
     },
     {
-      icon: "🔌",
+      icon: "cable",
       title: "Stage Snake B",
       href: "/audio/equipment/item/stage-snake-b",
     },
     {
-      icon: "🎛️",
+      icon: "dmx-control",
       title: "TF5 Channel List",
       href: "/audio/documentation/tf5-channel-list",
     },
     {
-      icon: "🔊",
+      icon: "speaker",
       title: "Output Routing",
       href: "/audio/documentation/output-routing",
     },
     {
-      icon: "🎯",
+      icon: "target",
       title: "Sunday Setup",
       href: "/audio/setup",
     },
     {
-      icon: "🔄",
+      icon: "signal",
       title: "Signal Flow",
       href: "/audio/documentation/signal-flow",
     },

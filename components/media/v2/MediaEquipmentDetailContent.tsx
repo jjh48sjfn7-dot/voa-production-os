@@ -40,6 +40,8 @@ export function MediaEquipmentDetailContent({ slug }: MediaEquipmentDetailConten
         backHref={backHref}
         backLabel={backLabel}
         image={equipment.image}
+        imageAlt={equipment.imageAlt}
+        accent="media"
       />
 
       <div className="mt-8 space-y-8 sm:space-y-10">

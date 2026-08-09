@@ -5,7 +5,14 @@ import Link from "next/link";
 import { AlertTriangle, X } from "lucide-react";
 import { emergencyCategories } from "@/data/dashboard/v1";
 
-export function FloatingEmergencyButton() {
+interface FloatingEmergencyButtonProps {
+  className?: string;
+}
+
+/** Mobile-only quick access when the sidebar drawer is closed. */
+export function FloatingEmergencyButton({
+  className = "",
+}: FloatingEmergencyButtonProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -19,9 +26,11 @@ export function FloatingEmergencyButton() {
         />
       )}
 
-      <div className="fixed bottom-6 left-4 z-50 sm:bottom-8 sm:left-8 pb-[env(safe-area-inset-bottom)]">
+      <div
+        className={`fixed bottom-6 left-4 z-50 pb-[env(safe-area-inset-bottom)] sm:bottom-8 sm:left-8 ${className}`}
+      >
         {open && (
-          <div className="mb-3 w-[min(calc(100vw-2rem),280px)] animate-slide-up rounded-2xl border border-red-500/25 bg-[#0c1524]/95 p-3 shadow-2xl shadow-red-500/10 backdrop-blur-2xl">
+          <div className="mb-3 w-[min(calc(100vw-2rem),280px)] animate-slide-up rounded-2xl border border-red-500/25 bg-[#141414]/95 p-3 shadow-2xl shadow-red-500/10 backdrop-blur-2xl">
             <div className="mb-2 flex items-center justify-between px-1">
               <p className="text-xs font-semibold uppercase tracking-wider text-red-400">
                 Emergency

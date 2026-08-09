@@ -19,6 +19,7 @@ export function MediaInventoryLandingContent() {
       compactMobile
       backHref="/media"
       backLabel="Back to Media Department"
+      accent="media"
     >
       <DashboardSection title="Equipment">
         <div className="divide-y divide-white/[0.06]">

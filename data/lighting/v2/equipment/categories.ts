@@ -4,14 +4,14 @@ export const lightingEquipmentCategories: EquipmentCategory[] = [
   {
     id: "fixtures",
     title: "Fixtures",
-    emoji: "💡",
+    icon: "fixture",
     href: "/lighting/equipment/fixtures",
     itemSlugs: ["chauvet-slimpar-pro-h-usb"],
   },
   {
     id: "control",
     title: "Control",
-    emoji: "🎛️",
+    icon: "dmx-control",
     href: "/lighting/equipment/control",
     itemSlugs: ["lightkey-foh-control", "dmxking-micro"],
   },

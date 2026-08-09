@@ -16,6 +16,7 @@ export function MediaProjectorSignalFlowContent() {
         backHref="/media/documentation"
         backLabel="Back to Documentation"
         title={doc.title}
+        accent="media"
       />
 
       <p className={`mt-2 ${audioStyles.body} text-slate-500`}>{doc.subtitle}</p>
@@ -38,7 +39,7 @@ export function MediaProjectorSignalFlowContent() {
         </EquipmentSection>
 
         <EquipmentSection title="Signal path">
-          <SignalFlowPathView path={doc.signalPath} />
+          <SignalFlowPathView path={doc.signalPath} accent="media" />
         </EquipmentSection>
 
         <EquipmentSection title="Teardown">

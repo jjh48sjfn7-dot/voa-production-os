@@ -22,10 +22,10 @@ export const mediaConfidenceMonitorSignalFlowDocument: MediaConfidenceMonitorSig
     signalPath: {
       id: "media-confidence-monitor-path",
       nodes: [
-        { id: "foh-mac", name: "FOH Mac", emoji: "💻" },
-        { id: "usb-c", name: "USB-C", emoji: "🔗" },
-        { id: "hdmi", name: "HDMI", emoji: "🔌" },
-        { id: "tv", name: "55-inch Roku TV", emoji: "📺" },
+        { id: "foh-mac", name: "FOH Mac", icon: "computer" },
+        { id: "usb-c", name: "USB-C", icon: "link" },
+        { id: "hdmi", name: "HDMI", icon: "cable" },
+        { id: "tv", name: "55-inch Roku TV", icon: "display" },
       ],
     },
     contentNote:

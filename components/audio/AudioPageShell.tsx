@@ -9,6 +9,8 @@ import { AudioProgressCard } from "@/components/audio/AudioProgressCard";
 import { audioStyles } from "@/lib/audio-styles";
 import { useMounted } from "@/hooks/useMounted";
 
+import type { DepartmentAccent } from "@/lib/theme";
+
 interface AudioPageShellProps {
   title: string;
   description: string;
@@ -26,6 +28,7 @@ interface AudioPageShellProps {
   compactMobile?: boolean;
   backHref?: string;
   backLabel?: string;
+  accent?: DepartmentAccent;
 }
 
 export function AudioPageShell({
@@ -40,6 +43,7 @@ export function AudioPageShell({
   compactMobile = false,
   backHref,
   backLabel,
+  accent = "audio",
 }: AudioPageShellProps) {
   const mounted = useMounted();
 
@@ -58,6 +62,7 @@ export function AudioPageShell({
         compactMobile={compactMobile}
         backHref={backHref}
         backLabel={backLabel}
+        accent={accent}
       />
 
       {stickyProgress}

@@ -1,12 +1,15 @@
 import type { EquipmentDefinition } from "@/data/audio/v2/equipment/types";
 import { accessoryItems } from "@/data/audio/v2/equipment/accessories";
+import { brandPhotos } from "@/lib/brand-photos";
 
 export const yamahaTf5: EquipmentDefinition = {
   id: "yamaha-tf5",
   slug: "yamaha-tf5",
   name: "Yamaha TF5",
   categoryId: "console",
-  icon: "🎚️",
+  icon: "console",
+  image: brandPhotos.equipment.yamahaTf5,
+  imageAlt: "Yamaha TF5 digital mixing console",
   purpose:
     "The Yamaha TF5 is the heart of our entire audio system. Every microphone, instrument, playback source, monitor mix and FOH speaker routes through this console. No audio should be connected directly to speakers without first routing through the TF5.",
   quickStart: [
@@ -154,7 +157,9 @@ export const stageSnakeA: EquipmentDefinition = {
   slug: "stage-snake-a",
   name: "Stage Snake A",
   categoryId: "stage-boxes",
-  icon: "🔌",
+  icon: "cable",
+  image: brandPhotos.equipment.stageSnakeA,
+  imageAlt: "Analog stage snake and stage box",
   purpose:
     "Stage Snake A carries the drum inputs and stage-side outputs between Stage Left and the Yamaha TF5. It is used every Sunday for drum microphones, the drummer in-ear feed, and the Stage Left speaker and monitor connections.",
   quickStart: [
@@ -319,7 +324,9 @@ export const stageSnakeB: EquipmentDefinition = {
   slug: "stage-snake-b",
   name: "Stage Snake B",
   categoryId: "stage-boxes",
-  icon: "🔌",
+  icon: "cable",
+  image: brandPhotos.equipment.stageSnakeB,
+  imageAlt: "Analog stage snake and stage box",
   purpose:
     "Stage Snake B carries the keyboard input and Stage Right outputs between the stage and the Yamaha TF5. It is used every Sunday for the keyboard, Right FOH speaker, and Right stage monitor.",
   quickStart: [
@@ -460,7 +467,9 @@ export const shureBlxReceiver: EquipmentDefinition = {
   slug: "shure-blx-receiver",
   name: "Shure BLX288 Dual Wireless Receiver",
   categoryId: "wireless",
-  icon: "🎤",
+  icon: "microphone",
+  image: brandPhotos.equipment.shureBlx288,
+  imageAlt: "Shure BLX288 dual wireless receiver",
   purpose:
     "The Shure BLX288 wireless system provides handheld microphone audio for Sunday services. Two dual receivers feed four color-coded handheld microphones directly into the Yamaha TF5.",
   specifications: [
@@ -627,7 +636,9 @@ export const qscK122: EquipmentDefinition = {
   slug: "qsc-k12-2",
   name: "QSC K12.2",
   categoryId: "foh-speakers",
-  icon: "🔊",
+  icon: "speaker",
+  image: brandPhotos.equipment.qscK12,
+  imageAlt: "QSC K12.2 powered speaker",
   purpose: "Main Front of House speakers.",
   quickStart: [
     "Position Left and Right FOH speakers at the approved FOH location",
@@ -684,7 +695,7 @@ export const subwoofer: EquipmentDefinition = {
   slug: "subwoofer",
   name: "Subwoofer",
   categoryId: "subwoofer",
-  icon: "🔈",
+  icon: "subwoofer",
   purpose:
     "The subwoofer extends low-frequency response for worship music and playback. Approved placement is on the audience floor, centered directly in front of the stage before the first seating row. Model and final routing are TBD.",
   quickStart: [
@@ -811,7 +822,9 @@ export const qscK102: EquipmentDefinition = {
   slug: "qsc-k10-2",
   name: "QSC K10.2",
   categoryId: "monitors",
-  icon: "📣",
+  icon: "monitor",
+  image: brandPhotos.equipment.qscK102,
+  imageAlt: "QSC K10.2 stage monitor",
   purpose: "Stage monitor speakers.",
   quickStart: [
     "Position Left and Right monitors at approved stage locations",
@@ -868,7 +881,9 @@ export const drummerInEarSystem: EquipmentDefinition = {
   slug: "drummer-in-ear-system",
   name: "Drummer In-Ear System",
   categoryId: "monitors",
-  icon: "🎧",
+  icon: "headphones",
+  image: brandPhotos.equipment.behringerPm1,
+  imageAlt: "Behringer PM1 personal monitor beltpack",
   purpose: "Provides a wired personal monitor mix for the drummer.",
   specifications: [
     {
@@ -926,7 +941,9 @@ export const mediaComputer: EquipmentDefinition = {
   slug: "media-computer",
   name: "Media Computer",
   categoryId: "playback",
-  icon: "💻",
+  icon: "computer",
+  image: brandPhotos.equipment.mediaComputer,
+  imageAlt: "FOH iMac production computer",
   purpose:
     "The media computer runs ProPresenter and sends playback audio to the Yamaha TF5 for worship slides, videos, and pre-service music.",
   specifications: [
@@ -1034,7 +1051,9 @@ export const keyboard: EquipmentDefinition = {
   slug: "keyboard",
   name: "Keyboard",
   categoryId: "keyboard",
-  icon: "🎹",
+  icon: "keyboard",
+  image: brandPhotos.equipment.keyboardModx8,
+  imageAlt: "Yamaha MODX8 keyboard",
   purpose:
     "The keyboard provides the main keys signal for worship and feeds the audio system through Stage Snake B.",
   quickStart: [

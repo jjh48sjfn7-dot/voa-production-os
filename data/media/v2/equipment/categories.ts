@@ -4,7 +4,7 @@ export const mediaEquipmentCategories: EquipmentCategory[] = [
   {
     id: "displays",
     title: "Displays",
-    emoji: "🖥️",
+    icon: "screen",
     href: "/media/equipment/displays",
     itemSlugs: [
       "skerell-projection-screen",
@@ -15,7 +15,7 @@ export const mediaEquipmentCategories: EquipmentCategory[] = [
   {
     id: "projection",
     title: "Projection",
-    emoji: "📽️",
+    icon: "projector",
     href: "/media/equipment/projection",
     itemSlugs: [
       "epson-home-cinema-2250",
@@ -27,7 +27,7 @@ export const mediaEquipmentCategories: EquipmentCategory[] = [
   {
     id: "control",
     title: "Control",
-    emoji: "💻",
+    icon: "computer",
     href: "/media/equipment/control",
     itemSlugs: ["foh-mac"],
   },
