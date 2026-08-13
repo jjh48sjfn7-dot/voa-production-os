@@ -1,5 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 import type { ProductionIconId } from "@/lib/production-icons";
+import type { ReferenceSequenceKey } from "@/lib/reference-photos";
 
 export interface DocumentationPage {
   id: string;
@@ -62,6 +63,11 @@ export type DocumentationChannelGroup =
   | DocumentationChannelAvailableGroup
   | DocumentationChannelAssignmentGroup;
 
+export interface DocumentationVisualSupplement {
+  afterListSectionTitle: string;
+  sequenceKey: ReferenceSequenceKey;
+}
+
 export interface DocumentationPageContent {
   id: string;
   purpose: string;
@@ -71,6 +77,7 @@ export interface DocumentationPageContent {
   channelGroups?: DocumentationChannelGroup[];
   listSections?: DocumentationListSection[];
   infoSections?: DocumentationInfoSection[];
+  visualSupplements?: DocumentationVisualSupplement[];
   placeholderMessage?: string;
   relatedResources?: DocumentationRelatedResource[];
 }

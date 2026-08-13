@@ -21,5 +21,7 @@ export {
   type RelatedResourceItem,
 } from "@/components/shared/RelatedResources";
 export { SectionCard } from "@/components/shared/SectionCard";
+export { SetupReference } from "@/components/shared/SetupReference";
+export { SetupReferenceSequence } from "@/components/shared/SetupReferenceSequence";
 export { StatusBadge } from "@/components/shared/StatusBadge";
 export { TroubleshootingCard } from "@/components/shared/TroubleshootingCard";

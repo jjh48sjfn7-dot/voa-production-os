@@ -5,6 +5,7 @@ import { SetupChecklist } from "@/components/audio/v2/SetupChecklist";
 import { SundaySetupAccordion } from "@/components/audio/v2/SundaySetupAccordion";
 import { SundaySetupMilestoneRow } from "@/components/audio/v2/SundaySetupMilestoneRow";
 import { AudioSubpageHeader } from "@/components/audio/v2/AudioSubpageHeader";
+import { SetupReference } from "@/components/shared/SetupReference";
 import {
   SUNDAY_SETUP_MEDIA_V1_STORAGE,
   getMediaSectionTaskCount,
@@ -13,6 +14,7 @@ import {
   mediaSetupUnloadTrailer,
 } from "@/data/media/v2/sunday-setup";
 import { useChecklist } from "@/hooks/useChecklist";
+import { mediaConfidenceMonitorReferences, mediaSundaySetupReferences } from "@/lib/reference-photos";
 import { audioStyles } from "@/lib/audio-styles";
 
 const MEDIA_SETUP_VALID_ITEM_IDS = getMediaSetupItemIds();
@@ -48,7 +50,10 @@ export function MediaSundaySetupContent() {
           accent="media"
         />
 
-        {mediaSetupSections.map((section) => (
+        {mediaSetupSections.map((section) => {
+          const sectionReference = mediaSundaySetupReferences[section.id];
+
+          return (
           <SundaySetupAccordion
             key={section.id}
             title={section.title}
@@ -63,13 +68,31 @@ export function MediaSundaySetupContent() {
                 {section.note}
               </p>
             )}
+            {sectionReference && (
+              <div className="pb-3 pt-1">
+                <SetupReference photo={sectionReference} />
+              </div>
+            )}
+            {section.id === "setup-confidence-monitor" && (
+              <div className="space-y-4 pb-3 pt-1">
+                <SetupReference
+                  photo={mediaConfidenceMonitorReferences.spatial}
+                  label="Overall position"
+                />
+                <SetupReference
+                  photo={mediaConfidenceMonitorReferences.connectionDetail}
+                  label="HDMI connection detail"
+                />
+              </div>
+            )}
             <SetupChecklist
               items={section.items}
               checked={checked}
               onToggle={toggleItem}
             />
           </SundaySetupAccordion>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

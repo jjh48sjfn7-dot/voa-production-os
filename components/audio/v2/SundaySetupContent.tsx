@@ -5,6 +5,7 @@ import { SetupChecklist } from "@/components/audio/v2/SetupChecklist";
 import { SundaySetupAccordion } from "@/components/audio/v2/SundaySetupAccordion";
 import { SundaySetupMilestoneRow } from "@/components/audio/v2/SundaySetupMilestoneRow";
 import { AudioSubpageHeader } from "@/components/audio/v2/AudioSubpageHeader";
+import { SetupReference } from "@/components/shared/SetupReference";
 import { useChecklist } from "@/hooks/useChecklist";
 import {
   SUNDAY_SETUP_V2_STORAGE,
@@ -13,6 +14,7 @@ import {
   sundaySetupUnloadTrailer,
   sundaySetupV2Sections,
 } from "@/data/audio/v2/sunday-setup";
+import { audioSundaySetupReferences } from "@/lib/reference-photos";
 import { audioStyles } from "@/lib/audio-styles";
 
 const SUNDAY_SETUP_VALID_ITEM_IDS = getSundaySetupV2ItemIds();
@@ -48,7 +50,12 @@ export function SundaySetupContent() {
           accent="audio"
         />
 
-        {sundaySetupV2Sections.map((section) => (
+        {sundaySetupV2Sections.map((section) => {
+          const reference = audioSundaySetupReferences[section.id];
+          const referencePhoto =
+            reference && !Array.isArray(reference) ? reference : undefined;
+
+          return (
           <SundaySetupAccordion
             key={section.id}
             title={section.title}
@@ -58,6 +65,11 @@ export function SundaySetupContent() {
             open={openSectionId === section.id}
             onToggle={() => handleSectionToggle(section.id)}
           >
+            {referencePhoto && (
+              <div className="pb-3 pt-1">
+                <SetupReference photo={referencePhoto} />
+              </div>
+            )}
             <SetupChecklist
               items={section.items}
               groups={section.groups}
@@ -65,7 +77,8 @@ export function SundaySetupContent() {
               onToggle={toggleItem}
             />
           </SundaySetupAccordion>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

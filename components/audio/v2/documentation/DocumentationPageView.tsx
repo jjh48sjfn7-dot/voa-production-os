@@ -7,9 +7,11 @@ import { DocumentationInfoCard } from "@/components/audio/v2/documentation/Docum
 import { DocumentationList } from "@/components/audio/v2/documentation/DocumentationList";
 import { DocumentationRelatedResources } from "@/components/audio/v2/documentation/DocumentationRelatedResources";
 import { DocumentationTable } from "@/components/audio/v2/documentation/DocumentationTable";
+import { SetupReferenceSequence } from "@/components/shared/SetupReferenceSequence";
 import { EquipmentSection } from "@/components/audio/v2/equipment/EquipmentSection";
 import type { DocumentationPageContent } from "@/data/audio/v2/documentation/types";
 import { audioStyles } from "@/lib/audio-styles";
+import { referenceSequences } from "@/lib/reference-photos";
 import { voaLabels } from "@/data/audio/venue";
 
 interface DocumentationPageContentProps {
@@ -29,6 +31,13 @@ export function DocumentationPageView({
   const hasInfoSections = !!content.infoSections?.length;
   const hasRelatedResources = !!content.relatedResources?.length;
   const isPlaceholder = !!content.placeholderMessage;
+
+  function getVisualSupplement(sectionTitle?: string) {
+    if (!sectionTitle || !content.visualSupplements?.length) return undefined;
+    return content.visualSupplements.find(
+      (supplement) => supplement.afterListSectionTitle === sectionTitle
+    );
+  }
 
   return (
     <AudioPageShell
@@ -83,14 +92,29 @@ export function DocumentationPageView({
           ))}
 
         {hasLists &&
-          content.listSections!.map((section) => (
-            <EquipmentSection
-              key={section.title ?? section.items[0]}
-              title={section.title ?? "Guide"}
-            >
-              <DocumentationList items={section.items} />
-            </EquipmentSection>
-          ))}
+          content.listSections!.map((section) => {
+            const supplement = getVisualSupplement(section.title);
+
+            return (
+              <div key={section.title ?? section.items[0]} className="space-y-8">
+                <EquipmentSection
+                  title={section.title ?? "Guide"}
+                >
+                  <DocumentationList items={section.items} />
+                </EquipmentSection>
+
+                {supplement && (
+                  <EquipmentSection
+                    title={referenceSequences[supplement.sequenceKey].title}
+                  >
+                    <SetupReferenceSequence
+                      sequence={referenceSequences[supplement.sequenceKey]}
+                    />
+                  </EquipmentSection>
+                )}
+              </div>
+            );
+          })}
 
         {hasRelatedResources && (
           <EquipmentSection title="Related Resources">

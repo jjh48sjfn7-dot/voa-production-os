@@ -38,6 +38,12 @@ export const wiringStandards: DocumentationPageContent = {
       ],
     },
   ],
+  visualSupplements: [
+    {
+      afterListSectionTitle: "Cable Routing",
+      sequenceKey: "venueCablePath",
+    },
+  ],
   relatedResources: [
     {
       icon: "console",
