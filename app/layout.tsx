@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Montserrat } from "next/font/google";
-import { AppLayout } from "@/components/layout/AppLayout";
+import { RootShell } from "@/components/layout/RootShell";
 import { brandAssets } from "@/lib/brand-assets";
 import "./globals.css";
 
@@ -37,7 +37,7 @@ export default function RootLayout({
       className={`${montserrat.variable} h-full antialiased`}
     >
       <body className="min-h-full">
-        <AppLayout>{children}</AppLayout>
+        <RootShell>{children}</RootShell>
       </body>
     </html>
   );
