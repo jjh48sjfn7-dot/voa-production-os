@@ -2,10 +2,18 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import type { Database } from "@/lib/supabase/database.types";
 import { getSupabasePublicConfig } from "@/lib/supabase/env";
+import { isLoginOrSignupPath, isVolunteerPath } from "@/lib/auth/paths";
+
+function copyCookies(from: NextResponse, to: NextResponse): NextResponse {
+  from.cookies.getAll().forEach((cookie) => {
+    to.cookies.set(cookie);
+  });
+  return to;
+}
 
 /**
- * Refresh Supabase auth cookies. Does not authorize routes.
- * Operational Production OS stays public. /volunteer is not redirected in 4B.
+ * Refresh Supabase auth cookies. Does not load membership or authorize in full.
+ * Volunteer protection still runs in the /volunteer layout via getClaims().
  */
 export async function refreshSupabaseSession(
   request: NextRequest
@@ -16,6 +24,7 @@ export async function refreshSupabaseSession(
   }
 
   let supabaseResponse = NextResponse.next({ request });
+  let hasIdentity = false;
 
   try {
     const supabase = createServerClient<Database>(config.url, config.publishableKey, {
@@ -38,10 +47,26 @@ export async function refreshSupabaseSession(
       },
     });
 
-    // Verify/refresh via claims. Do not authorize from getSession().user.
-    await supabase.auth.getClaims();
+    const { data } = await supabase.auth.getClaims();
+    hasIdentity = Boolean(data?.claims);
   } catch {
     return NextResponse.next({ request });
+  }
+
+  const pathname = request.nextUrl.pathname;
+
+  if (isVolunteerPath(pathname) && !hasIdentity) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/login";
+    url.search = "";
+    return copyCookies(supabaseResponse, NextResponse.redirect(url));
+  }
+
+  if (isLoginOrSignupPath(pathname) && hasIdentity) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/volunteer";
+    url.search = "";
+    return copyCookies(supabaseResponse, NextResponse.redirect(url));
   }
 
   return supabaseResponse;

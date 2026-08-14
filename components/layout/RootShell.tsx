@@ -2,14 +2,13 @@
 
 import { usePathname } from "next/navigation";
 import { AppLayout } from "@/components/layout/AppLayout";
+import { isAuthUiPath, isVolunteerPath } from "@/lib/auth/paths";
 
-/** Keeps Volunteer Mode out of the operational shell without changing AppLayout. */
+/** Keeps Volunteer Mode and Auth screens out of the operational shell. */
 export function RootShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isVolunteer =
-    pathname === "/volunteer" || pathname.startsWith("/volunteer/");
 
-  if (isVolunteer) {
+  if (isVolunteerPath(pathname) || isAuthUiPath(pathname)) {
     return <>{children}</>;
   }
 
