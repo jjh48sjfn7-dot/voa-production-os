@@ -1,10 +1,5 @@
-import { VolunteerStubPage } from "@/components/volunteer/VolunteerStubPage";
+import { VolunteerJourney } from "@/components/volunteer/journey/VolunteerJourney";
 
 export default function VolunteerJourneyPage() {
-  return (
-    <VolunteerStubPage
-      title="My Journey"
-      body="Volunteer training and growth experience coming next."
-    />
-  );
+  return <VolunteerJourney />;
 }

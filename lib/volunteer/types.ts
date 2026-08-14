@@ -167,6 +167,10 @@ export interface PersonalNotice {
   tone: "info" | "action";
 }
 
+export type TrainingHistoryKind = "course" | "shadow" | "checkoff";
+
+export type RequirementProgress = "complete" | "in-progress" | "not-started";
+
 /** Stored separately from the main Journey view. */
 export interface TrainingHistoryEntry {
   id: string;
@@ -174,6 +178,8 @@ export interface TrainingHistoryEntry {
   courseId: string;
   title: string;
   completedAt: string;
+  kind?: TrainingHistoryKind;
+  detail?: string;
 }
 
 export interface ChecklistTaskCompletion {

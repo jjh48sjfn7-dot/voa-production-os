@@ -1,0 +1,55 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { DepartmentJourneySwitcher } from "@/components/volunteer/journey/DepartmentJourneySwitcher";
+import { GrowthTrack } from "@/components/volunteer/journey/GrowthTrack";
+import { JourneyNextStepCard } from "@/components/volunteer/journey/JourneyNextStepCard";
+import { JourneyProgressSummary } from "@/components/volunteer/journey/JourneyProgressSummary";
+import { PositionQualificationsSection } from "@/components/volunteer/journey/PositionQualificationsSection";
+import { useVolunteerSession } from "@/components/volunteer/VolunteerSessionProvider";
+import { volunteerUi } from "@/lib/volunteer/ui";
+
+export function VolunteerJourney() {
+  const session = useVolunteerSession();
+  const [departmentId, setDepartmentId] = useState(session.activeDepartmentId);
+  const showingActiveJourney = departmentId === session.journey.departmentId;
+
+  return (
+    <div className="space-y-4">
+      <header>
+        <h1 className="text-[26px] font-semibold tracking-tight text-white">
+          My Journey
+        </h1>
+        <p className="mt-0.5 text-[13px] text-white/45">{session.workspace.name}</p>
+        <DepartmentJourneySwitcher
+          selectedDepartmentId={departmentId}
+          onSelect={setDepartmentId}
+        />
+      </header>
+
+      {showingActiveJourney ? (
+        <>
+          <JourneyNextStepCard />
+          <GrowthTrack steps={session.journey.growthTrack} />
+          <JourneyProgressSummary />
+          <PositionQualificationsSection departmentId={departmentId} />
+          <Link
+            href="/volunteer/journey/history"
+            className={`${volunteerUi.ghost} -ml-3 text-white/55`}
+          >
+            View Training History
+            <ArrowRight className="ml-1.5 h-4 w-4" />
+          </Link>
+        </>
+      ) : (
+        <section className={`${volunteerUi.card} ${volunteerUi.cardPad}`}>
+          <p className={volunteerUi.body}>
+            No active journey in this department yet.
+          </p>
+        </section>
+      )}
+    </div>
+  );
+}
