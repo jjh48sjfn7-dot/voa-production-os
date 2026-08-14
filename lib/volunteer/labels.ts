@@ -1,3 +1,4 @@
+import { getProductionDepartments } from "@/lib/production-os";
 import type {
   DepartmentGrowthLevel,
   DepartmentId,
@@ -6,11 +7,9 @@ import type {
   RequirementProgress,
 } from "@/lib/volunteer/types";
 
-export const departmentLabels: Record<DepartmentId, string> = {
-  audio: "Audio",
-  lighting: "Lighting",
-  media: "Media",
-};
+export const departmentLabels: Record<DepartmentId, string> = Object.fromEntries(
+  getProductionDepartments().map((department) => [department.id, department.name])
+) as Record<DepartmentId, string>;
 
 export const growthLevelLabels: Record<DepartmentGrowthLevel, string> = {
   "new-volunteer": "New Volunteer",
@@ -20,6 +19,15 @@ export const growthLevelLabels: Record<DepartmentGrowthLevel, string> = {
   "ready-to-serve": "Ready to Serve",
   advanced: "Advanced",
 };
+
+export const departmentGrowthTrackLevels: DepartmentGrowthLevel[] = [
+  "new-volunteer",
+  "learning",
+  "shadowing",
+  "assisted",
+  "ready-to-serve",
+  "advanced",
+];
 
 export const qualificationStatusLabels: Record<
   PositionQualificationStatus,
@@ -61,6 +69,21 @@ export const growthLevelDescriptions: Record<DepartmentGrowthLevel, string> = {
   advanced:
     "You’re deepening specialty skills beyond the core serving path.",
 };
+
+export const volunteerEmptyCopy = {
+  welcome: "Welcome to Volunteer Mode",
+  noUpcomingService: "No upcoming service",
+  noUpcomingServiceDetail: "You don’t have a personal Sunday assignment yet.",
+  notAssigned: "Not assigned yet",
+  trainingUnconnected: "Training progress not connected yet",
+  trainingUnconnectedDetail:
+    "Your personal growth path will appear here once training is connected.",
+  noQualification: "No position qualification yet",
+  noQualificationDetail:
+    "Serving positions are defined by the church. None are connected to this account yet.",
+  noTrainingHistory: "No training history yet",
+  growthFrameworkNote: "Framework — personal progress not connected yet",
+} as const;
 
 export function getPositionName(
   positions: { id: string; name: string }[],

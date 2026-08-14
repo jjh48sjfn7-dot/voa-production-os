@@ -6,6 +6,7 @@ import { useVolunteerSession } from "@/components/volunteer/VolunteerSessionProv
 import {
   getPositionName,
   growthLevelLabels,
+  volunteerEmptyCopy,
 } from "@/lib/volunteer/labels";
 import {
   getActiveAssignment,
@@ -17,7 +18,22 @@ import { volunteerUi } from "@/lib/volunteer/ui";
 export function JourneyNextStepCard() {
   const session = useVolunteerSession();
   const assignment = getActiveAssignment(session);
-  const step = session.journey.nextStep;
+  const step = session.journey?.nextStep;
+
+  if (!step || !session.journey) {
+    return (
+      <section className={`${volunteerUi.card} ${volunteerUi.cardPad} border-[#FF5A00]/20`}>
+        <p className={volunteerUi.eyebrow}>Next step</p>
+        <h2 className="mt-1.5 text-[20px] font-semibold tracking-tight text-white">
+          {volunteerEmptyCopy.trainingUnconnected}
+        </h2>
+        <p className={`mt-1 ${volunteerUi.body}`}>
+          {volunteerEmptyCopy.trainingUnconnectedDetail}
+        </p>
+      </section>
+    );
+  }
+
   const positionName = getPositionName(session.positions, session.journey.positionId);
   const { done, total } = getCompetencyProgress(
     getQualificationForPosition(session, session.journey.positionId)

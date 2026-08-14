@@ -1,4 +1,4 @@
-import { formatHistoryDate } from "@/lib/volunteer/labels";
+import { formatHistoryDate, volunteerEmptyCopy } from "@/lib/volunteer/labels";
 import type { TrainingHistoryEntry } from "@/lib/volunteer/types";
 import { volunteerUi } from "@/lib/volunteer/ui";
 
@@ -8,7 +8,7 @@ interface TrainingHistoryListProps {
 
 export function TrainingHistoryList({ entries }: TrainingHistoryListProps) {
   if (entries.length === 0) {
-    return <p className={volunteerUi.body}>No training history yet.</p>;
+    return <p className={volunteerUi.body}>{volunteerEmptyCopy.noTrainingHistory}</p>;
   }
 
   return (

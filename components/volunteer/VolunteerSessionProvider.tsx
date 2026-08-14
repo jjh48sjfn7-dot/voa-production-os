@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext } from "react";
-import { getDemoVolunteerSession } from "@/data/volunteer/demo-session";
+import { getVolunteerSession } from "@/lib/volunteer/adapters/session";
 import type { VolunteerSession } from "@/lib/volunteer/types";
 
 const VolunteerSessionContext = createContext<VolunteerSession | null>(null);
@@ -12,7 +12,7 @@ export function VolunteerSessionProvider({
   children: React.ReactNode;
 }) {
   return (
-    <VolunteerSessionContext.Provider value={getDemoVolunteerSession()}>
+    <VolunteerSessionContext.Provider value={getVolunteerSession()}>
       {children}
     </VolunteerSessionContext.Provider>
   );

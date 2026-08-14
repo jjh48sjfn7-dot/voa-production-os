@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { DepartmentJourneySwitcher } from "@/components/volunteer/journey/DepartmentJourneySwitcher";
@@ -9,12 +8,18 @@ import { JourneyNextStepCard } from "@/components/volunteer/journey/JourneyNextS
 import { JourneyProgressSummary } from "@/components/volunteer/journey/JourneyProgressSummary";
 import { PositionQualificationsSection } from "@/components/volunteer/journey/PositionQualificationsSection";
 import { useVolunteerSession } from "@/components/volunteer/VolunteerSessionProvider";
+import { departmentGrowthTrackLevels } from "@/lib/volunteer/labels";
 import { volunteerUi } from "@/lib/volunteer/ui";
+import type { DepartmentId } from "@/lib/volunteer/types";
+import { useState } from "react";
 
 export function VolunteerJourney() {
   const session = useVolunteerSession();
-  const [departmentId, setDepartmentId] = useState(session.activeDepartmentId);
-  const showingActiveJourney = departmentId === session.journey.departmentId;
+  const [departmentId, setDepartmentId] = useState<DepartmentId | null>(
+    session.activeDepartmentId
+  );
+  const showingPersonalJourney =
+    session.journey !== null && departmentId === session.journey.departmentId;
 
   return (
     <div className="space-y-4">
@@ -29,27 +34,24 @@ export function VolunteerJourney() {
         />
       </header>
 
-      {showingActiveJourney ? (
-        <>
-          <JourneyNextStepCard />
-          <GrowthTrack steps={session.journey.growthTrack} />
-          <JourneyProgressSummary />
-          <PositionQualificationsSection departmentId={departmentId} />
-          <Link
-            href="/volunteer/journey/history"
-            className={`${volunteerUi.ghost} -ml-3 text-white/55`}
-          >
-            View Training History
-            <ArrowRight className="ml-1.5 h-4 w-4" />
-          </Link>
-        </>
-      ) : (
-        <section className={`${volunteerUi.card} ${volunteerUi.cardPad}`}>
-          <p className={volunteerUi.body}>
-            No active journey in this department yet.
-          </p>
-        </section>
-      )}
+      <JourneyNextStepCard />
+      <GrowthTrack
+        steps={
+          showingPersonalJourney && session.journey
+            ? session.journey.growthTrack
+            : departmentGrowthTrackLevels.map((level) => ({ level }))
+        }
+        unconnected={!showingPersonalJourney}
+      />
+      <JourneyProgressSummary />
+      <PositionQualificationsSection departmentId={departmentId} />
+      <Link
+        href="/volunteer/journey/history"
+        className={`${volunteerUi.ghost} -ml-3 text-white/55`}
+      >
+        View Training History
+        <ArrowRight className="ml-1.5 h-4 w-4" />
+      </Link>
     </div>
   );
 }

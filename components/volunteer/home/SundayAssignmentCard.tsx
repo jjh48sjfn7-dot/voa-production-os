@@ -9,6 +9,7 @@ import {
   getPositionName,
   growthLevelLabels,
   qualificationStatusLabels,
+  volunteerEmptyCopy,
 } from "@/lib/volunteer/labels";
 import {
   getActiveAssignment,
@@ -20,7 +21,19 @@ import { volunteerUi } from "@/lib/volunteer/ui";
 export function SundayAssignmentCard() {
   const session = useVolunteerSession();
   const assignment = session.sundayAssignment;
-  if (!assignment) return null;
+  if (!assignment) {
+    return (
+      <section className={`${volunteerUi.card} ${volunteerUi.cardPad}`}>
+        <p className={volunteerUi.eyebrow}>Sunday</p>
+        <h2 className={`mt-1.5 ${volunteerUi.title}`}>
+          {volunteerEmptyCopy.noUpcomingService}
+        </h2>
+        <p className={`mt-1 ${volunteerUi.body}`}>
+          {volunteerEmptyCopy.noUpcomingServiceDetail}
+        </p>
+      </section>
+    );
+  }
 
   const positionName = getPositionName(session.positions, assignment.positionId);
   const servingToday = isServingToday(session);

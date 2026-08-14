@@ -213,14 +213,16 @@ export interface ServiceReadiness {
 }
 
 export interface VolunteerSession {
-  user: UserAccount;
+  user: UserAccount | null;
   workspace: ChurchWorkspace;
-  membership: TeamMembership;
+  membership: TeamMembership | null;
+  /** Real Production OS departments available at this church — not personal assignments. */
+  availableDepartmentIds: DepartmentId[];
   positions: Position[];
   departmentAssignments: DepartmentAssignment[];
   qualifications: PositionQualificationRecord[];
-  activeDepartmentId: DepartmentId;
-  journey: DepartmentJourney;
+  activeDepartmentId: DepartmentId | null;
+  journey: DepartmentJourney | null;
   sundayAssignment: SundayAssignment | null;
   notices: PersonalNotice[];
   trainingHistory: TrainingHistoryEntry[];

@@ -7,7 +7,8 @@ import { volunteerUi } from "@/lib/volunteer/ui";
 
 export function UpcomingNextStep() {
   const session = useVolunteerSession();
-  const step = session.journey.nextStep;
+  const step = session.journey?.nextStep;
+  if (!step) return null;
 
   return (
     <section className={`${volunteerUi.card} ${volunteerUi.cardPad}`}>

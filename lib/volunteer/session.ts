@@ -18,7 +18,12 @@ export function isServingToday(session: VolunteerSession): boolean {
   return assignment.serviceDate === local;
 }
 
+export function isPersonalTrainingConnected(session: VolunteerSession): boolean {
+  return session.journey !== null || session.departmentAssignments.length > 0;
+}
+
 export function getActiveAssignment(session: VolunteerSession) {
+  if (!session.activeDepartmentId) return undefined;
   return session.departmentAssignments.find(
     (assignment) => assignment.departmentId === session.activeDepartmentId
   );
@@ -39,17 +44,19 @@ export function getQualificationForPosition(
   session: VolunteerSession,
   positionId: string
 ): PositionQualificationRecord | undefined {
+  if (!session.membership) return undefined;
   return session.qualifications.find(
     (record) =>
       record.positionId === positionId &&
-      record.membershipId === session.membership.id
+      record.membershipId === session.membership?.id
   );
 }
 
 export function getDepartmentPositions(
   session: VolunteerSession,
-  departmentId: DepartmentId = session.activeDepartmentId
+  departmentId: DepartmentId | null = session.activeDepartmentId
 ): Position[] {
+  if (!departmentId) return [];
   const assignment = session.departmentAssignments.find(
     (item) => item.departmentId === departmentId && item.active
   );

@@ -2,20 +2,27 @@ import { Check } from "lucide-react";
 import {
   growthLevelLabels,
   journeyStepStateLabels,
+  volunteerEmptyCopy,
 } from "@/lib/volunteer/labels";
 import type { DepartmentGrowthLevel, JourneyStepState } from "@/lib/volunteer/types";
 import { volunteerUi } from "@/lib/volunteer/ui";
 
 interface GrowthTrackStepProps {
   level: DepartmentGrowthLevel;
-  state: JourneyStepState;
+  state?: JourneyStepState;
   isLast: boolean;
+  unconnected: boolean;
 }
 
-export function GrowthTrackStep({ level, state, isLast }: GrowthTrackStepProps) {
-  const isCurrent = state === "current";
-  const isCompleted = state === "completed";
-  const isLocked = state === "locked";
+export function GrowthTrackStep({
+  level,
+  state,
+  isLast,
+  unconnected,
+}: GrowthTrackStepProps) {
+  const isCurrent = !unconnected && state === "current";
+  const isCompleted = !unconnected && state === "completed";
+  const isLocked = !unconnected && state === "locked";
 
   return (
     <li className="flex gap-3">
@@ -26,9 +33,7 @@ export function GrowthTrackStep({ level, state, isLast }: GrowthTrackStepProps) 
               ? "bg-[#FF5A00]"
               : isCurrent
                 ? "border-2 border-[#FF5A00] bg-[#FF5A00]/15"
-                : isLocked
-                  ? "bg-white/[0.06]"
-                  : "border border-white/20 bg-transparent"
+                : "border border-white/20 bg-transparent"
           }`}
           aria-hidden
         >
@@ -53,29 +58,36 @@ export function GrowthTrackStep({ level, state, isLast }: GrowthTrackStepProps) 
         >
           {growthLevelLabels[level]}
         </p>
-        <p className={`mt-0.5 text-[12px] ${isCurrent ? volunteerUi.orange : "text-white/40"}`}>
-          {journeyStepStateLabels[state]}
-        </p>
+        {!unconnected && state && (
+          <p className={`mt-0.5 text-[12px] ${isCurrent ? volunteerUi.orange : "text-white/40"}`}>
+            {journeyStepStateLabels[state]}
+          </p>
+        )}
       </div>
     </li>
   );
 }
 
 interface GrowthTrackProps {
-  steps: { level: DepartmentGrowthLevel; state: JourneyStepState }[];
+  steps: { level: DepartmentGrowthLevel; state?: JourneyStepState }[];
+  unconnected?: boolean;
 }
 
-export function GrowthTrack({ steps }: GrowthTrackProps) {
+export function GrowthTrack({ steps, unconnected = false }: GrowthTrackProps) {
   return (
     <section className={`${volunteerUi.card} ${volunteerUi.cardPad}`}>
       <p className={volunteerUi.eyebrow}>Department growth</p>
       <h2 className={`mt-1.5 ${volunteerUi.title}`}>Growth Track</h2>
+      {unconnected && (
+        <p className={`mt-1 ${volunteerUi.muted}`}>{volunteerEmptyCopy.growthFrameworkNote}</p>
+      )}
       <ol className="mt-4">
         {steps.map((step, index) => (
           <GrowthTrackStep
             key={step.level}
             level={step.level}
             state={step.state}
+            unconnected={unconnected}
             isLast={index === steps.length - 1}
           />
         ))}

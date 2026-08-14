@@ -7,6 +7,7 @@ import { QuickAccess } from "@/components/volunteer/home/QuickAccess";
 import { SundayAssignmentCard } from "@/components/volunteer/home/SundayAssignmentCard";
 import { UpcomingNextStep } from "@/components/volunteer/home/UpcomingNextStep";
 import { useVolunteerSession } from "@/components/volunteer/VolunteerSessionProvider";
+import { volunteerEmptyCopy } from "@/lib/volunteer/labels";
 import { isScheduledForService } from "@/lib/volunteer/session";
 
 export function VolunteerHome() {
@@ -18,7 +19,9 @@ export function VolunteerHome() {
       <header>
         <p className="text-[13px] text-white/45">{session.workspace.name}</p>
         <h1 className="mt-0.5 text-[26px] font-semibold tracking-tight text-white">
-          Welcome back, {session.user.firstName}
+          {session.user
+            ? `Welcome back, ${session.user.firstName}`
+            : volunteerEmptyCopy.welcome}
         </h1>
       </header>
 
@@ -34,6 +37,7 @@ export function VolunteerHome() {
       ) : (
         <>
           <ContinueJourneyCard />
+          <SundayAssignmentCard />
           <GrowthSnapshot />
           <UpcomingNextStep />
           <QuickAccess />

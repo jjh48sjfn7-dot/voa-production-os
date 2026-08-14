@@ -41,8 +41,9 @@ export interface JourneyRequirementRow {
 
 export function getPositionQualificationViews(
   session: VolunteerSession,
-  departmentId: DepartmentId = session.activeDepartmentId
+  departmentId: DepartmentId | null = session.activeDepartmentId
 ): PositionQualificationView[] {
+  if (!departmentId) return [];
   const assignment = session.departmentAssignments.find(
     (item) => item.departmentId === departmentId && item.active
   );
@@ -77,7 +78,7 @@ export function getPositionQualificationViews(
       competenciesLabel:
         record && total > 0 ? `${done} / ${total}` : undefined,
       nextRequirement:
-        !locked && position.id === session.journey.positionId
+        !locked && position.id === session.journey?.positionId
           ? session.journey.nextStep.title
           : undefined,
     };
@@ -113,5 +114,5 @@ export function getCurrentStageRequirementRows(
 export function getCurrentGrowthLevel(session: VolunteerSession) {
   const assignment = getActiveAssignment(session);
   if (assignment) return assignment.growthLevel;
-  return session.journey.growthTrack.find((step) => step.state === "current")?.level;
+  return session.journey?.growthTrack.find((step) => step.state === "current")?.level;
 }

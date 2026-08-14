@@ -6,6 +6,7 @@ import {
   getPositionName,
   growthLevelLabels,
   qualificationStatusLabels,
+  volunteerEmptyCopy,
 } from "@/lib/volunteer/labels";
 import {
   getActiveAssignment,
@@ -17,7 +18,28 @@ export function GrowthSnapshot() {
   const session = useVolunteerSession();
   const assignment = getActiveAssignment(session);
   const qualification = getActiveQualification(session);
-  if (!assignment) return null;
+
+  if (!assignment) {
+    return (
+      <section className={`${volunteerUi.card} ${volunteerUi.cardPad}`}>
+        <p className={volunteerUi.eyebrow}>Growth snapshot</p>
+        <div className="mt-3 grid grid-cols-2 gap-4">
+          <div>
+            <p className="text-[12px] text-white/40">Department</p>
+            <p className="mt-0.5 text-[15px] font-semibold text-white">
+              {volunteerEmptyCopy.notAssigned}
+            </p>
+          </div>
+          <div>
+            <p className="text-[12px] text-white/40">Position</p>
+            <p className="mt-0.5 text-[15px] font-semibold text-white">
+              {volunteerEmptyCopy.noQualification}
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   const positionName = getPositionName(
     session.positions,
@@ -41,7 +63,7 @@ export function GrowthSnapshot() {
           <p className="mt-0.5 text-[15px] font-semibold text-white">
             {qualification
               ? qualificationStatusLabels[qualification.status]
-              : "Not Started"}
+              : volunteerEmptyCopy.noQualification}
           </p>
         </div>
       </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Bell, Search } from "lucide-react";
+import { Bell, Search, User } from "lucide-react";
 import { BrandCircleMark } from "@/components/layout/BrandMark";
 import { useVolunteerSession } from "@/components/volunteer/VolunteerSessionProvider";
 import { shellTokens } from "@/lib/theme";
@@ -43,7 +43,11 @@ export function VolunteerTopBar() {
             aria-label="Profile"
           >
             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#FF5A00]/18 text-[12px] font-semibold text-[#FF8A4C]">
-              {session.user.avatarInitials}
+              {session.user ? (
+                session.user.avatarInitials
+              ) : (
+                <User className="h-4 w-4" strokeWidth={1.75} />
+              )}
             </span>
           </Link>
         </div>

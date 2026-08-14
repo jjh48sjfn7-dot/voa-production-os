@@ -3,37 +3,63 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useVolunteerSession } from "@/components/volunteer/VolunteerSessionProvider";
-import { getPositionName } from "@/lib/volunteer/labels";
-import { getActiveQualification } from "@/lib/volunteer/session";
+import { getPositionName, volunteerEmptyCopy } from "@/lib/volunteer/labels";
+import {
+  getActiveQualification,
+  isPersonalTrainingConnected,
+} from "@/lib/volunteer/session";
 import { volunteerUi } from "@/lib/volunteer/ui";
 
 export function ContinueJourneyCard() {
   const session = useVolunteerSession();
+  const connected = isPersonalTrainingConnected(session);
   const qualification = getActiveQualification(session);
-  const positionName = getPositionName(session.positions, session.journey.positionId);
+  const positionName = session.journey
+    ? getPositionName(session.positions, session.journey.positionId)
+    : null;
   const done = qualification?.completedCompetencyIds.length ?? 0;
   const total = qualification?.requiredCompetencyIds.length ?? 0;
   const percent = total > 0 ? Math.round((done / total) * 100) : 0;
+
+  if (!connected || !session.journey) {
+    return (
+      <section className={`${volunteerUi.card} ${volunteerUi.cardPad} border-[#FF5A00]/20`}>
+        <p className={volunteerUi.eyebrow}>My Journey</p>
+        <h2 className="mt-1.5 text-[20px] font-semibold tracking-tight text-white">
+          {volunteerEmptyCopy.trainingUnconnected}
+        </h2>
+        <p className={`mt-1 ${volunteerUi.body}`}>
+          {volunteerEmptyCopy.trainingUnconnectedDetail}
+        </p>
+        <Link href="/volunteer/journey" className={`${volunteerUi.cta} mt-5 w-full`}>
+          View Journey
+          <ArrowRight className="ml-2 h-4 w-4" />
+        </Link>
+      </section>
+    );
+  }
 
   return (
     <section className={`${volunteerUi.card} ${volunteerUi.cardPad}`}>
       <p className={volunteerUi.eyebrow}>Continue My Journey</p>
       <h2 className={`mt-1.5 ${volunteerUi.title}`}>{positionName}</h2>
       <p className={`mt-1 ${volunteerUi.body}`}>{session.journey.nextStep.title}</p>
-      <div className="mt-3">
-        <div className="flex justify-between text-[12px] text-white/45">
-          <span>Hands-on competencies</span>
-          <span>
-            {done} of {total}
-          </span>
+      {total > 0 && (
+        <div className="mt-3">
+          <div className="flex justify-between text-[12px] text-white/45">
+            <span>Hands-on competencies</span>
+            <span>
+              {done} of {total}
+            </span>
+          </div>
+          <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-white/[0.08]">
+            <div
+              className="h-full rounded-full bg-[#FF5A00]"
+              style={{ width: `${percent}%` }}
+            />
+          </div>
         </div>
-        <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-white/[0.08]">
-          <div
-            className="h-full rounded-full bg-[#FF5A00]"
-            style={{ width: `${percent}%` }}
-          />
-        </div>
-      </div>
+      )}
       <Link
         href={session.journey.nextStep.href}
         className={`${volunteerUi.ghost} mt-3 -ml-3 text-[#FF8A4C]`}
