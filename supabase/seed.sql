@@ -1,0 +1,3 @@
+-- Phase 4B: no application seed data.
+-- Do not insert church, membership, or VOA rows here.
+-- Phase 4E will seed the Victory Outreach Antioch workspace after Migration 1.
