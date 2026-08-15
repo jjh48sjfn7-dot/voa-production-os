@@ -19,7 +19,7 @@ export function isServingToday(session: VolunteerSession): boolean {
 }
 
 export function isPersonalTrainingConnected(session: VolunteerSession): boolean {
-  return session.journey !== null || session.departmentAssignments.length > 0;
+  return session.journey !== null;
 }
 
 export function getActiveAssignment(session: VolunteerSession) {

@@ -2,7 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import type { Database } from "@/lib/supabase/database.types";
 import { getSupabasePublicConfig } from "@/lib/supabase/env";
-import { isLoginOrSignupPath, isVolunteerPath } from "@/lib/auth/paths";
+import { isAdminPath, isLoginOrSignupPath, isVolunteerPath } from "@/lib/auth/paths";
 
 function copyCookies(from: NextResponse, to: NextResponse): NextResponse {
   from.cookies.getAll().forEach((cookie) => {
@@ -13,7 +13,8 @@ function copyCookies(from: NextResponse, to: NextResponse): NextResponse {
 
 /**
  * Refresh Supabase auth cookies. Does not load membership or authorize in full.
- * Volunteer protection still runs in the /volunteer layout via getClaims().
+ * Volunteer and Admin protection still run in their layouts via getClaims()
+ * plus membership/permission checks.
  */
 export async function refreshSupabaseSession(
   request: NextRequest
@@ -55,7 +56,7 @@ export async function refreshSupabaseSession(
 
   const pathname = request.nextUrl.pathname;
 
-  if (isVolunteerPath(pathname) && !hasIdentity) {
+  if ((isVolunteerPath(pathname) || isAdminPath(pathname)) && !hasIdentity) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     url.search = "";

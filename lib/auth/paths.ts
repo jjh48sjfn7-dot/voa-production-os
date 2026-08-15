@@ -11,6 +11,10 @@ export function isVolunteerPath(pathname: string): boolean {
   return pathname === "/volunteer" || pathname.startsWith("/volunteer/");
 }
 
+export function isAdminPath(pathname: string): boolean {
+  return pathname === "/admin" || pathname.startsWith("/admin/");
+}
+
 export function isAuthUiPath(pathname: string): boolean {
   return (AUTH_UI_PATHS as readonly string[]).includes(pathname);
 }
@@ -57,6 +61,9 @@ export function getSafeNextPath(
   if (pathname.includes("..")) return fallback;
 
   if (pathname === "/volunteer" || pathname.startsWith("/volunteer/")) {
+    return pathname;
+  }
+  if (pathname === "/admin" || pathname.startsWith("/admin/")) {
     return pathname;
   }
   if (pathname === "/update-password" || pathname === "/login") {

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useVolunteerSession } from "@/components/volunteer/VolunteerSessionProvider";
 import {
+  departmentLabels,
   getPositionName,
   growthLevelLabels,
   volunteerEmptyCopy,
@@ -21,6 +22,21 @@ export function JourneyNextStepCard() {
   const step = session.journey?.nextStep;
 
   if (!step || !session.journey) {
+    if (assignment) {
+      return (
+        <section className={`${volunteerUi.card} ${volunteerUi.cardPad} border-[#FF5A00]/20`}>
+          <p className={volunteerUi.eyebrow}>Next step</p>
+          <h2 className="mt-1.5 text-[20px] font-semibold tracking-tight text-white">
+            {growthLevelLabels[assignment.growthLevel]}
+          </h2>
+          <p className={`mt-1 ${volunteerUi.body}`}>
+            {departmentLabels[assignment.departmentId]} ·{" "}
+            {volunteerEmptyCopy.trainingEngineUnconnected}
+          </p>
+        </section>
+      );
+    }
+
     return (
       <section className={`${volunteerUi.card} ${volunteerUi.cardPad} border-[#FF5A00]/20`}>
         <p className={volunteerUi.eyebrow}>Next step</p>

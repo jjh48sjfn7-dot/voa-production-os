@@ -8,7 +8,8 @@ import { JourneyNextStepCard } from "@/components/volunteer/journey/JourneyNextS
 import { JourneyProgressSummary } from "@/components/volunteer/journey/JourneyProgressSummary";
 import { PositionQualificationsSection } from "@/components/volunteer/journey/PositionQualificationsSection";
 import { useVolunteerSession } from "@/components/volunteer/VolunteerSessionProvider";
-import { departmentGrowthTrackLevels, volunteerWorkspaceLabel } from "@/lib/volunteer/labels";
+import { getDepartmentGrowthTrackSteps } from "@/lib/volunteer/journey";
+import { volunteerWorkspaceLabel } from "@/lib/volunteer/labels";
 import { volunteerUi } from "@/lib/volunteer/ui";
 import type { DepartmentId } from "@/lib/volunteer/types";
 import { useState } from "react";
@@ -18,8 +19,7 @@ export function VolunteerJourney() {
   const [departmentId, setDepartmentId] = useState<DepartmentId | null>(
     session.activeDepartmentId
   );
-  const showingPersonalJourney =
-    session.journey !== null && departmentId === session.journey.departmentId;
+  const growthTrack = getDepartmentGrowthTrackSteps(session, departmentId);
 
   return (
     <div className="space-y-4">
@@ -38,12 +38,8 @@ export function VolunteerJourney() {
 
       <JourneyNextStepCard />
       <GrowthTrack
-        steps={
-          showingPersonalJourney && session.journey
-            ? session.journey.growthTrack
-            : departmentGrowthTrackLevels.map((level) => ({ level }))
-        }
-        unconnected={!showingPersonalJourney}
+        steps={growthTrack.steps}
+        unconnected={growthTrack.unconnected}
       />
       <JourneyProgressSummary />
       <PositionQualificationsSection departmentId={departmentId} />
