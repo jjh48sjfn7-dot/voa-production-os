@@ -1,3 +1,9 @@
--- Phase 4B: no application seed data.
--- Do not insert church, membership, or VOA rows here.
--- Phase 4E will seed the Victory Outreach Antioch workspace after Migration 1.
+-- Production OS seed file.
+-- Reserved for future local development / test seed data only.
+--
+-- Production baseline church data is deployed through database migrations.
+-- The Victory Outreach Antioch workspace + Audio / Lighting / Media departments
+-- live in Migration 2:
+--   supabase/migrations/20260815002027_bootstrap_voa_workspace.sql
+--
+-- Do not insert VOA production baseline, membership, or permission rows here.
