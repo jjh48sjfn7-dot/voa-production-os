@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Bell, Search, User } from "lucide-react";
 import { BrandCircleMark } from "@/components/layout/BrandMark";
 import { useVolunteerSession } from "@/components/volunteer/VolunteerSessionProvider";
+import { volunteerWorkspaceLabel } from "@/lib/volunteer/labels";
 import { shellTokens } from "@/lib/theme";
 
 export function VolunteerTopBar() {
@@ -17,7 +18,7 @@ export function VolunteerTopBar() {
           <BrandCircleMark className="h-10 w-10 sm:h-11 sm:w-11" />
         </div>
         <p className="hidden min-w-0 truncate text-[13px] text-white/50 lg:block">
-          {session.workspace.name}
+          {volunteerWorkspaceLabel(session)}
         </p>
         <div className="ml-auto flex items-center gap-1.5">
           <button
@@ -43,7 +44,7 @@ export function VolunteerTopBar() {
             aria-label="Profile"
           >
             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#FF5A00]/18 text-[12px] font-semibold text-[#FF8A4C]">
-              {session.user ? (
+              {session.user?.avatarInitials ? (
                 session.user.avatarInitials
               ) : (
                 <User className="h-4 w-4" strokeWidth={1.75} />

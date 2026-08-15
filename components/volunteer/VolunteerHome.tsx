@@ -7,7 +7,10 @@ import { QuickAccess } from "@/components/volunteer/home/QuickAccess";
 import { SundayAssignmentCard } from "@/components/volunteer/home/SundayAssignmentCard";
 import { UpcomingNextStep } from "@/components/volunteer/home/UpcomingNextStep";
 import { useVolunteerSession } from "@/components/volunteer/VolunteerSessionProvider";
-import { volunteerEmptyCopy } from "@/lib/volunteer/labels";
+import {
+  volunteerWelcomeTitle,
+  volunteerWorkspaceLabel,
+} from "@/lib/volunteer/labels";
 import { isScheduledForService } from "@/lib/volunteer/session";
 
 export function VolunteerHome() {
@@ -17,11 +20,11 @@ export function VolunteerHome() {
   return (
     <div className="space-y-4">
       <header>
-        <p className="text-[13px] text-white/45">{session.workspace.name}</p>
+        <p className="text-[13px] text-white/45">
+          {volunteerWorkspaceLabel(session)}
+        </p>
         <h1 className="mt-0.5 text-[26px] font-semibold tracking-tight text-white">
-          {session.user
-            ? `Welcome back, ${session.user.firstName}`
-            : volunteerEmptyCopy.welcome}
+          {volunteerWelcomeTitle(session)}
         </h1>
       </header>
 

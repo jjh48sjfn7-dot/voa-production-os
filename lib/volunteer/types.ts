@@ -1,4 +1,4 @@
-/** Volunteer Mode domain models — foundation types only. Replace mock session later. */
+/** Volunteer Mode domain models. Personal/membership truth comes from the database. */
 
 export type MembershipStatus = "invited" | "active" | "inactive" | "archived";
 
@@ -38,16 +38,19 @@ export type SundaySupportMode = "shadowing" | "assisted" | "operational";
 
 export interface UserAccount {
   id: string;
-  firstName: string;
-  lastName: string;
-  displayName: string;
-  email: string;
-  avatarInitials: string;
+  firstName: string | null;
+  lastName: string | null;
+  displayName: string | null;
+  avatarInitials: string | null;
 }
 
 export interface ChurchWorkspace {
   id: string;
   name: string;
+  slug: string;
+  timezone: string;
+  productionOsKey: string | null;
+  isActive: boolean;
   campusLabel?: string;
 }
 
@@ -56,22 +59,36 @@ export interface TeamMembership {
   userId: string;
   workspaceId: string;
   status: MembershipStatus;
-  joinedAt: string;
+  joinedAt: string | null;
 }
+
+export type LeadershipRoleKey = "production_overseer" | "department_overseer";
 
 /** Church-appointed leadership. Separate from software permissions. */
 export interface LeadershipAppointment {
   id: string;
   membershipId: string;
+  roleKey: LeadershipRoleKey;
   departmentId?: DepartmentId;
-  title: string;
 }
+
+export type SoftwarePermissionId =
+  | "trainer"
+  | "scheduler"
+  | "department_editor"
+  | "admin"
+  | "builder";
 
 /** Product/software access. Separate from church leadership. */
 export interface SoftwarePermissionGrant {
+  id: string;
   membershipId: string;
-  permissionId: string;
+  permissionId: SoftwarePermissionId;
+  workspaceDepartmentId: string | null;
 }
+
+/** How many active church memberships the signed-in account currently has. */
+export type MembershipResolution = "single" | "none" | "multiple";
 
 export interface Position {
   id: string;
@@ -214,9 +231,12 @@ export interface ServiceReadiness {
 
 export interface VolunteerSession {
   user: UserAccount | null;
-  workspace: ChurchWorkspace;
+  membershipResolution: MembershipResolution;
+  workspace: ChurchWorkspace | null;
   membership: TeamMembership | null;
-  /** Real Production OS departments available at this church — not personal assignments. */
+  permissionGrants: SoftwarePermissionGrant[];
+  leadershipAppointments: LeadershipAppointment[];
+  /** Database workspace departments ∩ Production OS department registry. */
   availableDepartmentIds: DepartmentId[];
   positions: Position[];
   departmentAssignments: DepartmentAssignment[];

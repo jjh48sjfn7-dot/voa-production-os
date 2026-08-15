@@ -3,6 +3,7 @@ import type {
   DepartmentGrowthLevel,
   DepartmentId,
   JourneyStepState,
+  MembershipResolution,
   PositionQualificationStatus,
   RequirementProgress,
 } from "@/lib/volunteer/types";
@@ -72,6 +73,12 @@ export const growthLevelDescriptions: Record<DepartmentGrowthLevel, string> = {
 
 export const volunteerEmptyCopy = {
   welcome: "Welcome to Volunteer Mode",
+  noChurchTeam: "No church team connected yet",
+  multipleChurchTeams:
+    "Multiple church teams are connected. A workspace switcher is not available yet.",
+  sessionUnavailable: "Volunteer Mode is unavailable",
+  sessionUnavailableDetail:
+    "We couldn’t load your team session. Please try again.",
   noUpcomingService: "No upcoming service",
   noUpcomingServiceDetail: "You don’t have a personal Sunday assignment yet.",
   notAssigned: "Not assigned yet",
@@ -84,6 +91,24 @@ export const volunteerEmptyCopy = {
   noTrainingHistory: "No training history yet",
   growthFrameworkNote: "Framework — personal progress not connected yet",
 } as const;
+
+export function volunteerWorkspaceLabel(session: {
+  membershipResolution: MembershipResolution;
+  workspace: { name: string } | null;
+}): string {
+  if (session.membershipResolution === "multiple") {
+    return volunteerEmptyCopy.multipleChurchTeams;
+  }
+  return session.workspace?.name ?? volunteerEmptyCopy.noChurchTeam;
+}
+
+export function volunteerWelcomeTitle(session: {
+  user: { firstName: string | null } | null;
+}): string {
+  const firstName = session.user?.firstName?.trim();
+  if (firstName) return `Welcome back, ${firstName}`;
+  return volunteerEmptyCopy.welcome;
+}
 
 export function getPositionName(
   positions: { id: string; name: string }[],

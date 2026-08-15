@@ -18,7 +18,7 @@ import { lightingSetupSections } from "@/data/lighting/v2/sunday-setup";
 import { mediaSetupSections } from "@/data/media/v2/sunday-setup";
 import { theaterBlueprint } from "@/data/blueprint/theater";
 import { voaVenue } from "@/data/audio/venue";
-import { getVolunteerSession } from "@/lib/volunteer/adapters/session";
+import { intersectAvailableDepartmentIds } from "@/lib/volunteer/departments";
 
 function assert(condition: unknown, message: string) {
   if (!condition) {
@@ -29,6 +29,10 @@ function assert(condition: unknown, message: string) {
 const church = getProductionChurch();
 assert(church.name === voaVenue.church, "church name must come from voaVenue");
 assert(church.name === "Victory Outreach Antioch", "expected real VOA identity");
+assert(
+  church.id === "victory-outreach-antioch",
+  "Production OS church id must match workspace production_os_key"
+);
 
 const departments = getProductionDepartments();
 assert(
@@ -86,20 +90,19 @@ const blueprint = getTheaterBlueprint();
 assert(blueprint === theaterBlueprint, "blueprint selector must not clone geometry");
 assert(getBlueprintVenueContext().churchName === voaVenue.church, "blueprint venue uses church");
 
-const session = getVolunteerSession();
-assert(session.workspace.name === voaVenue.church, "session workspace from Production OS");
-assert(session.user === null, "user must be unconnected");
-assert(session.membership === null, "membership must be unconnected");
-assert(session.sundayAssignment === null, "no fake Sunday assignment");
-assert(session.journey === null, "no fake journey");
-assert(session.positions.length === 0, "no invented positions");
-assert(session.qualifications.length === 0, "no fake qualifications");
-assert(session.trainingHistory.length === 0, "no fake training history");
-assert(session.notices.length === 0, "no fake notices");
-assert(session.departmentAssignments.length === 0, "no personal department assignment");
+const intersection = intersectAvailableDepartmentIds([
+  { department_key: "audio", source: "production_os", is_active: true },
+  { department_key: "lighting", source: "production_os", is_active: true },
+  { department_key: "media", source: "production_os", is_active: true },
+  { department_key: "unknown-key", source: "production_os", is_active: true },
+]);
 assert(
-  session.availableDepartmentIds.join(",") === "audio,lighting,media",
-  "available departments are real"
+  intersection.available.join(",") === "audio,lighting,media",
+  "available departments are DB ∩ Production OS registry"
+);
+assert(
+  intersection.unmatchedProductionOsKeys.join(",") === "unknown-key",
+  "orphan production_os keys must be reported, not invented"
 );
 
 const forbidden = [
@@ -110,7 +113,11 @@ const forbidden = [
   "7 of 9",
   "FOH Setup checkoff",
 ];
-const sessionText = JSON.stringify(session);
+const sessionText = JSON.stringify({
+  church,
+  departments,
+  intersection,
+});
 for (const value of forbidden) {
   assert(!sessionText.includes(value), `session must not contain ${value}`);
 }

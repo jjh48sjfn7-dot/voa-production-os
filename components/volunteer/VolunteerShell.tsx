@@ -3,10 +3,17 @@ import { VolunteerDesktopNav } from "@/components/volunteer/VolunteerDesktopNav"
 import { VolunteerSessionProvider } from "@/components/volunteer/VolunteerSessionProvider";
 import { VolunteerTopBar } from "@/components/volunteer/VolunteerTopBar";
 import { volunteerUi } from "@/lib/volunteer/ui";
+import type { VolunteerSession } from "@/lib/volunteer/types";
 
-export function VolunteerShell({ children }: { children: React.ReactNode }) {
+export function VolunteerShell({
+  session,
+  children,
+}: {
+  session: VolunteerSession;
+  children: React.ReactNode;
+}) {
   return (
-    <VolunteerSessionProvider>
+    <VolunteerSessionProvider session={session}>
       <div className={volunteerUi.page}>
         <VolunteerDesktopNav />
         <div className="lg:pl-56">

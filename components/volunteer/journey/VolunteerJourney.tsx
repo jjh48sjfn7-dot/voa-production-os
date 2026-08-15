@@ -8,7 +8,7 @@ import { JourneyNextStepCard } from "@/components/volunteer/journey/JourneyNextS
 import { JourneyProgressSummary } from "@/components/volunteer/journey/JourneyProgressSummary";
 import { PositionQualificationsSection } from "@/components/volunteer/journey/PositionQualificationsSection";
 import { useVolunteerSession } from "@/components/volunteer/VolunteerSessionProvider";
-import { departmentGrowthTrackLevels } from "@/lib/volunteer/labels";
+import { departmentGrowthTrackLevels, volunteerWorkspaceLabel } from "@/lib/volunteer/labels";
 import { volunteerUi } from "@/lib/volunteer/ui";
 import type { DepartmentId } from "@/lib/volunteer/types";
 import { useState } from "react";
@@ -27,7 +27,9 @@ export function VolunteerJourney() {
         <h1 className="text-[26px] font-semibold tracking-tight text-white">
           My Journey
         </h1>
-        <p className="mt-0.5 text-[13px] text-white/45">{session.workspace.name}</p>
+        <p className="mt-0.5 text-[13px] text-white/45">
+          {volunteerWorkspaceLabel(session)}
+        </p>
         <DepartmentJourneySwitcher
           selectedDepartmentId={departmentId}
           onSelect={setDepartmentId}

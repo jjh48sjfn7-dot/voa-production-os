@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { VolunteerSessionError } from "@/components/volunteer/VolunteerSessionError";
 import { VolunteerShell } from "@/components/volunteer/VolunteerShell";
 import { getAuthIdentity } from "@/lib/auth/identity";
+import { loadVolunteerSession } from "@/lib/volunteer/load-session";
 
 export const metadata: Metadata = {
   title: "Volunteer | Production OS",
@@ -18,5 +20,10 @@ export default async function VolunteerLayout({
     redirect("/login");
   }
 
-  return <VolunteerShell>{children}</VolunteerShell>;
+  const result = await loadVolunteerSession(identity.sub);
+  if (!result.ok) {
+    return <VolunteerSessionError />;
+  }
+
+  return <VolunteerShell session={result.session}>{children}</VolunteerShell>;
 }
