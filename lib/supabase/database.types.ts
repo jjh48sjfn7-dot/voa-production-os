@@ -598,7 +598,36 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      accept_team_invitation: {
+        Args: { p_token_hash_hex: string }
+        Returns: Database["public"]["CompositeTypes"]["invitation_accept_result"]
+        SetofOptions: {
+          from: "*"
+          to: "invitation_accept_result"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      preview_team_invitation: {
+        Args: { p_token_hash_hex: string }
+        Returns: Database["public"]["CompositeTypes"]["invitation_preview_result"]
+        SetofOptions: {
+          from: "*"
+          to: "invitation_preview_result"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      revoke_team_invitation: {
+        Args: { p_invitation_id: string }
+        Returns: Database["public"]["CompositeTypes"]["invitation_revoke_result"]
+        SetofOptions: {
+          from: "*"
+          to: "invitation_revoke_result"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
     }
     Enums: {
       department_growth_level:
@@ -620,7 +649,17 @@ export type Database = {
         | "builder"
     }
     CompositeTypes: {
-      [_ in never]: never
+      invitation_accept_result: {
+        outcome: string | null
+        workspace_name: string | null
+      }
+      invitation_preview_result: {
+        state: string | null
+        workspace_name: string | null
+      }
+      invitation_revoke_result: {
+        outcome: string | null
+      }
     }
   }
 }
