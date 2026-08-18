@@ -696,6 +696,27 @@ export type Database = {
           isSetofReturn: false
         }
       }
+      start_position_qualification: {
+        Args: { p_membership_id: string; p_position_id: string }
+        Returns: {
+          created_at: string
+          first_qualified_at: string | null
+          first_qualified_by_membership_id: string | null
+          id: string
+          membership_id: string
+          position_id: string
+          status: Database["public"]["Enums"]["position_qualification_status"]
+          status_changed_by_membership_id: string
+          status_entered_at: string
+          updated_at: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "position_qualifications"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
     }
     Enums: {
       department_growth_level:
