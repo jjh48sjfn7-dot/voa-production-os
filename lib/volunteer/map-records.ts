@@ -3,6 +3,7 @@ import type {
   DepartmentGrowthLevel,
   DepartmentId,
   LeadershipAppointment,
+  PositionQualificationStatus,
   SoftwarePermissionGrant,
   SoftwarePermissionId,
   UserAccount,
@@ -24,6 +25,16 @@ export function mapGrowthLevel(
   value: Database["public"]["Enums"]["department_growth_level"]
 ): DepartmentGrowthLevel {
   return GROWTH_LEVEL_FROM_DB[value];
+}
+
+/** Absence of a position_qualifications row is Not Started. DB never stores that status. */
+export function mapQualificationStatus(
+  value:
+    | Database["public"]["Enums"]["position_qualification_status"]
+    | null
+    | undefined
+): PositionQualificationStatus {
+  return value ?? "not-started";
 }
 
 export function mapProfileToUserAccount(profile: {

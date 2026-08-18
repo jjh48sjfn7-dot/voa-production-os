@@ -6,6 +6,7 @@ import {
   teamAssignmentAction,
   type AssignActionState,
 } from "@/app/admin/team/actions";
+import { MemberQualificationSection } from "@/components/admin/MemberQualificationSection";
 import type {
   AdminTeamDepartmentOption,
   AdminTeamMember,
@@ -116,6 +117,8 @@ export function TeamAssignmentPanel({
                 Not assigned to a Production department yet.
               </p>
             )}
+
+            <MemberQualificationSection member={member} />
 
             <form action={formAction} className="mt-5 space-y-3">
               <input type="hidden" name="intent" value="assign" />

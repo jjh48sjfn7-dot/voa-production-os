@@ -5,10 +5,17 @@ import {
   departmentLabels,
   growthLevelLabels,
 } from "@/lib/volunteer/labels";
-import { mapGrowthLevel } from "@/lib/volunteer/map-records";
+import {
+  mapGrowthLevel,
+  mapQualificationStatus,
+} from "@/lib/volunteer/map-records";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { AdminAccess } from "@/lib/admin/access";
-import type { DepartmentId } from "@/lib/volunteer/types";
+import type { Database } from "@/lib/supabase/database.types";
+import type {
+  DepartmentId,
+  PositionQualificationStatus,
+} from "@/lib/volunteer/types";
 
 export type AdminTeamDepartmentOption = {
   workspaceDepartmentId: string;
@@ -24,11 +31,19 @@ export type AdminTeamAssignment = {
   active: boolean;
 };
 
+export type AdminMemberPositionView = {
+  positionId: string;
+  positionName: string;
+  departmentName: string;
+  status: PositionQualificationStatus;
+};
+
 export type AdminTeamMember = {
   membershipId: string;
   label: string;
   isCurrentUser: boolean;
   assignments: AdminTeamAssignment[];
+  positions: AdminMemberPositionView[];
 };
 
 export type AdminTeamPageData = {
@@ -95,23 +110,38 @@ export async function loadAdminTeamPage(
 
   const userIds = memberships.map((row) => row.user_id);
   const membershipIds = memberships.map((row) => row.id);
+  const workspaceDepartmentIds = dbDepartments.map((department) => department.id);
 
-  const [profilesResult, assignmentsResult] = await Promise.all([
-    userIds.length > 0
-      ? supabase
-          .from("profiles")
-          .select("id, first_name, last_name, display_name")
-          .in("id", userIds)
-      : Promise.resolve({ data: [], error: null }),
-    membershipIds.length > 0
-      ? supabase
-          .from("department_assignments")
-          .select(
-            "membership_id, workspace_department_id, growth_level, is_active"
-          )
-          .in("membership_id", membershipIds)
-      : Promise.resolve({ data: [], error: null }),
-  ]);
+  const [profilesResult, assignmentsResult, positionsResult, qualificationsResult] =
+    await Promise.all([
+      userIds.length > 0
+        ? supabase
+            .from("profiles")
+            .select("id, first_name, last_name, display_name")
+            .in("id", userIds)
+        : Promise.resolve({ data: [], error: null }),
+      membershipIds.length > 0
+        ? supabase
+            .from("department_assignments")
+            .select(
+              "membership_id, workspace_department_id, growth_level, is_active"
+            )
+            .in("membership_id", membershipIds)
+        : Promise.resolve({ data: [], error: null }),
+      workspaceDepartmentIds.length > 0
+        ? supabase
+            .from("positions")
+            .select("id, name, is_active, workspace_department_id")
+            .eq("is_active", true)
+            .in("workspace_department_id", workspaceDepartmentIds)
+        : Promise.resolve({ data: [], error: null }),
+      membershipIds.length > 0
+        ? supabase
+            .from("position_qualifications")
+            .select("membership_id, position_id, status")
+            .in("membership_id", membershipIds)
+        : Promise.resolve({ data: [], error: null }),
+    ]);
 
   if (profilesResult.error) {
     logAdminEvent("profiles_query_failed", {
@@ -122,6 +152,18 @@ export async function loadAdminTeamPage(
   if (assignmentsResult.error) {
     logAdminEvent("assignments_query_failed", {
       code: assignmentsResult.error.code,
+    });
+    return null;
+  }
+  if (positionsResult.error) {
+    logAdminEvent("positions_query_failed", {
+      code: positionsResult.error.code,
+    });
+    return null;
+  }
+  if (qualificationsResult.error) {
+    logAdminEvent("qualifications_query_failed", {
+      code: qualificationsResult.error.code,
     });
     return null;
   }
@@ -147,15 +189,59 @@ export async function loadAdminTeamPage(
     assignmentsByMembershipId.set(row.membership_id, list);
   }
 
+  const positionsByDepartmentId = new Map<
+    string,
+    { id: string; name: string }[]
+  >();
+  for (const row of positionsResult.data ?? []) {
+    const list = positionsByDepartmentId.get(row.workspace_department_id) ?? [];
+    list.push({ id: row.id, name: row.name });
+    positionsByDepartmentId.set(row.workspace_department_id, list);
+  }
+
+  const qualificationByMembershipPosition = new Map<
+    string,
+    Database["public"]["Enums"]["position_qualification_status"]
+  >();
+  for (const row of qualificationsResult.data ?? []) {
+    qualificationByMembershipPosition.set(
+      `${row.membership_id}:${row.position_id}`,
+      row.status
+    );
+  }
+
   const members: AdminTeamMember[] = memberships.map((row) => {
     const isCurrentUser = row.user_id === access.userId;
+    const assignments = (assignmentsByMembershipId.get(row.id) ?? []).sort(
+      (a, b) => a.departmentName.localeCompare(b.departmentName)
+    );
+    const positions: AdminMemberPositionView[] = [];
+    for (const assignment of assignments) {
+      if (!assignment.active) continue;
+      const departmentPositions =
+        positionsByDepartmentId.get(assignment.workspaceDepartmentId) ?? [];
+      for (const position of departmentPositions) {
+        positions.push({
+          positionId: position.id,
+          positionName: position.name,
+          departmentName: assignment.departmentName,
+          status: mapQualificationStatus(
+            qualificationByMembershipPosition.get(`${row.id}:${position.id}`)
+          ),
+        });
+      }
+    }
+    positions.sort(
+      (a, b) =>
+        a.departmentName.localeCompare(b.departmentName) ||
+        a.positionName.localeCompare(b.positionName)
+    );
     return {
       membershipId: row.id,
       label: adminMemberLabel(profileByUserId.get(row.user_id) ?? null, isCurrentUser),
       isCurrentUser,
-      assignments: (assignmentsByMembershipId.get(row.id) ?? []).sort((a, b) =>
-        a.departmentName.localeCompare(b.departmentName)
-      ),
+      assignments,
+      positions,
     };
   });
 
