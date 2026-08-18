@@ -3,7 +3,13 @@
 import { revalidatePath } from "next/cache";
 import { requireAdminAccess } from "@/lib/admin/access";
 import { logAdminEvent } from "@/lib/admin/log";
+import {
+  isStoredQualificationStatus,
+  nextQualificationStatus,
+  qualificationProgressionSuccessMessage,
+} from "@/lib/qualification/progression";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import type { Database } from "@/lib/supabase/database.types";
 
 const UUID_RE =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -16,6 +22,16 @@ export type StartQualificationState = {
   error?: string;
   message?: string;
 };
+
+export type AdvanceQualificationState = {
+  error?: string;
+  message?: string;
+};
+
+type QualificationStatusUpdate = Pick<
+  Database["public"]["Tables"]["position_qualifications"]["Update"],
+  "status"
+>;
 
 function readUuidField(formData: FormData, name: string): string | null {
   const raw = String(formData.get(name) ?? "").trim();
@@ -176,4 +192,193 @@ export async function startMemberPositionQualification(
 
   revalidatePath("/admin/team");
   return { message: "Qualification started." };
+}
+
+function mapQualificationAdvanceFailure(
+  code: string | undefined,
+  message: string | undefined
+): AdvanceQualificationState {
+  const text = (message ?? "").toLowerCase();
+  if (text.includes("cannot mutate own")) {
+    return { error: "You cannot update your own qualification." };
+  }
+  if (
+    text.includes("active team membership") ||
+    text.includes("active position") ||
+    text.includes("active department assignment")
+  ) {
+    return { error: "Qualification cannot be updated right now." };
+  }
+  if (
+    code === "42501" ||
+    code === "PGRST301" ||
+    text.includes("row-level security") ||
+    text.includes("not authorized")
+  ) {
+    return { error: "You do not have permission to update this qualification." };
+  }
+  return { error: "Could not update qualification. Please try again." };
+}
+
+export async function advanceMemberPositionQualification(
+  _prev: AdvanceQualificationState,
+  formData: FormData
+): Promise<AdvanceQualificationState> {
+  const access = await requireAdminAccess();
+  if (!access.ok) {
+    return { error: "You do not have permission to update this qualification." };
+  }
+
+  const qualificationId = readUuidField(formData, "qualificationId");
+  const expectedCurrentStatus = String(
+    formData.get("expectedCurrentStatus") ?? ""
+  ).trim();
+  if (
+    !qualificationId ||
+    !isStoredQualificationStatus(expectedCurrentStatus)
+  ) {
+    return { error: "Qualification changed. Refresh and try again." };
+  }
+
+  const supabase = await createSupabaseServerClient();
+  if (!supabase) {
+    logAdminEvent("supabase_unconfigured");
+    return { error: "Could not update qualification. Please try again." };
+  }
+
+  const qualificationResult = await supabase
+    .from("position_qualifications")
+    .select("id, membership_id, position_id, status")
+    .eq("id", qualificationId)
+    .maybeSingle();
+
+  if (qualificationResult.error) {
+    logAdminEvent("qualification_advance_lookup_failed", {
+      code: qualificationResult.error.code,
+    });
+    return { error: "Could not update qualification. Please try again." };
+  }
+
+  const qualification = qualificationResult.data;
+  if (!qualification) {
+    return { error: "Qualification cannot be updated right now." };
+  }
+
+  const membershipResult = await supabase
+    .from("team_memberships")
+    .select("id, workspace_id, status")
+    .eq("id", qualification.membership_id)
+    .maybeSingle();
+
+  if (membershipResult.error) {
+    logAdminEvent("qualification_advance_membership_lookup_failed", {
+      code: membershipResult.error.code,
+    });
+    return { error: "Could not update qualification. Please try again." };
+  }
+
+  const membership = membershipResult.data;
+  if (!membership || membership.workspace_id !== access.workspaceId) {
+    return { error: "Qualification cannot be updated right now." };
+  }
+  if (membership.status !== "active") {
+    return { error: "Qualification cannot be updated right now." };
+  }
+  if (membership.id === access.membershipId) {
+    return { error: "You cannot update your own qualification." };
+  }
+
+  const positionResult = await supabase
+    .from("positions")
+    .select("id, is_active, workspace_department_id")
+    .eq("id", qualification.position_id)
+    .maybeSingle();
+
+  if (positionResult.error) {
+    logAdminEvent("qualification_advance_position_lookup_failed", {
+      code: positionResult.error.code,
+    });
+    return { error: "Could not update qualification. Please try again." };
+  }
+
+  const position = positionResult.data;
+  if (!position) {
+    return { error: "Qualification cannot be updated right now." };
+  }
+
+  const departmentResult = await supabase
+    .from("workspace_departments")
+    .select("id, workspace_id")
+    .eq("id", position.workspace_department_id)
+    .maybeSingle();
+
+  if (departmentResult.error) {
+    logAdminEvent("qualification_advance_department_lookup_failed", {
+      code: departmentResult.error.code,
+    });
+    return { error: "Could not update qualification. Please try again." };
+  }
+
+  const department = departmentResult.data;
+  if (!department || department.workspace_id !== access.workspaceId) {
+    return { error: "Qualification cannot be updated right now." };
+  }
+  if (!position.is_active) {
+    return { error: "Qualification cannot be updated right now." };
+  }
+
+  const assignmentResult = await supabase
+    .from("department_assignments")
+    .select("id")
+    .eq("membership_id", membership.id)
+    .eq("workspace_department_id", position.workspace_department_id)
+    .eq("is_active", true)
+    .maybeSingle();
+
+  if (assignmentResult.error) {
+    logAdminEvent("qualification_advance_assignment_lookup_failed", {
+      code: assignmentResult.error.code,
+    });
+    return { error: "Could not update qualification. Please try again." };
+  }
+
+  if (!assignmentResult.data) {
+    return { error: "Qualification cannot be updated right now." };
+  }
+
+  if (qualification.status !== expectedCurrentStatus) {
+    return { error: "Qualification changed. Refresh and try again." };
+  }
+
+  const nextStatus = nextQualificationStatus(qualification.status);
+  if (!nextStatus) {
+    return { error: "Qualification is already Advanced." };
+  }
+
+  const updateRow: QualificationStatusUpdate = { status: nextStatus };
+  const updateResult = await supabase
+    .from("position_qualifications")
+    .update(updateRow)
+    .eq("id", qualification.id)
+    .eq("status", expectedCurrentStatus)
+    .select("id")
+    .maybeSingle();
+
+  if (updateResult.error) {
+    logAdminEvent("qualification_advance_update_failed", {
+      code: updateResult.error.code,
+    });
+    return mapQualificationAdvanceFailure(
+      updateResult.error.code,
+      updateResult.error.message
+    );
+  }
+
+  if (!updateResult.data) {
+    logAdminEvent("qualification_advance_stale");
+    return { error: "Qualification changed. Refresh and try again." };
+  }
+
+  revalidatePath("/admin/team");
+  return { message: qualificationProgressionSuccessMessage(nextStatus) };
 }

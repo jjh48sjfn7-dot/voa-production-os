@@ -33,6 +33,7 @@ export type AdminTeamAssignment = {
 
 export type AdminMemberPositionView = {
   positionId: string;
+  qualificationId: string | null;
   positionName: string;
   departmentName: string;
   status: PositionQualificationStatus;
@@ -138,7 +139,7 @@ export async function loadAdminTeamPage(
       membershipIds.length > 0
         ? supabase
             .from("position_qualifications")
-            .select("membership_id, position_id, status")
+            .select("id, membership_id, position_id, status")
             .in("membership_id", membershipIds)
         : Promise.resolve({ data: [], error: null }),
     ]);
@@ -201,12 +202,15 @@ export async function loadAdminTeamPage(
 
   const qualificationByMembershipPosition = new Map<
     string,
-    Database["public"]["Enums"]["position_qualification_status"]
+    {
+      id: string;
+      status: Database["public"]["Enums"]["position_qualification_status"];
+    }
   >();
   for (const row of qualificationsResult.data ?? []) {
     qualificationByMembershipPosition.set(
       `${row.membership_id}:${row.position_id}`,
-      row.status
+      { id: row.id, status: row.status }
     );
   }
 
@@ -221,13 +225,15 @@ export async function loadAdminTeamPage(
       const departmentPositions =
         positionsByDepartmentId.get(assignment.workspaceDepartmentId) ?? [];
       for (const position of departmentPositions) {
+        const qualification = qualificationByMembershipPosition.get(
+          `${row.id}:${position.id}`
+        );
         positions.push({
           positionId: position.id,
+          qualificationId: qualification?.id ?? null,
           positionName: position.name,
           departmentName: assignment.departmentName,
-          status: mapQualificationStatus(
-            qualificationByMembershipPosition.get(`${row.id}:${position.id}`)
-          ),
+          status: mapQualificationStatus(qualification?.status),
         });
       }
     }
