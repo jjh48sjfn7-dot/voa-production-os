@@ -263,6 +263,74 @@ export type Database = {
           },
         ]
       }
+      position_qualifications: {
+        Row: {
+          created_at: string
+          first_qualified_at: string | null
+          first_qualified_by_membership_id: string | null
+          id: string
+          membership_id: string
+          position_id: string
+          status: Database["public"]["Enums"]["position_qualification_status"]
+          status_changed_by_membership_id: string
+          status_entered_at: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          first_qualified_at?: string | null
+          first_qualified_by_membership_id?: string | null
+          id?: string
+          membership_id: string
+          position_id: string
+          status: Database["public"]["Enums"]["position_qualification_status"]
+          status_changed_by_membership_id: string
+          status_entered_at: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          first_qualified_at?: string | null
+          first_qualified_by_membership_id?: string | null
+          id?: string
+          membership_id?: string
+          position_id?: string
+          status?: Database["public"]["Enums"]["position_qualification_status"]
+          status_changed_by_membership_id?: string
+          status_entered_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "position_qualifications_first_qualified_by_membership_id_fkey"
+            columns: ["first_qualified_by_membership_id"]
+            isOneToOne: false
+            referencedRelation: "team_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "position_qualifications_membership_id_fkey"
+            columns: ["membership_id"]
+            isOneToOne: false
+            referencedRelation: "team_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "position_qualifications_position_id_fkey"
+            columns: ["position_id"]
+            isOneToOne: false
+            referencedRelation: "positions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "position_qualifications_status_changed_by_membership_id_fkey"
+            columns: ["status_changed_by_membership_id"]
+            isOneToOne: false
+            referencedRelation: "team_memberships"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       positions: {
         Row: {
           created_at: string
@@ -647,6 +715,12 @@ export type Database = {
         | "department_editor"
         | "admin"
         | "builder"
+      position_qualification_status:
+        | "learning"
+        | "shadowing"
+        | "assisted"
+        | "qualified"
+        | "advanced"
     }
     CompositeTypes: {
       invitation_accept_result: {
@@ -805,6 +879,13 @@ export const Constants = {
         "department_editor",
         "admin",
         "builder",
+      ],
+      position_qualification_status: [
+        "learning",
+        "shadowing",
+        "assisted",
+        "qualified",
+        "advanced",
       ],
     },
   },
