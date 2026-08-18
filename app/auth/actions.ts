@@ -10,6 +10,7 @@ import {
 } from "@/lib/auth/errors";
 import { getAuthIdentity } from "@/lib/auth/identity";
 import { getAuthRedirectUrl } from "@/lib/auth/site-url";
+import { readSafeNextFromForm } from "@/lib/auth/paths";
 import {
   normalizeEmail,
   validateEmail,
@@ -49,6 +50,7 @@ export async function loginAction(
   const { client, error: configError } = await requireAuthClient();
   if (!client) return { error: configError };
 
+  const nextPath = readSafeNextFromForm(formData, "/volunteer");
   const { error } = await client.auth.signInWithPassword({
     email: normalizeEmail(String(formData.get("email") ?? "")),
     password,
@@ -60,7 +62,7 @@ export async function loginAction(
   }
 
   revalidatePath("/", "layout");
-  redirect("/volunteer");
+  redirect(nextPath);
 }
 
 export async function signupAction(
@@ -83,11 +85,16 @@ export async function signupAction(
   if (!client) return { error: configError };
 
   const email = normalizeEmail(String(formData.get("email") ?? ""));
+  const nextPath = readSafeNextFromForm(formData, "/volunteer");
+  const emailRedirectTo =
+    nextPath === "/invite"
+      ? getAuthRedirectUrl("/auth/callback?next=/invite")
+      : getAuthRedirectUrl("/auth/callback");
   const { data, error } = await client.auth.signUp({
     email,
     password,
     options: {
-      emailRedirectTo: getAuthRedirectUrl("/auth/callback"),
+      emailRedirectTo,
     },
   });
 
@@ -104,7 +111,7 @@ export async function signupAction(
   }
 
   revalidatePath("/", "layout");
-  redirect("/volunteer");
+  redirect(nextPath);
 }
 
 export async function forgotPasswordAction(

@@ -69,6 +69,16 @@ export function getSafeNextPath(
   if (pathname === "/update-password" || pathname === "/login") {
     return pathname;
   }
+  if (pathname === "/invite") {
+    return pathname;
+  }
 
   return fallback;
+}
+
+export function readSafeNextFromForm(
+  formData: FormData,
+  fallback: string
+): string {
+  return getSafeNextPath(String(formData.get("next") ?? ""), fallback);
 }

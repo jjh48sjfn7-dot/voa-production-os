@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import { InviteVolunteerPanel } from "@/components/admin/InviteVolunteerPanel";
+import { PendingInvitationsPanel } from "@/components/admin/PendingInvitationsPanel";
 import { TeamAssignmentPanel } from "@/components/admin/TeamAssignmentPanel";
 import { requireAdminAccess } from "@/lib/admin/access";
+import { loadAdminPendingInvitations } from "@/lib/admin/load-invitations";
 import { loadAdminTeamPage } from "@/lib/admin/load-team";
 import { volunteerUi } from "@/lib/volunteer/ui";
 
@@ -15,7 +18,10 @@ export default async function AdminTeamPage() {
     return null;
   }
 
-  const data = await loadAdminTeamPage(access);
+  const [data, invitations] = await Promise.all([
+    loadAdminTeamPage(access),
+    loadAdminPendingInvitations(access.workspaceId),
+  ]);
   if (!data) {
     return (
       <section className={`${volunteerUi.card} ${volunteerUi.cardPad}`}>
@@ -40,6 +46,17 @@ export default async function AdminTeamPage() {
         </p>
         <p className="mt-1 text-[13px] text-white/40">{data.workspaceName}</p>
       </header>
+      <InviteVolunteerPanel />
+      {invitations ? (
+        <PendingInvitationsPanel invitations={invitations} />
+      ) : (
+        <section className={`${volunteerUi.card} ${volunteerUi.cardPad}`}>
+          <p className={volunteerUi.eyebrow}>Pending Invitations</p>
+          <p className={`mt-2 ${volunteerUi.body}`}>
+            We couldn’t load invitations. Please try again.
+          </p>
+        </section>
+      )}
       {data.members.length === 0 || data.departments.length === 0 ? (
         <section className={`${volunteerUi.card} ${volunteerUi.cardPad}`}>
           <p className={volunteerUi.body}>

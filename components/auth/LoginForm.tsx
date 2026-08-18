@@ -15,12 +15,17 @@ import {
 
 const initialState: AuthActionState = {};
 
-export function LoginForm() {
+export function LoginForm({ nextPath }: { nextPath: string }) {
   const [state, formAction] = useActionState(loginAction, initialState);
+  const signupHref =
+    nextPath === "/invite" ? "/signup?next=/invite" : "/signup";
 
   return (
     <AuthScreen title="Sign in" description="Use your Production OS email and password.">
       <form action={formAction} className="space-y-4">
+        {nextPath !== "/volunteer" ? (
+          <input type="hidden" name="next" value={nextPath} />
+        ) : null}
         <AuthError message={state.error} />
         <AuthField
           id="email"
@@ -46,7 +51,7 @@ export function LoginForm() {
         </p>
         <p>
           Need an account?{" "}
-          <Link href="/signup" className="text-[#FF8A4C] hover:text-[#FF5A00]">
+          <Link href={signupHref} className="text-[#FF8A4C] hover:text-[#FF5A00]">
             Create one
           </Link>
         </p>

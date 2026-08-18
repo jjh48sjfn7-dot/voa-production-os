@@ -2,7 +2,12 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import type { Database } from "@/lib/supabase/database.types";
 import { getSupabasePublicConfig } from "@/lib/supabase/env";
-import { isAdminPath, isLoginOrSignupPath, isVolunteerPath } from "@/lib/auth/paths";
+import {
+  getSafeNextPath,
+  isAdminPath,
+  isLoginOrSignupPath,
+  isVolunteerPath,
+} from "@/lib/auth/paths";
 
 function copyCookies(from: NextResponse, to: NextResponse): NextResponse {
   from.cookies.getAll().forEach((cookie) => {
@@ -65,7 +70,10 @@ export async function refreshSupabaseSession(
 
   if (isLoginOrSignupPath(pathname) && hasIdentity) {
     const url = request.nextUrl.clone();
-    url.pathname = "/volunteer";
+    url.pathname = getSafeNextPath(
+      request.nextUrl.searchParams.get("next"),
+      "/volunteer"
+    );
     url.search = "";
     return copyCookies(supabaseResponse, NextResponse.redirect(url));
   }

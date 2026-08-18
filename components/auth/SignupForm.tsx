@@ -19,8 +19,9 @@ import {
 
 const initialState: AuthActionState = {};
 
-export function SignupForm() {
+export function SignupForm({ nextPath }: { nextPath: string }) {
   const [state, formAction] = useActionState(signupAction, initialState);
+  const loginHref = nextPath === "/invite" ? "/login?next=/invite" : "/login";
 
   if (state.status === "check_email") {
     return (
@@ -28,8 +29,14 @@ export function SignupForm() {
         <p className="text-[14px] leading-relaxed text-white/60">
           Creating an account does not by itself grant access to a church team.
         </p>
+        {nextPath === "/invite" ? (
+          <p className="mt-3 text-[14px] leading-relaxed text-white/60">
+            After you confirm, return to the invitation in this browser. If you
+            confirm on another device, reopen the original invitation email.
+          </p>
+        ) : null}
         <p className="mt-5 text-center text-[13px] text-white/55">
-          <Link href="/login" className="text-[#FF8A4C] hover:text-[#FF5A00]">
+          <Link href={loginHref} className="text-[#FF8A4C] hover:text-[#FF5A00]">
             Back to sign in
           </Link>
         </p>
@@ -43,6 +50,9 @@ export function SignupForm() {
       description="Creating an account does not by itself grant access to a church team."
     >
       <form action={formAction} className="space-y-4">
+        {nextPath !== "/volunteer" ? (
+          <input type="hidden" name="next" value={nextPath} />
+        ) : null}
         <AuthError message={state.error} />
         <AuthField
           id="email"
@@ -69,7 +79,7 @@ export function SignupForm() {
       </form>
       <p className="mt-5 text-center text-[13px] text-white/55">
         Already have an account?{" "}
-        <Link href="/login" className="text-[#FF8A4C] hover:text-[#FF5A00]">
+        <Link href={loginHref} className="text-[#FF8A4C] hover:text-[#FF5A00]">
           Sign in
         </Link>
       </p>

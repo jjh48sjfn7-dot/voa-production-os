@@ -2,13 +2,20 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { LoginForm } from "@/components/auth/LoginForm";
 import { getAuthIdentity } from "@/lib/auth/identity";
+import { getSafeNextPath } from "@/lib/auth/paths";
 
 export const metadata: Metadata = {
   title: "Sign in | Production OS",
 };
 
-export default async function LoginPage() {
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ next?: string }>;
+}) {
+  const params = await searchParams;
+  const nextPath = getSafeNextPath(params.next, "/volunteer");
   const identity = await getAuthIdentity();
-  if (identity) redirect("/volunteer");
-  return <LoginForm />;
+  if (identity) redirect(nextPath);
+  return <LoginForm nextPath={nextPath} />;
 }
