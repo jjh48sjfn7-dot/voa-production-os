@@ -11,7 +11,6 @@ import {
 } from "@/lib/volunteer/labels";
 import {
   getActiveAssignment,
-  getActiveQualification,
   isPersonalTrainingConnected,
 } from "@/lib/volunteer/session";
 import { volunteerUi } from "@/lib/volunteer/ui";
@@ -20,13 +19,9 @@ export function ContinueJourneyCard() {
   const session = useVolunteerSession();
   const trainingConnected = isPersonalTrainingConnected(session);
   const assignment = getActiveAssignment(session);
-  const qualification = getActiveQualification(session);
   const positionName = session.journey
     ? getPositionName(session.positions, session.journey.positionId)
     : null;
-  const done = qualification?.completedCompetencyIds.length ?? 0;
-  const total = qualification?.requiredCompetencyIds.length ?? 0;
-  const percent = total > 0 ? Math.round((done / total) * 100) : 0;
 
   if (trainingConnected && session.journey) {
     return (
@@ -34,22 +29,6 @@ export function ContinueJourneyCard() {
         <p className={volunteerUi.eyebrow}>Continue My Journey</p>
         <h2 className={`mt-1.5 ${volunteerUi.title}`}>{positionName}</h2>
         <p className={`mt-1 ${volunteerUi.body}`}>{session.journey.nextStep.title}</p>
-        {total > 0 && (
-          <div className="mt-3">
-            <div className="flex justify-between text-[12px] text-white/45">
-              <span>Hands-on competencies</span>
-              <span>
-                {done} of {total}
-              </span>
-            </div>
-            <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-white/[0.08]">
-              <div
-                className="h-full rounded-full bg-[#FF5A00]"
-                style={{ width: `${percent}%` }}
-              />
-            </div>
-          </div>
-        )}
         <Link
           href={session.journey.nextStep.href}
           className={`${volunteerUi.ghost} mt-3 -ml-3 text-[#FF8A4C]`}

@@ -1,20 +1,9 @@
 import {
   departmentGrowthTrackLevels,
-  getPositionName,
   qualificationStatusLabels,
-  requirementProgressLabels,
 } from "@/lib/volunteer/labels";
-import {
-  arePositionPrerequisitesMet,
-  getActiveAssignment,
-  getActiveQualification,
-  getAssistedProgress,
-  getCompetencyProgress,
-  getCourseProgress,
-  getDepartmentPositions,
-  getQualificationForPosition,
-  getShadowProgress,
-} from "@/lib/volunteer/session";
+import { getActiveAssignment } from "@/lib/volunteer/session";
+import { getServingPositionViews } from "@/lib/volunteer/serving";
 import type {
   DepartmentGrowthLevel,
   DepartmentId,
@@ -46,72 +35,21 @@ export function getPositionQualificationViews(
   session: VolunteerSession,
   departmentId: DepartmentId | null = session.activeDepartmentId
 ): PositionQualificationView[] {
-  if (!departmentId) return [];
-  const assignment = session.departmentAssignments.find(
-    (item) => item.departmentId === departmentId && item.active
-  );
-  const currentIds = new Set(assignment?.assignedPositionIds ?? []);
-
-  return getDepartmentPositions(session, departmentId).map((position) => {
-    const record = getQualificationForPosition(session, position.id);
-    const locked = !arePositionPrerequisitesMet(session, position);
-    const status: PositionQualificationStatus = record?.status ?? "not-started";
-    const { done, total } = getCompetencyProgress(record);
-    const unmet = (position.prerequisitePositionIds ?? []).map((id) =>
-      getPositionName(session.positions, id)
-    );
-
-    return {
-      positionId: position.id,
-      name: position.name,
-      status,
-      statusLabel: locked ? "Locked" : qualificationStatusLabels[status],
-      isCurrent: currentIds.has(position.id),
-      locked,
-      requiresLabel:
-        locked && unmet.length > 0
-          ? `Requires: ${unmet.join(", ")} qualification`
-          : undefined,
-      trainingLabel: record
-        ? requirementProgressLabels[getCourseProgress(record)]
-        : undefined,
-      shadowingLabel: record
-        ? requirementProgressLabels[getShadowProgress(record)]
-        : undefined,
-      competenciesLabel:
-        record && total > 0 ? `${done} / ${total}` : undefined,
-      nextRequirement:
-        !locked && position.id === session.journey?.positionId
-          ? session.journey.nextStep.title
-          : undefined,
-    };
-  });
+  return getServingPositionViews(session, departmentId).map((view) => ({
+    positionId: view.positionId,
+    name: view.positionName,
+    status: view.status,
+    statusLabel: qualificationStatusLabels[view.status],
+    isCurrent: false,
+    locked: false,
+  }));
 }
 
 export function getCurrentStageRequirementRows(
   session: VolunteerSession
 ): JourneyRequirementRow[] {
-  const record = getActiveQualification(session);
-  const { done, total } = getCompetencyProgress(record);
-
-  return [
-    {
-      label: "Training",
-      value: requirementProgressLabels[getCourseProgress(record)],
-    },
-    {
-      label: "Shadowing",
-      value: requirementProgressLabels[getShadowProgress(record)],
-    },
-    {
-      label: "Assisted Services",
-      value: requirementProgressLabels[getAssistedProgress(record)],
-    },
-    {
-      label: "Hands-On Competencies",
-      value: total > 0 ? `${done} of ${total}` : requirementProgressLabels["not-started"],
-    },
-  ];
+  if (!session.journey) return [];
+  return [];
 }
 
 export function getCurrentGrowthLevel(session: VolunteerSession) {

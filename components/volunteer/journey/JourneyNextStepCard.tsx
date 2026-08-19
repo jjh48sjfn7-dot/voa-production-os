@@ -11,8 +11,6 @@ import {
 } from "@/lib/volunteer/labels";
 import {
   getActiveAssignment,
-  getCompetencyProgress,
-  getQualificationForPosition,
 } from "@/lib/volunteer/session";
 import { volunteerUi } from "@/lib/volunteer/ui";
 
@@ -33,6 +31,9 @@ export function JourneyNextStepCard() {
             {departmentLabels[assignment.departmentId]} ·{" "}
             {volunteerEmptyCopy.trainingEngineUnconnected}
           </p>
+          <p className={`mt-1 ${volunteerUi.muted}`}>
+            {volunteerEmptyCopy.trainingEngineUnconnectedDetail}
+          </p>
         </section>
       );
     }
@@ -51,9 +52,6 @@ export function JourneyNextStepCard() {
   }
 
   const positionName = getPositionName(session.positions, session.journey.positionId);
-  const { done, total } = getCompetencyProgress(
-    getQualificationForPosition(session, session.journey.positionId)
-  );
 
   return (
     <section className={`${volunteerUi.card} ${volunteerUi.cardPad} border-[#FF5A00]/20`}>
@@ -65,7 +63,6 @@ export function JourneyNextStepCard() {
       <p className="mt-3 text-[13px] text-white/45">
         {positionName}
         {assignment ? ` · ${growthLevelLabels[assignment.growthLevel]}` : ""}
-        {total > 0 ? ` · Hands-on competencies: ${done} of ${total} complete` : ""}
       </p>
       <Link href={step.href} className={`${volunteerUi.cta} mt-5 w-full`}>
         Continue

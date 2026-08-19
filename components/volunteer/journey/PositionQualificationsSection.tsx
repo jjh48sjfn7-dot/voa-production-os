@@ -26,9 +26,9 @@ export function PositionQualificationsSection({
       </p>
       {views.length === 0 ? (
         <div className={`${volunteerUi.card} ${volunteerUi.cardPad} mt-3`}>
-          <p className={volunteerUi.title}>{volunteerEmptyCopy.noQualification}</p>
+          <p className={volunteerUi.title}>{volunteerEmptyCopy.noServingPosition}</p>
           <p className={`mt-1 ${volunteerUi.body}`}>
-            {volunteerEmptyCopy.noQualificationDetail}
+            {volunteerEmptyCopy.noServingPositionDetail}
           </p>
         </div>
       ) : (

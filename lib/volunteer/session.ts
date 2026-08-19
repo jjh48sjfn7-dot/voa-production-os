@@ -2,8 +2,10 @@ import type {
   DepartmentId,
   Position,
   PositionQualificationRecord,
+  VolunteerPositionQualification,
   RequirementProgress,
   VolunteerSession,
+  VolunteerServingPosition,
 } from "@/lib/volunteer/types";
 
 export function isScheduledForService(session: VolunteerSession): boolean {
@@ -43,7 +45,7 @@ export function getActiveQualification(session: VolunteerSession) {
 export function getQualificationForPosition(
   session: VolunteerSession,
   positionId: string
-): PositionQualificationRecord | undefined {
+): VolunteerPositionQualification | undefined {
   if (!session.membership) return undefined;
   return session.qualifications.find(
     (record) =>
@@ -55,16 +57,13 @@ export function getQualificationForPosition(
 export function getDepartmentPositions(
   session: VolunteerSession,
   departmentId: DepartmentId | null = session.activeDepartmentId
-): Position[] {
+): VolunteerServingPosition[] {
   if (!departmentId) return [];
-  const assignment = session.departmentAssignments.find(
-    (item) => item.departmentId === departmentId && item.active
-  );
-  const assigned = new Set(assignment?.assignedPositionIds ?? []);
-
   return session.positions
-    .filter((position) => position.departmentId === departmentId && position.active)
-    .sort((a, b) => Number(assigned.has(b.id)) - Number(assigned.has(a.id)));
+    .filter(
+      (position) => position.departmentId === departmentId && position.isActive
+    )
+    .sort((a, b) => a.name.localeCompare(b.name));
 }
 
 export function arePositionPrerequisitesMet(

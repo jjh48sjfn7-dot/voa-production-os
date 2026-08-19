@@ -85,12 +85,15 @@ export const volunteerEmptyCopy = {
   trainingUnconnected: "Training progress not connected yet",
   trainingUnconnectedDetail:
     "Your personal growth path will appear here once training is connected.",
-  trainingEngineUnconnected: "Training is not connected yet",
+  trainingEngineUnconnected: "Training tracking is not connected yet.",
   trainingEngineUnconnectedDetail:
-    "Your department growth is connected. Courses and position qualification will appear here when training is set up.",
+    "Your position qualification is shown separately.",
   noQualification: "No position qualification yet",
   noQualificationDetail:
     "Serving positions are defined by the church. None are connected to this account yet.",
+  noServingPosition: "No position configured yet",
+  noServingPositionDetail:
+    "This department does not have an active serving position yet.",
   noTrainingHistory: "No training history yet",
   growthFrameworkNote: "Framework — personal progress not connected yet",
 } as const;

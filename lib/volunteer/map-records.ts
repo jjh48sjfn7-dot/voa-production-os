@@ -31,6 +31,7 @@ export function mapGrowthLevel(
 export function mapQualificationStatus(
   value:
     | Database["public"]["Enums"]["position_qualification_status"]
+    | Exclude<PositionQualificationStatus, "not-started">
     | null
     | undefined
 ): PositionQualificationStatus {

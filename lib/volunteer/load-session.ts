@@ -6,6 +6,7 @@ import {
   mapLeadershipAppointment,
   mapPermissionGrant,
   mapProfileToUserAccount,
+  mapQualificationStatus,
 } from "@/lib/volunteer/map-records";
 import { getProductionChurchForKey } from "@/lib/volunteer/production-os-bridge";
 import { isProductionDepartmentId } from "@/lib/production-os";
@@ -16,6 +17,8 @@ import type {
   MembershipResolution,
   TeamMembership,
   UserAccount,
+  VolunteerPositionQualification,
+  VolunteerServingPosition,
   VolunteerSession,
 } from "@/lib/volunteer/types";
 
@@ -103,6 +106,7 @@ export async function loadVolunteerSession(
     grantsResult,
     leadershipResult,
     assignmentsResult,
+    qualificationsResult,
   ] = await Promise.all([
     supabase
       .from("church_workspaces")
@@ -131,6 +135,10 @@ export async function loadVolunteerSession(
       .select(
         "id, membership_id, workspace_department_id, growth_level, is_active, assigned_at"
       )
+      .eq("membership_id", membership.id),
+    supabase
+      .from("position_qualifications")
+      .select("id, membership_id, position_id, status")
       .eq("membership_id", membership.id),
   ]);
 
@@ -161,6 +169,12 @@ export async function loadVolunteerSession(
   if (assignmentsResult.error) {
     logVolunteerSessionEvent("assignments_query_failed", {
       code: assignmentsResult.error.code,
+    });
+    return { ok: false };
+  }
+  if (qualificationsResult.error) {
+    logVolunteerSessionEvent("qualifications_query_failed", {
+      code: qualificationsResult.error.code,
     });
     return { ok: false };
   }
@@ -209,6 +223,7 @@ export async function loadVolunteerSession(
   );
 
   const departmentAssignments: DepartmentAssignment[] = [];
+  const activeWorkspaceDepartmentIds: string[] = [];
   for (const row of assignmentsResult.data ?? []) {
     const departmentId = departmentIdByWorkspaceDepartmentId.get(
       row.workspace_department_id
@@ -226,6 +241,54 @@ export async function loadVolunteerSession(
       active: row.is_active,
       assignedAt: row.assigned_at,
     });
+    if (row.is_active) {
+      activeWorkspaceDepartmentIds.push(row.workspace_department_id);
+    }
+  }
+
+  const qualifications: VolunteerPositionQualification[] = [];
+  for (const row of qualificationsResult.data ?? []) {
+    const status = mapQualificationStatus(row.status);
+    if (status === "not-started") continue;
+    qualifications.push({
+      id: row.id,
+      membershipId: row.membership_id,
+      positionId: row.position_id,
+      status,
+    });
+  }
+
+  const uniqueActiveDepartmentIds = [...new Set(activeWorkspaceDepartmentIds)];
+  const positions: VolunteerServingPosition[] = [];
+  if (uniqueActiveDepartmentIds.length > 0) {
+    const positionsResult = await supabase
+      .from("positions")
+      .select("id, name, slug, description, is_active, workspace_department_id")
+      .eq("is_active", true)
+      .in("workspace_department_id", uniqueActiveDepartmentIds);
+
+    if (positionsResult.error) {
+      logVolunteerSessionEvent("positions_query_failed", {
+        code: positionsResult.error.code,
+      });
+      return { ok: false };
+    }
+
+    for (const row of positionsResult.data ?? []) {
+      const departmentId = departmentIdByWorkspaceDepartmentId.get(
+        row.workspace_department_id
+      );
+      if (!departmentId) continue;
+      positions.push({
+        id: row.id,
+        workspaceDepartmentId: row.workspace_department_id,
+        departmentId,
+        name: row.name,
+        slug: row.slug,
+        description: row.description,
+        isActive: row.is_active,
+      });
+    }
   }
 
   const activeAssignments = departmentAssignments.filter(
@@ -244,9 +307,9 @@ export async function loadVolunteerSession(
       permissionGrants,
       leadershipAppointments,
       availableDepartmentIds: available,
-      positions: [],
+      positions,
       departmentAssignments,
-      qualifications: [],
+      qualifications,
       activeDepartmentId,
       journey: null,
       sundayAssignment: null,

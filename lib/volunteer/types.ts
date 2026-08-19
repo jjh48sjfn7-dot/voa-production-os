@@ -132,6 +132,25 @@ export interface PositionQualificationRecord {
   qualificationNotes?: string;
 }
 
+/** DB-backed serving role. Not a training catalog row. */
+export interface VolunteerServingPosition {
+  id: string;
+  workspaceDepartmentId: string;
+  departmentId: DepartmentId;
+  name: string;
+  slug: string;
+  description: string | null;
+  isActive: boolean;
+}
+
+/** DB-backed qualification row. Absence of a row is Not Started in serving views. */
+export interface VolunteerPositionQualification {
+  id: string;
+  membershipId: string;
+  positionId: string;
+  status: Exclude<PositionQualificationStatus, "not-started">;
+}
+
 export interface DepartmentAssignment {
   id: string;
   membershipId: string;
@@ -238,9 +257,9 @@ export interface VolunteerSession {
   leadershipAppointments: LeadershipAppointment[];
   /** Database workspace departments ∩ Production OS department registry. */
   availableDepartmentIds: DepartmentId[];
-  positions: Position[];
+  positions: VolunteerServingPosition[];
   departmentAssignments: DepartmentAssignment[];
-  qualifications: PositionQualificationRecord[];
+  qualifications: VolunteerPositionQualification[];
   activeDepartmentId: DepartmentId | null;
   journey: DepartmentJourney | null;
   sundayAssignment: SundayAssignment | null;

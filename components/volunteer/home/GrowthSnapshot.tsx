@@ -1,23 +1,21 @@
 "use client";
 
+import Link from "next/link";
 import { useVolunteerSession } from "@/components/volunteer/VolunteerSessionProvider";
 import {
   departmentLabels,
-  getPositionName,
   growthLevelLabels,
   qualificationStatusLabels,
   volunteerEmptyCopy,
 } from "@/lib/volunteer/labels";
-import {
-  getActiveAssignment,
-  getActiveQualification,
-} from "@/lib/volunteer/session";
+import { getServingPositionViews } from "@/lib/volunteer/serving";
+import { getActiveAssignment } from "@/lib/volunteer/session";
 import { volunteerUi } from "@/lib/volunteer/ui";
 
 export function GrowthSnapshot() {
   const session = useVolunteerSession();
   const assignment = getActiveAssignment(session);
-  const qualification = getActiveQualification(session);
+  const views = getServingPositionViews(session, assignment?.departmentId ?? null);
 
   if (!assignment) {
     return (
@@ -33,18 +31,13 @@ export function GrowthSnapshot() {
           <div>
             <p className="text-[12px] text-white/40">Position</p>
             <p className="mt-0.5 text-[15px] font-semibold text-white">
-              {volunteerEmptyCopy.noQualification}
+              {volunteerEmptyCopy.noServingPosition}
             </p>
           </div>
         </div>
       </section>
     );
   }
-
-  const positionName = getPositionName(
-    session.positions,
-    assignment.assignedPositionIds[0] ?? ""
-  );
 
   return (
     <section className={`${volunteerUi.card} ${volunteerUi.cardPad}`}>
@@ -58,14 +51,36 @@ export function GrowthSnapshot() {
             {growthLevelLabels[assignment.growthLevel]}
           </p>
         </div>
-        <div>
-          <p className="text-[12px] text-white/40">{positionName}</p>
-          <p className="mt-0.5 text-[15px] font-semibold text-white">
-            {qualification
-              ? qualificationStatusLabels[qualification.status]
-              : volunteerEmptyCopy.noQualification}
-          </p>
-        </div>
+        {views.length === 0 ? (
+          <div>
+            <p className="text-[12px] text-white/40">Position</p>
+            <p className="mt-0.5 text-[15px] font-semibold text-white">
+              {volunteerEmptyCopy.noServingPosition}
+            </p>
+          </div>
+        ) : null}
+        {views.length === 1 ? (
+          <div>
+            <p className="text-[12px] text-white/40">{views[0].positionName}</p>
+            <p className="mt-0.5 text-[15px] font-semibold text-white">
+              {qualificationStatusLabels[views[0].status]}
+            </p>
+          </div>
+        ) : null}
+        {views.length > 1 ? (
+          <div>
+            <p className="text-[12px] text-white/40">Positions</p>
+            <p className="mt-0.5 text-[15px] font-semibold text-white">
+              {views.length} positions
+            </p>
+            <Link
+              href="/volunteer/journey"
+              className="mt-1 inline-block text-[13px] font-medium text-[#FF8A4C]"
+            >
+              View My Journey
+            </Link>
+          </div>
+        ) : null}
       </div>
     </section>
   );
